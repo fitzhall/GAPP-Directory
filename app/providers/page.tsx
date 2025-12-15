@@ -342,7 +342,7 @@ export default function ForProvidersPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-xl font-bold text-gray-900 mb-2">Ready to get listed?</h2>
           <p className="text-gray-600 mb-4">
-            Email us at <a href="mailto:providers@gappdirectory.com" className="text-primary hover:underline">providers@gappdirectory.com</a>
+            Email us at <a href="mailto:help@georgiaGAPP.com" className="text-primary hover:underline">help@georgiaGAPP.com</a>
           </p>
           <p className="text-sm text-gray-500">
             {config.contact.disclaimer}
