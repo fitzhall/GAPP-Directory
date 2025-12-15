@@ -9,25 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Calm, trustworthy palette for stressed parents
+        // GeorgiaGAPP Brand Colors
         primary: {
-          DEFAULT: '#2563EB', // Strong blue - trust
-          dark: '#1D4ED8',
-          light: '#3B82F6',
+          DEFAULT: '#FF8A80', // Coral Pink - care, compassion, CTAs
+          dark: '#E57373',
+          light: '#FFAB91',
         },
         accent: {
-          DEFAULT: '#059669', // Green - positive/verified
-          dark: '#047857',
-          light: '#10B981',
+          DEFAULT: '#87CEEB', // Sky Blue - trust, healthcare reliability
+          dark: '#5DADE2',
+          light: '#AED6F1',
         },
         warm: {
-          DEFAULT: '#7C3AED', // Purple - featured/premium
-          dark: '#6D28D9',
-          light: '#8B5CF6',
+          DEFAULT: '#FFCBA4', // Soft Peach - warmth, comfort
+          dark: '#FFB380',
+          light: '#FFE0C7',
+        },
+        navy: {
+          DEFAULT: '#2C3E50', // Navy Blue - professionalism, text
+          dark: '#1A252F',
+          light: '#34495E',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Nunito', 'Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
