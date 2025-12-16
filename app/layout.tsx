@@ -3,7 +3,7 @@ import { Nunito } from 'next/font/google'
 import './globals.css'
 import { config } from '@/lib/config'
 import Link from 'next/link'
-import Image from 'next/image'
+// Using regular img tag for logo to avoid Next.js Image sizing issues
 import { MobileNav } from '@/components/MobileNav'
 
 const nunito = Nunito({ subsets: ['latin'] })
@@ -73,13 +73,10 @@ export default function RootLayout({
               {/* Logo */}
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
-                  <Image
+                  <img
                     src="/logo.png"
                     alt="GeorgiaGAPP.com"
-                    width={200}
-                    height={50}
-                    className="h-12 sm:h-14 w-auto"
-                    priority
+                    className="h-12 sm:h-16 w-auto"
                   />
                 </Link>
               </div>
