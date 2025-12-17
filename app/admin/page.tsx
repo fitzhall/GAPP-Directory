@@ -135,12 +135,20 @@ export default function AdminPage() {
                 Manage and verify providers
               </p>
             </div>
-            <Link
-              href="/"
-              className="text-sm text-gray-600 hover:text-gray-900"
-            >
-              Back to Site
-            </Link>
+            <div className="flex gap-4">
+              <Link
+                href="/admin/leads"
+                className="text-sm text-primary font-medium hover:underline"
+              >
+                View Leads
+              </Link>
+              <Link
+                href="/"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              >
+                Back to Site
+              </Link>
+            </div>
           </div>
         </div>
       </div>

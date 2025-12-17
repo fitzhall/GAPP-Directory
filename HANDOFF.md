@@ -20,6 +20,8 @@
 - ✅ Mobile-responsive design with hamburger menu
 - ✅ Brand package integrated (logo, favicon, colors, OG image for social sharing)
 - ✅ Sitemap and robots.txt for SEO
+- ✅ **Lead notification system** - callbacks saved to DB + email to providers via Resend
+- ✅ **Lead management admin** - `/admin/leads` to view/manage all callback requests
 
 ### Provider Verification Flow (Current)
 1. All 327 providers seeded as `is_verified: false`
@@ -27,69 +29,42 @@
 3. Verified providers show full profile with callback form
 4. Unverified providers show limited info, not clickable (visible but "Pending Verification")
 
-### Callback/Lead Flow (Current)
+### Callback/Lead Flow (NOW WORKING)
 1. Family clicks on verified provider → goes to `/provider/[slug]`
-2. Family fills out callback form (name, phone, email, child info, message)
-3. Form submits to... **nowhere yet** - this is the gap
+2. Family fills out callback form (name, phone, email, service needed, urgency, etc.)
+3. Form submits to `/api/callback` which:
+   - Saves the lead to `callback_requests` table
+   - Sends email notification to provider (via Resend) with lead details
+4. Admin can view/manage leads at `/admin/leads`
 
 ---
 
-## NEXT PRIORITY: Provider Lead Notification System
+## COMPLETED: Provider Lead Notification System
 
-### The Problem
-When families submit callback requests, providers have no way to receive them. We're collecting lead data but not delivering it.
+The lead notification system is now fully implemented:
 
-### Options to Consider
+### How It Works
+1. **Form Submission** → `/api/callback` API route
+2. **Database** → Lead saved to `callback_requests` table
+3. **Email** → Provider receives formatted HTML email via Resend
+4. **Admin** → View/manage all leads at `/admin/leads`
 
-#### Option A: Email Notification (Simplest)
-- Store provider email in database (already have `email` field)
-- When callback form submits, send email to provider
-- Requires: Email service (Resend, SendGrid, or Supabase Edge Functions)
-- Pros: Simple, no provider login needed
-- Cons: Emails can go to spam, no tracking
+### Key Files
+- `/app/api/callback/route.ts` - API route that saves lead + sends email
+- `/app/admin/leads/page.tsx` - Lead management dashboard
+- `/components/CallbackForm.tsx` - Updated to use API route
 
-#### Option B: Provider Dashboard (More Robust)
-- Create `/provider-portal` with login
-- Providers see their leads, mark as contacted
-- Requires: Auth system (Supabase Auth), new UI
-- Pros: Tracking, lead management, provider can update their profile
-- Cons: More complex, providers need to check it
+### Setup Required
+Add these environment variables in Vercel:
 
-#### Option C: Hybrid (Recommended)
-- Email notification immediately when lead comes in
-- Provider dashboard for history/management
-- Best of both worlds
-
-### Database Changes Needed
-
-```sql
--- Leads/callbacks table (may already exist, check schema)
-CREATE TABLE IF NOT EXISTS callbacks (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  provider_id UUID REFERENCES providers(id),
-  family_name TEXT NOT NULL,
-  family_email TEXT,
-  family_phone TEXT NOT NULL,
-  child_age TEXT,
-  service_needed TEXT,
-  message TEXT,
-  urgency TEXT,
-  status TEXT DEFAULT 'new', -- new, contacted, converted, closed
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  contacted_at TIMESTAMPTZ,
-  notes TEXT
-);
-
--- Provider auth (if doing dashboard)
--- Could use Supabase Auth with provider email
+```
+RESEND_API_KEY=re_xxxxxxxxxx
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
-### Files to Check/Modify
+**Get Resend API key:** https://resend.com (free tier: 3k emails/month)
 
-1. **`/components/CallbackForm.tsx`** - Current form component
-2. **`/app/api/`** - Need API route for form submission
-3. **`/lib/supabase.ts`** - Database client
-4. **`/supabase/schema.sql`** - Check if callbacks table exists
+**Important:** You need to verify your domain (georgiagapp.com) in Resend to send from `leads@georgiagapp.com`. Until then, use Resend's default `onboarding@resend.dev` for testing.
 
 ---
 
@@ -171,18 +146,10 @@ git push origin main
 
 ---
 
-## Summary for Next Agent
+## Future Enhancements (Optional)
 
-**Immediate need:** When a family submits a callback request on a provider's profile page, that request needs to actually reach the provider. Currently the form exists but doesn't send anywhere.
-
-**Suggested approach:**
-1. Check if `callbacks` table exists in Supabase
-2. Create API route to save callback to database
-3. Set up email notification to provider (Resend is easy with Vercel)
-4. Optionally: Build simple provider portal for lead management
-
-**Questions to clarify with user:**
-- Do providers have reliable emails in the database?
-- Do they want providers to have login accounts?
-- What info should the notification email contain?
-- Should families get a confirmation email too?
+1. **Provider Portal** - Let providers log in to see their leads, update profile
+2. **Family Confirmation Email** - Send confirmation to family when they submit
+3. **SMS Notifications** - Add Twilio for text alerts to providers
+4. **Lead Analytics** - Track conversion rates, response times
+5. **Admin Auth** - Protect `/admin` routes with authentication

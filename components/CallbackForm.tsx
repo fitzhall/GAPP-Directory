@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '@/lib/supabase'
 
 interface CallbackFormProps {
   providerId: string
@@ -41,23 +40,27 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
     }
 
     try {
-      const { error } = await supabase
-        .from('callback_requests')
-        .insert({
-          parent_name: formState.parentName,
+      const response = await fetch('/api/callback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          parentName: formState.parentName,
           phone: formState.phone,
-          email: formState.email || null,
-          zip_code: formState.zipCode,
+          email: formState.email || undefined,
+          zipCode: formState.zipCode,
           county: formState.county || 'Unknown',
-          service_needed: formState.serviceNeeded,
+          serviceNeeded: formState.serviceNeeded,
           urgency: formState.urgency,
-          preferred_callback_time: formState.preferredCallbackTime || null,
-          special_needs: formState.specialNeeds || null,
-          provider_id: providerId,
-          status: 'new',
-        })
+          preferredCallbackTime: formState.preferredCallbackTime || undefined,
+          specialNeeds: formState.specialNeeds || undefined,
+          providerId: providerId,
+        }),
+      })
 
-      if (error) throw error
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Failed to submit')
+      }
 
       setStatus('success')
     } catch (err) {
