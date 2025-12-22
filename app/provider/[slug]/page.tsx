@@ -331,24 +331,9 @@ export default async function ProviderPage({
 
                 <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact Information Pending</h2>
                 <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                  This provider hasn&apos;t claimed their profile. Once claimed and verified,
+                  This provider hasn&apos;t claimed their profile yet. Once claimed and verified,
                   you&apos;ll be able to request callbacks and see full contact details.
                 </p>
-
-                {contactPhone && (
-                  <div className="mb-6">
-                    <p className="text-sm text-gray-500 mb-2">In the meantime, you can try calling:</p>
-                    <a
-                      href={`tel:${contactPhone.replace(/\D/g, '')}`}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      <span className="font-medium text-gray-900">{contactPhone}</span>
-                    </a>
-                  </div>
-                )}
 
                 <div className="pt-6 border-t border-gray-200">
                   <p className="text-sm text-gray-500 mb-3">Are you the owner of this business?</p>
