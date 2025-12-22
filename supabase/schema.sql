@@ -45,14 +45,17 @@ CREATE TABLE providers (
 
   -- Status & Trust Signals
   is_active BOOLEAN NOT NULL DEFAULT true,
-  is_verified BOOLEAN NOT NULL DEFAULT false,
-  is_featured BOOLEAN NOT NULL DEFAULT false,
+  is_claimed BOOLEAN NOT NULL DEFAULT false,  -- Provider has claimed their profile
+  is_verified BOOLEAN NOT NULL DEFAULT false, -- Admin verified the claim
+  is_featured BOOLEAN NOT NULL DEFAULT false, -- Paid featured listing
   background_checked_staff BOOLEAN DEFAULT false,
   fast_response BOOLEAN DEFAULT false,
 
   -- Timestamps
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  claimed_at TIMESTAMPTZ,
+  claimed_by_email TEXT,                      -- Email of person who claimed
   verified_at TIMESTAMPTZ,
   featured_at TIMESTAMPTZ
 );
