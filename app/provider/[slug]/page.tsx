@@ -11,7 +11,11 @@ const serviceLabels: Record<ServiceType, string> = {
   PCS: 'Personal Care Services (PCS)',
 }
 
-async function getProvider(slug: string): Promise<Provider | null> {
+interface ProviderData extends Provider {
+  isClaimed: boolean
+}
+
+async function getProvider(slug: string): Promise<ProviderData | null> {
   const { data, error } = await supabase
     .from('providers')
     .select('*')
@@ -44,6 +48,7 @@ async function getProvider(slug: string): Promise<Provider | null> {
     yearsInBusiness: data.years_in_business,
     tierLevel: data.tier_level,
     isActive: data.is_active,
+    isClaimed: data.is_claimed ?? false,
     isVerified: data.is_verified,
     isFeatured: data.is_featured,
     backgroundCheckedStaff: data.background_checked_staff,
@@ -234,83 +239,131 @@ export default async function ProviderPage({
             </section>
           </div>
 
-          {/* Contact section - ALL verified providers get callback form */}
+          {/* Contact section */}
           <div className="border-t border-gray-200 p-6 sm:p-8 bg-gray-50">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Connect With This Provider</h2>
+            {provider.isVerified ? (
+              <>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Connect With This Provider</h2>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Callback Form - for lead qualification */}
-              <div>
-                <h3 className="font-medium text-gray-900 mb-2">Request a Callback</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Tell us about your needs and the provider will reach out to you directly.
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Callback Form - for lead qualification */}
+                  <div>
+                    <h3 className="font-medium text-gray-900 mb-2">Request a Callback</h3>
+                    <p className="text-gray-600 text-sm mb-4">
+                      Tell us about your needs and the provider will reach out to you directly.
+                    </p>
+                    <CallbackForm
+                      providerId={provider.id}
+                      providerName={provider.name}
+                    />
+                  </div>
+
+                  {/* Direct Contact Info */}
+                  <div className="flex flex-col">
+                    <h3 className="font-medium text-gray-900 mb-2">Or Contact Directly</h3>
+                    <p className="text-gray-600 text-sm mb-4">
+                      Call or visit their website to learn more.
+                    </p>
+
+                    <div className="space-y-3">
+                      {contactPhone && (
+                        <a
+                          href={`tel:${contactPhone.replace(/\D/g, '')}`}
+                          className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                            <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-900">{contactPhone}</p>
+                            <p className="text-xs text-gray-500">Call now</p>
+                          </div>
+                        </a>
+                      )}
+
+                      {provider.website && (
+                        <a
+                          href={provider.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-900">Visit Website</p>
+                            <p className="text-xs text-gray-500 truncate max-w-[200px]">{provider.website.replace(/^https?:\/\//, '')}</p>
+                          </div>
+                        </a>
+                      )}
+
+                      {provider.address && (
+                        <div className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg">
+                          <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-900 text-sm">{provider.address}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              /* Unclaimed/Unverified profile - show claim CTA */
+              <div className="text-center py-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium mb-4">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  This profile hasn&apos;t been claimed yet
+                </div>
+
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact Information Pending</h2>
+                <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                  This provider hasn&apos;t claimed their profile. Once claimed and verified,
+                  you&apos;ll be able to request callbacks and see full contact details.
                 </p>
-                <CallbackForm
-                  providerId={provider.id}
-                  providerName={provider.name}
-                />
-              </div>
 
-              {/* Direct Contact Info */}
-              <div className="flex flex-col">
-                <h3 className="font-medium text-gray-900 mb-2">Or Contact Directly</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Call or visit their website to learn more.
-                </p>
-
-                <div className="space-y-3">
-                  {contactPhone && (
+                {contactPhone && (
+                  <div className="mb-6">
+                    <p className="text-sm text-gray-500 mb-2">In the meantime, you can try calling:</p>
                     <a
                       href={`tel:${contactPhone.replace(/\D/g, '')}`}
-                      className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-900">{contactPhone}</p>
-                        <p className="text-xs text-gray-500">Call now</p>
-                      </div>
+                      <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <span className="font-medium text-gray-900">{contactPhone}</span>
                     </a>
-                  )}
+                  </div>
+                )}
 
-                  {provider.website && (
-                    <a
-                      href={provider.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                        <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-900">Visit Website</p>
-                        <p className="text-xs text-gray-500 truncate max-w-[200px]">{provider.website.replace(/^https?:\/\//, '')}</p>
-                      </div>
-                    </a>
-                  )}
-
-                  {provider.address && (
-                    <div className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg">
-                      <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                        <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-900 text-sm">{provider.address}</p>
-                      </div>
-                    </div>
-                  )}
+                <div className="pt-6 border-t border-gray-200">
+                  <p className="text-sm text-gray-500 mb-3">Are you the owner of this business?</p>
+                  <Link
+                    href={`/claim/${provider.slug}`}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    Claim This Profile
+                  </Link>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
