@@ -320,18 +320,18 @@ export default async function ProviderPage({
                 </div>
               </>
             ) : (
-              /* Unclaimed/Unverified profile - show claim CTA */
+              /* Unclaimed profile - show claim CTA */
               <div className="text-center py-4">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium mb-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium mb-4">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  This profile hasn&apos;t been claimed yet
+                  Unclaimed Profile
                 </div>
 
-                <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact Information Pending</h2>
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact Information Unavailable</h2>
                 <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                  This provider hasn&apos;t claimed their profile yet. Once claimed and verified,
+                  This provider hasn&apos;t claimed their profile yet. Once claimed,
                   you&apos;ll be able to request callbacks and see full contact details.
                 </p>
 

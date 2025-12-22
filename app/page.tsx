@@ -19,6 +19,39 @@ export default function HomePage() {
             No confusing lists. Just providers who are ready to help.
           </p>
 
+          {/* Eligibility Screener CTA - Front and Center */}
+          <div className="bg-gradient-to-r from-accent/10 to-primary/10 rounded-2xl p-6 sm:p-8 mb-8 max-w-2xl mx-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-sm">
+                  <svg className="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  </svg>
+                </div>
+              </div>
+              <div className="flex-grow text-center sm:text-left">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
+                  Not Sure If You Qualify?
+                </h2>
+                <p className="text-gray-600 text-sm">
+                  Our free screener tells you if your child may qualify, what to do next, and what to say.
+                </p>
+              </div>
+              <div className="flex-shrink-0">
+                <Link
+                  href="/screener"
+                  className="inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-accent/90 transition-colors whitespace-nowrap text-sm"
+                >
+                  Check Eligibility
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+                <p className="text-xs text-gray-500 mt-1.5 text-center">Takes 2 minutes</p>
+              </div>
+            </div>
+          </div>
+
           {/* Two clear choices - big touch targets for stressed parents */}
           <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             {/* Primary: Search by County */}

@@ -27,16 +27,19 @@ export function ProviderCard({ provider }: ProviderCardProps) {
     responseExpectation,
   } = provider
 
-  // Unverified providers show limited info and can't be clicked through
+  // Unclaimed providers show limited info with link to profile and claim CTA
   if (!isVerified) {
     return (
-      <div className="bg-white rounded-xl border-2 border-gray-200 p-5 opacity-75">
-        {/* Pending verification badge */}
-        <div className="flex items-center gap-1.5 text-amber-600 text-sm font-medium mb-3">
+      <Link
+        href={`/provider/${slug}`}
+        className="block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
+      >
+        {/* Unclaimed badge */}
+        <div className="flex items-center gap-1.5 text-gray-500 text-sm font-medium mb-3">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-          Pending Verification
+          Unclaimed Profile
         </div>
 
         {/* Provider name and city */}
@@ -71,13 +74,19 @@ export function ProviderCard({ provider }: ProviderCardProps) {
           </p>
         </div>
 
-        {/* Pending message */}
-        <div className="mt-4 pt-3 border-t border-gray-100">
-          <p className="text-sm text-gray-500 italic">
-            We&apos;re verifying this provider&apos;s information. Check back soon.
+        {/* Claim CTA */}
+        <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+          <p className="text-sm text-gray-500">
+            Is this your business?
           </p>
+          <span className="inline-flex items-center gap-1 text-primary text-sm font-medium">
+            Claim Profile
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
         </div>
-      </div>
+      </Link>
     )
   }
 
