@@ -25,12 +25,15 @@ interface ProviderAdmin {
 
 type TabType = 'unclaimed' | 'claimed' | 'verified' | 'all'
 
+const ITEMS_PER_PAGE = 25
+
 export default function AdminPage() {
   const [providers, setProviders] = useState<ProviderAdmin[]>([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<TabType>('unclaimed')
   const [searchQuery, setSearchQuery] = useState('')
   const [updating, setUpdating] = useState<string | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Fetch providers
   useEffect(() => {
@@ -72,6 +75,11 @@ export default function AdminPage() {
     setLoading(false)
   }
 
+  // Reset page when tab or search changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [activeTab, searchQuery])
+
   // Filter providers based on tab and search
   const filteredProviders = providers.filter(provider => {
     // Tab filters
@@ -91,6 +99,11 @@ export default function AdminPage() {
 
     return true
   })
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProviders.length / ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const paginatedProviders = filteredProviders.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
   // Stats
   const unclaimedCount = providers.filter(p => !p.is_claimed).length
@@ -279,7 +292,7 @@ export default function AdminPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {filteredProviders.map(provider => (
+                  {paginatedProviders.map(provider => (
                     <tr key={provider.id} className="hover:bg-gray-50">
                       <td className="px-4 py-3">
                         <p className="font-medium text-gray-900 text-sm">{provider.name}</p>
@@ -383,6 +396,63 @@ export default function AdminPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
+              <div className="text-sm text-gray-500">
+                Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredProviders.length)} of {filteredProviders.length}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className={`px-3 py-1.5 text-sm font-medium rounded ${
+                    currentPage === 1
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Previous
+                </button>
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1)
+                    .filter(page => {
+                      // Show first, last, current, and adjacent pages
+                      return page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1
+                    })
+                    .map((page, index, array) => (
+                      <span key={page} className="flex items-center">
+                        {index > 0 && array[index - 1] !== page - 1 && (
+                          <span className="px-1 text-gray-400">...</span>
+                        )}
+                        <button
+                          onClick={() => setCurrentPage(page)}
+                          className={`w-8 h-8 text-sm font-medium rounded ${
+                            currentPage === page
+                              ? 'bg-primary text-white'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      </span>
+                    ))}
+                </div>
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className={`px-3 py-1.5 text-sm font-medium rounded ${
+                    currentPage === totalPages
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           )}
         </div>
