@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Provider, ServiceType } from '@/types/provider'
 import { CallbackForm } from '@/components/CallbackForm'
+import { CountiesSection } from '@/components/CountiesSection'
 
 // Service type labels
 const serviceLabels: Record<ServiceType, string> = {
@@ -179,16 +180,7 @@ export default async function ProviderPage({
             </section>
 
             {/* Counties Served */}
-            <section>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3">Counties Served</h2>
-              <div className="flex flex-wrap gap-2">
-                {provider.countiesServed.map(county => (
-                  <span key={county} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    {county}
-                  </span>
-                ))}
-              </div>
-            </section>
+            <CountiesSection counties={provider.countiesServed} />
 
             {/* How to Start */}
             {provider.howToStart && (
