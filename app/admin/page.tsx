@@ -295,7 +295,13 @@ export default function AdminPage() {
                   {paginatedProviders.map(provider => (
                     <tr key={provider.id} className="hover:bg-gray-50">
                       <td className="px-4 py-3">
-                        <p className="font-medium text-gray-900 text-sm">{provider.name}</p>
+                        <Link
+                          href={`/provider/${provider.slug}`}
+                          className="font-medium text-primary text-sm hover:underline"
+                          target="_blank"
+                        >
+                          {provider.name}
+                        </Link>
                       </td>
                       <td className="px-4 py-3">
                         <p className="text-sm text-gray-900">{provider.city}</p>
