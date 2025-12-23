@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 
 interface Provider {
@@ -14,12 +15,9 @@ interface Provider {
   is_verified: boolean
 }
 
-export default function ClaimProfilePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = use(params)
+export default function ClaimProfilePage() {
+  const params = useParams()
+  const slug = params.slug as string
   const [provider, setProvider] = useState<Provider | null>(null)
   const [loading, setLoading] = useState(true)
   const [email, setEmail] = useState('')
@@ -137,32 +135,83 @@ export default function ClaimProfilePage({
 
   if (status === 'success') {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+      <div className="min-h-screen bg-gray-50 py-8 px-4">
+        <div className="max-w-lg mx-auto">
+          {/* Success Card */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 text-center mb-6">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Profile Claimed!</h1>
+            <p className="text-gray-600 mb-4">
+              You&apos;ve successfully claimed <strong>{provider.name}</strong>.
+            </p>
+            <div className="bg-gray-50 rounded-xl p-4 text-left">
+              <h3 className="font-medium text-gray-900 mb-2">What&apos;s included:</h3>
+              <ul className="text-sm text-gray-600 space-y-2">
+                <li className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Your phone number is now visible to families
+                </li>
+              </ul>
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Claim Submitted!</h1>
-          <p className="text-gray-600 mb-6">
-            We&apos;ve received your request to claim <strong>{provider.name}</strong>.
-          </p>
-          <div className="bg-blue-50 rounded-xl p-4 text-left mb-6">
-            <h3 className="font-medium text-blue-900 mb-2">What happens next?</h3>
-            <ol className="text-sm text-blue-800 space-y-2 list-decimal list-inside">
-              <li>Our team will verify your claim within 24-48 hours</li>
-              <li>You&apos;ll receive an email confirmation at <strong>{email}</strong></li>
-              <li>Once verified, your profile will be fully visible to families</li>
-              <li>You&apos;ll start receiving callback requests from interested families</li>
-            </ol>
+
+          {/* Verification Upsell */}
+          <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl border-2 border-accent/30 p-6 sm:p-8">
+            <div className="flex items-center gap-2 text-accent font-semibold mb-3">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Get Verified — Unlock More Leads
+            </div>
+            <h2 className="text-xl font-bold text-gray-900 mb-3">
+              Want families to find you first?
+            </h2>
+            <p className="text-gray-600 mb-4 text-sm">
+              Verified providers get 5x more visibility and callback requests from families actively searching for care.
+            </p>
+
+            <ul className="space-y-2.5 mb-6">
+              {[
+                'Verified badge builds trust with families',
+                'Receive callback requests directly',
+                'Full profile visible in search results',
+                'Priority placement in your service areas',
+              ].map((benefit, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                  <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={`mailto:verify@georgiaGAPP.com?subject=Verification Request: ${provider.name}&body=Hi, I just claimed my profile for ${provider.name} and would like to get verified.%0A%0AMy contact info:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone || 'Not provided'}%0A%0AThank you!`}
+              className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
+            >
+              Request Verification — Free
+            </a>
+            <p className="text-xs text-gray-500 mt-2 text-center">
+              We&apos;ll reach out within 24 hours to verify your business
+            </p>
           </div>
-          <Link
-            href="/directory"
-            className="inline-block px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Browse Directory
-          </Link>
+
+          {/* Secondary action */}
+          <div className="text-center mt-6">
+            <Link
+              href={`/provider/${provider.slug}`}
+              className="text-gray-600 hover:text-gray-900 text-sm underline"
+            >
+              View your profile
+            </Link>
+          </div>
         </div>
       </div>
     )
@@ -208,7 +257,7 @@ export default function ClaimProfilePage({
             Claim Your Profile
           </h1>
           <p className="text-gray-600 mb-6 text-sm sm:text-base">
-            Verify that you represent this GAPP provider to unlock your full profile and start receiving leads.
+            Confirm that you represent this GAPP provider to make your contact information visible to families.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -241,7 +290,7 @@ export default function ClaimProfilePage({
                 required
               />
               <p className="text-xs text-gray-500 mt-1">
-                We&apos;ll send lead notifications to this email
+                We&apos;ll use this to confirm your claim
               </p>
             </div>
 
@@ -280,24 +329,22 @@ export default function ClaimProfilePage({
             </button>
           </form>
 
-          {/* Benefits */}
+          {/* What claiming gets you */}
           <div className="mt-8 pt-6 border-t border-gray-200">
-            <h3 className="font-medium text-gray-900 mb-3 text-sm">What you get with a claimed profile:</h3>
-            <ul className="space-y-2.5">
-              {[
-                'Receive callback requests from families',
-                'Full profile visible in search results',
-                'Priority listing for your service areas',
-                'Free verification badge'
-              ].map((benefit, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                  <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
+            <h3 className="font-medium text-gray-900 mb-3 text-sm">What claiming gets you:</h3>
+            <div className="flex items-start gap-2 text-sm text-gray-600 mb-4">
+              <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Your phone number becomes visible to families searching for care
+            </div>
+
+            {/* Verification teaser */}
+            <div className="bg-accent/5 rounded-lg p-4 border border-accent/20">
+              <p className="text-sm text-gray-700">
+                <span className="font-medium text-accent">Want more visibility?</span> After claiming, you can get verified to receive callback requests, priority placement, and a trusted badge.
+              </p>
+            </div>
           </div>
         </div>
 

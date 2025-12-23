@@ -132,6 +132,9 @@ export default function RootLayout({
                 <Link href="/providers" className="hover:text-warm transition-colors">
                   For Providers
                 </Link>
+                <Link href="/case-managers" className="hover:text-warm transition-colors">
+                  Case Managers
+                </Link>
                 <a href="mailto:help@georgiaGAPP.com" className="hover:text-warm transition-colors">
                   Contact
                 </a>
