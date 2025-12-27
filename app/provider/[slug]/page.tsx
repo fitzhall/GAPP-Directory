@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Provider, ServiceType } from '@/types/provider'
 import { CallbackForm } from '@/components/CallbackForm'
 import { CountiesSection } from '@/components/CountiesSection'
+import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 
 // Service type labels
 const serviceLabels: Record<ServiceType, string> = {
@@ -61,6 +63,43 @@ async function getProvider(slug: string): Promise<ProviderData | null> {
   }
 }
 
+// Generate dynamic metadata for SEO
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const provider = await getProvider(slug)
+
+  if (!provider) {
+    return { title: 'Provider Not Found' }
+  }
+
+  const servicesText = provider.servicesOffered
+    .map(s => serviceLabels[s])
+    .join(', ')
+
+  const countiesText = provider.countiesServed.slice(0, 3).join(', ')
+  const moreCounties = provider.countiesServed.length > 3
+    ? ` and ${provider.countiesServed.length - 3} more counties`
+    : ''
+
+  return {
+    title: `${provider.name} | GAPP Provider in ${provider.city}, Georgia`,
+    description: `${provider.name} is a ${provider.isVerified ? 'verified ' : ''}GAPP provider in ${provider.city}, GA offering ${servicesText}. Serves ${countiesText}${moreCounties}.`,
+    keywords: `${provider.name}, GAPP provider ${provider.city}, home care ${provider.city} Georgia, ${provider.servicesOffered.join(', ')}`,
+    openGraph: {
+      title: `${provider.name} | GAPP Home Care Provider`,
+      description: `${provider.isVerified ? 'Verified ' : ''}GAPP provider offering ${servicesText} in ${provider.city}, Georgia.`,
+      type: 'website',
+    },
+    alternates: {
+      canonical: `https://georgiagapp.com/provider/${provider.slug}`,
+    },
+  }
+}
+
 export default async function ProviderPage({
   params,
 }: {
@@ -75,8 +114,43 @@ export default async function ProviderPage({
 
   const contactPhone = provider.intakePhone || provider.phone
 
+  // Map service codes to medical specialty names for schema
+  const medicalSpecialties = provider.servicesOffered.map(service => {
+    switch (service) {
+      case 'RN': return 'Pediatric Nursing'
+      case 'LPN': return 'Licensed Practical Nursing'
+      case 'PCS': return 'Personal Care Services'
+      default: return service
+    }
+  })
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Schema.org MedicalBusiness for provider */}
+      <MedicalBusinessSchema
+        name={provider.name}
+        description={provider.bio || `GAPP home care provider in ${provider.city}, Georgia offering ${provider.servicesOffered.join(', ')} services.`}
+        url={`https://georgiagapp.com/provider/${provider.slug}`}
+        telephone={contactPhone || undefined}
+        address={{
+          addressLocality: provider.city,
+          addressRegion: 'GA',
+          streetAddress: provider.address || undefined,
+        }}
+        areaServed={provider.countiesServed}
+        medicalSpecialty={medicalSpecialties}
+        isAcceptingNewPatients={provider.acceptingNewPatients}
+      />
+
+      {/* Schema.org Breadcrumb */}
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://georgiagapp.com' },
+          { name: 'Directory', url: 'https://georgiagapp.com/directory' },
+          { name: provider.name, url: `https://georgiagapp.com/provider/${provider.slug}` },
+        ]}
+      />
+
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3">

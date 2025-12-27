@@ -1,6 +1,39 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { config } from '@/lib/config'
+import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+
+// FAQ data for both display and schema markup
+const FAQS = [
+  {
+    question: 'How do I get started with GAPP?',
+    answer: 'Contact your local Department of Family and Children Services (DFCS) or your child\'s doctor to request an evaluation. They will help determine eligibility.',
+  },
+  {
+    question: 'Can I choose my own provider?',
+    answer: 'Yes! Once you have GAPP authorization, you can choose any enrolled provider. That\'s what this directory is for — to help you find the right fit.',
+  },
+  {
+    question: 'What if I\'m not happy with my current provider?',
+    answer: 'You can switch providers at any time. Use this directory to find a new provider, then coordinate the transition with your care coordinator.',
+  },
+  {
+    question: 'How many hours of care can my child receive?',
+    answer: 'Hours are determined by your child\'s assessed needs and approved in your GAPP authorization. This varies for each child.',
+  },
+  {
+    question: 'Is there a cost for GAPP services?',
+    answer: 'GAPP is a Medicaid program, so there is typically no cost to families for covered services.',
+  },
+  {
+    question: 'What is GAPP?',
+    answer: 'The Georgia Pediatric Program (GAPP) helps children with complex medical needs receive care at home instead of in a hospital or nursing facility. It covers skilled nursing (RN/LPN) and personal care services (PCS).',
+  },
+  {
+    question: 'Who qualifies for GAPP?',
+    answer: 'To be eligible for GAPP, a child must be under 21 years old, be a Georgia resident, have Medicaid or qualify for Medicaid, and require a level of care typically provided in a hospital or nursing facility.',
+  },
+]
 
 export const metadata: Metadata = {
   title: 'How GAPP Works | Georgia Pediatric Program Guide for Families',
@@ -16,6 +49,17 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* Schema.org FAQPage */}
+      <FAQPageSchema faqs={FAQS} />
+
+      {/* Schema.org Breadcrumb */}
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://georgiagapp.com' },
+          { name: 'How GAPP Works', url: 'https://georgiagapp.com/how-it-works' },
+        ]}
+      />
+
       {/* Hero */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-12 sm:py-16 px-4">
         <div className="max-w-3xl mx-auto text-center">
@@ -120,37 +164,16 @@ export default function HowItWorksPage() {
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Common Questions</h2>
           <div className="space-y-4">
-            {[
-              {
-                q: 'How do I get started with GAPP?',
-                a: 'Contact your local Department of Family and Children Services (DFCS) or your child\'s doctor to request an evaluation. They will help determine eligibility.',
-              },
-              {
-                q: 'Can I choose my own provider?',
-                a: 'Yes! Once you have GAPP authorization, you can choose any enrolled provider. That\'s what this directory is for — to help you find the right fit.',
-              },
-              {
-                q: 'What if I\'m not happy with my current provider?',
-                a: 'You can switch providers at any time. Use this directory to find a new provider, then coordinate the transition with your care coordinator.',
-              },
-              {
-                q: 'How many hours of care can my child receive?',
-                a: 'Hours are determined by your child\'s assessed needs and approved in your GAPP authorization. This varies for each child.',
-              },
-              {
-                q: 'Is there a cost for GAPP services?',
-                a: 'GAPP is a Medicaid program, so there is typically no cost to families for covered services.',
-              },
-            ].map((faq, i) => (
+            {FAQS.slice(0, 5).map((faq, i) => (
               <details key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden group">
                 <summary className="px-6 py-4 cursor-pointer font-medium text-gray-900 flex items-center justify-between hover:bg-gray-50">
-                  {faq.q}
+                  {faq.question}
                   <svg className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
                 <div className="px-6 pb-4 text-gray-700">
-                  {faq.a}
+                  {faq.answer}
                 </div>
               </details>
             ))}

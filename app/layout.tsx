@@ -5,6 +5,7 @@ import { config } from '@/lib/config'
 import Link from 'next/link'
 // Using regular img tag for logo to avoid Next.js Image sizing issues
 import { MobileNav } from '@/components/MobileNav'
+import { OrganizationSchema } from '@/components/JsonLd'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -66,6 +67,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
+        {/* Organization Schema for site identity */}
+        <OrganizationSchema
+          name="GeorgiaGAPP.com"
+          url="https://georgiagapp.com"
+          description="Georgia Pediatric Program (GAPP) provider directory. Connecting families with verified home care providers for children with special needs."
+          logo="https://georgiagapp.com/logo.png"
+        />
+
         {/* Clean, simple navigation */}
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
