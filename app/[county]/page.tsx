@@ -37,6 +37,162 @@ function formatCountyName(slug: string): string {
     .join(' ')
 }
 
+// County metadata for unique content (top 30+ counties with regional context)
+const COUNTY_CONTEXT: Record<string, { region: string; cities: string[]; description: string }> = {
+  // Metro Atlanta (10 counties)
+  'fulton': {
+    region: 'Metro Atlanta',
+    cities: ['Atlanta', 'Sandy Springs', 'Roswell', 'Johns Creek', 'Alpharetta'],
+    description: 'As Georgia\'s most populous county and home to Atlanta, Fulton County has the highest concentration of GAPP providers in the state. Families here have access to a wide range of pediatric home care agencies.'
+  },
+  'gwinnett': {
+    region: 'Metro Atlanta',
+    cities: ['Lawrenceville', 'Duluth', 'Suwanee', 'Snellville', 'Buford'],
+    description: 'Gwinnett County is one of Georgia\'s fastest-growing areas with strong healthcare infrastructure. Many GAPP providers serve the diverse communities throughout the county.'
+  },
+  'cobb': {
+    region: 'Metro Atlanta',
+    cities: ['Marietta', 'Smyrna', 'Kennesaw', 'Acworth', 'Powder Springs'],
+    description: 'Cobb County offers families excellent access to pediatric home care services, with providers concentrated around Marietta and extending throughout the county.'
+  },
+  'dekalb': {
+    region: 'Metro Atlanta',
+    cities: ['Decatur', 'Dunwoody', 'Brookhaven', 'Tucker', 'Stonecrest'],
+    description: 'DeKalb County\'s proximity to Atlanta means families have access to many GAPP providers. The county\'s diverse communities are served by agencies offering multilingual care.'
+  },
+  'clayton': {
+    region: 'Metro Atlanta',
+    cities: ['Jonesboro', 'Morrow', 'Forest Park', 'Riverdale', 'College Park'],
+    description: 'Clayton County families can access GAPP services from providers based in the southern metro Atlanta area, with several agencies serving the Jonesboro and surrounding communities.'
+  },
+  'cherokee': {
+    region: 'North Metro Atlanta',
+    cities: ['Woodstock', 'Canton', 'Holly Springs', 'Ball Ground'],
+    description: 'Cherokee County\'s growing population has attracted several GAPP providers. Families in Woodstock, Canton, and surrounding areas have increasing options for pediatric home care.'
+  },
+  'forsyth': {
+    region: 'North Metro Atlanta',
+    cities: ['Cumming', 'Johns Creek (partial)'],
+    description: 'Forsyth County is one of Georgia\'s fastest-growing counties. GAPP providers serving this area often also cover neighboring Hall and Gwinnett counties.'
+  },
+  'henry': {
+    region: 'South Metro Atlanta',
+    cities: ['McDonough', 'Stockbridge', 'Hampton', 'Locust Grove'],
+    description: 'Henry County families have access to GAPP providers serving the southern metro Atlanta region. The county\'s growth has brought more healthcare options to the area.'
+  },
+  'douglas': {
+    region: 'West Metro Atlanta',
+    cities: ['Douglasville', 'Austell (partial)', 'Villa Rica (partial)'],
+    description: 'Douglas County is served by GAPP providers based in the western metro Atlanta area. Families often have providers who also serve neighboring Cobb and Paulding counties.'
+  },
+  'rockdale': {
+    region: 'East Metro Atlanta',
+    cities: ['Conyers'],
+    description: 'Rockdale County families can access GAPP services from providers serving the eastern metro Atlanta corridor, often sharing coverage with DeKalb and Newton counties.'
+  },
+  // Major Regional Centers
+  'chatham': {
+    region: 'Coastal Georgia',
+    cities: ['Savannah', 'Pooler', 'Garden City', 'Tybee Island'],
+    description: 'Chatham County, home to Savannah, is the hub for GAPP services in coastal Georgia. Providers here often serve families throughout the surrounding coastal counties.'
+  },
+  'richmond': {
+    region: 'Central Savannah River Area',
+    cities: ['Augusta', 'Martinez', 'Evans'],
+    description: 'Richmond County and the Augusta area serve as the regional center for GAPP services in eastern Georgia. Providers here often cover Columbia and surrounding counties.'
+  },
+  'muscogee': {
+    region: 'West Central Georgia',
+    cities: ['Columbus'],
+    description: 'Muscogee County (Columbus) is the regional hub for GAPP services in west central Georgia, serving families along the Alabama border.'
+  },
+  'bibb': {
+    region: 'Middle Georgia',
+    cities: ['Macon'],
+    description: 'Bibb County and Macon serve as the center for GAPP services in middle Georgia. Providers here often serve multiple surrounding counties.'
+  },
+  'dougherty': {
+    region: 'Southwest Georgia',
+    cities: ['Albany'],
+    description: 'Dougherty County (Albany) is the primary hub for GAPP services in southwest Georgia, though provider availability in this region can be more limited.'
+  },
+  'lowndes': {
+    region: 'South Georgia',
+    cities: ['Valdosta'],
+    description: 'Lowndes County (Valdosta) serves as a regional center for GAPP services in south Georgia, near the Florida border.'
+  },
+  'hall': {
+    region: 'Northeast Georgia',
+    cities: ['Gainesville', 'Flowery Branch', 'Oakwood'],
+    description: 'Hall County and Gainesville serve as the hub for GAPP services in northeast Georgia. The area\'s healthcare infrastructure supports families throughout the region.'
+  },
+  'clarke': {
+    region: 'Northeast Georgia',
+    cities: ['Athens'],
+    description: 'Clarke County (Athens) offers families access to GAPP providers serving the university community and surrounding northeast Georgia counties.'
+  },
+  'whitfield': {
+    region: 'Northwest Georgia',
+    cities: ['Dalton'],
+    description: 'Whitfield County (Dalton) is the primary center for GAPP services in northwest Georgia, serving the carpet industry region.'
+  },
+  'floyd': {
+    region: 'Northwest Georgia',
+    cities: ['Rome'],
+    description: 'Floyd County (Rome) offers GAPP services to families in the northwest Georgia region, with providers often covering multiple surrounding counties.'
+  },
+  'houston': {
+    region: 'Middle Georgia',
+    cities: ['Warner Robins', 'Perry', 'Centerville'],
+    description: 'Houston County, home to Robins Air Force Base, has GAPP providers serving military families and the broader Warner Robins community.'
+  },
+  'columbia': {
+    region: 'Central Savannah River Area',
+    cities: ['Evans', 'Martinez', 'Grovetown'],
+    description: 'Columbia County\'s growing population near Augusta has access to GAPP providers serving the CSRA region.'
+  },
+  'glynn': {
+    region: 'Coastal Georgia',
+    cities: ['Brunswick', 'St. Simons Island', 'Jekyll Island'],
+    description: 'Glynn County on Georgia\'s coast offers GAPP services to families in the Golden Isles area, though options may be more limited than in metro areas.'
+  },
+  'liberty': {
+    region: 'Coastal Georgia',
+    cities: ['Hinesville', 'Midway'],
+    description: 'Liberty County, home to Fort Stewart, has GAPP providers serving military families and the Hinesville community.'
+  },
+  'troup': {
+    region: 'West Georgia',
+    cities: ['LaGrange'],
+    description: 'Troup County (LaGrange) offers GAPP services to families in west Georgia, often sharing providers with the Columbus area.'
+  },
+  'bartow': {
+    region: 'Northwest Metro Atlanta',
+    cities: ['Cartersville', 'Adairsville', 'Emerson'],
+    description: 'Bartow County serves as a bridge between metro Atlanta and northwest Georgia, with GAPP providers often covering both regions.'
+  },
+  'paulding': {
+    region: 'West Metro Atlanta',
+    cities: ['Dallas', 'Hiram'],
+    description: 'Paulding County\'s rapid growth has brought more GAPP provider options to families in Dallas, Hiram, and surrounding communities.'
+  },
+  'newton': {
+    region: 'East Metro Atlanta',
+    cities: ['Covington', 'Oxford'],
+    description: 'Newton County families have access to GAPP providers serving the eastern metro Atlanta region and I-20 corridor.'
+  },
+  'fayette': {
+    region: 'South Metro Atlanta',
+    cities: ['Peachtree City', 'Fayetteville', 'Tyrone'],
+    description: 'Fayette County\'s affluent communities have good access to GAPP providers, with agencies serving the Peachtree City and Fayetteville areas.'
+  },
+  'coweta': {
+    region: 'South Metro Atlanta',
+    cities: ['Newnan', 'Senoia', 'Sharpsburg'],
+    description: 'Coweta County families can access GAPP providers serving the southern metro Atlanta region and extending toward LaGrange.'
+  },
+}
+
 // Georgia county regions for "nearby counties" internal linking
 const COUNTY_REGIONS: Record<string, string[]> = {
   // Metro Atlanta
@@ -167,7 +323,7 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
   }))
 }
 
-// Generate metadata for SEO
+// Generate metadata for SEO - dynamic and unique per county
 export async function generateMetadata({
   params,
 }: {
@@ -181,14 +337,31 @@ export async function generateMetadata({
   }
 
   const countyName = formatCountyName(countySlug)
+  const context = COUNTY_CONTEXT[countySlug]
+
+  // Dynamic description based on county context
+  let description: string
+  if (context) {
+    const cityList = context.cities.slice(0, 2).join(', ')
+    description = `Find GAPP home care providers in ${countyName} County (${context.region}), serving ${cityList} and nearby areas. Compare RN nursing, LPN, and personal care services.`
+  } else {
+    description = `Find verified GAPP home care providers in ${countyName} County, Georgia. Compare pediatric nursing and personal care services for children with special needs.`
+  }
+
+  // Dynamic keywords
+  const baseKeywords = `GAPP providers ${countyName} County, pediatric home care ${countyName} GA`
+  const regionKeywords = context ? `, ${context.region} GAPP services` : ''
+  const cityKeywords = context ? `, ${context.cities[0]} home care` : ''
 
   return {
-    title: `GAPP Providers in ${countyName} County, Georgia | Find Home Care`,
-    description: `Find verified GAPP home care providers in ${countyName} County, GA. Compare RN nursing, LPN, and personal care services for children with special needs.`,
-    keywords: `GAPP providers ${countyName} County, home care ${countyName} Georgia, pediatric nursing ${countyName}, PCS services ${countyName} GA`,
+    title: `GAPP Providers in ${countyName} County, Georgia | Pediatric Home Care`,
+    description,
+    keywords: `${baseKeywords}${regionKeywords}${cityKeywords}`,
     openGraph: {
       title: `GAPP Providers in ${countyName} County, Georgia`,
-      description: `Find verified home care providers for children in ${countyName} County. Compare services, check availability, and request callbacks.`,
+      description: context
+        ? `Find pediatric home care in ${countyName} County (${context.region}). ${context.cities.length} communities served.`
+        : `Find verified home care providers for children in ${countyName} County. Compare services and request callbacks.`,
       type: 'website',
     },
   }
@@ -389,26 +562,106 @@ export default async function CountyPage({
           </div>
         )}
 
-        {/* SEO content */}
+        {/* SEO content - Dynamic and unique per county */}
         <div className="mt-12 bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            About GAPP Services in {countyName} County
+            {providers.length > 0
+              ? `Finding Pediatric Home Care in ${countyName} County`
+              : `GAPP Coverage in ${countyName} County, Georgia`
+            }
           </h2>
           <div className="prose prose-gray max-w-none">
+            {/* Regional context for top counties */}
+            {COUNTY_CONTEXT[countySlug] && (
+              <p>
+                <strong>{countyName} County</strong>, located in {COUNTY_CONTEXT[countySlug].region},
+                includes {COUNTY_CONTEXT[countySlug].cities.slice(0, 3).join(', ')}
+                {COUNTY_CONTEXT[countySlug].cities.length > 3 && ' and surrounding communities'}. {COUNTY_CONTEXT[countySlug].description}
+              </p>
+            )}
+
+            {/* Dynamic content based on provider data */}
+            {providers.length > 0 ? (
+              <>
+                <p>
+                  {countyName} County currently has <strong>{providers.length} GAPP provider{providers.length !== 1 ? 's' : ''}</strong> listed in our directory
+                  {verifiedProviders.length > 0 && <>, with {verifiedProviders.length} verified</>}.
+                  {acceptingProviders.length > 0
+                    ? ` ${acceptingProviders.length} ${acceptingProviders.length === 1 ? 'is' : 'are'} currently accepting new patients.`
+                    : ' Contact providers directly to confirm current availability.'
+                  }
+                </p>
+
+                {/* Service-specific content */}
+                <h3>Available Services in {countyName} County</h3>
+                <ul>
+                  {rnProviders.length > 0 && (
+                    <li>
+                      <strong>RN Nursing ({rnProviders.length} provider{rnProviders.length !== 1 ? 's' : ''})</strong> -
+                      Skilled nursing care from registered nurses for complex medical needs including
+                      ventilator care, tracheostomy management, and medication administration.
+                    </li>
+                  )}
+                  {lpnProviders.length > 0 && (
+                    <li>
+                      <strong>LPN Services ({lpnProviders.length} provider{lpnProviders.length !== 1 ? 's' : ''})</strong> -
+                      Licensed practical nurse care for medication monitoring, wound care,
+                      and health supervision under RN direction.
+                    </li>
+                  )}
+                  {pcsProviders.length > 0 && (
+                    <li>
+                      <strong>Personal Care Services ({pcsProviders.length} provider{pcsProviders.length !== 1 ? 's' : ''})</strong> -
+                      Daily living assistance including bathing, dressing, feeding support,
+                      and mobility help for children with special needs.
+                    </li>
+                  )}
+                </ul>
+
+                {/* Missing services note */}
+                {(rnProviders.length === 0 || lpnProviders.length === 0 || pcsProviders.length === 0) && (
+                  <p className="text-sm">
+                    <em>
+                      Note: {[
+                        rnProviders.length === 0 && 'RN nursing',
+                        lpnProviders.length === 0 && 'LPN services',
+                        pcsProviders.length === 0 && 'personal care (PCS)'
+                      ].filter(Boolean).join(' and ')} {' '}
+                      {rnProviders.length === 0 && lpnProviders.length === 0 ? 'are' : 'is'} not currently listed for {countyName} County.
+                      Providers in <Link href="/directory" className="text-primary hover:underline">nearby counties</Link> may serve your area.
+                    </em>
+                  </p>
+                )}
+              </>
+            ) : (
+              <>
+                <p>
+                  {COUNTY_CONTEXT[countySlug]
+                    ? `While ${countyName} County is part of ${COUNTY_CONTEXT[countySlug].region}, we don't currently have GAPP providers specifically listed for this area.`
+                    : `We're working to expand our directory coverage to include ${countyName} County.`
+                  } The Georgia Pediatric Program (GAPP) provides home care services throughout Georgia,
+                  and providers in neighboring counties may serve your area.
+                </p>
+                <p>
+                  GAPP services include skilled nursing (RN and LPN) and personal care services (PCS)
+                  for children with medical needs. If your child qualifies for GAPP, you can contact
+                  providers who serve multiple counties - many travel to serve families in underserved areas.
+                </p>
+                <h3>What to Do If No Providers Are Listed</h3>
+                <ul>
+                  <li>Check <Link href="/directory" className="text-primary hover:underline">nearby counties</Link> - many providers serve multiple areas</li>
+                  <li>Use our <Link href="/screener" className="text-primary hover:underline">eligibility screener</Link> to confirm your child qualifies</li>
+                  <li>Contact your DCH care coordinator for provider referrals</li>
+                  <li>Ask about providers willing to travel to {countyName} County</li>
+                </ul>
+              </>
+            )}
+
+            {/* Call to action */}
             <p>
-              The Georgia Pediatric Program (GAPP) provides essential home care services for children
-              with special medical needs in {countyName} County and throughout Georgia. Our directory
-              helps families connect with verified providers offering:
-            </p>
-            <ul>
-              <li><strong>RN Nursing</strong> - Skilled nursing care from registered nurses</li>
-              <li><strong>LPN Services</strong> - Licensed practical nurse care</li>
-              <li><strong>Personal Care Services (PCS)</strong> - Daily living assistance and support</li>
-            </ul>
-            <p>
-              All providers listed as &quot;Verified&quot; have been confirmed as active GAPP providers
-              serving {countyName} County. Use our callback request form to connect with providers
-              and learn about their availability.
+              <strong>Ready to connect?</strong> Click on any provider above to view their full profile,
+              services offered, and request a callback. Our directory is updated regularly as new providers
+              join the GAPP network.
             </p>
           </div>
         </div>
