@@ -100,6 +100,14 @@ export default function HowItWorksPage() {
               GAPP is a Medicaid waiver program, which means it provides services that
               wouldn&apos;t otherwise be covered, helping children stay with their families.
             </p>
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <p className="text-gray-700 text-sm">
+                <strong>Looking for Katie Beckett or TEFRA?</strong> Learn how these Medicaid waivers compare to GAPP in our{' '}
+                <Link href="/waivers" className="text-primary hover:underline font-medium">
+                  complete waivers guide
+                </Link>.
+              </p>
+            </div>
           </div>
         </div>
       </section>

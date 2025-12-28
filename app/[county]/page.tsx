@@ -37,6 +37,70 @@ function formatCountyName(slug: string): string {
     .join(' ')
 }
 
+// Georgia county regions for "nearby counties" internal linking
+const COUNTY_REGIONS: Record<string, string[]> = {
+  // Metro Atlanta
+  'fulton': ['dekalb', 'cobb', 'gwinnett', 'clayton', 'douglas'],
+  'dekalb': ['fulton', 'gwinnett', 'rockdale', 'henry', 'clayton'],
+  'cobb': ['fulton', 'paulding', 'douglas', 'cherokee', 'bartow'],
+  'gwinnett': ['fulton', 'dekalb', 'barrow', 'walton', 'forsyth'],
+  'clayton': ['fulton', 'henry', 'fayette', 'spalding', 'dekalb'],
+  'cherokee': ['cobb', 'forsyth', 'bartow', 'pickens', 'dawson'],
+  'forsyth': ['cherokee', 'gwinnett', 'hall', 'dawson', 'fulton'],
+  'henry': ['clayton', 'dekalb', 'rockdale', 'newton', 'butts'],
+  'douglas': ['cobb', 'fulton', 'paulding', 'carroll', 'haralson'],
+  'paulding': ['cobb', 'douglas', 'bartow', 'polk', 'haralson'],
+  'rockdale': ['dekalb', 'newton', 'henry', 'walton', 'gwinnett'],
+  'newton': ['rockdale', 'walton', 'morgan', 'jasper', 'henry'],
+  'fayette': ['clayton', 'coweta', 'spalding', 'fulton', 'henry'],
+  'coweta': ['fayette', 'carroll', 'meriwether', 'troup', 'heard'],
+  // North Georgia
+  'hall': ['forsyth', 'jackson', 'banks', 'habersham', 'lumpkin'],
+  'bartow': ['cobb', 'cherokee', 'paulding', 'polk', 'gordon'],
+  'gordon': ['bartow', 'murray', 'whitfield', 'floyd', 'chattooga'],
+  'whitfield': ['gordon', 'murray', 'catoosa', 'walker', 'chattooga'],
+  'floyd': ['gordon', 'bartow', 'polk', 'chattooga', 'rome'],
+  'walker': ['whitfield', 'catoosa', 'dade', 'chattooga', 'murray'],
+  'catoosa': ['whitfield', 'walker', 'dade', 'hamilton'],
+  // Northeast Georgia
+  'clarke': ['oconee', 'madison', 'jackson', 'oglethorpe', 'barrow'],
+  'oconee': ['clarke', 'morgan', 'walton', 'oglethorpe', 'greene'],
+  'jackson': ['hall', 'barrow', 'madison', 'clarke', 'banks'],
+  'barrow': ['gwinnett', 'jackson', 'walton', 'oconee', 'clarke'],
+  // East Georgia
+  'richmond': ['columbia', 'burke', 'jefferson', 'mcduffie', 'lincoln'],
+  'columbia': ['richmond', 'lincoln', 'mcduffie', 'burke', 'warren'],
+  'burke': ['richmond', 'jefferson', 'screven', 'jenkins', 'emanuel'],
+  // Southeast Georgia
+  'chatham': ['effingham', 'bryan', 'liberty', 'bulloch', 'savannah'],
+  'effingham': ['chatham', 'bulloch', 'screven', 'bryan', 'jenkins'],
+  'bryan': ['chatham', 'liberty', 'bulloch', 'long', 'effingham'],
+  'liberty': ['bryan', 'long', 'mcintosh', 'tattnall', 'chatham'],
+  'glynn': ['mcintosh', 'wayne', 'brantley', 'camden', 'charlton'],
+  'camden': ['glynn', 'charlton', 'brantley', 'ware', 'wayne'],
+  // Southwest Georgia
+  'dougherty': ['lee', 'terrell', 'worth', 'mitchell', 'baker'],
+  'muscogee': ['harris', 'chattahoochee', 'marion', 'talbot', 'meriwether'],
+  'lee': ['dougherty', 'terrell', 'sumter', 'worth', 'crisp'],
+  'thomas': ['grady', 'brooks', 'colquitt', 'mitchell', 'decatur'],
+  'lowndes': ['brooks', 'lanier', 'echols', 'cook', 'berrien'],
+  // Central Georgia
+  'bibb': ['houston', 'jones', 'twiggs', 'crawford', 'peach'],
+  'houston': ['bibb', 'peach', 'pulaski', 'dooly', 'crisp'],
+  'jones': ['bibb', 'baldwin', 'twiggs', 'jasper', 'putnam'],
+}
+
+function getNearbyCounties(countySlug: string): string[] {
+  // Check if we have predefined neighbors
+  if (COUNTY_REGIONS[countySlug]) {
+    return COUNTY_REGIONS[countySlug].slice(0, 5)
+  }
+
+  // Fallback: return some popular metro counties
+  const fallbackCounties = ['fulton', 'cobb', 'gwinnett', 'dekalb', 'clayton']
+  return fallbackCounties.filter(c => c !== countySlug).slice(0, 4)
+}
+
 function toProviderCard(provider: Provider): ProviderCardData {
   return {
     id: provider.id,
@@ -346,6 +410,36 @@ export default async function CountyPage({
               serving {countyName} County. Use our callback request form to connect with providers
               and learn about their availability.
             </p>
+          </div>
+        </div>
+
+        {/* Nearby Counties - Internal Linking */}
+        <div className="mt-8 bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            GAPP Providers in Nearby Counties
+          </h2>
+          <p className="text-gray-600 text-sm mb-4">
+            Can&apos;t find what you need in {countyName} County? Many providers serve multiple counties.
+            Browse nearby areas:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {getNearbyCounties(countySlug).map(nearbySlug => (
+              <Link
+                key={nearbySlug}
+                href={`/${nearbySlug}`}
+                className="px-4 py-2 bg-gray-50 hover:bg-primary/5 hover:text-primary border border-gray-200 rounded-lg text-sm font-medium text-gray-700 transition-colors"
+              >
+                {formatCountyName(nearbySlug)} County
+              </Link>
+            ))}
+          </div>
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            <Link
+              href="/directory"
+              className="text-primary hover:underline text-sm font-medium"
+            >
+              View all Georgia counties →
+            </Link>
           </div>
         </div>
 

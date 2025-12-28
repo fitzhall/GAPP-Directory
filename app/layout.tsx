@@ -111,6 +111,12 @@ export default function RootLayout({
                   How GAPP Works
                 </Link>
                 <Link
+                  href="/waivers"
+                  className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
+                >
+                  Waivers
+                </Link>
+                <Link
                   href="/providers"
                   className="px-3 py-2 text-sm font-semibold text-primary hover:text-primary-dark hover:bg-primary/10 rounded-lg transition-colors"
                 >
@@ -134,9 +140,12 @@ export default function RootLayout({
               <div className="text-sm">
                 © 2025 GeorgiaGAPP.com
               </div>
-              <div className="flex gap-6 text-sm">
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm">
                 <Link href="/how-it-works" className="hover:text-warm transition-colors">
                   How GAPP Works
+                </Link>
+                <Link href="/waivers" className="hover:text-warm transition-colors">
+                  Medicaid Waivers
                 </Link>
                 <Link href="/providers" className="hover:text-warm transition-colors">
                   For Providers

@@ -12,6 +12,7 @@ export function MobileNav() {
     { href: '/directory', label: 'Find Provider' },
     { href: '/quiz', label: 'Help Me Choose' },
     { href: '/how-it-works', label: 'How GAPP Works' },
+    { href: '/waivers', label: 'Medicaid Waivers' },
     { href: '/providers', label: 'For Providers' },
   ]
 
