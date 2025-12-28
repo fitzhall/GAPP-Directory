@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { ProviderCard } from '@/components/ProviderCard'
+import { PaginatedProviderList } from '@/components/PaginatedProviderList'
 import { BreadcrumbSchema } from '@/components/JsonLd'
 import { MiniScreener } from '@/components/MiniScreener'
 import type { Provider, ProviderCardData } from '@/types/provider'
@@ -555,11 +556,10 @@ export default async function CountyPage({
             </Link>
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {providers.map(provider => (
-              <ProviderCard key={provider.id} provider={toProviderCard(provider)} />
-            ))}
-          </div>
+          <PaginatedProviderList
+            providers={providers.map(toProviderCard)}
+            pageSize={9}
+          />
         )}
 
         {/* SEO content - Dynamic and unique per county */}
