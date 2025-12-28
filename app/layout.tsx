@@ -133,33 +133,53 @@ export default function RootLayout({
         {/* Main content */}
         <main>{children}</main>
 
-        {/* Simple footer */}
-        <footer className="bg-navy text-gray-300 py-8">
+        {/* Footer */}
+        <footer className="bg-navy text-gray-300 py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            {/* Footer Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+              {/* Services */}
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Services</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/services/rn-nursing" className="hover:text-warm transition-colors">RN Nursing</Link></li>
+                  <li><Link href="/services/lpn-services" className="hover:text-warm transition-colors">LPN Services</Link></li>
+                  <li><Link href="/services/personal-care" className="hover:text-warm transition-colors">Personal Care (PCS)</Link></li>
+                </ul>
+              </div>
+              {/* Resources */}
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Resources</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/how-it-works" className="hover:text-warm transition-colors">How GAPP Works</Link></li>
+                  <li><Link href="/waivers" className="hover:text-warm transition-colors">Medicaid Waivers</Link></li>
+                  <li><Link href="/screener" className="hover:text-warm transition-colors">Eligibility Screener</Link></li>
+                </ul>
+              </div>
+              {/* For Professionals */}
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">For Professionals</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/providers" className="hover:text-warm transition-colors">For Providers</Link></li>
+                  <li><Link href="/case-managers" className="hover:text-warm transition-colors">Case Managers</Link></li>
+                </ul>
+              </div>
+              {/* Contact */}
+              <div>
+                <h4 className="text-white font-semibold mb-3 text-sm">Contact</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="mailto:help@georgiaGAPP.com" className="hover:text-warm transition-colors">help@georgiaGAPP.com</a></li>
+                </ul>
+              </div>
+            </div>
+            {/* Bottom bar */}
+            <div className="pt-6 border-t border-navy-light flex flex-col sm:flex-row justify-between items-center gap-4">
               <div className="text-sm">
                 © 2025 GeorgiaGAPP.com
               </div>
-              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm">
-                <Link href="/how-it-works" className="hover:text-warm transition-colors">
-                  How GAPP Works
-                </Link>
-                <Link href="/waivers" className="hover:text-warm transition-colors">
-                  Medicaid Waivers
-                </Link>
-                <Link href="/providers" className="hover:text-warm transition-colors">
-                  For Providers
-                </Link>
-                <Link href="/case-managers" className="hover:text-warm transition-colors">
-                  Case Managers
-                </Link>
-                <a href="mailto:help@georgiaGAPP.com" className="hover:text-warm transition-colors">
-                  Contact
-                </a>
+              <div className="text-xs text-gray-400 text-center sm:text-right max-w-xl">
+                {config.contact.disclaimer}
               </div>
-            </div>
-            <div className="mt-6 pt-6 border-t border-navy-light text-xs text-gray-400 text-center">
-              {config.contact.disclaimer}
             </div>
           </div>
         </footer>
