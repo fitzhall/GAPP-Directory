@@ -562,153 +562,46 @@ export default async function CountyPage({
           />
         )}
 
-        {/* SEO content - Dynamic and unique per county */}
-        <div className="mt-12 bg-white rounded-xl border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
-            {providers.length > 0
-              ? `Finding Pediatric Home Care in ${countyName} County`
-              : `GAPP Coverage in ${countyName} County, Georgia`
-            }
-          </h2>
-
-          <div className="space-y-6">
-            {/* Regional context for top counties */}
-            {COUNTY_CONTEXT[countySlug] && (
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-gray-700 leading-relaxed">
-                  <strong className="text-gray-900">{countyName} County</strong>, located in {COUNTY_CONTEXT[countySlug].region},
-                  includes {COUNTY_CONTEXT[countySlug].cities.slice(0, 3).join(', ')}
-                  {COUNTY_CONTEXT[countySlug].cities.length > 3 && ' and surrounding communities'}.
-                </p>
-                <p className="text-gray-600 mt-2 text-sm">
-                  {COUNTY_CONTEXT[countySlug].description}
-                </p>
-              </div>
-            )}
-
-            {/* Dynamic content based on provider data */}
-            {providers.length > 0 ? (
-              <>
-                {/* Provider stats */}
-                <div className="flex flex-wrap gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    <span><strong>{providers.length}</strong> provider{providers.length !== 1 ? 's' : ''} listed</span>
-                  </div>
-                  {verifiedProviders.length > 0 && (
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      <span><strong>{verifiedProviders.length}</strong> verified</span>
-                    </div>
-                  )}
-                  {acceptingProviders.length > 0 && (
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      <span><strong>{acceptingProviders.length}</strong> accepting patients</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Service-specific content */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    Available Services in {countyName} County
-                  </h3>
-                  <div className="grid sm:grid-cols-3 gap-3">
-                    {rnProviders.length > 0 && (
-                      <div className="bg-blue-50 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-2xl font-bold text-blue-600">{rnProviders.length}</span>
-                          <span className="text-sm font-medium text-blue-900">RN Nursing</span>
-                        </div>
-                        <p className="text-xs text-blue-700">
-                          Skilled nursing for ventilator care, trach management, medication admin
-                        </p>
-                      </div>
-                    )}
-                    {lpnProviders.length > 0 && (
-                      <div className="bg-purple-50 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-2xl font-bold text-purple-600">{lpnProviders.length}</span>
-                          <span className="text-sm font-medium text-purple-900">LPN Services</span>
-                        </div>
-                        <p className="text-xs text-purple-700">
-                          Medication monitoring, wound care, health supervision under RN
-                        </p>
-                      </div>
-                    )}
-                    {pcsProviders.length > 0 && (
-                      <div className="bg-teal-50 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-2xl font-bold text-teal-600">{pcsProviders.length}</span>
-                          <span className="text-sm font-medium text-teal-900">Personal Care</span>
-                        </div>
-                        <p className="text-xs text-teal-700">
-                          Daily living assistance: bathing, dressing, feeding, mobility help
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Missing services note */}
-                {(rnProviders.length === 0 || lpnProviders.length === 0 || pcsProviders.length === 0) && (
-                  <p className="text-sm text-amber-700 bg-amber-50 rounded-lg p-3">
-                    <strong>Note:</strong> {[
-                      rnProviders.length === 0 && 'RN nursing',
-                      lpnProviders.length === 0 && 'LPN services',
-                      pcsProviders.length === 0 && 'personal care (PCS)'
-                    ].filter(Boolean).join(' and ')} {' '}
-                    {rnProviders.length === 0 && lpnProviders.length === 0 ? 'are' : 'is'} not currently listed for {countyName} County.
-                    <Link href="/directory" className="underline hover:no-underline ml-1">Check nearby counties</Link>.
-                  </p>
-                )}
-              </>
-            ) : (
-              <>
-                <p className="text-gray-600">
-                  {COUNTY_CONTEXT[countySlug]
-                    ? `While ${countyName} County is part of ${COUNTY_CONTEXT[countySlug].region}, we don't currently have GAPP providers specifically listed for this area.`
-                    : `We're working to expand our directory coverage to include ${countyName} County.`
-                  } The Georgia Pediatric Program (GAPP) provides home care services throughout Georgia,
-                  and providers in neighboring counties may serve your area.
-                </p>
-
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    What to Do If No Providers Are Listed
-                  </h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-gray-600">
-                      <span className="text-primary mt-1">•</span>
-                      <span>Check <Link href="/directory" className="text-primary hover:underline font-medium">nearby counties</Link> - many providers serve multiple areas</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-gray-600">
-                      <span className="text-primary mt-1">•</span>
-                      <span>Use our <Link href="/screener" className="text-primary hover:underline font-medium">eligibility screener</Link> to confirm your child qualifies</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-gray-600">
-                      <span className="text-primary mt-1">•</span>
-                      <span>Contact your DCH care coordinator for provider referrals</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-gray-600">
-                      <span className="text-primary mt-1">•</span>
-                      <span>Ask about providers willing to travel to {countyName} County</span>
-                    </li>
-                  </ul>
-                </div>
-              </>
-            )}
-
-            {/* Call to action */}
-            <div className="border-t border-gray-100 pt-4">
-              <p className="text-gray-600 text-sm">
-                <strong className="text-gray-900">Ready to connect?</strong> Click on any provider above to view their full profile,
-                services offered, and request a callback.
-              </p>
-            </div>
+        {/* SEO content - Unique regional context for Google (not redundant with stats above) */}
+        {COUNTY_CONTEXT[countySlug] && (
+          <div className="mt-12 bg-white rounded-xl border border-gray-200 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+              About {countyName} County
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">{countyName} County</strong>, located in {COUNTY_CONTEXT[countySlug].region},
+              includes {COUNTY_CONTEXT[countySlug].cities.slice(0, 3).join(', ')}
+              {COUNTY_CONTEXT[countySlug].cities.length > 3 && ' and surrounding communities'}.{' '}
+              {COUNTY_CONTEXT[countySlug].description}
+            </p>
           </div>
-        </div>
+        )}
+
+        {/* No providers - helpful guidance */}
+        {providers.length === 0 && (
+          <div className="mt-8 bg-amber-50 rounded-xl border border-amber-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              No Providers Listed Yet
+            </h3>
+            <p className="text-gray-600 mb-4">
+              We&apos;re working to expand coverage in {countyName} County. In the meantime:
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start gap-2 text-gray-600">
+                <span className="text-amber-600 mt-0.5">→</span>
+                <span>Check <Link href="/directory" className="text-primary hover:underline font-medium">nearby counties</Link> - many providers serve multiple areas</span>
+              </li>
+              <li className="flex items-start gap-2 text-gray-600">
+                <span className="text-amber-600 mt-0.5">→</span>
+                <span>Use our <Link href="/screener" className="text-primary hover:underline font-medium">eligibility screener</Link> to confirm your child qualifies</span>
+              </li>
+              <li className="flex items-start gap-2 text-gray-600">
+                <span className="text-amber-600 mt-0.5">→</span>
+                <span>Contact your DCH care coordinator for provider referrals</span>
+              </li>
+            </ul>
+          </div>
+        )}
 
         {/* Nearby Counties - Internal Linking */}
         <div className="mt-8 bg-white rounded-xl border border-gray-200 p-6">
