@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 
 interface AvailableProvider {
@@ -14,6 +14,105 @@ interface AvailableProvider {
   availableHours: string | null
   languages: string[] | null
   availabilityUpdatedAt: string
+}
+
+interface ReportIssueDropdownProps {
+  providerId: string
+  providerName: string
+}
+
+function ReportIssueDropdown({ providerId, providerName }: ReportIssueDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState<string | null>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  async function reportIssue(issueType: string) {
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/providers/report-issue', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          providerId,
+          issueType,
+          reportedBy: 'case_manager',
+        }),
+      })
+
+      if (res.ok) {
+        setSubmitted(issueType)
+        setTimeout(() => {
+          setIsOpen(false)
+          setSubmitted(null)
+        }, 2000)
+      }
+    } catch (err) {
+      console.error('Error reporting issue:', err)
+    }
+    setSubmitting(false)
+  }
+
+  const issueTypes = [
+    { key: 'no_answer', label: 'No answer', icon: '📵' },
+    { key: 'not_taking_cases', label: 'Not taking cases', icon: '🚫' },
+    { key: 'wrong_number', label: 'Wrong number', icon: '❌' },
+  ]
+
+  if (submitted) {
+    return (
+      <span className="text-xs text-green-600 flex items-center gap-1">
+        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+        </svg>
+        Reported
+      </span>
+    )
+  }
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-xs text-gray-500 hover:text-gray-700 flex items-center gap-1"
+      >
+        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        Report issue
+      </button>
+
+      {isOpen && (
+        <div className="absolute bottom-full right-0 mb-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+          <p className="px-3 py-1.5 text-xs text-gray-500 border-b border-gray-100">
+            Report an issue
+          </p>
+          {issueTypes.map(issue => (
+            <button
+              key={issue.key}
+              onClick={() => reportIssue(issue.key)}
+              disabled={submitting}
+              className="w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 disabled:opacity-50"
+            >
+              <span>{issue.icon}</span>
+              {issue.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 // Georgia counties
@@ -268,8 +367,8 @@ export default function CaseManagersPage() {
                         )}
                       </div>
 
-                      {/* Phone - Right Side */}
-                      <div className="flex-shrink-0">
+                      {/* Phone & Actions - Right Side */}
+                      <div className="flex-shrink-0 flex flex-col items-end gap-2">
                         <a
                           href={`tel:${provider.phone.replace(/\D/g, '')}`}
                           className="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors"
@@ -279,6 +378,7 @@ export default function CaseManagersPage() {
                           </svg>
                           {provider.phone}
                         </a>
+                        <ReportIssueDropdown providerId={provider.id} providerName={provider.name} />
                       </div>
                     </div>
                   </div>

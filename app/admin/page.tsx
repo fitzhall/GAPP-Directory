@@ -21,6 +21,7 @@ interface ProviderAdmin {
   tier_level: number
   created_at: string
   claimed_by_email: string | null
+  claim_token: string | null
 }
 
 type TabType = 'unclaimed' | 'claimed' | 'verified' | 'all'
@@ -44,13 +45,13 @@ export default function AdminPage() {
     setLoading(true)
     const { data, error } = await supabase
       .from('providers')
-      .select('id, name, slug, city, email, phone, website, services_offered, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served, claimed_by_email')
+      .select('id, name, slug, city, email, phone, website, services_offered, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served, claimed_by_email, claim_token')
       .order('name')
 
     if (error) {
       console.error('Error fetching providers:', error)
-      // If is_claimed column doesn't exist yet, try without it
-      if (error.message?.includes('is_claimed')) {
+      // If columns don't exist yet, try without them
+      if (error.message?.includes('is_claimed') || error.message?.includes('claim_token')) {
         const { data: fallbackData } = await supabase
           .from('providers')
           .select('id, name, slug, city, email, phone, website, services_offered, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served')
@@ -59,7 +60,8 @@ export default function AdminPage() {
           ...p,
           county: p.counties_served?.[0] || 'Unknown',
           is_claimed: false,
-          claimed_by_email: null
+          claimed_by_email: null,
+          claim_token: null
         }))
         setProviders(transformed)
       }
@@ -68,7 +70,8 @@ export default function AdminPage() {
         ...p,
         county: p.counties_served?.[0] || 'Unknown',
         is_claimed: p.is_claimed ?? false,
-        claimed_by_email: p.claimed_by_email ?? null
+        claimed_by_email: p.claimed_by_email ?? null,
+        claim_token: p.claim_token ?? null
       }))
       setProviders(transformed)
     }
@@ -159,6 +162,44 @@ export default function AdminPage() {
     })
   }
 
+  // Get base URL
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://georgiagapp.com'
+
+  // Export claim links as CSV
+  function exportClaimLinks() {
+    const unclaimedProviders = providers.filter(p => !p.is_claimed && p.claim_token)
+    if (unclaimedProviders.length === 0) {
+      alert('No unclaimed providers with claim tokens to export')
+      return
+    }
+
+    const csvRows = [
+      ['Provider Name', 'City', 'County', 'Phone', 'Claim Link'].join(','),
+      ...unclaimedProviders.map(p => [
+        `"${p.name.replace(/"/g, '""')}"`,
+        `"${p.city}"`,
+        `"${p.county}"`,
+        `"${p.phone || ''}"`,
+        `"${baseUrl}/claim/t/${p.claim_token}"`
+      ].join(','))
+    ]
+
+    const csvContent = csvRows.join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `gapp-claim-links-${new Date().toISOString().split('T')[0]}.csv`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
+  // Copy single claim link
+  function copyClaimLink(token: string) {
+    const link = `${baseUrl}/claim/t/${token}`
+    navigator.clipboard.writeText(link)
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
@@ -171,7 +212,16 @@ export default function AdminPage() {
                 Manage and verify providers
               </p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={exportClaimLinks}
+                className="px-3 py-1.5 bg-accent text-white text-sm font-medium rounded hover:bg-accent/90 flex items-center gap-1.5"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Export Claim Links
+              </button>
               <Link
                 href="/admin/leads"
                 className="text-sm text-primary font-medium hover:underline"
@@ -357,6 +407,23 @@ export default function AdminPage() {
                             <span className="text-xs text-gray-500">Saving...</span>
                           ) : (
                             <>
+                              {/* Copy Claim Link button for unclaimed providers */}
+                              {!provider.is_claimed && provider.claim_token && (
+                                <button
+                                  onClick={() => {
+                                    copyClaimLink(provider.claim_token!)
+                                    // Show brief feedback
+                                    const btn = document.activeElement as HTMLButtonElement
+                                    const originalText = btn.innerText
+                                    btn.innerText = 'Copied!'
+                                    setTimeout(() => btn.innerText = originalText, 1000)
+                                  }}
+                                  className="px-2 py-1 text-xs rounded border border-accent text-accent hover:bg-accent/10"
+                                  title={`${baseUrl}/claim/t/${provider.claim_token}`}
+                                >
+                                  Copy Link
+                                </button>
+                              )}
                               {!provider.is_verified ? (
                                 <button
                                   onClick={() => verifyProvider(provider.id)}
