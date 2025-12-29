@@ -161,30 +161,73 @@ export default function ClaimProfilePage() {
             </div>
           </div>
 
-          {/* Verification Upsell */}
+          {/* Verification Upsell - Hormozi Style */}
           <div className="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl border-2 border-accent/30 p-6 sm:p-8">
-            <div className="flex items-center gap-2 text-accent font-semibold mb-3">
+            <div className="flex items-center gap-2 text-accent font-semibold mb-2">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              Get Verified — Unlock More Leads
+              Get Verified
             </div>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">
-              Want families to find you first?
-            </h2>
-            <p className="text-gray-600 mb-4 text-sm">
-              Verified providers get 5x more visibility and callback requests from families actively searching for care.
-            </p>
 
-            <ul className="space-y-2.5 mb-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              Here&apos;s how verified providers get more cases:
+            </h2>
+
+            {/* The Problem */}
+            <div className="bg-white/60 rounded-lg p-4 mb-4">
+              <p className="text-gray-700 text-sm">
+                <strong>The problem:</strong> Case managers don&apos;t have time to call 10 providers hoping someone picks up.
+                They need to know <em>right now</em> who has capacity.
+              </p>
+            </div>
+
+            {/* The Solution */}
+            <div className="mb-5">
+              <p className="text-gray-900 font-medium mb-3">
+                When you&apos;re verified, here&apos;s what happens:
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3 text-sm">
+                  <span className="flex-shrink-0 w-6 h-6 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                  <span className="text-gray-700">
+                    <strong className="text-gray-900">Every Monday</strong> — you get a simple email: &quot;Are you accepting new cases this week?&quot;
+                  </span>
+                </li>
+                <li className="flex items-start gap-3 text-sm">
+                  <span className="flex-shrink-0 w-6 h-6 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                  <span className="text-gray-700">
+                    <strong className="text-gray-900">One click</strong> — hit &quot;Yes&quot; and you&apos;re marked as available. Takes 2 seconds.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3 text-sm">
+                  <span className="flex-shrink-0 w-6 h-6 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                  <span className="text-gray-700">
+                    <strong className="text-gray-900">Case managers see you first</strong> — they only see providers who confirmed availability in the last 7 days.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* The Result */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-5">
+              <p className="text-green-800 text-sm">
+                <strong>Result:</strong> You show up when case managers are actively placing cases.
+                No more being buried in a list. No more cold calls to the wrong providers.
+                Just qualified leads who know you have capacity.
+              </p>
+            </div>
+
+            {/* Benefits summary */}
+            <ul className="space-y-2 mb-6">
               {[
-                'Verified badge builds trust with families',
-                'Receive callback requests directly',
-                'Full profile visible in search results',
-                'Priority placement in your service areas',
+                'Verified badge = instant trust with families',
+                'Case managers only see verified providers',
+                'Weekly check-in keeps you top of the list',
+                'Direct callback requests from families',
               ].map((benefit, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                  <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   {benefit}
@@ -196,10 +239,10 @@ export default function ClaimProfilePage() {
               href={`mailto:verify@georgiaGAPP.com?subject=Verification Request: ${provider.name}&body=Hi, I just claimed my profile for ${provider.name} and would like to get verified.%0A%0AMy contact info:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone || 'Not provided'}%0A%0AThank you!`}
               className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
             >
-              Request Verification — Free
+              Get Verified — It&apos;s Free
             </a>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              We&apos;ll reach out within 24 hours to verify your business
+              We&apos;ll call within 24 hours to set you up
             </p>
           </div>
 
