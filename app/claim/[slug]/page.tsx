@@ -246,7 +246,7 @@ export default function ClaimProfilePage() {
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
               >
-                Get Verified — $29/month
+                Get Verified — $42/mo (billed quarterly)
               </a>
 
               {/* Premium Tier */}
@@ -256,7 +256,7 @@ export default function ClaimProfilePage() {
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-lg text-center hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
               >
-                ⭐ Go Premium — $79/month
+                ⭐ Go Premium — $129/mo (billed quarterly)
               </a>
               <p className="text-xs text-gray-600 text-center">
                 Premium includes: Featured placement, priority in search results, and highlighted profile badge

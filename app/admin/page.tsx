@@ -133,12 +133,30 @@ export default function AdminPage() {
     setUpdating(null)
   }
 
-  // Verify provider
+  // Verify provider (calls API to also send email)
   async function verifyProvider(id: string) {
-    await updateProvider(id, {
-      is_verified: true,
-      accepting_new_patients: true
-    })
+    setUpdating(id)
+    try {
+      const res = await fetch('/api/admin/verify-provider', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ providerId: id }),
+      })
+
+      if (res.ok) {
+        // Update local state
+        setProviders(prev =>
+          prev.map(p => p.id === id ? { ...p, is_verified: true, accepting_new_patients: true } : p)
+        )
+      } else {
+        const data = await res.json()
+        alert(data.error || 'Failed to verify provider')
+      }
+    } catch (err) {
+      console.error('Error verifying provider:', err)
+      alert('Failed to verify provider')
+    }
+    setUpdating(null)
   }
 
   // Unverify provider
@@ -425,12 +443,32 @@ export default function AdminPage() {
                                 </button>
                               )}
                               {!provider.is_verified ? (
-                                <button
-                                  onClick={() => verifyProvider(provider.id)}
-                                  className="px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700"
-                                >
-                                  Verify
-                                </button>
+                                provider.is_claimed ? (
+                                  // Claimed but not verified - show email action + verify after payment
+                                  <>
+                                    <a
+                                      href={`mailto:${provider.claimed_by_email}?subject=Upgrade to Verified - ${provider.name}&body=Hi,%0A%0AThank you for claiming your profile on GeorgiaGAPP.com!%0A%0ATo get verified and appear in case manager searches, upgrade here:%0A%0AVerified ($42/mo quarterly): https://whop.com/checkout/prod_YmESR0QDOQOz1%0APremium ($129/mo quarterly): https://whop.com/checkout/prod_28Ccd66I4F2qT%0A%0AQuestions? Just reply to this email.%0A%0ABest,%0AGeorgiaGAPP Team`}
+                                      className="px-2 py-1 text-xs rounded border border-blue-300 text-blue-700 hover:bg-blue-50"
+                                    >
+                                      Email Upgrade
+                                    </a>
+                                    <button
+                                      onClick={() => verifyProvider(provider.id)}
+                                      className="px-2 py-1 text-xs rounded border border-green-300 text-green-700 hover:bg-green-50"
+                                      title="Only click after payment confirmed"
+                                    >
+                                      Mark Paid ✓
+                                    </button>
+                                  </>
+                                ) : (
+                                  // Unclaimed - just show verify button for manual verification
+                                  <button
+                                    onClick={() => verifyProvider(provider.id)}
+                                    className="px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700"
+                                  >
+                                    Verify
+                                  </button>
+                                )
                               ) : (
                                 <>
                                   <button
