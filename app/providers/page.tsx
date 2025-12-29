@@ -14,12 +14,32 @@ export default function ForProvidersPage() {
     message: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // For now, just show success - in production this would submit to Supabase or email
-    console.log('Provider inquiry:', formData)
-    setSubmitted(true)
+    setSubmitting(true)
+    setError('')
+
+    try {
+      const response = await fetch('/api/providers/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Failed to submit')
+      }
+
+      setSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleServiceToggle = (service: string) => {
@@ -283,11 +303,18 @@ export default function ForProvidersPage() {
                 />
               </div>
 
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
+                disabled={submitting || formData.services.length === 0}
+                className="w-full py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit for Listing
+                {submitting ? 'Submitting...' : 'Submit for Listing'}
               </button>
 
               <p className="text-sm text-gray-500 text-center">
