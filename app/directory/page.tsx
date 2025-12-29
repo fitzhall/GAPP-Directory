@@ -91,6 +91,7 @@ function DirectoryContent() {
           yearsInBusiness: row.years_in_business,
           tierLevel: row.tier_level,
           isActive: row.is_active,
+          isClaimed: row.is_claimed ?? false,
           isVerified: row.is_verified,
           isFeatured: row.is_featured,
           backgroundCheckedStaff: row.background_checked_staff,

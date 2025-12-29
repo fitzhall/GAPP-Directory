@@ -20,15 +20,17 @@ export function ProviderCard({ provider }: ProviderCardProps) {
     countiesServed,
     servicesOffered,
     acceptingNewPatients,
+    isClaimed,
     isVerified,
     isFeatured,
+    phone,
     fastResponse,
     backgroundCheckedStaff,
     responseExpectation,
   } = provider
 
   // Unclaimed providers show limited info with link to profile and claim CTA
-  if (!isVerified) {
+  if (!isClaimed && !isVerified) {
     return (
       <Link
         href={`/provider/${slug}`}
@@ -85,6 +87,80 @@ export function ProviderCard({ provider }: ProviderCardProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </span>
+        </div>
+      </Link>
+    )
+  }
+
+  // Claimed but not verified - show phone number, but no verified badge
+  if (isClaimed && !isVerified) {
+    return (
+      <Link
+        href={`/provider/${slug}`}
+        className="block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
+      >
+        {/* Claimed badge */}
+        <div className="flex items-center gap-1.5 text-blue-600 text-sm font-medium mb-3">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+          </svg>
+          Claimed Profile
+        </div>
+
+        {/* Provider name and city */}
+        <div className="mb-3">
+          <h3 className="text-lg font-semibold text-gray-900 mb-0.5">{name}</h3>
+          <p className="text-sm text-gray-500">{city}, Georgia</p>
+        </div>
+
+        {/* Phone - visible for claimed providers */}
+        {phone && (
+          <div className="mb-3 p-2 bg-blue-50 rounded-lg">
+            <a
+              href={`tel:${phone.replace(/\D/g, '')}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 text-blue-700 font-medium"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              {phone}
+            </a>
+          </div>
+        )}
+
+        {/* Services */}
+        <div className="mb-3">
+          <div className="text-xs text-gray-500 uppercase tracking-wide mb-1.5">Services</div>
+          <div className="flex flex-wrap gap-1.5">
+            {servicesOffered.map(service => (
+              <span
+                key={service}
+                className="px-2 py-0.5 bg-gray-100 text-gray-700 text-sm rounded"
+              >
+                {serviceLabels[service]}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Counties */}
+        <div className="mb-3">
+          <div className="text-xs text-gray-500 uppercase tracking-wide mb-1.5">Counties Served</div>
+          <p className="text-sm text-gray-700">
+            {countiesServed.length <= 3
+              ? countiesServed.join(', ')
+              : `${countiesServed.slice(0, 3).join(', ')} +${countiesServed.length - 3} more`
+            }
+          </p>
+        </div>
+
+        {/* CTA hint */}
+        <div className="mt-4 flex items-center text-primary text-sm font-medium">
+          View Profile
+          <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </div>
       </Link>
     )

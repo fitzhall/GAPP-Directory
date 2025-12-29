@@ -39,7 +39,8 @@ export interface Provider {
 
   // Status & Trust Signals
   isActive: boolean;
-  isVerified: boolean;           // We called and verified
+  isClaimed: boolean;            // Provider claimed their profile (phone visible)
+  isVerified: boolean;           // Paid verified tier
   isFeatured: boolean;           // Paid featured listing
   backgroundCheckedStaff?: boolean;
   fastResponse?: boolean;        // Measured/verified fast response
@@ -75,8 +76,10 @@ export interface ProviderCardData {
   servicesOffered: ServiceType[];
   acceptingNewPatients: boolean;
   tierLevel: number;
+  isClaimed: boolean;
   isVerified: boolean;
   isFeatured: boolean;
+  phone?: string;
   fastResponse?: boolean;
   backgroundCheckedStaff?: boolean;
   responseExpectation?: string;
