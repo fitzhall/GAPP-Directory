@@ -19,6 +19,7 @@ interface ClaimRequest {
   email: string
   name: string
   phone?: string
+  website?: string
 }
 
 export async function POST(request: NextRequest) {
@@ -59,6 +60,7 @@ export async function POST(request: NextRequest) {
     // Try to update with is_claimed field
     const updateData: Record<string, unknown> = {
       email: body.email, // Update email to claimer's email
+      ...(body.website && { website: body.website }), // Add website if provided
     }
 
     // Try updating with claimed fields (will work after migration)
@@ -147,6 +149,7 @@ export async function POST(request: NextRequest) {
               <p><strong>Claimed by:</strong> ${body.name}</p>
               <p><strong>Email:</strong> ${body.email}</p>
               <p><strong>Phone:</strong> ${body.phone || 'Not provided'}</p>
+              <p><strong>Website:</strong> ${body.website || 'Not provided'}</p>
               <p style="margin-top: 20px;">
                 <a href="https://georgiagapp.com/admin" style="background: #FF8A80; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                   Review in Admin

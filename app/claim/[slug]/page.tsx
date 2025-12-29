@@ -23,6 +23,7 @@ export default function ClaimProfilePage() {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [website, setWebsite] = useState('')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error' | 'already_claimed'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -65,6 +66,7 @@ export default function ClaimProfilePage() {
           email,
           name,
           phone,
+          website: website || null,
         }),
       })
 
@@ -367,6 +369,20 @@ export default function ClaimProfilePage() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="(xxx) xxx-xxxx"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
+              />
+            </div>
+
+            {/* Website */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Website <span className="text-gray-400">(optional)</span>
+              </label>
+              <input
+                type="url"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                placeholder="https://yourcompany.com"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
               />
             </div>
