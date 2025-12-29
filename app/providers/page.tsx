@@ -1,12 +1,74 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { config } from '@/lib/config'
 
+interface SearchResult {
+  id: string
+  name: string
+  slug: string
+  city: string
+  countiesServed: string[]
+  servicesOffered: string[]
+  isVerified: boolean
+  isClaimed?: boolean
+}
+
 export default function ForProvidersPage() {
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+  const [showDropdown, setShowDropdown] = useState(false)
   const [showNotFound, setShowNotFound] = useState(false)
+  const searchRef = useRef<HTMLDivElement>(null)
+  const debounceRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  // Debounced search
+  useEffect(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current)
+    }
+
+    if (searchQuery.length < 2) {
+      setSearchResults([])
+      setShowDropdown(false)
+      return
+    }
+
+    setIsSearching(true)
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}&limit=8`)
+        if (res.ok) {
+          const data = await res.json()
+          setSearchResults(data.results || [])
+          setShowDropdown(true)
+        }
+      } catch (err) {
+        console.error('Search error:', err)
+      } finally {
+        setIsSearching(false)
+      }
+    }, 300)
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current)
+      }
+    }
+  }, [searchQuery])
 
   // Form state for "not in directory" submissions
   const [formData, setFormData] = useState({
@@ -221,28 +283,85 @@ export default function ForProvidersPage() {
             </p>
           </div>
 
-          {/* Search */}
+          {/* Search with Autocomplete */}
           <div className="bg-white rounded-2xl border-2 border-gray-200 p-6 sm:p-8 mb-6">
-            <div className="flex gap-3">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value)
-                  setShowNotFound(false)
-                }}
-                placeholder="Enter your agency name..."
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-lg"
-              />
-              <Link
-                href={`/directory?search=${encodeURIComponent(searchQuery)}`}
-                className="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors whitespace-nowrap"
-              >
-                Search
-              </Link>
+            <div ref={searchRef} className="relative">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    setShowNotFound(false)
+                  }}
+                  onFocus={() => searchResults.length > 0 && setShowDropdown(true)}
+                  placeholder="Start typing your agency name..."
+                  className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-lg"
+                />
+                {isSearching && (
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                    <svg className="animate-spin h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+
+              {/* Search Results Dropdown */}
+              {showDropdown && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-lg z-50 max-h-80 overflow-y-auto">
+                  {searchResults.map((result) => (
+                    <Link
+                      key={result.id}
+                      href={`/claim/${result.slug}`}
+                      className="flex items-center gap-4 p-4 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors"
+                      onClick={() => setShowDropdown(false)}
+                    >
+                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-semibold">
+                          {result.name.charAt(0)}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-gray-900 truncate">{result.name}</p>
+                        <p className="text-sm text-gray-500">{result.city}, GA</p>
+                      </div>
+                      <div className="flex-shrink-0">
+                        {result.isVerified ? (
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                            Verified
+                          </span>
+                        ) : (
+                          <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">
+                            Claim Now
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* No results message */}
+              {showDropdown && searchQuery.length >= 2 && searchResults.length === 0 && !isSearching && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-gray-200 rounded-xl shadow-lg z-50 p-4 text-center">
+                  <p className="text-gray-600 mb-2">No agencies found matching &quot;{searchQuery}&quot;</p>
+                  <button
+                    onClick={() => {
+                      setShowDropdown(false)
+                      setShowNotFound(true)
+                    }}
+                    className="text-primary font-medium hover:underline"
+                  >
+                    Request to be added →
+                  </button>
+                </div>
+              )}
             </div>
-            <p className="text-sm text-gray-500 mt-3">
-              Once you find your profile, click &quot;Claim This Profile&quot; to get started.
+
+            <p className="text-sm text-gray-500 mt-3 text-center">
+              Type at least 2 characters to search • Click your agency to claim it
             </p>
           </div>
 
