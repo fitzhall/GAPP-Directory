@@ -141,15 +141,22 @@ function DirectoryContent() {
     })
   }, [providers, county, service, searchQuery])
 
-  // Sort: verified first, then by name
+  // Sort: Premium > Verified > Claimed > Unclaimed, then by name
   const sortedProviders = useMemo(() => {
     return [...filteredProviders].sort((a, b) => {
-      // Verified providers first
-      if (a.isVerified && !b.isVerified) return -1
-      if (!a.isVerified && b.isVerified) return 1
-      // Then featured
-      if (a.isFeatured && !b.isFeatured) return -1
-      if (!a.isFeatured && b.isFeatured) return 1
+      // Calculate tier score: Premium=4, Verified=3, Claimed=2, Unclaimed=1
+      const getTierScore = (p: typeof a) => {
+        if (p.isFeatured) return 4  // Premium
+        if (p.isVerified) return 3  // Verified
+        if (p.isClaimed) return 2   // Claimed
+        return 1                     // Unclaimed
+      }
+      const scoreA = getTierScore(a)
+      const scoreB = getTierScore(b)
+
+      // Higher tier first
+      if (scoreA !== scoreB) return scoreB - scoreA
+
       // Then alphabetically
       return a.name.localeCompare(b.name)
     })

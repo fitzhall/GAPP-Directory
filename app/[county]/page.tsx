@@ -286,6 +286,7 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
     .contains('counties_served', [countyName])
     .order('is_featured', { ascending: false })
     .order('is_verified', { ascending: false })
+    .order('is_claimed', { ascending: false })
     .order('name')
 
   if (error) {
