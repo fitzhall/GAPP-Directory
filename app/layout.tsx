@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { config } from '@/lib/config'
 import Link from 'next/link'
 // Using regular img tag for logo to avoid Next.js Image sizing issues
 import { MobileNav } from '@/components/MobileNav'
 import { OrganizationSchema } from '@/components/JsonLd'
+
+const GA_MEASUREMENT_ID = 'G-QSHSPFWHFF'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -66,6 +69,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      {/* Google Analytics */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
       <body className={nunito.className}>
         {/* Organization Schema for site identity */}
         <OrganizationSchema
