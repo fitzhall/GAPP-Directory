@@ -235,12 +235,21 @@ export default function WaiversPage() {
               </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <Link
                 href="/how-it-works"
                 className="inline-flex items-center text-primary hover:underline font-medium"
               >
                 Learn more about how GAPP works
+                <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/gapp-approval-guide"
+                className="inline-flex items-center text-accent hover:underline font-medium"
+              >
+                Step-by-step GAPP approval guide
                 <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

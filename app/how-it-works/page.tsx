@@ -108,6 +108,15 @@ export default function HowItWorksPage() {
                 </Link>.
               </p>
             </div>
+            <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-100">
+              <p className="text-gray-700 text-sm">
+                <strong>Ready to apply?</strong> Read our{' '}
+                <Link href="/gapp-approval-guide" className="text-primary hover:underline font-medium">
+                  step-by-step GAPP approval guide
+                </Link>{' '}
+                to avoid common delays and get approved faster.
+              </p>
+            </div>
           </div>
         </div>
       </section>

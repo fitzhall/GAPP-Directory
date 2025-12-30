@@ -637,6 +637,42 @@ export default async function CountyPage({
           </div>
         </div>
 
+        {/* GAPP Approval Guide Callout */}
+        <div className="mt-8 bg-gradient-to-br from-primary/5 to-blue-50 rounded-xl border border-primary/20 p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Getting Approved for GAPP in {countyName} County?
+              </h3>
+              <p className="text-gray-600 text-sm mb-4">
+                Learn the step-by-step approval process, avoid common delays, and find out what documentation you need before contacting providers.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/gapp-approval-guide"
+                  className="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors"
+                >
+                  Read the Approval Guide
+                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/screener"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Check Eligibility
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Help CTA */}
         <div className="mt-8 bg-blue-50 rounded-xl p-6 text-center">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
