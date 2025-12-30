@@ -185,9 +185,9 @@ export default function AdminPage() {
 
   // Export claim links as CSV
   function exportClaimLinks() {
-    const unclaimedProviders = providers.filter(p => !p.is_claimed && p.claim_token)
+    const unclaimedProviders = providers.filter(p => !p.is_claimed)
     if (unclaimedProviders.length === 0) {
-      alert('No unclaimed providers with claim tokens to export')
+      alert('No unclaimed providers to export')
       return
     }
 
@@ -198,7 +198,7 @@ export default function AdminPage() {
         `"${p.city}"`,
         `"${p.county}"`,
         `"${p.phone || ''}"`,
-        `"${baseUrl}/claim/t/${p.claim_token}"`
+        `"${baseUrl}/claim/${p.slug}"`
       ].join(','))
     ]
 
@@ -213,8 +213,8 @@ export default function AdminPage() {
   }
 
   // Copy single claim link
-  function copyClaimLink(token: string) {
-    const link = `${baseUrl}/claim/t/${token}`
+  function copyClaimLink(slug: string) {
+    const link = `${baseUrl}/claim/${slug}`
     navigator.clipboard.writeText(link)
   }
 
@@ -426,10 +426,10 @@ export default function AdminPage() {
                           ) : (
                             <>
                               {/* Copy Claim Link button for unclaimed providers */}
-                              {!provider.is_claimed && provider.claim_token && (
+                              {!provider.is_claimed && (
                                 <button
                                   onClick={() => {
-                                    copyClaimLink(provider.claim_token!)
+                                    copyClaimLink(provider.slug)
                                     // Show brief feedback
                                     const btn = document.activeElement as HTMLButtonElement
                                     const originalText = btn.innerText
@@ -437,7 +437,7 @@ export default function AdminPage() {
                                     setTimeout(() => btn.innerText = originalText, 1000)
                                   }}
                                   className="px-2 py-1 text-xs rounded border border-accent text-accent hover:bg-accent/10"
-                                  title={`${baseUrl}/claim/t/${provider.claim_token}`}
+                                  title={`${baseUrl}/claim/${provider.slug}`}
                                 >
                                   Copy Link
                                 </button>
