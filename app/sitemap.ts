@@ -25,7 +25,7 @@ const GEORGIA_COUNTIES = [
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://georgiagapp.com'
+  const baseUrl = 'https://www.georgiagapp.com'
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -48,6 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/screener`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/how-it-works`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -61,6 +67,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/providers`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/case-managers`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,
@@ -84,7 +96,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    // GAPP Approval Guide pages
+    // SEO Pillar Pages (high priority for target keywords)
+    {
+      url: `${baseUrl}/gapp-providers-georgia`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/gapp-home-care`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/medically-fragile-children-care`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
     {
       url: `${baseUrl}/gapp-approval-guide`,
       lastModified: new Date(),
