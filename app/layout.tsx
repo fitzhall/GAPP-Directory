@@ -20,11 +20,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'GeorgiaGAPP.com | Find GAPP Providers for Special Needs Children',
+    default: 'Find GAPP Providers in Georgia | Verified Home Care for Medically Fragile Children',
     template: '%s | GeorgiaGAPP.com'
   },
-  description: 'Connecting families with quality GAPP providers in Georgia. Find verified home care providers for children with special needs - RN nursing, LPN, and personal care services.',
-  keywords: 'GAPP Georgia, GAPP providers, pediatric home care Georgia, RN nursing services, LPN services, personal care services, Georgia Pediatric Program, special needs children',
+  description: 'Find GAPP providers in Georgia. Search verified home care providers for medically fragile children - RN nursing, LPN, and personal care services. Updated weekly.',
+  keywords: 'find GAPP providers, GAPP providers Georgia, GAPP home care Georgia, medically fragile children care Georgia, Georgia Pediatric Program, pediatric home care',
   authors: [{ name: 'GeorgiaGAPP.com' }],
   icons: {
     icon: [
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://georgiagapp.com',
     siteName: 'GeorgiaGAPP.com',
-    title: 'GeorgiaGAPP.com | Connecting Families with Quality GAPP Providers',
-    description: 'Find verified GAPP home care providers for children with special needs in Georgia. Search by county for RN nursing, LPN, and personal care services.',
+    title: 'Find GAPP Providers in Georgia | Home Care for Medically Fragile Children',
+    description: 'Find GAPP providers in Georgia. Search verified home care providers for medically fragile children - RN nursing, LPN, and personal care services.',
     images: [
       {
         url: 'https://georgiagapp.com/og-image.png',
@@ -167,9 +167,11 @@ export default function RootLayout({
               <div>
                 <h4 className="text-white font-semibold mb-3 text-sm">Resources</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><Link href="/how-it-works" className="hover:text-warm transition-colors">How GAPP Works</Link></li>
+                  <li><Link href="/gapp-providers-georgia" className="hover:text-warm transition-colors">GAPP Providers Georgia</Link></li>
+                  <li><Link href="/gapp-home-care" className="hover:text-warm transition-colors">GAPP Home Care</Link></li>
+                  <li><Link href="/medically-fragile-children-care" className="hover:text-warm transition-colors">Medically Fragile Care</Link></li>
+                  <li><Link href="/gapp-approval-guide" className="hover:text-warm transition-colors">GAPP Approval Guide</Link></li>
                   <li><Link href="/waivers" className="hover:text-warm transition-colors">Medicaid Waivers</Link></li>
-                  <li><Link href="/screener" className="hover:text-warm transition-colors">Eligibility Screener</Link></li>
                 </ul>
               </div>
               {/* For Professionals */}
