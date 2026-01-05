@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: 'article',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/gapp-medicaid-requirements',
+    canonical: 'https://www.georgiagapp.com/gapp-medicaid-requirements',
   },
 }
 
@@ -50,9 +50,9 @@ export default function GAPPMedicaidRequirementsPage() {
       <FAQPageSchema faqs={MEDICAID_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'GAPP Approval Guide', url: 'https://georgiagapp.com/gapp-approval-guide' },
-          { name: 'Medicaid Requirements', url: 'https://georgiagapp.com/gapp-medicaid-requirements' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'GAPP Approval Guide', url: 'https://www.georgiagapp.com/gapp-approval-guide' },
+          { name: 'Medicaid Requirements', url: 'https://www.georgiagapp.com/gapp-medicaid-requirements' },
         ]}
       />
 

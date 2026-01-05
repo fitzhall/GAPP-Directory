@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     type: 'article',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/gapp-approval-timeline',
+    canonical: 'https://www.georgiagapp.com/gapp-approval-timeline',
   },
 }
 
@@ -42,9 +42,9 @@ export default function GAPPApprovalTimelinePage() {
       <FAQPageSchema faqs={TIMELINE_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'GAPP Approval Guide', url: 'https://georgiagapp.com/gapp-approval-guide' },
-          { name: 'Approval Timeline', url: 'https://georgiagapp.com/gapp-approval-timeline' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'GAPP Approval Guide', url: 'https://www.georgiagapp.com/gapp-approval-guide' },
+          { name: 'Approval Timeline', url: 'https://www.georgiagapp.com/gapp-approval-timeline' },
         ]}
       />
 

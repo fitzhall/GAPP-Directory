@@ -59,8 +59,8 @@ export default function WaiversPage() {
       {/* Schema.org Breadcrumb */}
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Medicaid Waivers', url: 'https://georgiagapp.com/waivers' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Medicaid Waivers', url: 'https://www.georgiagapp.com/waivers' },
         ]}
       />
 

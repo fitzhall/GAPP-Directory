@@ -22,7 +22,7 @@ export default function ScreenerLayout({
       <SoftwareApplicationSchema
         name="GAPP Eligibility Screener"
         description="Free online tool to check if your child may qualify for Georgia Pediatric Program (GAPP) home nursing services. Answers questions about care needs, Medicaid status, and location to provide personalized next steps."
-        url="https://georgiagapp.com/screener"
+        url="https://www.georgiagapp.com/screener"
         applicationCategory="HealthApplication"
         operatingSystem="Web"
       />

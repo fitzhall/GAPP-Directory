@@ -79,9 +79,9 @@ export default async function PersonalCarePage() {
       <FAQPageSchema faqs={PCS_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Services', url: 'https://georgiagapp.com/services' },
-          { name: 'Personal Care', url: 'https://georgiagapp.com/services/personal-care' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Services', url: 'https://www.georgiagapp.com/services' },
+          { name: 'Personal Care', url: 'https://www.georgiagapp.com/services/personal-care' },
         ]}
       />
 

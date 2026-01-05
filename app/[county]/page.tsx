@@ -405,9 +405,9 @@ export default async function CountyPage({
       {/* Schema.org Breadcrumb */}
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Directory', url: 'https://georgiagapp.com/directory' },
-          { name: `${countyName} County`, url: `https://georgiagapp.com/${countySlug}` },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Directory', url: 'https://www.georgiagapp.com/directory' },
+          { name: `${countyName} County`, url: `https://www.georgiagapp.com/${countySlug}` },
         ]}
       />
 

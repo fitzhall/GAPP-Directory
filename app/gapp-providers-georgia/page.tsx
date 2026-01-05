@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/gapp-providers-georgia',
+    canonical: 'https://www.georgiagapp.com/gapp-providers-georgia',
   },
 }
 
@@ -87,8 +87,8 @@ export default async function GAPPProvidersGeorgiaPage() {
       <FAQPageSchema faqs={FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'GAPP Providers Georgia', url: 'https://georgiagapp.com/gapp-providers-georgia' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'GAPP Providers Georgia', url: 'https://www.georgiagapp.com/gapp-providers-georgia' },
         ]}
       />
 

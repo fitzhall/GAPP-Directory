@@ -79,9 +79,9 @@ export default async function LPNServicesPage() {
       <FAQPageSchema faqs={LPN_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Services', url: 'https://georgiagapp.com/services' },
-          { name: 'LPN Services', url: 'https://georgiagapp.com/services/lpn-services' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Services', url: 'https://www.georgiagapp.com/services' },
+          { name: 'LPN Services', url: 'https://www.georgiagapp.com/services/lpn-services' },
         ]}
       />
 

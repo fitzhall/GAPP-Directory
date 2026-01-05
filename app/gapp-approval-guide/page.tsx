@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: 'article',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/gapp-approval-guide',
+    canonical: 'https://www.georgiagapp.com/gapp-approval-guide',
   },
 }
 
@@ -88,8 +88,8 @@ export default async function GAPPApprovalGuidePage() {
       <FAQPageSchema faqs={APPROVAL_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'GAPP Approval Guide', url: 'https://georgiagapp.com/gapp-approval-guide' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'GAPP Approval Guide', url: 'https://www.georgiagapp.com/gapp-approval-guide' },
         ]}
       />
 

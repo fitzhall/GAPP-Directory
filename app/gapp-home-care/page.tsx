@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/gapp-home-care',
+    canonical: 'https://www.georgiagapp.com/gapp-home-care',
   },
 }
 
@@ -83,8 +83,8 @@ export default async function GAPPHomeCareGeorgiaPage() {
       <FAQPageSchema faqs={FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'GAPP Home Care', url: 'https://georgiagapp.com/gapp-home-care' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'GAPP Home Care', url: 'https://www.georgiagapp.com/gapp-home-care' },
         ]}
       />
 

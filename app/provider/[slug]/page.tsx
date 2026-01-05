@@ -95,7 +95,7 @@ export async function generateMetadata({
       type: 'website',
     },
     alternates: {
-      canonical: `https://georgiagapp.com/provider/${provider.slug}`,
+      canonical: `https://www.georgiagapp.com/provider/${provider.slug}`,
     },
   }
 }
@@ -130,7 +130,7 @@ export default async function ProviderPage({
       <MedicalBusinessSchema
         name={provider.name}
         description={provider.bio || `GAPP home care provider in ${provider.city}, Georgia offering ${provider.servicesOffered.join(', ')} services.`}
-        url={`https://georgiagapp.com/provider/${provider.slug}`}
+        url={`https://www.georgiagapp.com/provider/${provider.slug}`}
         telephone={contactPhone || undefined}
         address={{
           addressLocality: provider.city,
@@ -145,9 +145,9 @@ export default async function ProviderPage({
       {/* Schema.org Breadcrumb */}
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Directory', url: 'https://georgiagapp.com/directory' },
-          { name: provider.name, url: `https://georgiagapp.com/provider/${provider.slug}` },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Directory', url: 'https://www.georgiagapp.com/directory' },
+          { name: provider.name, url: `https://www.georgiagapp.com/provider/${provider.slug}` },
         ]}
       />
 

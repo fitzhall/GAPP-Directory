@@ -37,13 +37,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://georgiagapp.com',
+    url: 'https://www.georgiagapp.com',
     siteName: 'GeorgiaGAPP.com',
     title: 'Find GAPP Providers in Georgia | Home Care for Medically Fragile Children',
     description: 'Find GAPP providers in Georgia. Search verified home care providers for medically fragile children - RN nursing, LPN, and personal care services.',
     images: [
       {
-        url: 'https://georgiagapp.com/og-image.png',
+        url: 'https://www.georgiagapp.com/og-image.png',
         width: 1640,
         height: 624,
         alt: 'GeorgiaGAPP.com - Connecting Families with Quality GAPP Providers',
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'GeorgiaGAPP.com | Find GAPP Providers',
     description: 'Connecting families with quality GAPP providers for special needs children in Georgia.',
-    images: ['https://georgiagapp.com/og-image.png'],
+    images: ['https://www.georgiagapp.com/og-image.png'],
   },
   robots: {
     index: true,
@@ -86,9 +86,9 @@ export default function RootLayout({
         {/* Organization Schema for site identity */}
         <OrganizationSchema
           name="GeorgiaGAPP.com"
-          url="https://georgiagapp.com"
+          url="https://www.georgiagapp.com"
           description="Georgia Pediatric Program (GAPP) provider directory. Connecting families with verified home care providers for children with special needs."
-          logo="https://georgiagapp.com/logo.png"
+          logo="https://www.georgiagapp.com/logo.png"
         />
 
         {/* Clean, simple navigation */}

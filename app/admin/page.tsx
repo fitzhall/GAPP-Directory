@@ -181,7 +181,7 @@ export default function AdminPage() {
   }
 
   // Get base URL
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://georgiagapp.com'
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.georgiagapp.com'
 
   // Export claim links as CSV
   function exportClaimLinks() {

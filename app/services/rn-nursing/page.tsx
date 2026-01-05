@@ -80,9 +80,9 @@ export default async function RNNursingPage() {
       <FAQPageSchema faqs={RN_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Services', url: 'https://georgiagapp.com/services' },
-          { name: 'RN Nursing', url: 'https://georgiagapp.com/services/rn-nursing' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Services', url: 'https://www.georgiagapp.com/services' },
+          { name: 'RN Nursing', url: 'https://www.georgiagapp.com/services/rn-nursing' },
         ]}
       />
 

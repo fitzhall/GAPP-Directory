@@ -55,8 +55,8 @@ export default function HowItWorksPage() {
       {/* Schema.org Breadcrumb */}
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'How GAPP Works', url: 'https://georgiagapp.com/how-it-works' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'How GAPP Works', url: 'https://www.georgiagapp.com/how-it-works' },
         ]}
       />
 

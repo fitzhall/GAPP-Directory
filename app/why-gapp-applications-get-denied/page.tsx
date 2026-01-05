@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: 'article',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/why-gapp-applications-get-denied',
+    canonical: 'https://www.georgiagapp.com/why-gapp-applications-get-denied',
   },
 }
 
@@ -46,9 +46,9 @@ export default function WhyGAPPApplicationsGetDeniedPage() {
       <FAQPageSchema faqs={DENIAL_FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'GAPP Approval Guide', url: 'https://georgiagapp.com/gapp-approval-guide' },
-          { name: 'Why Applications Get Denied', url: 'https://georgiagapp.com/why-gapp-applications-get-denied' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'GAPP Approval Guide', url: 'https://www.georgiagapp.com/gapp-approval-guide' },
+          { name: 'Why Applications Get Denied', url: 'https://www.georgiagapp.com/why-gapp-applications-get-denied' },
         ]}
       />
 

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: {
-    canonical: 'https://georgiagapp.com/medically-fragile-children-care',
+    canonical: 'https://www.georgiagapp.com/medically-fragile-children-care',
   },
 }
 
@@ -73,8 +73,8 @@ export default async function MedicallyFragileChildrenCarePage() {
       <FAQPageSchema faqs={FAQS} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://georgiagapp.com' },
-          { name: 'Medically Fragile Children Care', url: 'https://georgiagapp.com/medically-fragile-children-care' },
+          { name: 'Home', url: 'https://www.georgiagapp.com' },
+          { name: 'Medically Fragile Children Care', url: 'https://www.georgiagapp.com/medically-fragile-children-care' },
         ]}
       />
 
