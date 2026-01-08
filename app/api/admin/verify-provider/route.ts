@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
         is_verified: true,
         accepting_new_patients: true,
         verified_at: new Date().toISOString(),
-        tier_level: 'verified',
+        tier_level: 2, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
       })
       .eq('id', providerId)
 

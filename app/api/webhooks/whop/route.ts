@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
       ) {
         // Premium tier
         updates = {
-          tier_level: 'premium',
+          tier_level: 3, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
           is_verified: true,
           is_featured: true,
           verified_at: new Date().toISOString(),
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
       ) {
         // Verified tier
         updates = {
-          tier_level: 'verified',
+          tier_level: 2, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
           is_verified: true,
           verified_at: new Date().toISOString(),
         }
@@ -177,7 +177,7 @@ export async function POST(request: NextRequest) {
         await supabase
           .from('providers')
           .update({
-            tier_level: 'free',
+            tier_level: 0, // 0=unclaimed/free
             is_verified: false,
             is_featured: false,
           })
