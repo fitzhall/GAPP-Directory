@@ -11,6 +11,7 @@ interface Provider {
   city: string
   phone: string | null
   services_offered: string[]
+  counties_served: string[]
   is_claimed: boolean
   is_verified: boolean
 }
@@ -27,6 +28,13 @@ export default function ClaimProfilePage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error' | 'already_claimed'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
+  // Profile update fields
+  const [businessName, setBusinessName] = useState('')
+  const [city, setCity] = useState('')
+  const [servicesOffered, setServicesOffered] = useState<string[]>([])
+  const [countiesServed, setCountiesServed] = useState<string[]>([])
+  const [showProfileEdit, setShowProfileEdit] = useState(false)
+
   useEffect(() => {
     async function fetchProvider() {
       try {
@@ -34,6 +42,12 @@ export default function ClaimProfilePage() {
         if (res.ok) {
           const data = await res.json()
           setProvider(data)
+          // Initialize profile edit fields with current data
+          setBusinessName(data.name || '')
+          setCity(data.city || '')
+          setServicesOffered(data.services_offered || [])
+          setCountiesServed(data.counties_served || [])
+          setPhone(data.phone || '')
           if (data.is_claimed || data.is_verified) {
             setStatus('already_claimed')
           }
@@ -67,6 +81,13 @@ export default function ClaimProfilePage() {
           name,
           phone,
           website: website || null,
+          // Profile updates
+          profileUpdates: showProfileEdit ? {
+            businessName: businessName !== provider?.name ? businessName : undefined,
+            city: city !== provider?.city ? city : undefined,
+            servicesOffered: JSON.stringify(servicesOffered) !== JSON.stringify(provider?.services_offered) ? servicesOffered : undefined,
+            countiesServed: JSON.stringify(countiesServed) !== JSON.stringify(provider?.counties_served) ? countiesServed : undefined,
+          } : undefined,
         }),
       })
 
@@ -94,10 +115,31 @@ export default function ClaimProfilePage() {
   if (!provider) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="text-center">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 text-center">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Provider Not Found</h1>
-          <p className="text-gray-600 mb-4">This provider listing doesn&apos;t exist.</p>
-          <Link href="/directory" className="text-primary hover:underline">
+          <p className="text-gray-600 mb-6">
+            This provider listing doesn&apos;t exist in our directory yet.
+          </p>
+
+          <div className="bg-accent/5 rounded-xl p-4 border border-accent/20 text-left mb-6">
+            <h3 className="font-medium text-gray-900 mb-2">Are you a GAPP provider?</h3>
+            <p className="text-sm text-gray-600 mb-3">
+              If you&apos;re a licensed GAPP provider and want to be listed, you can request to be added to our directory.
+            </p>
+            <Link
+              href="/request-listing"
+              className="inline-block w-full py-3 bg-accent text-white font-medium rounded-lg text-center hover:bg-accent/90 transition-colors"
+            >
+              Request to be Listed
+            </Link>
+          </div>
+
+          <Link href="/directory" className="text-primary hover:underline text-sm">
             Browse all providers
           </Link>
         </div>
@@ -385,6 +427,113 @@ export default function ClaimProfilePage() {
                 placeholder="https://yourcompany.com"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
               />
+            </div>
+
+            {/* Profile Update Toggle */}
+            <div className="pt-4 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setShowProfileEdit(!showProfileEdit)}
+                className="flex items-center gap-2 text-sm text-primary hover:text-primary-dark font-medium"
+              >
+                <svg
+                  className={`w-4 h-4 transition-transform ${showProfileEdit ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+                {showProfileEdit ? 'Hide profile updates' : 'Need to update your profile info?'}
+              </button>
+
+              {showProfileEdit && (
+                <div className="mt-4 space-y-4 p-4 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-3">
+                    Update any information that needs to be corrected on your listing.
+                  </p>
+
+                  {/* Business Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      Business Name
+                    </label>
+                    <input
+                      type="text"
+                      value={businessName}
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      placeholder="Your business/agency name"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base bg-white"
+                    />
+                  </div>
+
+                  {/* City */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      City
+                    </label>
+                    <input
+                      type="text"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      placeholder="City in Georgia"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base bg-white"
+                    />
+                  </div>
+
+                  {/* Services Offered */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Services Offered
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {['RN', 'LPN', 'PCS'].map(service => (
+                        <button
+                          key={service}
+                          type="button"
+                          onClick={() => {
+                            if (servicesOffered.includes(service)) {
+                              setServicesOffered(servicesOffered.filter(s => s !== service))
+                            } else {
+                              setServicesOffered([...servicesOffered, service])
+                            }
+                          }}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                            servicesOffered.includes(service)
+                              ? 'bg-primary text-white border-primary'
+                              : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
+                          }`}
+                        >
+                          {service}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      RN = Registered Nurse, LPN = Licensed Practical Nurse, PCS = Personal Care Services
+                    </p>
+                  </div>
+
+                  {/* Counties Served */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      Counties Served <span className="text-gray-400">(comma separated)</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={countiesServed.join(', ')}
+                      onChange={(e) => {
+                        const counties = e.target.value
+                          .split(',')
+                          .map(c => c.trim())
+                          .filter(c => c.length > 0)
+                        setCountiesServed(counties)
+                      }}
+                      placeholder="Fulton, Gwinnett, DeKalb"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base bg-white"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Error */}

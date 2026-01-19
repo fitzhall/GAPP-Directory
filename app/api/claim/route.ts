@@ -14,12 +14,20 @@ function getResend() {
   return new Resend(process.env.RESEND_API_KEY)
 }
 
+interface ProfileUpdates {
+  businessName?: string
+  city?: string
+  servicesOffered?: string[]
+  countiesServed?: string[]
+}
+
 interface ClaimRequest {
   providerId: string
   email: string
   name: string
   phone?: string
   website?: string
+  profileUpdates?: ProfileUpdates
 }
 
 export async function POST(request: NextRequest) {
@@ -57,17 +65,43 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Build update payload
+    const updatePayload: Record<string, unknown> = {
+      email: body.email,
+      ...(body.website && { website: body.website }),
+      ...(body.phone && { phone: body.phone }),
+      is_claimed: true,
+      claimed_at: new Date().toISOString(),
+      claimed_by_email: body.email,
+      tier_level: 1, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
+    }
+
+    // Add profile updates if provided
+    if (body.profileUpdates) {
+      if (body.profileUpdates.businessName) {
+        updatePayload.name = body.profileUpdates.businessName
+        // Generate new slug from business name
+        const newSlug = body.profileUpdates.businessName
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '')
+        updatePayload.slug = newSlug
+      }
+      if (body.profileUpdates.city) {
+        updatePayload.city = body.profileUpdates.city
+      }
+      if (body.profileUpdates.servicesOffered) {
+        updatePayload.services_offered = body.profileUpdates.servicesOffered
+      }
+      if (body.profileUpdates.countiesServed) {
+        updatePayload.counties_served = body.profileUpdates.countiesServed
+      }
+    }
+
     // Update provider with claim data
     const { error: updateError } = await supabase
       .from('providers')
-      .update({
-        email: body.email,
-        ...(body.website && { website: body.website }),
-        is_claimed: true,
-        claimed_at: new Date().toISOString(),
-        claimed_by_email: body.email,
-        tier_level: 1, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
-      })
+      .update(updatePayload)
       .eq('id', body.providerId)
 
     if (updateError) {
@@ -139,10 +173,28 @@ export async function POST(request: NextRequest) {
 
       // Also notify admin
       try {
+        // Build profile updates section if any
+        let profileUpdatesHtml = ''
+        if (body.profileUpdates) {
+          const updates = []
+          if (body.profileUpdates.businessName) updates.push(`<li>Business Name: ${body.profileUpdates.businessName}</li>`)
+          if (body.profileUpdates.city) updates.push(`<li>City: ${body.profileUpdates.city}</li>`)
+          if (body.profileUpdates.servicesOffered) updates.push(`<li>Services: ${body.profileUpdates.servicesOffered.join(', ')}</li>`)
+          if (body.profileUpdates.countiesServed) updates.push(`<li>Counties: ${body.profileUpdates.countiesServed.join(', ')}</li>`)
+          if (updates.length > 0) {
+            profileUpdatesHtml = `
+              <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 5px; padding: 15px; margin: 15px 0;">
+                <strong style="color: #856404;">Profile Updates Requested:</strong>
+                <ul style="margin: 10px 0 0 0; padding-left: 20px;">${updates.join('')}</ul>
+              </div>
+            `
+          }
+        }
+
         await resend.emails.send({
           from: 'GeorgiaGAPP.com <noreply@georgiagapp.com>',
           to: 'help@georgiaGAPP.com',
-          subject: `New Claim: ${provider.name}`,
+          subject: `New Claim: ${provider.name}${body.profileUpdates ? ' (with updates)' : ''}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <h2>New Profile Claim</h2>
@@ -151,6 +203,7 @@ export async function POST(request: NextRequest) {
               <p><strong>Email:</strong> ${body.email}</p>
               <p><strong>Phone:</strong> ${body.phone || 'Not provided'}</p>
               <p><strong>Website:</strong> ${body.website || 'Not provided'}</p>
+              ${profileUpdatesHtml}
               <p style="margin-top: 20px;">
                 <a href="https://georgiagapp.com/admin" style="background: #FF8A80; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                   Review in Admin

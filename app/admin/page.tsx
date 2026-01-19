@@ -22,6 +22,7 @@ interface ProviderAdmin {
   created_at: string
   claimed_by_email: string | null
   claim_token: string | null
+  claimed_at?: string | null
 }
 
 type TabType = 'unclaimed' | 'claimed' | 'verified' | 'all'
@@ -253,6 +254,12 @@ export default function AdminPage() {
                 </svg>
                 Export Claim Links
               </button>
+              <Link
+                href="/admin/requests"
+                className="text-sm text-primary font-medium hover:underline"
+              >
+                Listing Requests
+              </Link>
               <Link
                 href="/admin/leads"
                 className="text-sm text-primary font-medium hover:underline"
