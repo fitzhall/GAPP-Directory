@@ -1,0 +1,18 @@
+# Cursor AI Rules for GAPP Directory
+
+## Project Documentation
+IMPORTANT: Always read and reference the CLAUDE.md file located at the project root for:
+- Database schema and table structures
+- Project architecture and file organization
+- API routes and endpoints
+- Common code patterns and best practices
+- Configuration guidelines
+
+File path: ./CLAUDE.md
+
+## Development Guidelines
+- Use TypeScript with strict types
+- Server Components by default, Client Components only when needed
+- Tailwind for all styling
+- Follow Next.js App Router conventions
+- Reference lib/config.ts for site-wide settings

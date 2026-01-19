@@ -1,0 +1,11 @@
+# Aider AI Configuration
+
+# Read CLAUDE.md for project context
+read:
+  - CLAUDE.md
+
+# Additional context files
+additional-files:
+  - lib/config.ts
+  - types/provider.ts
+  - supabase/schema.sql
