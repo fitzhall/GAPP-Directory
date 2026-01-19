@@ -385,6 +385,37 @@ export default async function ProviderPage({
                   </div>
                 </div>
               </>
+            ) : provider.isClaimed ? (
+              /* Claimed but not verified - show pending status */
+              <div className="text-center py-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium mb-4">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Profile Claimed - Verification Pending
+                </div>
+
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">This Provider Has Claimed Their Profile</h2>
+                <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                  Contact information will be available once the provider completes verification.
+                  This usually takes 24-48 hours.
+                </p>
+
+                {/* Show website if available */}
+                {provider.website && (
+                  <a
+                    href={provider.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    Visit Website
+                  </a>
+                )}
+              </div>
             ) : (
               /* Unclaimed profile - show claim CTA */
               <div className="text-center py-4">

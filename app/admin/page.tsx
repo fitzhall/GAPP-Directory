@@ -180,6 +180,19 @@ export default function AdminPage() {
     })
   }
 
+  // Mark provider as claimed (manual fix)
+  async function markAsClaimed(id: string, email?: string) {
+    const claimEmail = email || prompt('Enter the email of the person claiming this profile:')
+    if (!claimEmail) return
+
+    await updateProvider(id, {
+      is_claimed: true,
+      claimed_at: new Date().toISOString(),
+      claimed_by_email: claimEmail,
+      tier_level: 1, // 0=unclaimed, 1=claimed
+    })
+  }
+
   // Get base URL
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.georgiagapp.com'
 

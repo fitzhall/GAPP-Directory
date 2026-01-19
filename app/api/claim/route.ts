@@ -57,36 +57,37 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Try to update with is_claimed field
-    const updateData: Record<string, unknown> = {
-      email: body.email, // Update email to claimer's email
-      ...(body.website && { website: body.website }), // Add website if provided
-    }
-
-    // Try updating with claimed fields (will work after migration)
+    // Update provider with claim data
     const { error: updateError } = await supabase
       .from('providers')
       .update({
-        ...updateData,
+        email: body.email,
+        ...(body.website && { website: body.website }),
         is_claimed: true,
         claimed_at: new Date().toISOString(),
         claimed_by_email: body.email,
+        tier_level: 1, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
       })
       .eq('id', body.providerId)
 
-    // If is_claimed column doesn't exist, just update email
-    if (updateError?.message?.includes('is_claimed')) {
-      await supabase
-        .from('providers')
-        .update(updateData)
-        .eq('id', body.providerId)
-    } else if (updateError) {
+    if (updateError) {
       console.error('Error updating provider:', updateError)
+      console.error('Provider ID:', body.providerId)
+      console.error('Update payload:', { email: body.email, is_claimed: true, claimed_by_email: body.email })
       return NextResponse.json(
-        { error: 'Failed to claim profile' },
+        { error: 'Failed to claim profile: ' + updateError.message },
         { status: 500 }
       )
     }
+
+    // Verify the update worked
+    const { data: verifyData } = await supabase
+      .from('providers')
+      .select('is_claimed, claimed_by_email')
+      .eq('id', body.providerId)
+      .single()
+
+    console.log('Claim verification:', { providerId: body.providerId, result: verifyData })
 
     // Send confirmation email
     const resend = getResend()
