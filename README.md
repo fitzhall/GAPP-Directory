@@ -14,6 +14,17 @@ npm run dev
 
 Visit http://localhost:3000
 
+## For AI Assistants & Developers
+
+**📘 Read `CLAUDE.md` first!** This file contains comprehensive project documentation including:
+- Complete database schema and table structures
+- Project architecture and design patterns
+- API endpoints and request/response formats
+- Common code patterns and best practices
+- Configuration guidelines and environment setup
+
+**File path:** `./CLAUDE.md` or `/home/user/GAPP-Directory/CLAUDE.md`
+
 ## Features
 
 ✅ **Working Out of the Box** - No broken dependencies or missing files
