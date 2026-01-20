@@ -27,6 +27,7 @@ interface ClaimRequest {
   name: string
   phone?: string
   website?: string
+  acceptingNewPatients?: boolean
   profileUpdates?: ProfileUpdates
 }
 
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
       claimed_at: new Date().toISOString(),
       claimed_by_email: body.email,
       tier_level: 1, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
+      accepting_new_patients: body.acceptingNewPatients ?? true,
     }
 
     // Add profile updates if provided
@@ -203,6 +205,7 @@ export async function POST(request: NextRequest) {
               <p><strong>Email:</strong> ${body.email}</p>
               <p><strong>Phone:</strong> ${body.phone || 'Not provided'}</p>
               <p><strong>Website:</strong> ${body.website || 'Not provided'}</p>
+              <p><strong>Accepting New Patients:</strong> ${body.acceptingNewPatients ? '✅ Yes' : '❌ No'}</p>
               ${profileUpdatesHtml}
               <p style="margin-top: 20px;">
                 <a href="https://georgiagapp.com/admin" style="background: #FF8A80; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">

@@ -33,6 +33,7 @@ export default function ClaimProfilePage() {
   const [city, setCity] = useState('')
   const [servicesOffered, setServicesOffered] = useState<string[]>([])
   const [countiesServed, setCountiesServed] = useState<string[]>([])
+  const [acceptingNewPatients, setAcceptingNewPatients] = useState(true)
   const [showProfileEdit, setShowProfileEdit] = useState(false)
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function ClaimProfilePage() {
           phone,
           website: website || null,
           // Profile updates
+          acceptingNewPatients,
           profileUpdates: showProfileEdit ? {
             businessName: businessName !== provider?.name ? businessName : undefined,
             city: city !== provider?.city ? city : undefined,
@@ -427,6 +429,29 @@ export default function ClaimProfilePage() {
                 placeholder="https://yourcompany.com"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
               />
+            </div>
+
+            {/* Accepting New Patients */}
+            <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={acceptingNewPatients}
+                  onChange={(e) => setAcceptingNewPatients(e.target.checked)}
+                  className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                />
+                <div>
+                  <span className="font-medium text-gray-900">Accepting New Patients</span>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Let families know you have capacity for new cases
+                  </p>
+                </div>
+                {acceptingNewPatients && (
+                  <span className="ml-auto px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+                    Yes
+                  </span>
+                )}
+              </label>
             </div>
 
             {/* Profile Update Toggle */}
