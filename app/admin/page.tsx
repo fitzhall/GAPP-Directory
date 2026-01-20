@@ -59,6 +59,7 @@ interface EditFormData {
   website: string
   services_offered: string[]
   counties_served: string[]
+  accepting_new_patients: boolean
 }
 
 export default function AdminPage() {
@@ -75,7 +76,8 @@ export default function AdminPage() {
     phone: '',
     website: '',
     services_offered: [],
-    counties_served: []
+    counties_served: [],
+    accepting_new_patients: false
   })
   const [saving, setSaving] = useState(false)
 
@@ -285,7 +287,8 @@ export default function AdminPage() {
       services_offered: provider.services_offered || [],
       counties_served: providers.find(p => p.id === provider.id)?.county
         ? [providers.find(p => p.id === provider.id)!.county]
-        : []
+        : [],
+      accepting_new_patients: provider.accepting_new_patients
     })
     // Fetch full counties from database
     fetchProviderCounties(provider.id)
@@ -320,7 +323,8 @@ export default function AdminPage() {
           phone: editForm.phone || null,
           website: editForm.website || null,
           services_offered: editForm.services_offered,
-          counties_served: editForm.counties_served
+          counties_served: editForm.counties_served,
+          accepting_new_patients: editForm.accepting_new_patients
         })
       })
 
@@ -337,7 +341,8 @@ export default function AdminPage() {
                 phone: editForm.phone || null,
                 website: editForm.website || null,
                 services_offered: editForm.services_offered,
-                county: editForm.counties_served[0] || p.county
+                county: editForm.counties_served[0] || p.county,
+                accepting_new_patients: editForm.accepting_new_patients
               }
             : p
         ))
@@ -886,6 +891,22 @@ export default function AdminPage() {
                     </label>
                   ))}
                 </div>
+              </div>
+
+              {/* Accepting New Patients */}
+              <div>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={editForm.accepting_new_patients}
+                    onChange={(e) => setEditForm(prev => ({ ...prev, accepting_new_patients: e.target.checked }))}
+                    className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Accepting New Patients</span>
+                  {editForm.accepting_new_patients && (
+                    <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">Yes</span>
+                  )}
+                </label>
               </div>
 
               {/* Counties */}
