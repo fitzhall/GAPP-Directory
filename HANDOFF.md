@@ -1,155 +1,156 @@
-# GeorgiaGAPP.com - Development Handoff Document
+# Agent Handoff Document - GeorgiaGAPP.com
 
 ## Project Overview
+GeorgiaGAPP.com is a directory of GAPP (Georgia Pediatric Program) providers - home health agencies that provide nursing care to medically fragile children in Georgia. The site helps families find providers and helps providers get listed/verified.
 
-**GeorgiaGAPP.com** is a directory connecting families with GAPP (Georgia Pediatric Program) providers for special needs children. Built with Next.js 14 + Supabase.
-
-**Live Site:** https://georgiagapp.com (deployed on Vercel)
-**GitHub:** https://github.com/fitzhall/GAPP-Directory
+**Tech Stack:** Next.js 14, Supabase, Tailwind CSS, Resend (email), Whop (payments)
 
 ---
 
-## Current State
+## Recent Session Summary (Jan 2025)
 
-### What's Working
-- ✅ Provider directory with 327 seeded providers from CSV
-- ✅ Search/filter by county and service type (RN, LPN, PCS)
-- ✅ Clean SEO URLs for all 159 Georgia counties (`/fulton`, `/cobb`, etc.)
-- ✅ Provider profile pages with callback request forms
-- ✅ Admin panel at `/admin` for provider management (verify, feature, toggle accepting)
-- ✅ Mobile-responsive design with hamburger menu
-- ✅ Brand package integrated (logo, favicon, colors, OG image for social sharing)
-- ✅ Sitemap and robots.txt for SEO
-- ✅ **Lead notification system** - callbacks saved to DB + email to providers via Resend
-- ✅ **Lead management admin** - `/admin/leads` to view/manage all callback requests
+### Issues Fixed This Session
 
-### Provider Verification Flow (Current)
-1. All 327 providers seeded as `is_verified: false`
-2. Admin manually verifies providers at `/admin`
-3. Verified providers show full profile with callback form
-4. Unverified providers show limited info, not clickable (visible but "Pending Verification")
+#### 1. Profile Editing During Claim Process
+**Problem:** Providers couldn't update their business info (name, city, services) when claiming their listing.
 
-### Callback/Lead Flow (NOW WORKING)
-1. Family clicks on verified provider → goes to `/provider/[slug]`
-2. Family fills out callback form (name, phone, email, service needed, urgency, etc.)
-3. Form submits to `/api/callback` which:
-   - Saves the lead to `callback_requests` table
-   - Sends email notification to provider (via Resend) with lead details
-4. Admin can view/manage leads at `/admin/leads`
+**Solution:**
+- Added expandable "Need to update your profile info?" section to `/app/claim/[slug]/page.tsx`
+- Fields: business name, city, services (RN/LPN/PCS), counties served
+- API at `/app/api/claim/route.ts` updated to handle `profileUpdates` object
+- Admin email notification shows any profile changes
 
----
+#### 2. New Listing Request Flow
+**Problem:** Providers not in the directory had no way to request to be added.
 
-## COMPLETED: Provider Lead Notification System
+**Solution:**
+- New page: `/app/request-listing/page.tsx` - form for unlisted providers
+- New API: `/app/api/listing-request/route.ts` - handles submissions
+- New admin page: `/app/admin/requests/page.tsx` - review/approve/reject requests
+- New migration: `/supabase/migrations/005_listing_requests.sql`
+- **USER ALREADY RAN THIS MIGRATION**
 
-The lead notification system is now fully implemented:
+#### 3. Auto-Verified Provider Issue
+**Problem:** "Mack Lander LLC" showing as verified but never paid.
 
-### How It Works
-1. **Form Submission** → `/api/callback` API route
-2. **Database** → Lead saved to `callback_requests` table
-3. **Email** → Provider receives formatted HTML email via Resend
-4. **Admin** → View/manage all leads at `/admin/leads`
+**Root Cause:** The seed script (`scripts/seed-providers.ts` line 189) set `is_verified: true` for all imported providers. Also, `scripts/verify-one-per-county.ts` auto-verified one provider per county.
 
-### Key Files
-- `/app/api/callback/route.ts` - API route that saves lead + sends email
-- `/app/admin/leads/page.tsx` - Lead management dashboard
-- `/components/CallbackForm.tsx` - Updated to use API route
-
-### Setup Required
-Add these environment variables in Vercel:
-
-```
-RESEND_API_KEY=re_xxxxxxxxxx
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-```
-
-**Get Resend API key:** https://resend.com (free tier: 3k emails/month)
-
-**Important:** You need to verify your domain (georgiagapp.com) in Resend to send from `leads@georgiagapp.com`. Until then, use Resend's default `onboarding@resend.dev` for testing.
-
----
-
-## Tech Stack
-
-- **Framework:** Next.js 14.2.5 (App Router)
-- **Database:** Supabase (PostgreSQL)
-- **Styling:** Tailwind CSS
-- **Hosting:** Vercel
-- **Font:** Nunito (Google Fonts)
-
-### Environment Variables (Vercel)
-```
-NEXT_PUBLIC_SUPABASE_URL=https://mjuuqjrxzhkvsbrgqfot.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key>
+**Recommended Fix (not yet applied):** User should run in Supabase:
+```sql
+UPDATE providers
+SET
+  is_verified = false,
+  is_claimed = false,
+  verified_at = NULL,
+  accepting_new_patients = false,
+  tier_level = 0
+WHERE is_verified = true
+  AND (claimed_by_email IS NULL OR claimed_by_email = '');
 ```
 
 ---
 
-## Brand Guidelines
+## SEO Work This Session
 
-Colors (in `tailwind.config.ts`):
-- **Primary (Coral Pink):** #FF8A80 - CTAs, buttons
-- **Accent (Sky Blue):** #87CEEB - Trust, links
-- **Warm (Soft Peach):** #FFCBA4 - Backgrounds
-- **Navy:** #2C3E50 - Text, headers
+### Current Ranking Page
+- `/gapp-providers-georgia` ranks #2 for "ga gapp providers"
+- ~1,500 words, FAQ schema, strong internal linking
 
-Full brand guide: `/GeorgiaGAPP_Brand_Package/BRAND_GUIDELINES.md`
+### New Page Created
+- `/katie-beckett-waiver-georgia` - targeting "Katie Beckett waiver Georgia"
+- Comprehensive guide: eligibility, application, vs GAPP comparison
+- 10 FAQs with schema markup
+- ~500 lines, strong internal links to GAPP directory
 
----
+### Existing SEO Pages
+| URL | Target Keyword |
+|-----|---------------|
+| `/gapp-providers-georgia` | GAPP providers Georgia (RANKING #2) |
+| `/gapp-approval-guide` | how to get approved for GAPP |
+| `/gapp-approval-timeline` | GAPP approval timeline |
+| `/gapp-home-care` | GAPP home care Georgia |
+| `/gapp-medicaid-requirements` | GAPP Medicaid requirements |
+| `/medically-fragile-children-care` | medically fragile child care Georgia |
+| `/waivers` | Georgia Medicaid waivers (general) |
+| `/why-gapp-applications-get-denied` | GAPP denied |
+| `/katie-beckett-waiver-georgia` | Katie Beckett waiver Georgia (NEW) |
+| `/services/rn-nursing` | pediatric RN nursing Georgia |
+| `/services/lpn-services` | GAPP LPN services |
+| `/services/personal-care` | GAPP personal care services |
 
-## Key Files
-
-```
-/app
-  /[county]/page.tsx      # County pages (/fulton, /cobb)
-  /admin/page.tsx         # Admin panel
-  /directory/page.tsx     # Main directory with filters
-  /provider/[slug]/page.tsx  # Individual provider profiles
-  /providers/page.tsx     # "For Providers" landing page
-  /quiz/page.tsx          # Provider matching quiz
-  layout.tsx              # Main layout with nav/footer
-
-/components
-  CallbackForm.tsx        # Lead capture form
-  ProviderCard.tsx        # Provider listing card
-  MobileNav.tsx           # Mobile hamburger menu
-
-/lib
-  supabase.ts             # Supabase client
-  config.ts               # Site config
-
-/supabase
-  schema.sql              # Database schema
-  seed.sql                # Sample data
-```
+### Next SEO Priority
+**Recommended:** Create `/pediatric-home-nursing-georgia` page
+- Broader keyword that captures parents who don't know GAPP exists
+- High commercial intent, less competitive than government sites
+- Direct funnel to the provider directory
 
 ---
 
-## Quick Commands
+## Database Schema (Key Tables)
 
-```bash
-# Run locally
-npm run dev
+### providers
+- `is_claimed` - boolean (has someone claimed this listing)
+- `claimed_by_email` - text (email of person who claimed)
+- `claimed_at` - timestamp
+- `is_verified` - boolean (have they paid/been verified)
+- `verified_at` - timestamp
+- `tier_level` - integer (0=unclaimed, 1=claimed, 2=verified, 3=premium)
+- `services_offered` - text[] (RN, LPN, PCS)
+- `counties_served` - text[]
 
-# Build
-npm run build
+### listing_requests (NEW)
+- `contact_name`, `contact_email`, `contact_phone`
+- `business_name`, `city`, `services_offered`, `counties_served`
+- `status` - text (pending, approved, rejected)
+- `provider_id` - UUID (links to created provider if approved)
 
-# The repo auto-deploys to Vercel on push to main
-git push origin main
-```
+### callback_requests
+- Leads from families requesting callbacks from providers
 
 ---
 
-## Contact
+## Admin Panel
 
-- **Support Email:** help@georgiaGAPP.com
-- **Supabase Dashboard:** https://supabase.com/dashboard/project/mjuuqjrxzhkvsbrgqfot
+**URL:** `/admin` (password protected via `ADMIN_PASSWORD` env var)
+
+**Key Pages:**
+- `/admin` - Main provider management (verify, feature, copy claim links)
+- `/admin/requests` - NEW: Review listing requests from unlisted providers
+- `/admin/leads` - View callback requests from families
 
 ---
 
-## Future Enhancements (Optional)
+## Key Files Reference
 
-1. **Provider Portal** - Let providers log in to see their leads, update profile
-2. **Family Confirmation Email** - Send confirmation to family when they submit
-3. **SMS Notifications** - Add Twilio for text alerts to providers
-4. **Lead Analytics** - Track conversion rates, response times
-5. **Admin Auth** - Protect `/admin` routes with authentication
+| Purpose | File |
+|---------|------|
+| Claim form | `app/claim/[slug]/page.tsx` |
+| Claim API | `app/api/claim/route.ts` |
+| New listing request page | `app/request-listing/page.tsx` |
+| New listing request API | `app/api/listing-request/route.ts` |
+| Admin - providers | `app/admin/page.tsx` |
+| Admin - listing requests | `app/admin/requests/page.tsx` |
+| Provider types | `types/provider.ts` |
+| Supabase client | `lib/supabase.ts` |
+| Site config | `lib/config.ts` |
+
+---
+
+## Pending Items / Known Issues
+
+1. **Reset auto-verified providers** - SQL above needs to be run to fix providers who were auto-verified but never paid
+
+2. **Home page is thin** - Only ~300 words, could benefit from more SEO content
+
+3. **Next SEO page** - `/pediatric-home-nursing-georgia` recommended as next content piece
+
+4. **Deployment** - Site deploys via Vercel from GitHub. Recent deploy should have gone through with commit `d4f803a`.
+
+---
+
+## Git Info
+- **Repo:** https://github.com/fitzhall/GAPP-Directory
+- **Branch:** main
+- **Latest commits:**
+  - `d4f803a` - Add Katie Beckett waiver Georgia SEO page
+  - `fe2d194` - Add profile editing during claim + new listing request flow

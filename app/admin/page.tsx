@@ -466,12 +466,55 @@ export default function AdminPage() {
                                 provider.is_claimed ? (
                                   // Claimed but not verified - show email action + verify after payment
                                   <>
-                                    <a
-                                      href={`mailto:${provider.claimed_by_email}?subject=Upgrade to Verified - ${provider.name}&body=Hi,%0A%0AThank you for claiming your profile on GeorgiaGAPP.com!%0A%0ATo get verified and appear in case manager searches, upgrade here:%0A%0AVerified ($42/mo quarterly): https://whop.com/checkout/prod_YmESR0QDOQOz1%0APremium ($129/mo quarterly): https://whop.com/checkout/prod_28Ccd66I4F2qT%0A%0AQuestions? Just reply to this email.%0A%0ABest,%0AGeorgiaGAPP Team`}
+                                    <button
+                                      onClick={async () => {
+                                        const btn = document.activeElement as HTMLButtonElement
+                                        btn.disabled = true
+                                        btn.innerText = 'Sending...'
+                                        try {
+                                          const res = await fetch('/api/admin/send-upgrade-email', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({
+                                              providerName: provider.name,
+                                              providerEmail: provider.claimed_by_email
+                                            })
+                                          })
+                                          if (res.ok) {
+                                            btn.innerText = 'Sent ✓'
+                                            btn.className = 'px-2 py-1 text-xs rounded border border-green-300 text-green-700 bg-green-50'
+                                          } else {
+                                            btn.innerText = 'Failed'
+                                            btn.disabled = false
+                                          }
+                                        } catch {
+                                          btn.innerText = 'Failed'
+                                          btn.disabled = false
+                                        }
+                                        setTimeout(() => {
+                                          btn.innerText = 'Send Email'
+                                          btn.disabled = false
+                                          btn.className = 'px-2 py-1 text-xs rounded border border-blue-300 text-blue-700 hover:bg-blue-50'
+                                        }, 3000)
+                                      }}
                                       className="px-2 py-1 text-xs rounded border border-blue-300 text-blue-700 hover:bg-blue-50"
+                                      title={`Send upgrade email to ${provider.claimed_by_email}`}
                                     >
-                                      Email Upgrade
-                                    </a>
+                                      Send Email
+                                    </button>
+                                    <button
+                                      onClick={() => {
+                                        navigator.clipboard.writeText('https://whop.com/checkout/prod_YmESR0QDOQOz1')
+                                        const btn = document.activeElement as HTMLButtonElement
+                                        const original = btn.innerText
+                                        btn.innerText = 'Copied!'
+                                        setTimeout(() => btn.innerText = original, 1500)
+                                      }}
+                                      className="px-2 py-1 text-xs rounded border border-gray-300 text-gray-600 hover:bg-gray-50"
+                                      title="Copy Whop checkout link"
+                                    >
+                                      Copy Link
+                                    </button>
                                     <button
                                       onClick={() => verifyProvider(provider.id)}
                                       className="px-2 py-1 text-xs rounded border border-green-300 text-green-700 hover:bg-green-50"
