@@ -4,8 +4,8 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Whop checkout URLs
-const WHOP_VERIFIED_URL = 'https://whop.com/checkout/prod_YmESR0QDOQOz1'
-const WHOP_PREMIUM_URL = 'https://whop.com/checkout/prod_28Ccd66I4F2qT'
+const WHOP_VERIFIED_URL = 'https://whop.com/bitcoin-estate-commission-inc/verfied-tier/'
+const WHOP_PREMIUM_URL = 'https://whop.com/bitcoin-estate-commission-inc/premium-listing/'
 
 export async function POST(request: NextRequest) {
   try {

@@ -283,22 +283,22 @@ export default function ClaimProfilePage() {
             <div className="space-y-3">
               {/* Verified Tier */}
               <a
-                href={`https://whop.com/checkout/prod_YmESR0QDOQOz1/?d2c=true&email=${encodeURIComponent(email)}`}
+                href="https://whop.com/bitcoin-estate-commission-inc/verfied-tier/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
               >
-                Get Verified — $42/mo (billed quarterly)
+                Get Verified — $127/quarter
               </a>
 
               {/* Premium Tier */}
               <a
-                href={`https://whop.com/checkout/prod_28Ccd66I4F2qT/?d2c=true&email=${encodeURIComponent(email)}`}
+                href="https://whop.com/bitcoin-estate-commission-inc/premium-listing/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-lg text-center hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
               >
-                ⭐ Go Premium — $129/mo (billed quarterly)
+                ⭐ Go Premium — $387/quarter
               </a>
               <p className="text-xs text-gray-600 text-center">
                 Premium includes: Featured placement, priority in search results, and highlighted profile badge

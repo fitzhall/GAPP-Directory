@@ -658,7 +658,7 @@ export default function AdminPage() {
                                     </button>
                                     <button
                                       onClick={() => {
-                                        navigator.clipboard.writeText('https://whop.com/checkout/prod_YmESR0QDOQOz1')
+                                        navigator.clipboard.writeText('https://whop.com/bitcoin-estate-commission-inc/verfied-tier/')
                                         const btn = document.activeElement as HTMLButtonElement
                                         const original = btn.innerText
                                         btn.innerText = 'Copied!'
