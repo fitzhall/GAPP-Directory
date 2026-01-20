@@ -26,6 +26,7 @@ interface ProviderAdmin {
 }
 
 type TabType = 'unclaimed' | 'claimed' | 'verified' | 'all'
+type SortType = 'name' | 'claimed_newest' | 'claimed_oldest' | 'city'
 
 const ITEMS_PER_PAGE = 25
 
@@ -66,6 +67,7 @@ export default function AdminPage() {
   const [providers, setProviders] = useState<ProviderAdmin[]>([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<TabType>('unclaimed')
+  const [sortBy, setSortBy] = useState<SortType>('name')
   const [searchQuery, setSearchQuery] = useState('')
   const [updating, setUpdating] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
@@ -123,30 +125,52 @@ export default function AdminPage() {
     setLoading(false)
   }
 
-  // Reset page when tab or search changes
+  // Reset page when tab, search, or sort changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [activeTab, searchQuery])
+  }, [activeTab, searchQuery, sortBy])
 
   // Filter providers based on tab and search
-  const filteredProviders = providers.filter(provider => {
-    // Tab filters
-    if (activeTab === 'unclaimed' && provider.is_claimed) return false
-    if (activeTab === 'claimed' && (!provider.is_claimed || provider.is_verified)) return false
-    if (activeTab === 'verified' && !provider.is_verified) return false
+  const filteredProviders = providers
+    .filter(provider => {
+      // Tab filters
+      if (activeTab === 'unclaimed' && provider.is_claimed) return false
+      if (activeTab === 'claimed' && (!provider.is_claimed || provider.is_verified)) return false
+      if (activeTab === 'verified' && !provider.is_verified) return false
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase()
-      return (
-        provider.name.toLowerCase().includes(query) ||
-        provider.city.toLowerCase().includes(query) ||
-        provider.county.toLowerCase().includes(query) ||
-        (provider.email?.toLowerCase().includes(query) ?? false)
-      )
-    }
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase()
+        return (
+          provider.name.toLowerCase().includes(query) ||
+          provider.city.toLowerCase().includes(query) ||
+          provider.county.toLowerCase().includes(query) ||
+          (provider.email?.toLowerCase().includes(query) ?? false)
+        )
+      }
 
-    return true
-  })
+      return true
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'claimed_newest':
+          // Sort by claimed_at descending (newest first), null values last
+          if (!a.claimed_at && !b.claimed_at) return a.name.localeCompare(b.name)
+          if (!a.claimed_at) return 1
+          if (!b.claimed_at) return -1
+          return new Date(b.claimed_at).getTime() - new Date(a.claimed_at).getTime()
+        case 'claimed_oldest':
+          // Sort by claimed_at ascending (oldest first), null values last
+          if (!a.claimed_at && !b.claimed_at) return a.name.localeCompare(b.name)
+          if (!a.claimed_at) return 1
+          if (!b.claimed_at) return -1
+          return new Date(a.claimed_at).getTime() - new Date(b.claimed_at).getTime()
+        case 'city':
+          return a.city.localeCompare(b.city)
+        case 'name':
+        default:
+          return a.name.localeCompare(b.name)
+      }
+    })
 
   // Pagination
   const totalPages = Math.ceil(filteredProviders.length / ITEMS_PER_PAGE)
@@ -495,14 +519,24 @@ export default function AdminPage() {
             </div>
           </div>
 
-          <div className="p-4">
+          <div className="p-4 flex gap-4">
             <input
               type="text"
               placeholder="Search by name, city, or county..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary"
             />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortType)}
+              className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-white"
+            >
+              <option value="name">Sort: Name (A-Z)</option>
+              <option value="claimed_newest">Sort: Claimed (Newest)</option>
+              <option value="claimed_oldest">Sort: Claimed (Oldest)</option>
+              <option value="city">Sort: City (A-Z)</option>
+            </select>
           </div>
         </div>
 
