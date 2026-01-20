@@ -29,6 +29,38 @@ type TabType = 'unclaimed' | 'claimed' | 'verified' | 'all'
 
 const ITEMS_PER_PAGE = 25
 
+// Georgia counties for the dropdown
+const GEORGIA_COUNTIES = [
+  'Appling', 'Atkinson', 'Bacon', 'Baker', 'Baldwin', 'Banks', 'Barrow', 'Bartow', 'Ben Hill',
+  'Berrien', 'Bibb', 'Bleckley', 'Brantley', 'Brooks', 'Bryan', 'Bulloch', 'Burke', 'Butts',
+  'Calhoun', 'Camden', 'Candler', 'Carroll', 'Catoosa', 'Charlton', 'Chatham', 'Chattahoochee',
+  'Chattooga', 'Cherokee', 'Clarke', 'Clay', 'Clayton', 'Clinch', 'Cobb', 'Coffee', 'Colquitt',
+  'Columbia', 'Cook', 'Coweta', 'Crawford', 'Crisp', 'Dade', 'Dawson', 'Decatur', 'DeKalb',
+  'Dodge', 'Dooly', 'Dougherty', 'Douglas', 'Early', 'Echols', 'Effingham', 'Elbert', 'Emanuel',
+  'Evans', 'Fannin', 'Fayette', 'Floyd', 'Forsyth', 'Franklin', 'Fulton', 'Gilmer', 'Glascock',
+  'Glynn', 'Gordon', 'Grady', 'Greene', 'Gwinnett', 'Habersham', 'Hall', 'Hancock', 'Haralson',
+  'Harris', 'Hart', 'Heard', 'Henry', 'Houston', 'Irwin', 'Jackson', 'Jasper', 'Jeff Davis',
+  'Jefferson', 'Jenkins', 'Johnson', 'Jones', 'Lamar', 'Lanier', 'Laurens', 'Lee', 'Liberty',
+  'Lincoln', 'Long', 'Lowndes', 'Lumpkin', 'Macon', 'Madison', 'Marion', 'McDuffie', 'McIntosh',
+  'Meriwether', 'Miller', 'Mitchell', 'Monroe', 'Montgomery', 'Morgan', 'Murray', 'Muscogee',
+  'Newton', 'Oconee', 'Oglethorpe', 'Paulding', 'Peach', 'Pickens', 'Pierce', 'Pike', 'Polk',
+  'Pulaski', 'Putnam', 'Quitman', 'Rabun', 'Randolph', 'Richmond', 'Rockdale', 'Schley',
+  'Screven', 'Seminole', 'Spalding', 'Stephens', 'Stewart', 'Sumter', 'Talbot', 'Taliaferro',
+  'Tattnall', 'Taylor', 'Telfair', 'Terrell', 'Thomas', 'Tift', 'Toombs', 'Towns', 'Treutlen',
+  'Troup', 'Turner', 'Twiggs', 'Union', 'Upson', 'Walker', 'Walton', 'Ware', 'Warren',
+  'Washington', 'Wayne', 'Webster', 'Wheeler', 'White', 'Whitfield', 'Wilcox', 'Wilkes',
+  'Wilkinson', 'Worth'
+]
+
+interface EditFormData {
+  name: string
+  city: string
+  phone: string
+  website: string
+  services_offered: string[]
+  counties_served: string[]
+}
+
 export default function AdminPage() {
   const [providers, setProviders] = useState<ProviderAdmin[]>([])
   const [loading, setLoading] = useState(true)
@@ -36,6 +68,16 @@ export default function AdminPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [updating, setUpdating] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
+  const [editingProvider, setEditingProvider] = useState<ProviderAdmin | null>(null)
+  const [editForm, setEditForm] = useState<EditFormData>({
+    name: '',
+    city: '',
+    phone: '',
+    website: '',
+    services_offered: [],
+    counties_served: []
+  })
+  const [saving, setSaving] = useState(false)
 
   // Fetch providers
   useEffect(() => {
@@ -230,6 +272,105 @@ export default function AdminPage() {
   function copyClaimLink(slug: string) {
     const link = `${baseUrl}/claim/${slug}`
     navigator.clipboard.writeText(link)
+  }
+
+  // Open edit modal
+  function openEditModal(provider: ProviderAdmin) {
+    setEditingProvider(provider)
+    setEditForm({
+      name: provider.name,
+      city: provider.city,
+      phone: provider.phone || '',
+      website: provider.website || '',
+      services_offered: provider.services_offered || [],
+      counties_served: providers.find(p => p.id === provider.id)?.county
+        ? [providers.find(p => p.id === provider.id)!.county]
+        : []
+    })
+    // Fetch full counties from database
+    fetchProviderCounties(provider.id)
+  }
+
+  // Fetch provider's full counties list
+  async function fetchProviderCounties(providerId: string) {
+    const { data } = await supabase
+      .from('providers')
+      .select('counties_served')
+      .eq('id', providerId)
+      .single()
+
+    if (data?.counties_served) {
+      setEditForm(prev => ({ ...prev, counties_served: data.counties_served }))
+    }
+  }
+
+  // Save edited provider
+  async function saveProvider() {
+    if (!editingProvider) return
+    setSaving(true)
+
+    try {
+      const res = await fetch('/api/admin/update-provider', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: editingProvider.id,
+          name: editForm.name,
+          city: editForm.city,
+          phone: editForm.phone || null,
+          website: editForm.website || null,
+          services_offered: editForm.services_offered,
+          counties_served: editForm.counties_served
+        })
+      })
+
+      if (res.ok) {
+        const { provider: updated } = await res.json()
+        // Update local state
+        setProviders(prev => prev.map(p =>
+          p.id === editingProvider.id
+            ? {
+                ...p,
+                name: editForm.name,
+                slug: updated.slug,
+                city: editForm.city,
+                phone: editForm.phone || null,
+                website: editForm.website || null,
+                services_offered: editForm.services_offered,
+                county: editForm.counties_served[0] || p.county
+              }
+            : p
+        ))
+        setEditingProvider(null)
+      } else {
+        alert('Failed to save changes')
+      }
+    } catch (err) {
+      console.error('Error saving provider:', err)
+      alert('Failed to save changes')
+    }
+
+    setSaving(false)
+  }
+
+  // Toggle service in edit form
+  function toggleService(service: string) {
+    setEditForm(prev => ({
+      ...prev,
+      services_offered: prev.services_offered.includes(service)
+        ? prev.services_offered.filter(s => s !== service)
+        : [...prev.services_offered, service]
+    }))
+  }
+
+  // Toggle county in edit form
+  function toggleCounty(county: string) {
+    setEditForm(prev => ({
+      ...prev,
+      counties_served: prev.counties_served.includes(county)
+        ? prev.counties_served.filter(c => c !== county)
+        : [...prev.counties_served, county]
+    }))
   }
 
   return (
@@ -445,6 +586,14 @@ export default function AdminPage() {
                             <span className="text-xs text-gray-500">Saving...</span>
                           ) : (
                             <>
+                              {/* Edit button for all providers */}
+                              <button
+                                onClick={() => openEditModal(provider)}
+                                className="px-2 py-1 text-xs rounded border border-gray-300 text-gray-600 hover:bg-gray-50"
+                                title="Edit provider details"
+                              >
+                                Edit
+                              </button>
                               {/* Copy Claim Link button for unclaimed providers */}
                               {!provider.is_claimed && (
                                 <button
@@ -655,6 +804,152 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
+
+      {/* Edit Modal */}
+      {editingProvider && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-semibold text-gray-900">Edit Provider</h2>
+              <button
+                onClick={() => setEditingProvider(null)}
+                className="p-1 hover:bg-gray-100 rounded"
+              >
+                <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-4 space-y-4">
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Provider Name</label>
+                <input
+                  type="text"
+                  value={editForm.name}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              {/* City */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                <input
+                  type="text"
+                  value={editForm.city}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, city: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                <input
+                  type="text"
+                  value={editForm.phone}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, phone: e.target.value }))}
+                  placeholder="(XXX) XXX-XXXX"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              {/* Website */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+                <input
+                  type="text"
+                  value={editForm.website}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, website: e.target.value }))}
+                  placeholder="https://..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              {/* Services */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Services Offered</label>
+                <div className="flex gap-3">
+                  {['RN', 'LPN', 'PCS'].map(service => (
+                    <label key={service} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={editForm.services_offered.includes(service)}
+                        onChange={() => toggleService(service)}
+                        className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                      />
+                      <span className="text-sm text-gray-700">{service}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Counties */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Counties Served ({editForm.counties_served.length} selected)
+                </label>
+                <div className="border border-gray-300 rounded-lg p-3 max-h-48 overflow-y-auto">
+                  <div className="grid grid-cols-3 gap-1">
+                    {GEORGIA_COUNTIES.map(county => (
+                      <label key={county} className="flex items-center gap-1.5 cursor-pointer text-sm py-0.5">
+                        <input
+                          type="checkbox"
+                          checked={editForm.counties_served.includes(county)}
+                          onChange={() => toggleCounty(county)}
+                          className="w-3.5 h-3.5 text-primary border-gray-300 rounded focus:ring-primary"
+                        />
+                        <span className={editForm.counties_served.includes(county) ? 'text-primary font-medium' : 'text-gray-600'}>
+                          {county}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                {editForm.counties_served.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {editForm.counties_served.map(county => (
+                      <span
+                        key={county}
+                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary text-xs rounded"
+                      >
+                        {county}
+                        <button
+                          onClick={() => toggleCounty(county)}
+                          className="hover:text-red-600"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex items-center justify-end gap-3 p-4 border-t border-gray-200 bg-gray-50">
+              <button
+                onClick={() => setEditingProvider(null)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={saveProvider}
+                disabled={saving}
+                className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark disabled:opacity-50"
+              >
+                {saving ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
