@@ -14,6 +14,7 @@ interface ProviderAdmin {
   phone: string | null
   website: string | null
   services_offered: string[]
+  languages: string[]
   is_claimed: boolean
   is_verified: boolean
   is_featured: boolean
@@ -60,6 +61,7 @@ interface EditFormData {
   website: string
   services_offered: string[]
   counties_served: string[]
+  languages: string[]
   accepting_new_patients: boolean
 }
 
@@ -79,6 +81,7 @@ export default function AdminPage() {
     website: '',
     services_offered: [],
     counties_served: [],
+    languages: ['English'],
     accepting_new_patients: false
   })
   const [saving, setSaving] = useState(false)
@@ -92,7 +95,7 @@ export default function AdminPage() {
     setLoading(true)
     const { data, error } = await supabase
       .from('providers')
-      .select('id, name, slug, city, email, phone, website, services_offered, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served, claimed_by_email, claim_token')
+      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served, claimed_by_email, claim_token')
       .order('name')
 
     if (error) {
@@ -106,6 +109,7 @@ export default function AdminPage() {
         const transformed = (fallbackData || []).map(p => ({
           ...p,
           county: p.counties_served?.[0] || 'Unknown',
+          languages: p.languages || ['English'],
           is_claimed: false,
           claimed_by_email: null,
           claim_token: null
@@ -116,6 +120,7 @@ export default function AdminPage() {
       const transformed = (data || []).map(p => ({
         ...p,
         county: p.counties_served?.[0] || 'Unknown',
+        languages: p.languages || ['English'],
         is_claimed: p.is_claimed ?? false,
         claimed_by_email: p.claimed_by_email ?? null,
         claim_token: p.claim_token ?? null
@@ -312,22 +317,27 @@ export default function AdminPage() {
       counties_served: providers.find(p => p.id === provider.id)?.county
         ? [providers.find(p => p.id === provider.id)!.county]
         : [],
+      languages: provider.languages || ['English'],
       accepting_new_patients: provider.accepting_new_patients
     })
-    // Fetch full counties from database
-    fetchProviderCounties(provider.id)
+    // Fetch full counties and languages from database
+    fetchProviderDetails(provider.id)
   }
 
-  // Fetch provider's full counties list
-  async function fetchProviderCounties(providerId: string) {
+  // Fetch provider's full details (counties, languages)
+  async function fetchProviderDetails(providerId: string) {
     const { data } = await supabase
       .from('providers')
-      .select('counties_served')
+      .select('counties_served, languages')
       .eq('id', providerId)
       .single()
 
-    if (data?.counties_served) {
-      setEditForm(prev => ({ ...prev, counties_served: data.counties_served }))
+    if (data) {
+      setEditForm(prev => ({
+        ...prev,
+        counties_served: data.counties_served || [],
+        languages: data.languages || ['English']
+      }))
     }
   }
 
@@ -348,6 +358,7 @@ export default function AdminPage() {
           website: editForm.website || null,
           services_offered: editForm.services_offered,
           counties_served: editForm.counties_served,
+          languages: editForm.languages,
           accepting_new_patients: editForm.accepting_new_patients
         })
       })
@@ -366,6 +377,7 @@ export default function AdminPage() {
                 website: editForm.website || null,
                 services_offered: editForm.services_offered,
                 county: editForm.counties_served[0] || p.county,
+                languages: editForm.languages,
                 accepting_new_patients: editForm.accepting_new_patients
               }
             : p
@@ -400,6 +412,23 @@ export default function AdminPage() {
         ? prev.counties_served.filter(c => c !== county)
         : [...prev.counties_served, county]
     }))
+  }
+
+  // Toggle language in edit form
+  function toggleLanguage(language: string) {
+    setEditForm(prev => {
+      const hasLanguage = prev.languages.includes(language)
+      // Don't allow removing English if it's the only language
+      if (hasLanguage && language === 'English' && prev.languages.length === 1) {
+        return prev
+      }
+      return {
+        ...prev,
+        languages: hasLanguage
+          ? prev.languages.filter(l => l !== language)
+          : [...prev.languages, language]
+      }
+    })
   }
 
   return (
@@ -922,6 +951,24 @@ export default function AdminPage() {
                         className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
                       />
                       <span className="text-sm text-gray-700">{service}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Languages */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Languages Spoken</label>
+                <div className="flex flex-wrap gap-2">
+                  {['English', 'Spanish', 'Vietnamese', 'Korean', 'Chinese', 'Hindi', 'Other'].map(lang => (
+                    <label key={lang} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={editForm.languages.includes(lang)}
+                        onChange={() => toggleLanguage(lang)}
+                        className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                      />
+                      <span className="text-sm text-gray-700">{lang}</span>
                     </label>
                   ))}
                 </div>

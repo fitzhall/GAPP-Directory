@@ -19,6 +19,7 @@ interface ProfileUpdates {
   city?: string
   servicesOffered?: string[]
   countiesServed?: string[]
+  languages?: string[]
 }
 
 interface ClaimRequest {
@@ -97,6 +98,9 @@ export async function POST(request: NextRequest) {
       }
       if (body.profileUpdates.countiesServed) {
         updatePayload.counties_served = body.profileUpdates.countiesServed
+      }
+      if (body.profileUpdates.languages) {
+        updatePayload.languages = body.profileUpdates.languages
       }
     }
 
@@ -183,6 +187,7 @@ export async function POST(request: NextRequest) {
           if (body.profileUpdates.city) updates.push(`<li>City: ${body.profileUpdates.city}</li>`)
           if (body.profileUpdates.servicesOffered) updates.push(`<li>Services: ${body.profileUpdates.servicesOffered.join(', ')}</li>`)
           if (body.profileUpdates.countiesServed) updates.push(`<li>Counties: ${body.profileUpdates.countiesServed.join(', ')}</li>`)
+          if (body.profileUpdates.languages) updates.push(`<li>Languages: ${body.profileUpdates.languages.join(', ')}</li>`)
           if (updates.length > 0) {
             profileUpdatesHtml = `
               <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 5px; padding: 15px; margin: 15px 0;">

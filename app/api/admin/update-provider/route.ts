@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
       website,
       services_offered,
       counties_served,
+      languages,
       accepting_new_patients
     } = body
 
@@ -46,6 +47,7 @@ export async function POST(request: NextRequest) {
     if (website !== undefined) updates.website = website
     if (services_offered !== undefined) updates.services_offered = services_offered
     if (counties_served !== undefined) updates.counties_served = counties_served
+    if (languages !== undefined) updates.languages = languages
     if (accepting_new_patients !== undefined) updates.accepting_new_patients = accepting_new_patients
 
     // Update provider

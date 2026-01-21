@@ -12,6 +12,7 @@ interface Provider {
   phone: string | null
   services_offered: string[]
   counties_served: string[]
+  languages: string[]
   is_claimed: boolean
   is_verified: boolean
 }
@@ -33,6 +34,7 @@ export default function ClaimProfilePage() {
   const [city, setCity] = useState('')
   const [servicesOffered, setServicesOffered] = useState<string[]>([])
   const [countiesServed, setCountiesServed] = useState<string[]>([])
+  const [languages, setLanguages] = useState<string[]>(['English'])
   const [acceptingNewPatients, setAcceptingNewPatients] = useState(true)
   const [showProfileEdit, setShowProfileEdit] = useState(false)
 
@@ -48,6 +50,7 @@ export default function ClaimProfilePage() {
           setCity(data.city || '')
           setServicesOffered(data.services_offered || [])
           setCountiesServed(data.counties_served || [])
+          setLanguages(data.languages || ['English'])
           setPhone(data.phone || '')
           if (data.is_claimed || data.is_verified) {
             setStatus('already_claimed')
@@ -82,14 +85,15 @@ export default function ClaimProfilePage() {
           name,
           phone,
           website: website || null,
-          // Profile updates
+          // Profile updates - always send if changed
           acceptingNewPatients,
-          profileUpdates: showProfileEdit ? {
+          profileUpdates: {
             businessName: businessName !== provider?.name ? businessName : undefined,
             city: city !== provider?.city ? city : undefined,
             servicesOffered: JSON.stringify(servicesOffered) !== JSON.stringify(provider?.services_offered) ? servicesOffered : undefined,
             countiesServed: JSON.stringify(countiesServed) !== JSON.stringify(provider?.counties_served) ? countiesServed : undefined,
-          } : undefined,
+            languages: JSON.stringify(languages) !== JSON.stringify(provider?.languages || ['English']) ? languages : undefined,
+          },
         }),
       })
 
@@ -431,6 +435,76 @@ export default function ClaimProfilePage() {
               />
             </div>
 
+            {/* Profile Info Section */}
+            <div className="pt-4 border-t border-gray-200">
+              <h3 className="font-medium text-gray-900 mb-3">Your Business Info</h3>
+              <p className="text-sm text-gray-500 mb-4">
+                Update your listing information if anything needs to be corrected.
+              </p>
+
+              {/* Business Name */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                  Business Name
+                </label>
+                <input
+                  type="text"
+                  value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
+                  placeholder="Your business/agency name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
+                />
+              </div>
+
+              {/* City */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                  City
+                </label>
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="City in Georgia"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
+                />
+              </div>
+
+              {/* Languages */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Languages Spoken
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {['English', 'Spanish', 'Vietnamese', 'Korean', 'Chinese', 'Hindi', 'Other'].map(lang => (
+                    <button
+                      key={lang}
+                      type="button"
+                      onClick={() => {
+                        if (languages.includes(lang)) {
+                          // Don't allow removing English if it's the only language
+                          if (lang === 'English' && languages.length === 1) return
+                          setLanguages(languages.filter(l => l !== lang))
+                        } else {
+                          setLanguages([...languages, lang])
+                        }
+                      }}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                        languages.includes(lang)
+                          ? 'bg-primary text-white border-primary'
+                          : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
+                      }`}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Select all languages your staff can speak with families
+                </p>
+              </div>
+            </div>
+
             {/* Accepting New Patients */}
             <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
               <label className="flex items-center gap-3 cursor-pointer">
@@ -454,7 +528,7 @@ export default function ClaimProfilePage() {
               </label>
             </div>
 
-            {/* Profile Update Toggle */}
+            {/* Services & Counties Toggle */}
             <div className="pt-4 border-t border-gray-200">
               <button
                 type="button"
@@ -469,43 +543,11 @@ export default function ClaimProfilePage() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-                {showProfileEdit ? 'Hide profile updates' : 'Need to update your profile info?'}
+                {showProfileEdit ? 'Hide services & counties' : 'Need to update services or counties?'}
               </button>
 
               {showProfileEdit && (
                 <div className="mt-4 space-y-4 p-4 bg-gray-50 rounded-lg">
-                  <p className="text-xs text-gray-500 mb-3">
-                    Update any information that needs to be corrected on your listing.
-                  </p>
-
-                  {/* Business Name */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Business Name
-                    </label>
-                    <input
-                      type="text"
-                      value={businessName}
-                      onChange={(e) => setBusinessName(e.target.value)}
-                      placeholder="Your business/agency name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base bg-white"
-                    />
-                  </div>
-
-                  {/* City */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      City
-                    </label>
-                    <input
-                      type="text"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      placeholder="City in Georgia"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base bg-white"
-                    />
-                  </div>
-
                   {/* Services Offered */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
