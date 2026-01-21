@@ -115,11 +115,19 @@ function DirectoryContent() {
   }, [])
 
   // Filter providers client-side
+  const FREE_TIER_COUNTY_LIMIT = 5
+
   const filteredProviders = useMemo(() => {
     return providers.filter(provider => {
-      // County filter
-      if (county && !provider.countiesServed.includes(county)) {
-        return false
+      // County filter - non-verified only appear for their first 5 counties
+      if (county) {
+        const visibleCounties = provider.isVerified
+          ? provider.countiesServed
+          : [...provider.countiesServed].sort().slice(0, FREE_TIER_COUNTY_LIMIT)
+
+        if (!visibleCounties.includes(county)) {
+          return false
+        }
       }
 
       // Service filter

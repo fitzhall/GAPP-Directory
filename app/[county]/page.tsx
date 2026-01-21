@@ -278,6 +278,8 @@ function toProviderCard(provider: Provider): ProviderCardData {
   }
 }
 
+const FREE_TIER_COUNTY_LIMIT = 5
+
 async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
   const { data, error } = await supabase
     .from('providers')
@@ -294,7 +296,17 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
     return []
   }
 
-  return (data || []).map(row => ({
+  // Filter: non-verified providers only appear for their first 5 counties (alphabetically)
+  const filteredData = (data || []).filter(row => {
+    if (row.is_verified) return true // Verified providers appear for all counties
+
+    // For non-verified, check if this county is in their first 5 visible counties
+    const sortedCounties = [...(row.counties_served || [])].sort()
+    const visibleCounties = sortedCounties.slice(0, FREE_TIER_COUNTY_LIMIT)
+    return visibleCounties.includes(countyName)
+  })
+
+  return filteredData.map(row => ({
     id: row.id,
     name: row.name,
     slug: row.slug,
