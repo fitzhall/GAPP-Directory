@@ -104,7 +104,7 @@ export default function AdminPage() {
       if (error.message?.includes('is_claimed') || error.message?.includes('claim_token')) {
         const { data: fallbackData } = await supabase
           .from('providers')
-          .select('id, name, slug, city, email, phone, website, services_offered, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served')
+          .select('id, name, slug, city, email, phone, website, services_offered, languages, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served')
           .order('name')
         const transformed = (fallbackData || []).map(p => ({
           ...p,
