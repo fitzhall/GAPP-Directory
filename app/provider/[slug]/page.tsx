@@ -254,7 +254,11 @@ export default async function ProviderPage({
             </section>
 
             {/* Counties Served */}
-            <CountiesSection counties={provider.countiesServed} />
+            <CountiesSection
+              counties={provider.countiesServed}
+              isVerified={provider.isVerified}
+              providerSlug={provider.slug}
+            />
 
             {/* How to Start */}
             {provider.howToStart && (
