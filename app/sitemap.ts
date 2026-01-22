@@ -161,22 +161,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  // Provider pages (only verified ones)
+  // Provider pages - ALL active providers (so agencies can find themselves on Google)
+  // Priority: Premium > Verified > Claimed > Unclaimed
   let providerPages: MetadataRoute.Sitemap = []
   try {
     const { data: providers } = await supabase
       .from('providers')
-      .select('slug, updated_at')
+      .select('slug, updated_at, is_featured, is_verified, is_claimed')
       .eq('is_active', true)
-      .eq('is_verified', true)
 
     if (providers) {
-      providerPages = providers.map(provider => ({
-        url: `${baseUrl}/provider/${provider.slug}`,
-        lastModified: new Date(provider.updated_at),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-      }))
+      providerPages = providers.map(provider => {
+        // Higher priority for higher tiers - incentivizes claiming/upgrading
+        let priority = 0.5 // Unclaimed base
+        if (provider.is_claimed) priority = 0.6
+        if (provider.is_verified) priority = 0.7
+        if (provider.is_featured) priority = 0.8
+
+        return {
+          url: `${baseUrl}/provider/${provider.slug}`,
+          lastModified: new Date(provider.updated_at),
+          changeFrequency: 'weekly' as const,
+          priority,
+        }
+      })
     }
   } catch (error) {
     console.error('Error fetching providers for sitemap:', error)

@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://georgiagapp.com/sitemap.xml',
+    sitemap: 'https://www.georgiagapp.com/sitemap.xml',
   }
 }

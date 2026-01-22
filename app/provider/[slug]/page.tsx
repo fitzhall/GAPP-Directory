@@ -85,17 +85,34 @@ export async function generateMetadata({
     ? ` and ${provider.countiesServed.length - 3} more counties`
     : ''
 
+  // Status for meta description
+  const statusText = provider.isVerified
+    ? 'verified'
+    : provider.isClaimed
+    ? 'claimed'
+    : 'listed'
+
   return {
     title: `${provider.name} | GAPP Provider in ${provider.city}, Georgia`,
-    description: `${provider.name} is a ${provider.isVerified ? 'verified ' : ''}GAPP provider in ${provider.city}, GA offering ${servicesText}. Serves ${countiesText}${moreCounties}.`,
-    keywords: `${provider.name}, GAPP provider ${provider.city}, home care ${provider.city} Georgia, ${provider.servicesOffered.join(', ')}`,
+    description: `${provider.name} is a ${statusText} GAPP provider in ${provider.city}, GA offering ${servicesText}. Serves ${countiesText}${moreCounties}. Request a callback today.`,
+    keywords: `${provider.name}, ${provider.name} Georgia, ${provider.name} home care, GAPP provider ${provider.city}, home care ${provider.city} Georgia, pediatric nursing ${provider.city}, ${provider.servicesOffered.join(', ')}`,
     openGraph: {
       title: `${provider.name} | GAPP Home Care Provider`,
-      description: `${provider.isVerified ? 'Verified ' : ''}GAPP provider offering ${servicesText} in ${provider.city}, Georgia.`,
+      description: `${statusText.charAt(0).toUpperCase() + statusText.slice(1)} GAPP provider offering ${servicesText} in ${provider.city}, Georgia.`,
       type: 'website',
+      siteName: 'GeorgiaGAPP.com',
+    },
+    twitter: {
+      card: 'summary',
+      title: `${provider.name} | GAPP Provider`,
+      description: `${servicesText} in ${provider.city}, Georgia`,
     },
     alternates: {
       canonical: `https://www.georgiagapp.com/provider/${provider.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   }
 }
