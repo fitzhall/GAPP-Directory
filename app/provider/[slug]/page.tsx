@@ -423,7 +423,7 @@ export default async function ProviderPage({
                   This provider has claimed their profile. Full features available after verification.
                 </p>
 
-                {/* Show phone and website for claimed profiles */}
+                {/* Show phone for claimed profiles - website only for verified */}
                 <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
                   {contactPhone && (
                     <a
@@ -436,21 +436,14 @@ export default async function ProviderPage({
                       {contactPhone}
                     </a>
                   )}
-
-                  {provider.website && (
-                    <a
-                      href={provider.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
-                    >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                      </svg>
-                      Visit Website
-                    </a>
-                  )}
                 </div>
+
+                {/* Website only shown for verified - upsell */}
+                {provider.website && (
+                  <p className="text-sm text-gray-500 mt-4 text-center">
+                    Website available after verification
+                  </p>
+                )}
               </div>
             ) : (
               /* Unclaimed profile - show claim CTA */

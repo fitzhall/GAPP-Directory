@@ -36,7 +36,6 @@ export default function ClaimProfilePage() {
   const [countiesServed, setCountiesServed] = useState<string[]>([])
   const [languages, setLanguages] = useState<string[]>(['English'])
   const [acceptingNewPatients, setAcceptingNewPatients] = useState(true)
-  const [showProfileEdit, setShowProfileEdit] = useState(false)
 
   useEffect(() => {
     async function fetchProvider() {
@@ -528,79 +527,111 @@ export default function ClaimProfilePage() {
               </label>
             </div>
 
-            {/* Services & Counties Toggle */}
+            {/* Services Offered */}
             <div className="pt-4 border-t border-gray-200">
-              <button
-                type="button"
-                onClick={() => setShowProfileEdit(!showProfileEdit)}
-                className="flex items-center gap-2 text-sm text-primary hover:text-primary-dark font-medium"
-              >
-                <svg
-                  className={`w-4 h-4 transition-transform ${showProfileEdit ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-                {showProfileEdit ? 'Hide services & counties' : 'Need to update services or counties?'}
-              </button>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Services Offered
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {['RN', 'LPN', 'PCS'].map(service => (
+                  <button
+                    key={service}
+                    type="button"
+                    onClick={() => {
+                      if (servicesOffered.includes(service)) {
+                        setServicesOffered(servicesOffered.filter(s => s !== service))
+                      } else {
+                        setServicesOffered([...servicesOffered, service])
+                      }
+                    }}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                      servicesOffered.includes(service)
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
+                    }`}
+                  >
+                    {service}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                RN = Registered Nurse, LPN = Licensed Practical Nurse, PCS = Personal Care Services
+              </p>
+            </div>
 
-              {showProfileEdit && (
-                <div className="mt-4 space-y-4 p-4 bg-gray-50 rounded-lg">
-                  {/* Services Offered */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Services Offered
+            {/* Counties Served */}
+            <div className="pt-4 border-t border-gray-200">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Counties You Serve ({countiesServed.length} selected)
+              </label>
+              <div className="border border-gray-300 rounded-lg p-3 max-h-48 overflow-y-auto bg-white">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1">
+                  {[
+                    'Appling', 'Atkinson', 'Bacon', 'Baker', 'Baldwin', 'Banks', 'Barrow', 'Bartow', 'Ben Hill',
+                    'Berrien', 'Bibb', 'Bleckley', 'Brantley', 'Brooks', 'Bryan', 'Bulloch', 'Burke', 'Butts',
+                    'Calhoun', 'Camden', 'Candler', 'Carroll', 'Catoosa', 'Charlton', 'Chatham', 'Chattahoochee',
+                    'Chattooga', 'Cherokee', 'Clarke', 'Clay', 'Clayton', 'Clinch', 'Cobb', 'Coffee', 'Colquitt',
+                    'Columbia', 'Cook', 'Coweta', 'Crawford', 'Crisp', 'Dade', 'Dawson', 'Decatur', 'DeKalb',
+                    'Dodge', 'Dooly', 'Dougherty', 'Douglas', 'Early', 'Echols', 'Effingham', 'Elbert', 'Emanuel',
+                    'Evans', 'Fannin', 'Fayette', 'Floyd', 'Forsyth', 'Franklin', 'Fulton', 'Gilmer', 'Glascock',
+                    'Glynn', 'Gordon', 'Grady', 'Greene', 'Gwinnett', 'Habersham', 'Hall', 'Hancock', 'Haralson',
+                    'Harris', 'Hart', 'Heard', 'Henry', 'Houston', 'Irwin', 'Jackson', 'Jasper', 'Jeff Davis',
+                    'Jefferson', 'Jenkins', 'Johnson', 'Jones', 'Lamar', 'Lanier', 'Laurens', 'Lee', 'Liberty',
+                    'Lincoln', 'Long', 'Lowndes', 'Lumpkin', 'Macon', 'Madison', 'Marion', 'McDuffie', 'McIntosh',
+                    'Meriwether', 'Miller', 'Mitchell', 'Monroe', 'Montgomery', 'Morgan', 'Murray', 'Muscogee',
+                    'Newton', 'Oconee', 'Oglethorpe', 'Paulding', 'Peach', 'Pickens', 'Pierce', 'Pike', 'Polk',
+                    'Pulaski', 'Putnam', 'Quitman', 'Rabun', 'Randolph', 'Richmond', 'Rockdale', 'Schley',
+                    'Screven', 'Seminole', 'Spalding', 'Stephens', 'Stewart', 'Sumter', 'Talbot', 'Taliaferro',
+                    'Tattnall', 'Taylor', 'Telfair', 'Terrell', 'Thomas', 'Tift', 'Toombs', 'Towns', 'Treutlen',
+                    'Troup', 'Turner', 'Twiggs', 'Union', 'Upson', 'Walker', 'Walton', 'Ware', 'Warren',
+                    'Washington', 'Wayne', 'Webster', 'Wheeler', 'White', 'Whitfield', 'Wilcox', 'Wilkes',
+                    'Wilkinson', 'Worth'
+                  ].map(county => (
+                    <label key={county} className="flex items-center gap-1.5 cursor-pointer text-sm py-0.5">
+                      <input
+                        type="checkbox"
+                        checked={countiesServed.includes(county)}
+                        onChange={() => {
+                          if (countiesServed.includes(county)) {
+                            setCountiesServed(countiesServed.filter(c => c !== county))
+                          } else {
+                            setCountiesServed([...countiesServed, county])
+                          }
+                        }}
+                        className="w-3.5 h-3.5 text-primary border-gray-300 rounded focus:ring-primary"
+                      />
+                      <span className={countiesServed.includes(county) ? 'text-primary font-medium' : 'text-gray-600'}>
+                        {county}
+                      </span>
                     </label>
-                    <div className="flex flex-wrap gap-2">
-                      {['RN', 'LPN', 'PCS'].map(service => (
-                        <button
-                          key={service}
-                          type="button"
-                          onClick={() => {
-                            if (servicesOffered.includes(service)) {
-                              setServicesOffered(servicesOffered.filter(s => s !== service))
-                            } else {
-                              setServicesOffered([...servicesOffered, service])
-                            }
-                          }}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                            servicesOffered.includes(service)
-                              ? 'bg-primary text-white border-primary'
-                              : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
-                          }`}
-                        >
-                          {service}
-                        </button>
-                      ))}
-                    </div>
-                    <p className="text-xs text-gray-500 mt-1">
-                      RN = Registered Nurse, LPN = Licensed Practical Nurse, PCS = Personal Care Services
-                    </p>
-                  </div>
-
-                  {/* Counties Served */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Counties Served <span className="text-gray-400">(comma separated)</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={countiesServed.join(', ')}
-                      onChange={(e) => {
-                        const counties = e.target.value
-                          .split(',')
-                          .map(c => c.trim())
-                          .filter(c => c.length > 0)
-                        setCountiesServed(counties)
-                      }}
-                      placeholder="Fulton, Gwinnett, DeKalb"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base bg-white"
-                    />
-                  </div>
+                  ))}
+                </div>
+              </div>
+              {countiesServed.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {countiesServed.slice(0, 10).map(county => (
+                    <span
+                      key={county}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary text-xs rounded"
+                    >
+                      {county}
+                      <button
+                        type="button"
+                        onClick={() => setCountiesServed(countiesServed.filter(c => c !== county))}
+                        className="hover:text-primary-dark"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                  {countiesServed.length > 10 && (
+                    <span className="text-xs text-gray-500">+{countiesServed.length - 10} more</span>
+                  )}
                 </div>
               )}
+              <p className="text-xs text-gray-500 mt-2">
+                Note: Free listings appear in search for up to 5 counties. Get verified to appear in all counties.
+              </p>
             </div>
 
             {/* Error */}
