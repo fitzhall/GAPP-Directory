@@ -426,12 +426,22 @@ export default function ClaimProfilePage() {
                 Website <span className="text-gray-400">(optional)</span>
               </label>
               <input
-                type="url"
+                type="text"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
-                placeholder="https://yourcompany.com"
+                onBlur={(e) => {
+                  // Auto-add https:// if they enter a domain without protocol
+                  const val = e.target.value.trim()
+                  if (val && !val.startsWith('http://') && !val.startsWith('https://')) {
+                    setWebsite('https://' + val)
+                  }
+                }}
+                placeholder="yourcompany.com"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-base"
               />
+              <p className="text-xs text-gray-500 mt-1">
+                Just enter your domain - we&apos;ll add https:// for you
+              </p>
             </div>
 
             {/* Profile Info Section */}
