@@ -52,7 +52,7 @@ async function getProvider(slug: string): Promise<ProviderData | null> {
     tierLevel: data.tier_level,
     isActive: data.is_active,
     isClaimed: data.is_claimed ?? false,
-    isVerified: data.is_verified,
+    isVerified: data.is_verified ?? false,
     isFeatured: data.is_featured,
     backgroundCheckedStaff: data.background_checked_staff,
     fastResponse: data.fast_response,

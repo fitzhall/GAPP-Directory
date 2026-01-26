@@ -24,9 +24,14 @@ interface ProviderAdmin {
   claimed_by_email: string | null
   claim_token: string | null
   claimed_at?: string | null
+  // Verification tracking
+  unverified_at?: string | null
+  unverified_reason?: string | null
+  downgraded_at?: string | null
+  downgraded_reason?: string | null
 }
 
-type TabType = 'unclaimed' | 'claimed' | 'verified' | 'all'
+type TabType = 'unclaimed' | 'claimed' | 'verified' | 'attention' | 'all'
 type SortType = 'name' | 'claimed_newest' | 'claimed_oldest' | 'city'
 
 const ITEMS_PER_PAGE = 25
@@ -95,7 +100,7 @@ export default function AdminPage() {
     setLoading(true)
     const { data, error } = await supabase
       .from('providers')
-      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claim_token')
+      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason')
       .order('name')
 
     if (error) {
@@ -123,7 +128,11 @@ export default function AdminPage() {
         languages: p.languages || ['English'],
         is_claimed: p.is_claimed ?? false,
         claimed_by_email: p.claimed_by_email ?? null,
-        claim_token: p.claim_token ?? null
+        claim_token: p.claim_token ?? null,
+        unverified_at: p.unverified_at ?? null,
+        unverified_reason: p.unverified_reason ?? null,
+        downgraded_at: p.downgraded_at ?? null,
+        downgraded_reason: p.downgraded_reason ?? null
       }))
       setProviders(transformed)
     }
@@ -142,6 +151,8 @@ export default function AdminPage() {
       if (activeTab === 'unclaimed' && provider.is_claimed) return false
       if (activeTab === 'claimed' && (!provider.is_claimed || provider.is_verified)) return false
       if (activeTab === 'verified' && !provider.is_verified) return false
+      // Attention tab: featured but NOT verified (missed check-in or recently unverified)
+      if (activeTab === 'attention' && !(provider.is_featured && !provider.is_verified)) return false
 
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
@@ -187,6 +198,8 @@ export default function AdminPage() {
   const claimedCount = providers.filter(p => p.is_claimed && !p.is_verified).length
   const verifiedCount = providers.filter(p => p.is_verified).length
   const featuredCount = providers.filter(p => p.is_featured).length
+  // Attention: featured providers who lost verification (need review)
+  const attentionCount = providers.filter(p => p.is_featured && !p.is_verified).length
 
   // Update provider field
   async function updateProvider(id: string, updates: Partial<ProviderAdmin>) {
@@ -233,11 +246,23 @@ export default function AdminPage() {
     setUpdating(null)
   }
 
-  // Unverify provider
-  async function unverifyProvider(id: string) {
+  // Unverify provider (remove badge, track reason)
+  async function unverifyProvider(id: string, reason: string = 'manual') {
     await updateProvider(id, {
       is_verified: false,
-      accepting_new_patients: false
+      accepting_new_patients: false,
+      unverified_at: new Date().toISOString(),
+      unverified_reason: reason
+    })
+  }
+
+  // Downgrade tier (remove premium/featured status)
+  async function downgradeTier(id: string, reason: string = 'manual') {
+    await updateProvider(id, {
+      is_featured: false,
+      tier_level: 0,
+      downgraded_at: new Date().toISOString(),
+      downgraded_reason: reason
     })
   }
 
@@ -478,7 +503,7 @@ export default function AdminPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         {/* Stats Cards */}
-        <div className="grid grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-6 gap-4 mb-6">
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <p className="text-sm text-gray-500">Total Providers</p>
             <p className="text-2xl font-bold text-gray-900">{providers.length}</p>
@@ -498,6 +523,10 @@ export default function AdminPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <p className="text-sm text-gray-500">Featured</p>
             <p className="text-2xl font-bold text-purple-600">{featuredCount}</p>
+          </div>
+          <div className={`rounded-lg border p-4 ${attentionCount > 0 ? 'bg-red-50 border-red-200' : 'bg-white border-gray-200'}`}>
+            <p className="text-sm text-gray-500">Needs Attention</p>
+            <p className={`text-2xl font-bold ${attentionCount > 0 ? 'text-red-600' : 'text-gray-400'}`}>{attentionCount}</p>
           </div>
         </div>
 
@@ -534,6 +563,18 @@ export default function AdminPage() {
                 }`}
               >
                 Verified ({verifiedCount})
+              </button>
+              <button
+                onClick={() => setActiveTab('attention')}
+                className={`py-3 px-1 border-b-2 text-sm font-medium ${
+                  activeTab === 'attention'
+                    ? 'border-red-500 text-red-600'
+                    : attentionCount > 0
+                      ? 'border-transparent text-red-500 hover:text-red-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Attention ({attentionCount})
               </button>
               <button
                 onClick={() => setActiveTab('all')}
@@ -637,8 +678,24 @@ export default function AdminPage() {
                             </span>
                           )}
                           {provider.is_featured && (
-                            <span className="inline-flex items-center px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full w-fit">
-                              Featured
+                            <span className={`inline-flex items-center px-2 py-0.5 text-xs rounded-full w-fit ${
+                              provider.is_verified
+                                ? 'bg-purple-100 text-purple-700'
+                                : 'bg-red-100 text-red-700'  // Warning: featured but not verified
+                            }`}>
+                              Featured {!provider.is_verified && '⚠️'}
+                            </span>
+                          )}
+                          {/* Show unverified info if present */}
+                          {provider.unverified_at && (
+                            <span className="text-xs text-red-500" title={`Unverified: ${provider.unverified_reason || 'unknown reason'}`}>
+                              Lost badge: {new Date(provider.unverified_at).toLocaleDateString()}
+                            </span>
+                          )}
+                          {/* Show downgrade info if present */}
+                          {provider.downgraded_at && (
+                            <span className="text-xs text-orange-500" title={`Downgraded: ${provider.downgraded_reason || 'unknown reason'}`}>
+                              Downgraded: {new Date(provider.downgraded_at).toLocaleDateString()}
                             </span>
                           )}
                           {provider.claimed_by_email && (
@@ -680,8 +737,30 @@ export default function AdminPage() {
                                 </button>
                               )}
                               {!provider.is_verified ? (
-                                provider.is_claimed ? (
-                                  // Claimed but not verified - show email action + verify after payment
+                                // NOT VERIFIED - check if featured (needs attention) or regular
+                                provider.is_featured ? (
+                                  // Featured but NOT verified - needs attention!
+                                  <>
+                                    <button
+                                      onClick={() => verifyProvider(provider.id)}
+                                      className="px-2 py-1 text-xs rounded border border-green-300 text-green-700 hover:bg-green-50"
+                                      title="Restore verification after check-in"
+                                    >
+                                      Re-verify
+                                    </button>
+                                    <button
+                                      onClick={() => {
+                                        const reason = prompt('Reason for downgrading tier:', 'missed_checkin')
+                                        if (reason !== null) downgradeTier(provider.id, reason || 'manual')
+                                      }}
+                                      className="px-2 py-1 text-xs rounded border border-orange-300 text-orange-700 hover:bg-orange-50"
+                                      title="Remove premium/featured status"
+                                    >
+                                      Downgrade Tier
+                                    </button>
+                                  </>
+                                ) : provider.is_claimed ? (
+                                  // Claimed but not verified (and not featured) - show email action + verify after payment
                                   <>
                                     <button
                                       onClick={async () => {
@@ -750,6 +829,7 @@ export default function AdminPage() {
                                   </button>
                                 )
                               ) : (
+                                // Verified provider - show all management options
                                 <>
                                   <button
                                     onClick={() => toggleAccepting(provider.id, provider.accepting_new_patients)}
@@ -772,12 +852,30 @@ export default function AdminPage() {
                                     {provider.is_featured ? 'Featured' : 'Feature'}
                                   </button>
                                   <button
-                                    onClick={() => unverifyProvider(provider.id)}
+                                    onClick={() => {
+                                      const reason = prompt('Reason for removing verification:', 'missed_checkin')
+                                      if (reason !== null) unverifyProvider(provider.id, reason || 'manual')
+                                    }}
                                     className="px-2 py-1 text-xs text-red-600 hover:text-red-700"
+                                    title="Remove verified badge"
                                   >
                                     Unverify
                                   </button>
                                 </>
+                              )}
+                              {/* Downgrade Tier button - only for VERIFIED providers who are also featured */}
+                              {/* (unverified+featured already has this button in the attention section above) */}
+                              {provider.is_verified && provider.is_featured && (
+                                <button
+                                  onClick={() => {
+                                    const reason = prompt('Reason for downgrading tier:', 'manual')
+                                    if (reason !== null) downgradeTier(provider.id, reason || 'manual')
+                                  }}
+                                  className="px-2 py-1 text-xs rounded border border-orange-300 text-orange-700 hover:bg-orange-50"
+                                  title="Remove premium/featured status"
+                                >
+                                  Downgrade Tier
+                                </button>
                               )}
                             </>
                           )}
@@ -856,7 +954,20 @@ export default function AdminPage() {
               <p><span className="inline-block px-2 py-0.5 bg-gray-100 text-gray-500 text-xs rounded-full">Unclaimed</span> → Provider hasn&apos;t claimed their profile yet. Basic listing, no leads.</p>
               <p><span className="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full">Claimed</span> → Provider submitted email to claim profile. Ready to verify.</p>
               <p><span className="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">Verified</span> → Admin verified. Full profile + callback form enabled.</p>
-              <p><span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full">Featured</span> → Paid tier. Shown at top of results.</p>
+              <p><span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full">Featured</span> → Paid tier. Shown at top of results <strong>only if also Verified</strong>.</p>
+            </div>
+          </div>
+
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <h3 className="font-medium text-red-900 mb-2">Attention Tab: Missed Verification</h3>
+            <div className="text-sm text-red-800 space-y-2">
+              <p>The <strong>Attention</strong> tab shows providers who are Featured but NOT Verified.</p>
+              <p>These providers missed a check-in or had their verification removed. They no longer rank above regular verified providers in search results.</p>
+              <p><strong>Actions available:</strong></p>
+              <ul className="list-disc list-inside ml-2 space-y-1">
+                <li><strong>Unverify</strong> - Remove the verified badge (tracks reason + date)</li>
+                <li><strong>Downgrade Tier</strong> - Remove premium/featured status (tracks reason + date)</li>
+              </ul>
             </div>
           </div>
 

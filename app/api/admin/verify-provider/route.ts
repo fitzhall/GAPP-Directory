@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Provider already verified' }, { status: 400 })
     }
 
-    // Update provider to verified
+    // Update provider to verified (clear any unverified tracking)
     const { error: updateError } = await supabase
       .from('providers')
       .update({
@@ -47,6 +47,9 @@ export async function POST(request: NextRequest) {
         accepting_new_patients: true,
         verified_at: new Date().toISOString(),
         tier_level: 2, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
+        // Clear tracking fields from any previous unverification
+        unverified_at: null,
+        unverified_reason: null,
       })
       .eq('id', providerId)
 

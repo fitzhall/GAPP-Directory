@@ -149,15 +149,17 @@ function DirectoryContent() {
     })
   }, [providers, county, service, searchQuery])
 
-  // Sort: Premium > Verified > Claimed > Unclaimed, then by name
+  // Sort: Premium+Verified > Verified > Claimed > Featured-but-not-verified > Unclaimed
+  // NOTE: Featured providers who lost verification should NOT rank above verified providers
   const sortedProviders = useMemo(() => {
     return [...filteredProviders].sort((a, b) => {
-      // Calculate tier score: Premium=4, Verified=3, Claimed=2, Unclaimed=1
+      // Calculate tier score - verification is required to benefit from featured status
       const getTierScore = (p: typeof a) => {
-        if (p.isFeatured) return 4  // Premium
-        if (p.isVerified) return 3  // Verified
-        if (p.isClaimed) return 2   // Claimed
-        return 1                     // Unclaimed
+        if (p.isFeatured && p.isVerified) return 5  // Premium AND verified - top ranking
+        if (p.isVerified) return 4                   // Verified (with or without featured)
+        if (p.isFeatured) return 2                   // Featured but NOT verified - demoted below verified
+        if (p.isClaimed) return 1                    // Claimed only
+        return 0                                      // Unclaimed
       }
       const scoreA = getTierScore(a)
       const scoreB = getTierScore(b)

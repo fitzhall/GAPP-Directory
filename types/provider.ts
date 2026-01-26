@@ -50,6 +50,12 @@ export interface Provider {
   updatedAt: string;
   verifiedAt?: string;
   featuredAt?: string;
+
+  // Verification tracking (for admin)
+  unverifiedAt?: string;       // When provider lost verified badge
+  unverifiedReason?: string;   // Why: 'missed_checkin', 'failed_verification', 'manual'
+  downgradedAt?: string;       // When provider was downgraded from premium
+  downgradedReason?: string;   // Why they were downgraded
 }
 
 // For search/filter operations
