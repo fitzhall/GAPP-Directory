@@ -31,7 +31,7 @@ interface ProviderAdmin {
   downgraded_reason?: string | null
 }
 
-type TabType = 'unclaimed' | 'claimed' | 'verified' | 'attention' | 'all'
+type TabType = 'unclaimed' | 'claimed' | 'verified' | 'featured' | 'attention' | 'all'
 type SortType = 'name' | 'claimed_newest' | 'claimed_oldest' | 'city'
 
 const ITEMS_PER_PAGE = 25
@@ -151,6 +151,8 @@ export default function AdminPage() {
       if (activeTab === 'unclaimed' && provider.is_claimed) return false
       if (activeTab === 'claimed' && (!provider.is_claimed || provider.is_verified)) return false
       if (activeTab === 'verified' && !provider.is_verified) return false
+      // Featured tab: all premium/featured providers
+      if (activeTab === 'featured' && !provider.is_featured) return false
       // Attention tab: featured but NOT verified (missed check-in or recently unverified)
       if (activeTab === 'attention' && !(provider.is_featured && !provider.is_verified)) return false
 
@@ -563,6 +565,16 @@ export default function AdminPage() {
                 }`}
               >
                 Verified ({verifiedCount})
+              </button>
+              <button
+                onClick={() => setActiveTab('featured')}
+                className={`py-3 px-1 border-b-2 text-sm font-medium ${
+                  activeTab === 'featured'
+                    ? 'border-purple-500 text-purple-600'
+                    : 'border-transparent text-purple-500 hover:text-purple-600'
+                }`}
+              >
+                Featured ({featuredCount})
               </button>
               <button
                 onClick={() => setActiveTab('attention')}
