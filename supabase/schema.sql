@@ -56,6 +56,8 @@ CREATE TABLE providers (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   claimed_at TIMESTAMPTZ,
   claimed_by_email TEXT,                      -- Email of person who claimed
+  claimer_name TEXT,                          -- Name of person who claimed
+  claimer_phone TEXT,                         -- Phone of person who claimed
   verified_at TIMESTAMPTZ,
   featured_at TIMESTAMPTZ
 );

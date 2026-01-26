@@ -75,6 +75,8 @@ export async function POST(request: NextRequest) {
       is_claimed: true,
       claimed_at: new Date().toISOString(),
       claimed_by_email: body.email,
+      claimer_name: body.name,                    // Store claimer's name
+      claimer_phone: body.phone || null,          // Store claimer's phone
       tier_level: 1, // 0=unclaimed, 1=claimed, 2=verified, 3=premium
       accepting_new_patients: body.acceptingNewPatients ?? true,
     }

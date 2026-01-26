@@ -14,6 +14,7 @@ interface ProviderAdmin {
   phone: string | null
   website: string | null
   services_offered: string[]
+  counties_served: string[]
   languages: string[]
   is_claimed: boolean
   is_verified: boolean
@@ -24,6 +25,9 @@ interface ProviderAdmin {
   claimed_by_email: string | null
   claim_token: string | null
   claimed_at?: string | null
+  // Claim submission details
+  claimer_name?: string | null
+  claimer_phone?: string | null
   // Verification tracking
   unverified_at?: string | null
   unverified_reason?: string | null
@@ -100,7 +104,7 @@ export default function AdminPage() {
     setLoading(true)
     const { data, error } = await supabase
       .from('providers')
-      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason')
+      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claimer_name, claimer_phone, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason')
       .order('name')
 
     if (error) {
@@ -125,9 +129,12 @@ export default function AdminPage() {
       const transformed = (data || []).map(p => ({
         ...p,
         county: p.counties_served?.[0] || 'Unknown',
+        counties_served: p.counties_served || [],
         languages: p.languages || ['English'],
         is_claimed: p.is_claimed ?? false,
         claimed_by_email: p.claimed_by_email ?? null,
+        claimer_name: p.claimer_name ?? null,
+        claimer_phone: p.claimer_phone ?? null,
         claim_token: p.claim_token ?? null,
         unverified_at: p.unverified_at ?? null,
         unverified_reason: p.unverified_reason ?? null,
@@ -1015,6 +1022,78 @@ export default function AdminPage() {
 
             {/* Modal Body */}
             <div className="p-4 space-y-4">
+              {/* Claim Details Section - Read Only */}
+              {editingProvider.is_claimed && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <h3 className="font-semibold text-amber-800 mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Claim Details
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <span className="text-amber-700 font-medium">Claimed By:</span>
+                      <p className="text-gray-900">{editingProvider.claimer_name || 'N/A'}</p>
+                    </div>
+                    <div>
+                      <span className="text-amber-700 font-medium">Claimed At:</span>
+                      <p className="text-gray-900">
+                        {editingProvider.claimed_at
+                          ? new Date(editingProvider.claimed_at).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })
+                          : 'N/A'
+                        }
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-amber-700 font-medium">Email:</span>
+                      <p className="text-gray-900">
+                        {editingProvider.claimed_by_email ? (
+                          <a href={`mailto:${editingProvider.claimed_by_email}`} className="text-primary hover:underline">
+                            {editingProvider.claimed_by_email}
+                          </a>
+                        ) : 'N/A'}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-amber-700 font-medium">Phone:</span>
+                      <p className="text-gray-900">
+                        {editingProvider.claimer_phone ? (
+                          <a href={`tel:${editingProvider.claimer_phone}`} className="text-primary hover:underline">
+                            {editingProvider.claimer_phone}
+                          </a>
+                        ) : 'N/A'}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Quick Actions */}
+                  <div className="mt-3 pt-3 border-t border-amber-200 flex gap-2">
+                    {editingProvider.claimed_by_email && (
+                      <a
+                        href={`mailto:${editingProvider.claimed_by_email}?subject=Your GeorgiaGAPP.com Profile - ${editingProvider.name}`}
+                        className="px-3 py-1.5 bg-amber-100 text-amber-800 text-xs font-medium rounded hover:bg-amber-200 transition-colors"
+                      >
+                        Email Claimer
+                      </a>
+                    )}
+                    {editingProvider.claimer_phone && (
+                      <a
+                        href={`tel:${editingProvider.claimer_phone}`}
+                        className="px-3 py-1.5 bg-amber-100 text-amber-800 text-xs font-medium rounded hover:bg-amber-200 transition-colors"
+                      >
+                        Call Claimer
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Provider Name</label>
