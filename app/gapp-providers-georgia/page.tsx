@@ -341,7 +341,11 @@ export default async function GAPPProvidersGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Related Resources</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <Link href="/georgia-pediatric-program" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">What is GAPP?</h3>
+              <p className="text-sm text-gray-600">Learn about the program</p>
+            </Link>
             <Link href="/gapp-approval-guide" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">GAPP Approval Guide</h3>
               <p className="text-sm text-gray-600">Step-by-step approval process</p>

@@ -167,6 +167,7 @@ export default function RootLayout({
               <div>
                 <h4 className="text-white font-semibold mb-3 text-sm">Resources</h4>
                 <ul className="space-y-2 text-sm">
+                  <li><Link href="/georgia-pediatric-program" className="hover:text-warm transition-colors">What is GAPP?</Link></li>
                   <li><Link href="/gapp-providers-georgia" className="hover:text-warm transition-colors">GAPP Providers Georgia</Link></li>
                   <li><Link href="/gapp-home-care" className="hover:text-warm transition-colors">GAPP Home Care</Link></li>
                   <li><Link href="/medically-fragile-children-care" className="hover:text-warm transition-colors">Medically Fragile Care</Link></li>

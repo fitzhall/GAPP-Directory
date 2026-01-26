@@ -181,3 +181,105 @@ export function FAQPageSchema({ faqs }: FAQPageSchemaProps) {
   }
   return <JsonLd data={data} />
 }
+
+// WebPage Schema - for informational content pages
+interface WebPageSchemaProps {
+  name: string
+  description: string
+  url: string
+  datePublished?: string
+  dateModified?: string
+  breadcrumb?: BreadcrumbItem[]
+}
+
+export function WebPageSchema({
+  name,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  breadcrumb,
+}: WebPageSchemaProps) {
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name,
+    description,
+    url,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'GeorgiaGAPP.com',
+      url: 'https://www.georgiagapp.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'GeorgiaGAPP.com',
+      url: 'https://www.georgiagapp.com',
+    },
+  }
+
+  if (datePublished) data.datePublished = datePublished
+  if (dateModified) data.dateModified = dateModified
+
+  if (breadcrumb && breadcrumb.length > 0) {
+    data.breadcrumb = {
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumb.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    }
+  }
+
+  return <JsonLd data={data} />
+}
+
+// Article Schema - for blog/editorial content
+interface ArticleSchemaProps {
+  headline: string
+  description: string
+  url: string
+  datePublished: string
+  dateModified?: string
+  author?: string
+  image?: string
+}
+
+export function ArticleSchema({
+  headline,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  author = 'GeorgiaGAPP.com',
+  image,
+}: ArticleSchemaProps) {
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline,
+    description,
+    url,
+    datePublished,
+    author: {
+      '@type': 'Organization',
+      name: author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'GeorgiaGAPP.com',
+      url: 'https://www.georgiagapp.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.georgiagapp.com/logo.png',
+      },
+    },
+  }
+
+  if (dateModified) data.dateModified = dateModified
+  if (image) data.image = image
+
+  return <JsonLd data={data} />
+}

@@ -98,6 +98,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // SEO Pillar Pages (high priority for target keywords)
     {
+      url: `${baseUrl}/georgia-pediatric-program`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
       url: `${baseUrl}/gapp-providers-georgia`,
       lastModified: new Date(),
       changeFrequency: 'weekly',

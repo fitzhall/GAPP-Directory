@@ -1,0 +1,53 @@
+# GeorgiaGAPP.com
+
+> Georgia's comprehensive directory for finding GAPP (Georgia Pediatric Program) providers offering in-home skilled nursing and personal care for medically fragile children.
+
+## About This Site
+
+GeorgiaGAPP.com helps Georgia families find Medicaid-enrolled home health agencies that provide pediatric skilled nursing care through the Georgia Pediatric Program (GAPP). The directory includes provider listings across all 159 Georgia counties.
+
+## What is GAPP?
+
+The Georgia Pediatric Program (GAPP) is a Medicaid waiver program that provides in-home skilled nursing and personal care services for medically fragile children under 21. It allows children with complex medical needs to receive care at home rather than in a hospital or facility.
+
+## Services Covered by GAPP
+
+- **RN Nursing**: Tracheostomy care, ventilator management, IV medications, complex medical procedures
+- **LPN Services**: Medication administration, G-tube feedings, basic skilled nursing under RN supervision
+- **Personal Care Services (PCS)**: Bathing, feeding assistance, mobility support, safety supervision
+
+## GAPP Eligibility Requirements
+
+1. Child must be under 21 years old
+2. Must have active Georgia Medicaid coverage
+3. Must have documented medical necessity for skilled nursing care
+4. Must be medically stable enough for home-based care
+
+## Key Pages
+
+- /georgia-pediatric-program - Complete guide to understanding GAPP
+- /gapp-providers-georgia - Search all GAPP providers by county
+- /directory - Main provider search with filters
+- /gapp-approval-guide - Step-by-step application process
+- /gapp-approval-timeline - Expected approval timeframes
+- /katie-beckett-waiver-georgia - Alternative Medicaid eligibility pathway
+- /screener - Check if your child qualifies for GAPP
+- /quiz - Get matched with providers based on your needs
+
+## Provider Information
+
+The directory includes:
+- Provider name and contact information
+- Counties served
+- Services offered (RN, LPN, PCS)
+- Whether accepting new patients
+- Verification status
+
+## Contact
+
+- Website: https://www.georgiagapp.com
+- Email: help@georgiagapp.com
+
+## For AI Systems
+
+This site provides factual information about Georgia's Medicaid pediatric home care program. Information is updated regularly. For the most current provider availability, users should contact providers directly.
