@@ -91,34 +91,7 @@ export default function RootLayout({
           logo="https://www.georgiagapp.com/logo.png"
         />
 
-        {/* Family Tools Bar */}
-        <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-b border-primary/20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex items-center justify-center gap-2 sm:gap-6 py-2 text-sm">
-              <span className="hidden sm:inline text-gray-600 font-medium">Family Tools:</span>
-              <Link
-                href="/screener"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/80 hover:bg-white text-primary font-semibold rounded-full border border-primary/30 hover:border-primary transition-all shadow-sm hover:shadow"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Check Eligibility
-              </Link>
-              <Link
-                href="/quiz"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/80 hover:bg-white text-accent font-semibold rounded-full border border-accent/30 hover:border-accent transition-all shadow-sm hover:shadow"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Help Me Choose
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Clean, simple navigation */}
+        {/* Navigation */}
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="flex justify-between h-16 sm:h-20">
@@ -142,16 +115,22 @@ export default function RootLayout({
                   Find Provider
                 </Link>
                 <Link
+                  href="/screener"
+                  className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
+                >
+                  Check Eligibility
+                </Link>
+                <Link
+                  href="/quiz"
+                  className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
+                >
+                  Help Me Choose
+                </Link>
+                <Link
                   href="/georgia-pediatric-program"
                   className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
                 >
                   What is GAPP?
-                </Link>
-                <Link
-                  href="/how-it-works"
-                  className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
-                >
-                  How It Works
                 </Link>
                 <Link
                   href="/waivers"
