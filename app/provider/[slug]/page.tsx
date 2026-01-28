@@ -88,8 +88,6 @@ export async function generateMetadata({
   // Status for meta description
   const statusText = provider.isVerified
     ? 'verified'
-    : provider.isClaimed
-    ? 'claimed'
     : 'listed'
 
   return {
@@ -407,20 +405,11 @@ export default async function ProviderPage({
                 </div>
               </>
             ) : provider.isClaimed ? (
-              /* Claimed but not verified - show contact info with pending status */
+              /* Claimed but not yet verified - show contact info */
               <div className="py-4">
-                <div className="flex justify-center mb-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-medium">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Profile Claimed - Verification Pending
-                  </div>
-                </div>
-
                 <h2 className="text-lg font-semibold text-gray-900 mb-2 text-center">Contact This Provider</h2>
                 <p className="text-gray-600 mb-6 max-w-md mx-auto text-center">
-                  This provider has claimed their profile. Full features available after verification.
+                  Call this provider directly to learn about their services and availability.
                 </p>
 
                 {/* Show phone for claimed profiles - website only for verified */}
@@ -438,10 +427,10 @@ export default async function ProviderPage({
                   )}
                 </div>
 
-                {/* Website only shown for verified - upsell */}
+                {/* Website only shown for verified providers */}
                 {provider.website && (
                   <p className="text-sm text-gray-500 mt-4 text-center">
-                    Website available after verification
+                    Additional details coming soon
                   </p>
                 )}
               </div>

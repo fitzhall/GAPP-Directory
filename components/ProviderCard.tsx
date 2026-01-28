@@ -92,25 +92,16 @@ export function ProviderCard({ provider }: ProviderCardProps) {
     )
   }
 
-  // Claimed but not verified - show phone number, subtle claimed indicator
+  // Claimed but not verified - show phone number, no special badge for visitors
   if (isClaimed && !isVerified) {
     return (
       <Link
         href={`/provider/${slug}`}
         className="block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
       >
-        {/* Provider name and city - now the hero */}
+        {/* Provider name and city */}
         <div className="mb-3">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-            {/* Small claimed indicator */}
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 text-blue-600 text-xs font-medium rounded">
-              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Claimed
-            </span>
-          </div>
+          <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
           <p className="text-sm text-gray-500">{city}, Georgia</p>
         </div>
 
