@@ -134,9 +134,9 @@ export default function LeadsPage() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Lead Management</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Lead Management</h1>
               <p className="text-sm text-gray-600 mt-1">
                 Callback requests from families
               </p>
@@ -144,15 +144,15 @@ export default function LeadsPage() {
             <div className="flex gap-3">
               <Link
                 href="/admin"
-                className="text-sm text-gray-600 hover:text-gray-900"
+                className="text-xs sm:text-sm text-gray-600 hover:text-gray-900"
               >
                 Providers
               </Link>
               <Link
                 href="/"
-                className="text-sm text-gray-600 hover:text-gray-900"
+                className="text-xs sm:text-sm text-gray-600 hover:text-gray-900"
               >
-                Back to Site
+                Site
               </Link>
             </div>
           </div>
@@ -161,34 +161,34 @@ export default function LeadsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         {/* Stats Cards */}
-        <div className="grid grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Total Leads</p>
-            <p className="text-2xl font-bold text-gray-900">{leads.length}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4">
+            <p className="text-xs sm:text-sm text-gray-500">Total</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{leads.length}</p>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">New (Uncontacted)</p>
-            <p className="text-2xl font-bold text-blue-600">{newCount}</p>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4">
+            <p className="text-xs sm:text-sm text-gray-500">New</p>
+            <p className="text-xl sm:text-2xl font-bold text-blue-600">{newCount}</p>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Contacted</p>
-            <p className="text-2xl font-bold text-purple-600">{contactedCount}</p>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4">
+            <p className="text-xs sm:text-sm text-gray-500">Contacted</p>
+            <p className="text-xl sm:text-2xl font-bold text-purple-600">{contactedCount}</p>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-sm text-gray-500">Converted</p>
-            <p className="text-2xl font-bold text-green-600">{convertedCount}</p>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4">
+            <p className="text-xs sm:text-sm text-gray-500">Converted</p>
+            <p className="text-xl sm:text-2xl font-bold text-green-600">{convertedCount}</p>
           </div>
         </div>
 
         {/* Filter Tabs */}
         <div className="bg-white rounded-lg border border-gray-200 mb-6">
-          <div className="border-b border-gray-200 px-4">
-            <div className="flex gap-4">
+          <div className="border-b border-gray-200 overflow-x-auto">
+            <div className="flex gap-1 sm:gap-4 px-2 sm:px-4 min-w-max">
               {(['all', 'new', 'contacted', 'converted', 'closed'] as StatusFilter[]).map(status => (
                 <button
                   key={status}
                   onClick={() => setStatusFilter(status)}
-                  className={`py-3 px-1 border-b-2 text-sm font-medium capitalize ${
+                  className={`py-3 px-2 sm:px-1 border-b-2 text-xs sm:text-sm font-medium capitalize whitespace-nowrap ${
                     statusFilter === status
                       ? 'border-primary text-primary'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -213,97 +213,93 @@ export default function LeadsPage() {
             </div>
           ) : (
             filteredLeads.map(lead => (
-              <div key={lead.id} className="bg-white rounded-lg border border-gray-200 p-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    {/* Header Row */}
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-gray-900">{lead.parent_name}</h3>
-                      {getStatusBadge(lead.status)}
-                      {getUrgencyBadge(lead.urgency)}
-                      <span className="text-xs text-gray-500">{formatDate(lead.created_at)}</span>
-                    </div>
+              <div key={lead.id} className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4">
+                {/* Header Row - stacks on mobile */}
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{lead.parent_name}</h3>
+                  {getStatusBadge(lead.status)}
+                  {getUrgencyBadge(lead.urgency)}
+                  <span className="text-xs text-gray-500">{formatDate(lead.created_at)}</span>
+                </div>
 
-                    {/* Contact Info */}
-                    <div className="flex items-center gap-4 mb-3">
-                      <a href={`tel:${lead.phone}`} className="text-primary font-medium hover:underline">
-                        {lead.phone}
-                      </a>
-                      {lead.email && (
-                        <a href={`mailto:${lead.email}`} className="text-gray-600 text-sm hover:underline">
-                          {lead.email}
-                        </a>
-                      )}
-                      <span className="text-gray-500 text-sm">{lead.zip_code}, {lead.county}</span>
-                    </div>
+                {/* Contact Info - stacks on mobile */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-3">
+                  <a href={`tel:${lead.phone}`} className="text-primary font-medium hover:underline text-sm sm:text-base">
+                    {lead.phone}
+                  </a>
+                  {lead.email && (
+                    <a href={`mailto:${lead.email}`} className="text-gray-600 text-xs sm:text-sm hover:underline truncate">
+                      {lead.email}
+                    </a>
+                  )}
+                  <span className="text-gray-500 text-xs sm:text-sm">{lead.zip_code}, {lead.county}</span>
+                </div>
 
-                    {/* Details Row */}
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
-                      <span>
-                        <strong>Service:</strong> {lead.service_needed === 'not_sure' ? 'Not sure' : lead.service_needed}
-                      </span>
-                      {lead.preferred_callback_time && (
-                        <span>
-                          <strong>Best time:</strong> {lead.preferred_callback_time}
-                        </span>
-                      )}
-                      <span>
-                        <strong>For:</strong>{' '}
-                        <Link href={`/provider/${lead.provider?.slug}`} className="text-primary hover:underline">
-                          {lead.provider?.name}
-                        </Link>
-                      </span>
-                    </div>
+                {/* Details Row - wraps on mobile */}
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm text-gray-600 mb-2">
+                  <span>
+                    <strong>Service:</strong> {lead.service_needed === 'not_sure' ? 'Not sure' : lead.service_needed}
+                  </span>
+                  {lead.preferred_callback_time && (
+                    <span>
+                      <strong>Best time:</strong> {lead.preferred_callback_time}
+                    </span>
+                  )}
+                  <span>
+                    <strong>For:</strong>{' '}
+                    <Link href={`/provider/${lead.provider?.slug}`} className="text-primary hover:underline">
+                      {lead.provider?.name}
+                    </Link>
+                  </span>
+                </div>
 
-                    {/* Special Needs */}
-                    {lead.special_needs && (
-                      <div className="mt-2 text-sm text-gray-600 bg-gray-50 rounded p-2">
-                        <strong>Notes:</strong> {lead.special_needs}
-                      </div>
-                    )}
+                {/* Special Needs */}
+                {lead.special_needs && (
+                  <div className="text-xs sm:text-sm text-gray-600 bg-gray-50 rounded p-2 mb-3">
+                    <strong>Notes:</strong> {lead.special_needs}
                   </div>
+                )}
 
-                  {/* Actions */}
-                  <div className="flex flex-col gap-2 ml-4">
-                    {updating === lead.id ? (
-                      <span className="text-xs text-gray-500">Saving...</span>
-                    ) : (
-                      <>
-                        {lead.status === 'new' && (
+                {/* Actions - horizontal row at bottom */}
+                <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100">
+                  {updating === lead.id ? (
+                    <span className="text-xs text-gray-500">Saving...</span>
+                  ) : (
+                    <>
+                      {lead.status === 'new' && (
+                        <button
+                          onClick={() => updateStatus(lead.id, 'contacted')}
+                          className="px-3 py-1.5 bg-purple-600 text-white text-xs font-medium rounded hover:bg-purple-700"
+                        >
+                          Mark Contacted
+                        </button>
+                      )}
+                      {lead.status === 'contacted' && (
+                        <>
                           <button
-                            onClick={() => updateStatus(lead.id, 'contacted')}
-                            className="px-3 py-1.5 bg-purple-600 text-white text-xs font-medium rounded hover:bg-purple-700"
+                            onClick={() => updateStatus(lead.id, 'converted')}
+                            className="px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700"
                           >
-                            Mark Contacted
+                            Converted
                           </button>
-                        )}
-                        {lead.status === 'contacted' && (
-                          <>
-                            <button
-                              onClick={() => updateStatus(lead.id, 'converted')}
-                              className="px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700"
-                            >
-                              Converted
-                            </button>
-                            <button
-                              onClick={() => updateStatus(lead.id, 'closed')}
-                              className="px-3 py-1.5 border border-gray-300 text-gray-600 text-xs font-medium rounded hover:bg-gray-50"
-                            >
-                              Close
-                            </button>
-                          </>
-                        )}
-                        {(lead.status === 'converted' || lead.status === 'closed') && (
                           <button
-                            onClick={() => updateStatus(lead.id, 'new')}
+                            onClick={() => updateStatus(lead.id, 'closed')}
                             className="px-3 py-1.5 border border-gray-300 text-gray-600 text-xs font-medium rounded hover:bg-gray-50"
                           >
-                            Reopen
+                            Close
                           </button>
-                        )}
-                      </>
-                    )}
-                  </div>
+                        </>
+                      )}
+                      {(lead.status === 'converted' || lead.status === 'closed') && (
+                        <button
+                          onClick={() => updateStatus(lead.id, 'new')}
+                          className="px-3 py-1.5 border border-gray-300 text-gray-600 text-xs font-medium rounded hover:bg-gray-50"
+                        >
+                          Reopen
+                        </button>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             ))
