@@ -815,6 +815,30 @@ export default function AdminPage() {
                               >
                                 {provider.is_featured ? 'Featured' : 'Feature'}
                               </button>
+                              <button
+                                onClick={async () => {
+                                  const btn = document.activeElement as HTMLButtonElement
+                                  btn.disabled = true
+                                  btn.innerText = 'Sending...'
+                                  try {
+                                    const res = await fetch('/api/admin/send-live-email', {
+                                      method: 'POST',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({ providerId: provider.id })
+                                    })
+                                    btn.innerText = res.ok ? 'Sent ✓' : 'Failed'
+                                  } catch {
+                                    btn.innerText = 'Failed'
+                                  }
+                                  setTimeout(() => {
+                                    btn.innerText = 'Send Live'
+                                    btn.disabled = false
+                                  }, 2000)
+                                }}
+                                className="px-3 py-1.5 text-xs rounded border border-green-300 text-green-700 hover:bg-green-50"
+                              >
+                                Send Live
+                              </button>
                             </>
                           )}
                         </>
@@ -1048,6 +1072,39 @@ export default function AdminPage() {
                                       }`}
                                     >
                                       {provider.is_featured ? 'Featured' : 'Feature'}
+                                    </button>
+                                    <button
+                                      onClick={async () => {
+                                        const btn = document.activeElement as HTMLButtonElement
+                                        btn.disabled = true
+                                        btn.innerText = 'Sending...'
+                                        try {
+                                          const res = await fetch('/api/admin/send-live-email', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({ providerId: provider.id })
+                                          })
+                                          if (res.ok) {
+                                            btn.innerText = 'Sent ✓'
+                                            btn.className = 'px-2 py-1 text-xs rounded border border-green-300 text-green-700 bg-green-50'
+                                          } else {
+                                            btn.innerText = 'Failed'
+                                            btn.disabled = false
+                                          }
+                                        } catch {
+                                          btn.innerText = 'Failed'
+                                          btn.disabled = false
+                                        }
+                                        setTimeout(() => {
+                                          btn.innerText = 'Send Live'
+                                          btn.disabled = false
+                                          btn.className = 'px-2 py-1 text-xs rounded border border-green-300 text-green-700 hover:bg-green-50'
+                                        }, 3000)
+                                      }}
+                                      className="px-2 py-1 text-xs rounded border border-green-300 text-green-700 hover:bg-green-50"
+                                      title={`Send "profile is live" email to ${provider.claimed_by_email || provider.email}`}
+                                    >
+                                      Send Live
                                     </button>
                                     <button
                                       onClick={() => {

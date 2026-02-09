@@ -67,48 +67,54 @@ export async function POST(request: NextRequest) {
           await resend.emails.send({
             from: 'GeorgiaGAPP.com <noreply@georgiagapp.com>',
             to: recipientEmail,
-            subject: `You're Verified! ${provider.name} is now live`,
+            subject: `Payment Received - ${provider.name} on GeorgiaGAPP.com`,
             html: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                 <div style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
-                  <h1 style="color: white; margin: 0; font-size: 28px;">✓ You're Verified!</h1>
+                  <h1 style="color: white; margin: 0; font-size: 28px;">Payment Received!</h1>
+                  <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 16px;">Thank you for joining GeorgiaGAPP.com</p>
                 </div>
 
                 <div style="padding: 30px; background: #f9f9f9;">
                   <p style="font-size: 18px; color: #333; margin-top: 0;">
-                    Great news! <strong>${provider.name}</strong> is now verified on GeorgiaGAPP.com.
+                    Hi there! We've received your payment for <strong>${provider.name}</strong>.
                   </p>
 
                   <div style="background: white; border-radius: 8px; padding: 25px; margin: 20px 0; border-left: 4px solid #10B981;">
-                    <h2 style="color: #2C3E50; margin-top: 0; font-size: 18px;">What this means for you:</h2>
+                    <h2 style="color: #2C3E50; margin-top: 0; font-size: 18px;">What happens next:</h2>
                     <ul style="color: #555; line-height: 2; padding-left: 20px;">
-                      <li><strong>Case managers can find you</strong> — You now appear in case manager searches when they're placing clients</li>
-                      <li><strong>Weekly availability check</strong> — Every Monday, you'll get a quick email asking if you're accepting new cases</li>
-                      <li><strong>One-click confirmation</strong> — Just click "Yes" to stay visible to case managers that week</li>
-                      <li><strong>Verified badge</strong> — Families see you're a trusted, responsive provider</li>
+                      <li><strong>Profile update within 24 hours</strong> — Our team will review and activate your full profile within the next business day</li>
+                      <li><strong>Verified badge goes live</strong> — Families and case managers will see you as a trusted, verified provider</li>
+                      <li><strong>Callback requests enabled</strong> — Families can submit callback requests directly to you through your listing</li>
+                    </ul>
+                  </div>
+
+                  <div style="background: #EFF6FF; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3B82F6;">
+                    <h3 style="color: #1E40AF; margin: 0 0 10px 0; font-size: 16px;">Weekly Verification Check-In</h3>
+                    <p style="color: #1E40AF; margin: 0; font-size: 14px; line-height: 1.6;">
+                      Every week, you'll receive a quick check-in email asking if you're still accepting new patients.
+                      This is how we keep the directory accurate for families.
+                    </p>
+                    <ul style="color: #1E40AF; font-size: 14px; margin: 10px 0 0 0; padding-left: 20px; line-height: 1.8;">
+                      <li><strong>One click</strong> — Just confirm "Yes, still accepting" to stay visible</li>
+                      <li><strong>48-hour window</strong> — You have 48 hours to respond before your listing is temporarily hidden</li>
+                      <li><strong>Easy to restore</strong> — If you miss one, just respond to the next email to reappear</li>
                     </ul>
                   </div>
 
                   <div style="background: #FEF3C7; border-radius: 8px; padding: 20px; margin: 20px 0;">
                     <p style="color: #92400E; margin: 0; font-size: 14px;">
-                      <strong>Important:</strong> Watch for your first availability email on Monday.
-                      Responding keeps you visible — not responding for 48 hours temporarily hides you from searches.
+                      <strong>No action needed right now.</strong> We'll take care of everything on our end.
+                      You'll receive a separate email once your profile is fully live.
                     </p>
                   </div>
 
                   <p style="color: #666; font-size: 14px;">
-                    Questions? Reply to this email or contact us at help@georgiaGAPP.com
+                    Questions? Reply to this email or contact us at help@georgiagapp.com
                   </p>
 
-                  <div style="text-align: center; margin-top: 30px;">
-                    <a href="https://georgiagapp.com/case-managers"
-                       style="background: #10B981; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
-                      See How Case Managers Find You
-                    </a>
-                  </div>
-
                   <p style="color: #999; font-size: 12px; margin-top: 30px; text-align: center;">
-                    GeorgiaGAPP.com — Connecting families with GAPP providers
+                    GeorgiaGAPP.com — Connecting families with GAPP providers across Georgia
                   </p>
                 </div>
               </div>
