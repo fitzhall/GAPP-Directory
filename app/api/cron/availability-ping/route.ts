@@ -41,20 +41,22 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Get all verified providers with email
+    // Get all verified providers with email (prefer claimed_by_email)
     const { data: providers, error: fetchError } = await supabase
       .from('providers')
-      .select('id, name, email')
+      .select('id, name, email, claimed_by_email')
       .eq('is_active', true)
       .eq('is_verified', true)
-      .not('email', 'is', null)
 
     if (fetchError) {
       console.error('Error fetching providers:', fetchError)
       return NextResponse.json({ error: 'Failed to fetch providers' }, { status: 500 })
     }
 
-    if (!providers || providers.length === 0) {
+    // Filter to providers that have at least one email address
+    const providersWithEmail = (providers || []).filter(p => p.claimed_by_email || p.email)
+
+    if (providersWithEmail.length === 0) {
       return NextResponse.json({ message: 'No verified providers to ping', sent: 0 })
     }
 
@@ -65,7 +67,8 @@ export async function GET(request: NextRequest) {
     let sent = 0
     let failed = 0
 
-    for (const provider of providers) {
+    for (const provider of providersWithEmail) {
+      const recipientEmail = provider.claimed_by_email || provider.email
       try {
         // Generate unique token
         const token = generateToken()
@@ -95,10 +98,10 @@ export async function GET(request: NextRequest) {
         const availableUrl = `${baseUrl}/availability/${token}?response=available`
         const notAvailableUrl = `${baseUrl}/availability/${token}?response=not_available`
 
-        // Send email
+        // Send email to claimed_by_email (the person who signed up) with fallback to provider email
         await resend.emails.send({
           from: 'GeorgiaGAPP <noreply@georgiagapp.com>',
-          to: provider.email,
+          to: recipientEmail!,
           subject: 'Quick check: Are you accepting new cases this week?',
           html: `
             <!DOCTYPE html>
@@ -151,7 +154,7 @@ export async function GET(request: NextRequest) {
 
         sent++
       } catch (emailError) {
-        console.error(`Error sending to ${provider.email}:`, emailError)
+        console.error(`Error sending to ${recipientEmail}:`, emailError)
         failed++
       }
     }
@@ -169,7 +172,7 @@ export async function GET(request: NextRequest) {
       success: true,
       sent,
       failed,
-      total: providers.length,
+      total: providersWithEmail.length,
       message: `Sent ${sent} availability pings, ${failed} failed`,
     })
   } catch (error) {

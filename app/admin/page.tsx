@@ -33,6 +33,8 @@ interface ProviderAdmin {
   unverified_reason?: string | null
   downgraded_at?: string | null
   downgraded_reason?: string | null
+  // Missed check-in tracking
+  missed_checkin_at?: string | null
 }
 
 type TabType = 'unclaimed' | 'claimed' | 'verified' | 'featured' | 'attention' | 'all'
@@ -104,7 +106,7 @@ export default function AdminPage() {
     setLoading(true)
     const { data, error } = await supabase
       .from('providers')
-      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claimer_name, claimer_phone, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason')
+      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claimer_name, claimer_phone, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason, missed_checkin_at')
       .order('name')
 
     if (error) {
@@ -139,7 +141,8 @@ export default function AdminPage() {
         unverified_at: p.unverified_at ?? null,
         unverified_reason: p.unverified_reason ?? null,
         downgraded_at: p.downgraded_at ?? null,
-        downgraded_reason: p.downgraded_reason ?? null
+        downgraded_reason: p.downgraded_reason ?? null,
+        missed_checkin_at: p.missed_checkin_at ?? null
       }))
       setProviders(transformed)
     }
@@ -160,8 +163,11 @@ export default function AdminPage() {
       if (activeTab === 'verified' && !provider.is_verified) return false
       // Featured tab: all premium/featured providers
       if (activeTab === 'featured' && !provider.is_featured) return false
-      // Attention tab: featured but NOT verified (missed check-in or recently unverified)
-      if (activeTab === 'attention' && !(provider.is_featured && !provider.is_verified)) return false
+      // Attention tab: any provider who missed a check-in OR featured but unverified
+      if (activeTab === 'attention') {
+        const needsAttention = !!provider.missed_checkin_at || (provider.is_featured && !provider.is_verified)
+        if (!needsAttention) return false
+      }
 
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
@@ -207,8 +213,8 @@ export default function AdminPage() {
   const claimedCount = providers.filter(p => p.is_claimed && !p.is_verified).length
   const verifiedCount = providers.filter(p => p.is_verified).length
   const featuredCount = providers.filter(p => p.is_featured).length
-  // Attention: featured providers who lost verification (need review)
-  const attentionCount = providers.filter(p => p.is_featured && !p.is_verified).length
+  // Attention: any provider who missed a check-in OR featured but unverified
+  const attentionCount = providers.filter(p => !!p.missed_checkin_at || (p.is_featured && !p.is_verified)).length
 
   // Update provider field
   async function updateProvider(id: string, updates: Partial<ProviderAdmin>) {
@@ -697,6 +703,11 @@ export default function AdminPage() {
                           Accepting
                         </span>
                       )}
+                      {provider.missed_checkin_at && (
+                        <span className="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-medium rounded-full">
+                          Missed Check-in
+                        </span>
+                      )}
                     </div>
 
                     {/* Email info */}
@@ -815,6 +826,17 @@ export default function AdminPage() {
                               >
                                 {provider.is_featured ? 'Featured' : 'Feature'}
                               </button>
+                              {provider.missed_checkin_at && (
+                                <button
+                                  onClick={() => updateProvider(provider.id, {
+                                    missed_checkin_at: null,
+                                    accepting_new_patients: true,
+                                  })}
+                                  className="px-3 py-1.5 text-xs rounded border border-emerald-400 text-emerald-700 hover:bg-emerald-50 font-medium"
+                                >
+                                  Re-activate
+                                </button>
+                              )}
                               <button
                                 onClick={async () => {
                                   const btn = document.activeElement as HTMLButtonElement
@@ -916,6 +938,11 @@ export default function AdminPage() {
                                   : 'bg-red-100 text-red-700'
                               }`}>
                                 Featured {!provider.is_verified && '⚠️'}
+                              </span>
+                            )}
+                            {provider.missed_checkin_at && (
+                              <span className="inline-flex items-center px-2 py-0.5 bg-red-100 text-red-700 text-xs font-medium rounded-full w-fit">
+                                Missed Check-in {new Date(provider.missed_checkin_at).toLocaleDateString()}
                               </span>
                             )}
                             {provider.unverified_at && (
@@ -1106,6 +1133,18 @@ export default function AdminPage() {
                                     >
                                       Send Live
                                     </button>
+                                    {provider.missed_checkin_at && (
+                                      <button
+                                        onClick={() => updateProvider(provider.id, {
+                                          missed_checkin_at: null,
+                                          accepting_new_patients: true,
+                                        })}
+                                        className="px-2 py-1 text-xs rounded border border-emerald-400 text-emerald-700 hover:bg-emerald-50 font-medium"
+                                        title="Clear missed check-in flag and re-activate"
+                                      >
+                                        Re-activate
+                                      </button>
+                                    )}
                                     <button
                                       onClick={() => {
                                         const reason = prompt('Reason for removing verification:', 'missed_checkin')
@@ -1212,15 +1251,17 @@ export default function AdminPage() {
           </div>
 
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <h3 className="font-medium text-red-900 mb-2">Attention Tab: Missed Verification</h3>
+            <h3 className="font-medium text-red-900 mb-2">Attention Tab: Missed Check-Ins</h3>
             <div className="text-sm text-red-800 space-y-2">
-              <p>The <strong>Attention</strong> tab shows providers who are Featured but NOT Verified.</p>
-              <p>These providers missed a check-in or had their verification removed. They no longer rank above regular verified providers in search results.</p>
+              <p>The <strong>Attention</strong> tab shows providers who missed their weekly availability check-in.</p>
+              <p>These providers are still verified but have been <strong>hidden from case manager searches</strong>. They&apos;ll get another ping next Monday and can self-recover by responding.</p>
               <p><strong>Actions available:</strong></p>
               <ul className="list-disc list-inside ml-2 space-y-1">
-                <li><strong>Unverify</strong> - Remove the verified badge (tracks reason + date)</li>
-                <li><strong>Downgrade Tier</strong> - Remove premium/featured status (tracks reason + date)</li>
+                <li><strong>Re-activate</strong> - Clear the missed check-in flag and put them back in searches</li>
+                <li><strong>Unverify</strong> - Fully remove the verified badge (use for non-paying or problem providers)</li>
+                <li><strong>Downgrade Tier</strong> - Remove premium/featured status</li>
               </ul>
+              <p className="mt-2">You also receive an email notification when providers are hidden by the cron job.</p>
             </div>
           </div>
 

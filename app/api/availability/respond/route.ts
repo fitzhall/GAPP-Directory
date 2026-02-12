@@ -60,14 +60,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to record response' }, { status: 500 })
     }
 
-    // Update provider availability
+    // Update provider availability and clear any missed check-in flag
     const currentStreak = tokenData.providers?.availability_streak || 0
     const { error: updateProviderError } = await supabase
       .from('providers')
       .update({
         is_available: response === 'available',
+        accepting_new_patients: response === 'available',
         availability_updated_at: now,
         availability_streak: currentStreak + 1,
+        missed_checkin_at: null, // Clear flag so they leave the Attention tab
       })
       .eq('id', providerId)
 

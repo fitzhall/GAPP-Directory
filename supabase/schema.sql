@@ -59,7 +59,15 @@ CREATE TABLE providers (
   claimer_name TEXT,                          -- Name of person who claimed
   claimer_phone TEXT,                         -- Phone of person who claimed
   verified_at TIMESTAMPTZ,
-  featured_at TIMESTAMPTZ
+  featured_at TIMESTAMPTZ,
+
+  -- Availability ping tracking
+  is_available BOOLEAN DEFAULT false,
+  availability_updated_at TIMESTAMPTZ,
+  availability_streak INTEGER DEFAULT 0,
+  last_ping_sent_at TIMESTAMPTZ,
+  missed_checkin_at TIMESTAMPTZ,             -- Set when provider misses 48hr check-in window
+  verification_suspended_at TIMESTAMPTZ      -- Legacy: was used for hard unverify
 );
 
 -- Index for common queries
