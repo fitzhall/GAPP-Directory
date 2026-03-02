@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -9,15 +11,19 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [adminUser, setAdminUser] = useState('')
+  const pathname = usePathname()
 
-  // Check if already authenticated (session storage)
   useEffect(() => {
     const auth = sessionStorage.getItem('admin_auth')
+    const user = sessionStorage.getItem('admin_user')
     if (auth === 'true') {
       setIsAuthenticated(true)
+      setAdminUser(user || 'admin')
     }
     setIsLoading(false)
   }, [])
@@ -31,16 +37,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       const res = await fetch('/api/admin/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username: username || undefined, password }),
       })
 
       const data = await res.json()
 
       if (res.ok && data.success) {
         sessionStorage.setItem('admin_auth', 'true')
+        sessionStorage.setItem('admin_user', data.username || 'admin')
         setIsAuthenticated(true)
+        setAdminUser(data.username || 'admin')
       } else {
-        setError(data.error || 'Invalid password')
+        setError(data.error || 'Invalid credentials')
       }
     } catch (err) {
       setError('Failed to authenticate')
@@ -51,11 +59,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   function handleLogout() {
     sessionStorage.removeItem('admin_auth')
+    sessionStorage.removeItem('admin_user')
     setIsAuthenticated(false)
+    setAdminUser('')
+    setUsername('')
     setPassword('')
   }
 
-  // Show loading state
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -64,7 +74,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     )
   }
 
-  // Show login form if not authenticated
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -76,10 +85,21 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               </svg>
             </div>
             <h1 className="text-xl font-bold text-gray-900">Admin Access</h1>
-            <p className="text-sm text-gray-600 mt-1">Enter the admin password to continue</p>
+            <p className="text-sm text-gray-600 mt-1">Sign in to manage the directory</p>
           </div>
 
           <form onSubmit={handleLogin}>
+            <div className="mb-3">
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                autoFocus
+              />
+            </div>
+
             <div className="mb-4">
               <input
                 type="password"
@@ -87,7 +107,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                autoFocus
               />
             </div>
 
@@ -106,7 +125,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
-              {submitting ? 'Checking...' : 'Enter Admin'}
+              {submitting ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
@@ -118,16 +137,47 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     )
   }
 
-  // Show admin content with logout option
+  const navLinks = [
+    { href: '/admin', label: 'Providers' },
+    { href: '/admin/leads', label: 'Leads' },
+    { href: '/admin/requests', label: 'Requests' },
+    { href: '/admin/guide', label: 'Guide' },
+  ]
+
   return (
     <div className="relative">
-      {/* Logout button - fixed position */}
-      <button
-        onClick={handleLogout}
-        className="fixed top-4 right-4 z-50 px-3 py-1.5 bg-gray-800 text-white text-xs font-medium rounded-lg hover:bg-gray-700 transition-colors"
-      >
-        Logout
-      </button>
+      {/* Admin top bar */}
+      <div className="sticky top-0 z-50 bg-gray-800 text-white px-4 py-2 flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <span className="font-semibold text-sm">Admin Panel</span>
+          <nav className="flex gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm transition-colors ${
+                  pathname === link.href
+                    ? 'text-white font-medium'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="flex items-center gap-4">
+          <span className="text-xs text-gray-400">
+            Logged in as <span className="text-white font-medium">{adminUser}</span>
+          </span>
+          <button
+            onClick={handleLogout}
+            className="px-3 py-1 bg-gray-700 text-white text-xs font-medium rounded hover:bg-gray-600 transition-colors"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
       {children}
     </div>
   )
