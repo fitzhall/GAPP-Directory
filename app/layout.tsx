@@ -186,7 +186,12 @@ export default function RootLayout({
                 <h4 className="text-white font-semibold mb-3 text-sm">For Professionals</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/providers" className="hover:text-warm transition-colors">For Providers</Link></li>
-                  <li><Link href="/case-managers" className="hover:text-warm transition-colors">Case Managers</Link></li>
+                <Link
+                  href="/dashboard/login"
+                  className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
+                >
+                  Provider Login
+                </Link>                  <li><Link href="/case-managers" className="hover:text-warm transition-colors">Case Managers</Link></li>
                 </ul>
               </div>
               {/* Contact */}
