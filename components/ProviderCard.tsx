@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ProviderCardData, ServiceType } from '@/types/provider'
+import { TrackImpression } from '@/components/TrackImpression'
 
 interface ProviderCardProps {
   provider: ProviderCardData

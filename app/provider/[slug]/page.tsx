@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Provider, ServiceType } from '@/types/provider'
 import { CallbackForm } from '@/components/CallbackForm'
+import { TrackView } from '@/components/TrackView'
+import { TrackableLink } from '@/components/TrackableLink'
 import { CountiesSection } from '@/components/CountiesSection'
 import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 
@@ -141,6 +143,7 @@ export default async function ProviderPage({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <TrackView providerId={provider.id} />
       {/* Schema.org MedicalBusiness for provider */}
       <MedicalBusinessSchema
         name={provider.name}
@@ -352,8 +355,10 @@ export default async function ProviderPage({
 
                     <div className="space-y-3">
                       {contactPhone && (
-                        <a
+                        <TrackableLink
                           href={`tel:${contactPhone.replace(/\D/g, '')}`}
+                          providerId={provider.id}
+                          eventType="click_phone"
                           className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                         >
                           <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -365,12 +370,14 @@ export default async function ProviderPage({
                             <p className="font-medium text-gray-900">{contactPhone}</p>
                             <p className="text-xs text-gray-500">Call now</p>
                           </div>
-                        </a>
+                        </TrackableLink>
                       )}
 
                       {provider.website && (
-                        <a
+                        <TrackableLink
                           href={provider.website}
+                          providerId={provider.id}
+                          eventType="click_website"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
@@ -384,7 +391,7 @@ export default async function ProviderPage({
                             <p className="font-medium text-gray-900">Visit Website</p>
                             <p className="text-xs text-gray-500 truncate max-w-[200px]">{provider.website.replace(/^https?:\/\//, '')}</p>
                           </div>
-                        </a>
+                        </TrackableLink>
                       )}
 
                       {provider.address && (

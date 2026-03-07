@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { trackEvent } from '@/lib/track'
 
 interface CallbackFormProps {
   providerId: string
@@ -63,6 +64,7 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
       }
 
       setStatus('success')
+      trackEvent(providerId, 'click_callback')
     } catch (err) {
       console.error('Error submitting callback request:', err)
       setErrorMessage('Something went wrong. Please try calling directly.')
