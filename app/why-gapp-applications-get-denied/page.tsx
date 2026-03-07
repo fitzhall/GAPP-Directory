@@ -352,6 +352,20 @@ export default function WhyGAPPApplicationsGetDeniedPage() {
               <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">Medicaid Requirements</h3>
               <p className="text-sm text-gray-600">Ensure your Medicaid is properly set up.</p>
             </Link>
+            <Link
+              href="/how-to-apply-for-gapp"
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">How to apply for GAPP</h3>
+              <p className="text-sm text-gray-600">Full document checklist and step-by-step process.</p>
+            </Link>
+            <Link
+              href="/gapp-services-explained"
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">GAPP services explained</h3>
+              <p className="text-sm text-gray-600">What RN, LPN, and PCS actually cover.</p>
+            </Link>
           </div>
         </div>
       </section>

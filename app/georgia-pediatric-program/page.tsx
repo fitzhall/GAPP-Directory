@@ -453,7 +453,7 @@ export default async function GeorgiaPediatricProgramPage() {
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Related Resources</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             <Link href="/gapp-providers-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">Find GAPP Providers</h3>
               <p className="text-sm text-gray-600">Search all providers by county</p>
@@ -465,6 +465,26 @@ export default async function GeorgiaPediatricProgramPage() {
             <Link href="/katie-beckett-waiver-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">Katie Beckett Waiver</h3>
               <p className="text-sm text-gray-600">Alternative Medicaid eligibility</p>
+            </Link>
+            <Link href="/gapp-services-explained" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP services explained</h3>
+              <p className="text-sm text-gray-600">What RN, LPN, and PCS nurses do day-to-day</p>
+            </Link>
+            <Link href="/how-to-apply-for-gapp" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">How to apply for GAPP</h3>
+              <p className="text-sm text-gray-600">Documents, steps, and timeline</p>
+            </Link>
+            <Link href="/gapp-vs-ccsp" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP vs CCSP</h3>
+              <p className="text-sm text-gray-600">Which waiver program fits your child</p>
+            </Link>
+            <Link href="/how-to-become-a-gapp-provider" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Become a GAPP provider</h3>
+              <p className="text-sm text-gray-600">Enrollment steps for agencies</p>
+            </Link>
+            <Link href="/gapp-paid-caregiver" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Get paid as a caregiver</h3>
+              <p className="text-sm text-gray-600">How family members get paid through GAPP</p>
             </Link>
           </div>
         </div>

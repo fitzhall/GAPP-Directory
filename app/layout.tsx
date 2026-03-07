@@ -178,6 +178,10 @@ export default function RootLayout({
                   <li><Link href="/gapp-home-care" className="hover:text-warm transition-colors">GAPP Home Care</Link></li>
                   <li><Link href="/medically-fragile-children-care" className="hover:text-warm transition-colors">Medically Fragile Care</Link></li>
                   <li><Link href="/gapp-approval-guide" className="hover:text-warm transition-colors">GAPP Approval Guide</Link></li>
+                  <li><Link href="/how-to-apply-for-gapp" className="hover:text-warm transition-colors">How to Apply</Link></li>
+                  <li><Link href="/gapp-services-explained" className="hover:text-warm transition-colors">Services Explained</Link></li>
+                  <li><Link href="/gapp-vs-ccsp" className="hover:text-warm transition-colors">GAPP vs CCSP</Link></li>
+                  <li><Link href="/gapp-respite-care" className="hover:text-warm transition-colors">Respite Care</Link></li>
                   <li><Link href="/waivers" className="hover:text-warm transition-colors">Medicaid Waivers</Link></li>
                 </ul>
               </div>
@@ -191,7 +195,8 @@ export default function RootLayout({
                   className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
                 >
                   Provider Login
-                </Link>                  <li><Link href="/case-managers" className="hover:text-warm transition-colors">Case Managers</Link></li>
+                </Link>                  <li><Link href="/how-to-become-a-gapp-provider" className="hover:text-warm transition-colors">Become a Provider</Link></li>
+                  <li><Link href="/case-managers" className="hover:text-warm transition-colors">Case Managers</Link></li>
                 </ul>
               </div>
               {/* Contact */}

@@ -662,7 +662,7 @@ export default async function CountyPage({
                 Getting Approved for GAPP in {countyName} County?
               </h3>
               <p className="text-gray-600 text-sm mb-4">
-                Learn the step-by-step approval process, avoid common delays, and find out what documentation you need before contacting providers.
+                Learn the step-by-step approval process and find out what documentation you need before contacting providers.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -679,6 +679,12 @@ export default async function CountyPage({
                   className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Check Eligibility
+                </Link>
+                <Link
+                  href="/how-to-apply-for-gapp"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Application Checklist
                 </Link>
               </div>
             </div>

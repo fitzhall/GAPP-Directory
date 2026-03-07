@@ -334,6 +334,20 @@ export default function GAPPServicesExplainedPage() {
               <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">Provider directory</h3>
               <p className="text-sm text-gray-600">Search by county and service type.</p>
             </Link>
+            <Link
+              href="/gapp-paid-caregiver"
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">Get paid as a family caregiver</h3>
+              <p className="text-sm text-gray-600">How family members can be hired through GAPP.</p>
+            </Link>
+            <Link
+              href="/gapp-respite-care"
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">GAPP respite care</h3>
+              <p className="text-sm text-gray-600">How to get backup nursing hours when you need a break.</p>
+            </Link>
           </div>
         </div>
       </section>

@@ -440,7 +440,7 @@ export default async function GAPPHomeCareGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Related Resources</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             <Link href="/gapp-providers-georgia" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">GAPP Providers Georgia</h3>
               <p className="text-sm text-gray-600">Complete provider directory</p>
@@ -452,6 +452,18 @@ export default async function GAPPHomeCareGeorgiaPage() {
             <Link href="/medically-fragile-children-care" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">Medically Fragile Care</h3>
               <p className="text-sm text-gray-600">Care options overview</p>
+            </Link>
+            <Link href="/gapp-services-explained" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP services explained</h3>
+              <p className="text-sm text-gray-600">What RN, LPN, and PCS cover in your home</p>
+            </Link>
+            <Link href="/gapp-respite-care" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP respite care</h3>
+              <p className="text-sm text-gray-600">How to get backup nursing hours</p>
+            </Link>
+            <Link href="/how-to-switch-gapp-providers" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Switch GAPP providers</h3>
+              <p className="text-sm text-gray-600">How to change agencies without losing services</p>
             </Link>
           </div>
         </div>
