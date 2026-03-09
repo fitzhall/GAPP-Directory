@@ -28,12 +28,20 @@ const FAQS = [
     question: 'Do all GAPP providers serve all of Georgia?',
     answer: 'No. Most providers serve specific regions or counties. Metro Atlanta has the most options, while rural counties may have fewer choices. Our directory shows exactly which counties each provider serves.',
   },
+  {
+    question: 'How long does it take to get a nurse once I pick a provider?',
+    answer: 'After the provider submits a prior authorization to Medicaid, approval takes 2-6 weeks. Once approved, most agencies can place a nurse within a few days to two weeks depending on their staffing. If you need care fast, ask the agency about their current wait time before committing.',
+  },
+  {
+    question: 'Are GAPP providers free?',
+    answer: 'Yes. GAPP services are paid by Medicaid. You should never pay out of pocket for GAPP nursing or personal care. If a provider asks you to pay, that is not normal. All costs are billed directly to Medicaid through your child\'s prior authorization.',
+  },
 ]
 
 export const metadata: Metadata = {
   title: 'GAPP Providers in Georgia – Find Verified Home Care for Your Child',
   description: 'Search all GAPP providers in Georgia. Find verified home health agencies offering RN nursing, LPN services, and personal care for medically fragile children. Updated weekly.',
-  keywords: 'GAPP providers Georgia, Georgia Pediatric Program providers, GAPP agencies Georgia, pediatric home care Georgia, find GAPP provider, GAPP directory Georgia',
+  keywords: 'GAPP providers Georgia, GAPP providers in Georgia, Georgia Pediatric Program providers, find GAPP provider near me, GAPP agencies Georgia, pediatric home care providers Georgia, GAPP home health agencies',
   openGraph: {
     title: 'GAPP Providers in Georgia – Complete Provider Directory',
     description: 'Find and compare all GAPP providers in Georgia. Verified home health agencies offering pediatric nursing and personal care services.',
@@ -153,7 +161,7 @@ export default async function GAPPProvidersGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            What is a GAPP Provider?
+            What is a GAPP provider?
           </h2>
           <div className="prose prose-lg max-w-none text-gray-600">
             <p>
@@ -177,7 +185,7 @@ export default async function GAPPProvidersGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            Services Offered by GAPP Providers
+            Services offered by GAPP providers
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             <Link href="/services/rn-nursing" className="bg-white rounded-xl p-6 border border-gray-200 hover:border-primary hover:shadow-lg transition-all">
@@ -223,7 +231,7 @@ export default async function GAPPProvidersGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 text-center">
-            Find GAPP Providers by County
+            Find GAPP providers by county
           </h2>
           <p className="text-gray-600 text-center mb-8">
             GAPP providers serve specific counties. Select your county to see which agencies have availability in your area.
@@ -253,11 +261,75 @@ export default async function GAPPProvidersGeorgiaPage() {
         </div>
       </section>
 
-      {/* How to Choose */}
+      {/* What to ask when you call */}
+      <section className="py-12 sm:py-16 px-4 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Questions to ask when you call a GAPP provider
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Don&apos;t just ask &quot;are you accepting patients?&quot; and hang up. Get the details that matter before you commit. Here&apos;s what to ask:
+          </p>
+          <div className="space-y-4">
+            <div className="bg-gray-50 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">&quot;Do you have nurses available for the shifts I need?&quot;</p>
+              <p className="text-gray-700 text-sm">An agency can accept patients but still not have a nurse for your specific schedule. Ask about daytime, nighttime, and weekend availability.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">&quot;What happens when my regular nurse calls out?&quot;</p>
+              <p className="text-gray-700 text-sm">Some agencies have backup nurses on call. Others leave you without coverage. This matters more than almost anything else.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">&quot;Do your nurses have experience with my child&apos;s condition?&quot;</p>
+              <p className="text-gray-700 text-sm">A nurse who&apos;s worked with trachs before is different from one learning on the job. Ask specifically about your child&apos;s equipment and care needs.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">&quot;How quickly can you start services after the prior auth is approved?&quot;</p>
+              <p className="text-gray-700 text-sm">Some agencies can place a nurse within days. Others take weeks to staff your case. If you need care soon, this question saves you time.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">&quot;Will you handle the prior authorization paperwork?&quot;</p>
+              <p className="text-gray-700 text-sm">Most agencies do this for you. If one says you have to handle it yourself, that&apos;s a red flag. A good agency manages the Medicaid paperwork.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Warning signs */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Red flags when choosing a GAPP provider
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Not all agencies are equal. Watch out for these warning signs:
+          </p>
+          <ul className="space-y-3 mb-6">
+            {[
+              'They won\'t give you a straight answer about nurse availability for your schedule',
+              'No backup plan when your regular nurse is out sick',
+              'They pressure you to sign before answering your questions',
+              'They can\'t tell you how many pediatric cases they currently serve',
+              'Multiple Google reviews mention missed shifts or poor communication',
+              'They ask you to pay anything out of pocket (GAPP is fully covered by Medicaid)',
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-gray-700">
+                <span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="text-gray-700">
+            If you&apos;re already with an agency that&apos;s not working out, you can switch. Read our guide on <Link href="/how-to-switch-gapp-providers" className="text-primary hover:underline">how to switch GAPP providers</Link>.
+          </p>
+        </div>
+      </section>
+
+      {/* How to Choose */}
+      <section className="py-12 sm:py-16 px-4 bg-white">
+        <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
-            How to Choose a GAPP Provider
+            How to choose a GAPP provider
           </h2>
           <div className="space-y-6">
             <div className="flex gap-4">
@@ -296,7 +368,7 @@ export default async function GAPPProvidersGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-            Frequently Asked Questions
+            Frequently asked questions
           </h2>
           <div className="space-y-4">
             {FAQS.map((faq, index) => (
@@ -340,23 +412,39 @@ export default async function GAPPProvidersGeorgiaPage() {
       {/* Related Pages */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Related Resources</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Related resources</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             <Link href="/georgia-pediatric-program" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">What is GAPP?</h3>
               <p className="text-sm text-gray-600">Learn about the program</p>
             </Link>
             <Link href="/gapp-approval-guide" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
-              <h3 className="font-semibold text-gray-900 mb-1">GAPP Approval Guide</h3>
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP approval guide</h3>
               <p className="text-sm text-gray-600">Step-by-step approval process</p>
             </Link>
             <Link href="/gapp-home-care" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
-              <h3 className="font-semibold text-gray-900 mb-1">GAPP Home Care</h3>
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP home care</h3>
               <p className="text-sm text-gray-600">Understanding home care services</p>
             </Link>
             <Link href="/screener" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
-              <h3 className="font-semibold text-gray-900 mb-1">Eligibility Screener</h3>
+              <h3 className="font-semibold text-gray-900 mb-1">Eligibility screener</h3>
               <p className="text-sm text-gray-600">Check if your child qualifies</p>
+            </Link>
+            <Link href="/how-to-switch-gapp-providers" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Switch GAPP providers</h3>
+              <p className="text-sm text-gray-600">How to change agencies</p>
+            </Link>
+            <Link href="/sick-child-care-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Sick child care options</h3>
+              <p className="text-sm text-gray-600">When daycare isn&apos;t enough</p>
+            </Link>
+            <Link href="/gapp-services-explained" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP services explained</h3>
+              <p className="text-sm text-gray-600">RN, LPN, and PCS details</p>
+            </Link>
+            <Link href="/long-term-care-children-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Long-term care for children</h3>
+              <p className="text-sm text-gray-600">Ongoing care options</p>
             </Link>
           </div>
         </div>

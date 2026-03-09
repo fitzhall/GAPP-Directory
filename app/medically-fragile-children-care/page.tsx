@@ -518,6 +518,10 @@ export default async function MedicallyFragileChildrenCarePage() {
               <h3 className="font-semibold text-gray-900 mb-1">Childcare options</h3>
               <p className="text-sm text-gray-600">Daycare and childcare for medically fragile kids</p>
             </Link>
+            <Link href="/sick-child-care-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Sick child care in Georgia</h3>
+              <p className="text-sm text-gray-600">When daycare can&apos;t handle your child&apos;s medical needs</p>
+            </Link>
           </div>
         </div>
       </section>

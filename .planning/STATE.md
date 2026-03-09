@@ -2,38 +2,84 @@
 
 ## Current Position
 
-Phase: 8 (complete)
-Plan: .planning/phases/8/PLAN.md
-Status: All v1.2 phases complete — county enrichment + blog infrastructure + first blog posts
-Last activity: 2026-03-09 — 3 blog posts published, bidirectional linking wired
+Phase: SEO gap sprint (complete)
+Status: All 8 GSC gaps addressed
+Last activity: 2026-03-09 — created sick-child-care page, enriched GAPP providers page
+
+## What shipped this session (continued)
+
+### Move 4: "sick child care" — New dedicated page
+- Created `/sick-child-care-georgia` targeting "sick child care" (27 imp, pos 50)
+- Content: why daycare doesn't work for medically complex kids, GAPP as alternative, eligibility, 4-step getting started, other options, 6 FAQs
+- Added to sitemap (priority 0.8)
+- Internal links: from /medically-fragile-children-care, from /gapp-providers-georgia
+- Links out to: /directory, /screener, /gapp-services-explained, /katie-beckett-waiver-georgia, /gapp-approval-timeline, /medically-fragile-children-care, /gapp-paid-caregiver, /gapp-respite-care, /long-term-care-children-georgia
+
+### Move 5: "gapp providers in georgia" — Content enrichment (pos 14 → page 1 target)
+- Added "questions to ask when you call" section (5 practical questions)
+- Added "red flags when choosing a provider" section (6 warning signs)
+- Added 2 new FAQs (timeline + cost)
+- Expanded Related Resources from 4 to 8 links
+- Updated keywords to include exact match "GAPP providers in Georgia" and "near me" variant
+- Fixed heading case to sentence case per style guide
+
+## Previous session work (Moves 1-3)
+
+### Move 1: Fix underperforming pages
+- Enriched `/georgia-pediatric-program` — conditions section, post-approval guide, new FAQ
+- Enriched `/katie-beckett-waiver-georgia` — "what it covers" section, 2026 date, 9 related resources
+- Fixed `/pediatric-home-nursing-georgia` orphan (0→5 inbound links)
+- Added katie-beckett + pediatric-nursing to footer
+- Fixed malformed Provider Login HTML in footer
+
+### Move 2: Near-miss queries at position 10
+- Added Medicaid approval timeline section to `/gapp-approval-timeline`
+- Updated metadata to capture "how long does it take to get approved for medicaid in ga"
+- Added "near me" keywords to childcare blog post metadata
+
+### Move 3: New content page
+- Created `/long-term-care-children-georgia` targeting "long term care for children"
+- Added to sitemap, wired internal links from georgia-pediatric-program
+
+## GSC gaps — all addressed
+- ✅ "georgia pediatric program" — enriched page
+- ✅ "katie beckett program georgia" — enriched page
+- ✅ "what does katie beckett cover in georgia" — new section + FAQ
+- ✅ "how long does it take to get approved for medicaid in ga" — new Medicaid section
+- ✅ "medically fragile daycare near me" — keyword optimization
+- ✅ "long term care for children" — new page
+- ✅ "sick child care" — new dedicated page
+- ✅ "gapp providers in georgia" — enriched page, new sections, better keywords
+
+## What's next
+- Commit and push Moves 4-5
+- Pull fresh GSC data in 1-2 weeks to find new opportunities
+- Run `/gapp-seo-auditor` to verify all fixes landed correctly
+- Consider provider reviews system
+- Spanish language pages
+- Multi-admin auth (docs exist in docs/plans/)
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-09)
+See: .planning/PROJECT.md
 
 **Core value:** Help families quickly find verified GAPP providers by county
-**Current focus:** v1.2 complete — planning next milestone
+**Current focus:** SEO gap sprint complete — monitor GSC for impact
 
-## Milestone v1.1 Summary (Complete)
+## Milestone History
 
-- Phase 1: provider enrollment + paid caregiver pages
-- Phase 2: waiver comparison + application + services pages
-- Phase 3: switch providers + respite care pages
-- Phase 4: internal linking retrofit
-- Total: 7 new content pages + internal link graph strengthened
+### v1.1 (Complete)
+- 7 SEO content pages + internal link graph
 
-## Milestone v1.2 Summary (Complete)
+### v1.2 (Complete)
+- 159 county enrichments + blog system + 3 blog posts
 
-- Phase 5+6: All 159 county pages enriched with unique COUNTY_CONTEXT and COUNTY_REGIONS
-- Phase 7: Blog infrastructure — /blog index, /blog/[slug] template, ArticleSchema, sitemap, footer link
-- Phase 8: 3 blog posts from GSC SERP gaps + bidirectional internal linking
-- Total: 159 county enrichments + blog system + 3 blog posts
-
-## Blog Posts Published
-
-1. /blog/childcare-medically-fragile-children-georgia — targets daycare/sick child care queries (53 impressions)
-2. /blog/what-does-gapp-stand-for — targets GAPP definition queries (30 impressions)
-3. /blog/home-health-aides-vs-gapp-nursing — targets home health aide queries (18 impressions)
+### SEO Gap Sprint (Complete)
+- 8 of 8 GSC gaps addressed
+- 2 new content pages created (long-term-care, sick-child-care)
+- 2 existing pages enriched (georgia-pediatric-program, katie-beckett-waiver, gapp-providers-georgia)
+- Footer and orphan issues fixed
+- 229 total pages in build
 
 ## Accumulated Context
 

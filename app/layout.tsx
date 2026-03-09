@@ -186,6 +186,8 @@ export default function RootLayout({
                   <li><Link href="/gapp-services-explained" className="hover:text-warm transition-colors">Services Explained</Link></li>
                   <li><Link href="/gapp-vs-ccsp" className="hover:text-warm transition-colors">GAPP vs CCSP</Link></li>
                   <li><Link href="/gapp-respite-care" className="hover:text-warm transition-colors">Respite Care</Link></li>
+                  <li><Link href="/sick-child-care-georgia" className="hover:text-warm transition-colors">Sick Child Care</Link></li>
+                  <li><Link href="/long-term-care-children-georgia" className="hover:text-warm transition-colors">Long-Term Care for Children</Link></li>
                   <li><Link href="/waivers" className="hover:text-warm transition-colors">Medicaid Waivers</Link></li>
                 </ul>
               </div>
