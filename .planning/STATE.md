@@ -2,17 +2,17 @@
 
 ## Current Position
 
-Phase: 6 (complete — merged with Phase 5)
-Plan: .planning/phases/5/PLAN.md
-Status: Phases 5+6 executed — all 159 counties enriched with unique content, DFCS offices, and neighbor links
-Last activity: 2026-03-09 — All county enrichment complete
+Phase: 8 (complete)
+Plan: .planning/phases/8/PLAN.md
+Status: All v1.2 phases complete — county enrichment + blog infrastructure + first blog posts
+Last activity: 2026-03-09 — 3 blog posts published, bidirectional linking wired
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Help families quickly find verified GAPP providers by county
-**Current focus:** v1.2 County Enrichment & Blog System
+**Current focus:** v1.2 complete — planning next milestone
 
 ## Milestone v1.1 Summary (Complete)
 
@@ -22,19 +22,24 @@ See: .planning/PROJECT.md (updated 2026-03-09)
 - Phase 4: internal linking retrofit
 - Total: 7 new content pages + internal link graph strengthened
 
-## Milestone v1.2 Phases
+## Milestone v1.2 Summary (Complete)
 
-- Phase 5: County Enrichment — Metro Atlanta & Regional Centers (complete)
-- Phase 6: County Enrichment — Remaining Counties (complete, merged with Phase 5)
-- Phase 7: Blog Infrastructure (not started)
-- Phase 8: First Blog Posts & Internal Linking (not started)
+- Phase 5+6: All 159 county pages enriched with unique COUNTY_CONTEXT and COUNTY_REGIONS
+- Phase 7: Blog infrastructure — /blog index, /blog/[slug] template, ArticleSchema, sitemap, footer link
+- Phase 8: 3 blog posts from GSC SERP gaps + bidirectional internal linking
+- Total: 159 county enrichments + blog system + 3 blog posts
+
+## Blog Posts Published
+
+1. /blog/childcare-medically-fragile-children-georgia — targets daycare/sick child care queries (53 impressions)
+2. /blog/what-does-gapp-stand-for — targets GAPP definition queries (30 impressions)
+3. /blog/home-health-aides-vs-gapp-nursing — targets home health aide queries (18 impressions)
 
 ## Accumulated Context
 
-- Site ranks #1 for "GAPP providers Georgia"
-- 159 county pages exist; ~30 have COUNTY_CONTEXT entries, rest use generic fallback
-- `/gapp-county-enricher` skill ready to execute county enrichment
-- No /blog infrastructure exists yet
+- Site ranks #1 for "GAPP providers"
+- 159 county pages with unique content + accurate neighbor links
+- Blog system live with 3 data-backed posts
+- Custom skills: gapp-content-writer, gapp-seo-auditor, gapp-county-enricher
 - ANTI-AI-STYLE-GUIDE.md is the content quality gate
-- Admin auth already complete (not in v1.2 scope)
-- Custom skills built: gapp-content-writer, gapp-seo-auditor, gapp-county-enricher
+- Admin auth already complete
