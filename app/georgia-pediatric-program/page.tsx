@@ -486,6 +486,10 @@ export default async function GeorgiaPediatricProgramPage() {
               <h3 className="font-semibold text-gray-900 mb-1">Get paid as a caregiver</h3>
               <p className="text-sm text-gray-600">How family members get paid through GAPP</p>
             </Link>
+            <Link href="/blog/what-does-gapp-stand-for" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">What does GAPP stand for?</h3>
+              <p className="text-sm text-gray-600">Plain-English guide to the program</p>
+            </Link>
           </div>
         </div>
       </section>

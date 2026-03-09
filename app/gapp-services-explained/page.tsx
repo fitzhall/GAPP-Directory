@@ -342,6 +342,13 @@ export default function GAPPServicesExplainedPage() {
               <p className="text-sm text-gray-600">How family members can be hired through GAPP.</p>
             </Link>
             <Link
+              href="/blog/home-health-aides-vs-gapp-nursing"
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">Home health aides vs. GAPP nursing</h3>
+              <p className="text-sm text-gray-600">The difference between aides and nurses, and how to know which your child needs.</p>
+            </Link>
+            <Link
               href="/gapp-respite-care"
               className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
             >

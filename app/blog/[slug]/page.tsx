@@ -3,6 +3,15 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { getBlogPost, getAllBlogPosts } from '@/lib/blog-data'
 import { ArticleSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import ChildcareMedicallyFragileContent from '@/lib/blog-posts/childcare-medically-fragile-children-georgia'
+import WhatDoesGappStandForContent from '@/lib/blog-posts/what-does-gapp-stand-for'
+import HomeHealthAidesVsGappContent from '@/lib/blog-posts/home-health-aides-vs-gapp-nursing'
+
+const POST_CONTENT: Record<string, React.ComponentType> = {
+  'childcare-medically-fragile-children-georgia': ChildcareMedicallyFragileContent,
+  'what-does-gapp-stand-for': WhatDoesGappStandForContent,
+  'home-health-aides-vs-gapp-nursing': HomeHealthAidesVsGappContent,
+}
 
 interface BlogPostPageProps {
   params: { slug: string }
@@ -38,6 +47,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getBlogPost(params.slug)
   if (!post) notFound()
+
+  const ContentComponent = POST_CONTENT[params.slug]
 
   return (
     <div className="min-h-screen bg-white">
@@ -92,11 +103,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </p>
           </header>
 
-          {/* Post body — Phase 8 will add content components per post */}
-          <div className="prose prose-gray max-w-none">
-            <p className="text-gray-500 italic">
-              Full article content coming soon.
-            </p>
+          {/* Post body */}
+          <div className="max-w-none">
+            {ContentComponent ? <ContentComponent /> : (
+              <p className="text-gray-500 italic">Full article content coming soon.</p>
+            )}
           </div>
 
           {/* Bottom CTA */}

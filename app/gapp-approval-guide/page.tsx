@@ -513,6 +513,13 @@ export default async function GAPPApprovalGuidePage() {
               <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">GAPP services explained</h3>
               <p className="text-sm text-gray-600">What RN, LPN, and PCS nurses actually do in your home.</p>
             </Link>
+            <Link
+              href="/blog/childcare-medically-fragile-children-georgia"
+              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">Childcare options for medically fragile kids</h3>
+              <p className="text-sm text-gray-600">GAPP nursing, medical daycares, and other options in Georgia.</p>
+            </Link>
           </div>
         </div>
       </section>
