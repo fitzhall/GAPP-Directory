@@ -583,6 +583,10 @@ export default async function GeorgiaPediatricProgramPage() {
               <h3 className="font-semibold text-gray-900 mb-1">GAPP approval timeline</h3>
               <p className="text-sm text-gray-600">How long approval takes</p>
             </Link>
+            <Link href="/long-term-care-children-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Long term care for children</h3>
+              <p className="text-sm text-gray-600">All your long-term care options in Georgia</p>
+            </Link>
             <Link href="/blog/home-health-aides-vs-gapp-nursing" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">Home health aides vs GAPP nursing</h3>
               <p className="text-sm text-gray-600">Which type of care your child needs</p>
