@@ -177,6 +177,8 @@ export default function RootLayout({
                   <li><Link href="/blog" className="hover:text-warm transition-colors">Blog</Link></li>
                   <li><Link href="/georgia-pediatric-program" className="hover:text-warm transition-colors">What is GAPP?</Link></li>
                   <li><Link href="/gapp-providers-georgia" className="hover:text-warm transition-colors">GAPP Providers Georgia</Link></li>
+                  <li><Link href="/pediatric-home-nursing-georgia" className="hover:text-warm transition-colors">Pediatric Home Nursing</Link></li>
+                  <li><Link href="/katie-beckett-waiver-georgia" className="hover:text-warm transition-colors">Katie Beckett Waiver</Link></li>
                   <li><Link href="/gapp-home-care" className="hover:text-warm transition-colors">GAPP Home Care</Link></li>
                   <li><Link href="/medically-fragile-children-care" className="hover:text-warm transition-colors">Medically Fragile Care</Link></li>
                   <li><Link href="/gapp-approval-guide" className="hover:text-warm transition-colors">GAPP Approval Guide</Link></li>
@@ -192,12 +194,8 @@ export default function RootLayout({
                 <h4 className="text-white font-semibold mb-3 text-sm">For Professionals</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/providers" className="hover:text-warm transition-colors">For Providers</Link></li>
-                <Link
-                  href="/dashboard/login"
-                  className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
-                >
-                  Provider Login
-                </Link>                  <li><Link href="/how-to-become-a-gapp-provider" className="hover:text-warm transition-colors">Become a Provider</Link></li>
+                  <li><Link href="/dashboard/login" className="hover:text-warm transition-colors">Provider Login</Link></li>
+                  <li><Link href="/how-to-become-a-gapp-provider" className="hover:text-warm transition-colors">Become a Provider</Link></li>
                   <li><Link href="/case-managers" className="hover:text-warm transition-colors">Case Managers</Link></li>
                 </ul>
               </div>

@@ -43,6 +43,10 @@ const KATIE_BECKETT_FAQS = [
     question: 'What services does my child get with Katie Beckett Medicaid?',
     answer: 'Once approved for Medicaid through Katie Beckett, your child has access to all Medicaid services including doctor visits, hospital care, medications, therapy services, medical equipment, and specialized programs like GAPP for in-home nursing.',
   },
+  {
+    question: 'What does Katie Beckett Medicaid cover that regular insurance might not?',
+    answer: 'Katie Beckett Medicaid covers the full range of Medicaid services: doctor visits, hospital stays, prescriptions, durable medical equipment like wheelchairs and feeding pumps, therapy services (PT, OT, speech), home nursing through programs like GAPP, mental health services, dental care, and medical transportation. For many families, the biggest benefit is access to GAPP in-home nursing — something private insurance rarely covers at the hours medically fragile children need.',
+  },
 ]
 
 const QUALIFYING_CONDITIONS = [
@@ -64,8 +68,8 @@ const QUALIFYING_CONDITIONS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Katie Beckett Waiver Georgia: Eligibility, Application & Requirements (2025)',
-  description: 'Complete guide to the Katie Beckett waiver in Georgia. Learn eligibility requirements, how to apply, qualifying conditions, and how Katie Beckett connects to GAPP nursing services. Updated 2025.',
+  title: 'Katie Beckett waiver Georgia: eligibility, application & what it covers (2026)',
+  description: 'Complete guide to the Katie Beckett waiver in Georgia. Learn eligibility requirements, what Katie Beckett covers, how to apply, and how it connects to GAPP nursing services. Updated 2026.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {
     title: 'Katie Beckett Waiver Georgia: Complete Eligibility & Application Guide',
@@ -124,6 +128,9 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             </a>
             <a href="#how-to-apply" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
               How to Apply
+            </a>
+            <a href="#what-it-covers" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              What It Covers
             </a>
             <a href="#vs-gapp" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
               Katie Beckett vs GAPP
@@ -352,6 +359,54 @@ export default function KatieBeckettWaiverGeorgiaPage() {
         </div>
       </section>
 
+      {/* What Katie Beckett Covers */}
+      <section id="what-it-covers" className="py-12 sm:py-16 px-4 scroll-mt-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            What does Katie Beckett cover in Georgia?
+          </h2>
+          <div className="prose prose-lg max-w-none text-gray-600">
+            <p>
+              Once your child is approved for Medicaid through Katie Beckett, they get the full range of Georgia Medicaid benefits. For families with medically fragile kids, this changes everything.
+            </p>
+            <p>
+              Here&apos;s what Katie Beckett Medicaid covers:
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 mt-6 mb-8">
+            {[
+              { title: 'Doctor visits and specialists', desc: 'Pediatricians, neurologists, pulmonologists, and any specialist your child needs. No referral hoops for Medicaid-enrolled providers.' },
+              { title: 'Hospital stays', desc: 'Inpatient and outpatient hospital care, emergency room visits, and surgeries.' },
+              { title: 'Prescription medications', desc: 'Covered prescriptions including specialty medications that private insurance often limits or denies.' },
+              { title: 'Durable medical equipment', desc: 'Wheelchairs, feeding pumps, oxygen equipment, suction machines, hospital beds, and other equipment your child uses daily.' },
+              { title: 'Therapy services', desc: 'Physical therapy, occupational therapy, and speech therapy. These are often capped by private insurance but covered more fully through Medicaid.' },
+              { title: 'Home nursing through GAPP', desc: 'RN, LPN, and personal care services in your home. This is the big one for most families — private insurance rarely covers the hours medically fragile children actually need.' },
+              { title: 'Mental health services', desc: 'Behavioral health support, counseling, and psychiatric care for children who need it.' },
+              { title: 'Dental care', desc: 'Pediatric dental services including sedation dentistry when needed for children who can\'t tolerate regular dental visits.' },
+              { title: 'Medical transportation', desc: 'Non-emergency medical transportation to and from appointments. One less thing to figure out on appointment days.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                <p className="font-semibold text-gray-900 mb-1">{item.title}</p>
+                <p className="text-gray-600 text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-green-900">Katie Beckett + private insurance</p>
+                <p className="text-green-800 text-sm">Your child can have both Katie Beckett Medicaid and private insurance at the same time. Medicaid acts as secondary coverage and picks up what your private plan doesn&apos;t cover. Start by <Link href="/gapp-providers-georgia" className="text-green-900 underline hover:no-underline">finding a GAPP provider</Link> to get in-home nursing set up.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Katie Beckett vs GAPP */}
       <section id="vs-gapp" className="py-12 sm:py-16 px-4 scroll-mt-24">
         <div className="max-w-3xl mx-auto">
@@ -486,7 +541,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Related Resources</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             <Link href="/gapp-providers-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
               <h3 className="font-semibold text-gray-900 mb-1">GAPP Providers</h3>
               <p className="text-sm text-gray-600">Find verified providers in Georgia</p>
@@ -498,6 +553,30 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <Link href="/waivers" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
               <h3 className="font-semibold text-gray-900 mb-1">All Georgia Waivers</h3>
               <p className="text-sm text-gray-600">Compare GAPP, Katie Beckett & more</p>
+            </Link>
+            <Link href="/gapp-services-explained" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP services explained</h3>
+              <p className="text-sm text-gray-600">What RN, LPN, and PCS nurses do</p>
+            </Link>
+            <Link href="/how-to-apply-for-gapp" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 mb-1">How to apply for GAPP</h3>
+              <p className="text-sm text-gray-600">Steps after Katie Beckett approval</p>
+            </Link>
+            <Link href="/blog/what-does-gapp-stand-for" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 mb-1">What does GAPP stand for?</h3>
+              <p className="text-sm text-gray-600">Plain-English program guide</p>
+            </Link>
+            <Link href="/medically-fragile-children-care" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 mb-1">Medically fragile children care</h3>
+              <p className="text-sm text-gray-600">Care options for your child</p>
+            </Link>
+            <Link href="/pediatric-home-nursing-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 mb-1">Pediatric home nursing</h3>
+              <p className="text-sm text-gray-600">In-home nursing in Georgia</p>
+            </Link>
+            <Link href="/gapp-paid-caregiver" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-md transition-all">
+              <h3 className="font-semibold text-gray-900 mb-1">Get paid as a caregiver</h3>
+              <p className="text-sm text-gray-600">Family members as paid caregivers</p>
             </Link>
           </div>
         </div>

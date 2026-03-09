@@ -28,6 +28,10 @@ const FAQS = [
     question: 'How long does GAPP approval take?',
     answer: 'The GAPP approval process typically takes 30-90 days from initial application. This includes physician documentation, Medicaid enrollment (if not already enrolled), medical necessity determination, and prior authorization. Having complete documentation speeds up approval.',
   },
+  {
+    question: 'Is the Georgia Pediatric Program the same as GAPP?',
+    answer: 'Yes. GAPP stands for Georgia Pediatric Program. You may also hear it called "the pediatric waiver" or "GAPP waiver." They all refer to the same Medicaid program that provides in-home skilled nursing and personal care services for children under 21 with complex medical needs.',
+  },
 ]
 
 export const metadata: Metadata = {
@@ -256,6 +260,45 @@ export default async function GeorgiaPediatricProgramPage() {
         </div>
       </section>
 
+      {/* Common Qualifying Conditions */}
+      <section className="py-12 sm:py-16 px-4 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Common conditions that qualify for GAPP
+          </h2>
+          <p className="text-gray-600 mb-8">
+            GAPP eligibility depends on medical necessity, not diagnosis. That said, these conditions commonly qualify because they require skilled nursing care at home.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              'Tracheostomy dependence',
+              'Ventilator dependence',
+              'G-tube / feeding tube',
+              'Seizure disorders requiring monitoring',
+              'Cerebral palsy with nursing needs',
+              'Spinal muscular atrophy',
+              'Congenital heart defects',
+              'Chronic respiratory conditions (BPD)',
+              'TBI requiring skilled nursing',
+              'Sickle cell disease with complications',
+            ].map((condition) => (
+              <div key={condition} className="flex items-center gap-3 bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <svg className="w-5 h-5 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-gray-700 text-sm font-medium">{condition}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-gray-600 mt-6">
+            Not sure if your child qualifies?{' '}
+            <Link href="/screener" className="text-primary hover:text-primary-dark font-medium">
+              Use our free screener
+            </Link>.
+          </p>
+        </div>
+      </section>
+
       {/* Services Covered */}
       <section className="py-12 sm:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
@@ -373,8 +416,46 @@ export default async function GeorgiaPediatricProgramPage() {
         </div>
       </section>
 
-      {/* FAQs */}
+      {/* What to Expect After Approval */}
       <section className="py-12 sm:py-16 px-4 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            What to expect after approval
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Once your child is approved for GAPP, here is what day-to-day life looks like:
+          </p>
+          <ul className="space-y-4">
+            <li className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-gray-600"><strong className="text-gray-900">Your provider sends nurses on a schedule you agree on.</strong> You and the agency work out what hours and days fit your family.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-gray-600"><strong className="text-gray-900">You can change the schedule if it&apos;s not working.</strong> Talk to your provider about adjusting shifts, adding weekend hours, or changing nurses.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-gray-600"><strong className="text-gray-900">Hours get reviewed every 6-12 months.</strong> Medicaid reauthorizes your child&apos;s hours based on updated medical records. Your provider handles most of the paperwork.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-gray-600"><strong className="text-gray-900">You can switch providers any time.</strong> If you&apos;re not happy with your agency, you have every right to move to a different one. Learn how in our <Link href="/how-to-switch-gapp-providers" className="text-primary hover:text-primary-dark">guide to switching GAPP providers</Link>.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* FAQs */}
+      <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
             Frequently Asked Questions
@@ -489,6 +570,22 @@ export default async function GeorgiaPediatricProgramPage() {
             <Link href="/blog/what-does-gapp-stand-for" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
               <h3 className="font-semibold text-gray-900 mb-1">What does GAPP stand for?</h3>
               <p className="text-sm text-gray-600">Plain-English guide to the program</p>
+            </Link>
+            <Link href="/pediatric-home-nursing-georgia" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Pediatric home nursing in Georgia</h3>
+              <p className="text-sm text-gray-600">RN and LPN nursing at home</p>
+            </Link>
+            <Link href="/gapp-medicaid-requirements" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP Medicaid requirements</h3>
+              <p className="text-sm text-gray-600">What Medicaid coverage you need</p>
+            </Link>
+            <Link href="/gapp-approval-timeline" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">GAPP approval timeline</h3>
+              <p className="text-sm text-gray-600">How long approval takes</p>
+            </Link>
+            <Link href="/blog/home-health-aides-vs-gapp-nursing" className="p-4 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Home health aides vs GAPP nursing</h3>
+              <p className="text-sm text-gray-600">Which type of care your child needs</p>
             </Link>
           </div>
         </div>

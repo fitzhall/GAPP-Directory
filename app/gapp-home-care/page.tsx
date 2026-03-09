@@ -465,6 +465,14 @@ export default async function GAPPHomeCareGeorgiaPage() {
               <h3 className="font-semibold text-gray-900 mb-1">Switch GAPP providers</h3>
               <p className="text-sm text-gray-600">How to change agencies without losing services</p>
             </Link>
+            <Link href="/pediatric-home-nursing-georgia" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Pediatric home nursing in Georgia</h3>
+              <p className="text-sm text-gray-600">How in-home RN and LPN nursing works</p>
+            </Link>
+            <Link href="/katie-beckett-waiver-georgia" className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary transition-colors">
+              <h3 className="font-semibold text-gray-900 mb-1">Katie Beckett waiver</h3>
+              <p className="text-sm text-gray-600">Get Medicaid regardless of family income</p>
+            </Link>
           </div>
         </div>
       </section>
