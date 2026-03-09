@@ -239,6 +239,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Blog / Resources CTA */}
+      <section className="py-12 sm:py-16 bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+            Tips and guides for GAPP families
+          </h2>
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            Practical advice on navigating the program, choosing providers, and getting your kid the care they need.
+          </p>
+          <Link
+            href="/blog"
+            className="inline-flex items-center text-primary hover:text-primary-dark font-medium"
+          >
+            Visit the blog
+            <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
       {/* Trust/Disclaimer footer */}
       <section className="py-8 bg-gray-50 border-t border-gray-200">
         <div className="max-w-3xl mx-auto px-4 text-center">
