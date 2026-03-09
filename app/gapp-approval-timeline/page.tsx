@@ -20,12 +20,20 @@ const TIMELINE_FAQS = [
     question: 'Does the timeline differ for RN vs LPN vs PCS?',
     answer: 'The approval timeline is similar for all service types. However, finding available nurses may take longer for RN services or in rural areas due to staffing shortages.',
   },
+  {
+    question: 'How long does it take to get approved for Medicaid in Georgia?',
+    answer: 'Georgia Medicaid applications are processed within 30-45 days for most families. If you apply through Georgia Gateway online, you can check your status there. For children applying through Katie Beckett (based on disability, not income), expect 45-90 days. Once Medicaid is active, GAPP approval takes an additional 2-6 weeks.',
+  },
+  {
+    question: 'Can I start the GAPP process while waiting for Medicaid?',
+    answer: 'You can research GAPP providers and gather physician documentation while waiting for Medicaid approval. But the actual prior authorization cannot be submitted until your child has an active Medicaid ID number. Use the waiting time to find an agency and get your doctor\'s orders ready.',
+  },
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP Approval Timeline: How Long Does It Take? | Georgia Pediatric Program',
-  description: 'Learn how long GAPP approval takes in Georgia. Step-by-step timeline from Medicaid confirmation to care starting. Typical process is 2-6 weeks.',
-  keywords: 'GAPP approval time, how long GAPP takes, Georgia Pediatric Program timeline, GAPP prior authorization time, GAPP waiting period',
+  title: 'GAPP approval timeline: how long does it take to get approved in Georgia?',
+  description: 'How long does it take to get approved for Medicaid and GAPP in Georgia? Medicaid takes 30-45 days. GAPP prior authorization takes 2-6 weeks after that. Full timeline here.',
+  keywords: 'GAPP approval time, how long does it take to get approved for medicaid in ga, Georgia Medicaid approval timeline, how long GAPP takes, GAPP prior authorization time, Medicaid application Georgia timeline',
   openGraph: {
     title: 'GAPP Approval Timeline: How Long Does It Take?',
     description: 'Complete breakdown of the GAPP approval timeline in Georgia. Know what to expect at each step.',
@@ -91,10 +99,52 @@ export default function GAPPApprovalTimelinePage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Medicaid Approval Timeline */}
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Step-by-Step Timeline</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">How long does Medicaid approval take in Georgia?</h2>
+          <p className="text-gray-600 mb-6">
+            Before you can use GAPP, your child needs active Georgia Medicaid. How long that takes depends on which pathway you use:
+          </p>
+
+          <div className="space-y-4 mb-8">
+            <div className="bg-white rounded-xl border border-gray-200 p-5">
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-semibold text-gray-900">Regular Georgia Medicaid</h3>
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">30-45 days</span>
+              </div>
+              <p className="text-gray-600 text-sm">
+                Apply through <strong>Georgia Gateway</strong> (gateway.ga.gov) or your local DFCS office. Most applications are processed within 30-45 days. You can check your status online. Once approved, you get a Medicaid ID number.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl border border-gray-200 p-5">
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-semibold text-gray-900">Katie Beckett / TEFRA pathway</h3>
+                <span className="px-2 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded">45-90 days</span>
+              </div>
+              <p className="text-gray-600 text-sm">
+                If your family income is too high for regular Medicaid, <Link href="/katie-beckett-waiver-georgia" className="text-primary hover:underline">Katie Beckett</Link> qualifies your child based on their medical needs alone. Takes longer because of the medical evaluation. Call the Katie Beckett team at 678-248-7449.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl border border-gray-200 p-5">
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-semibold text-gray-900">Already on Medicaid</h3>
+                <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">Skip ahead</span>
+              </div>
+              <p className="text-gray-600 text-sm">
+                If your child already has an active Medicaid ID, you can go straight to the GAPP process below. Verify your Medicaid is active by calling 1-866-211-0950 or checking Georgia Gateway.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GAPP Timeline */}
+      <section className="py-12 px-4 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">GAPP approval: step-by-step timeline</h2>
 
           <div className="relative">
             {/* Timeline line */}
@@ -206,7 +256,7 @@ export default function GAPPApprovalTimelinePage() {
       </section>
 
       {/* What Causes Delays */}
-      <section className="py-12 px-4 bg-gray-50">
+      <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">What Causes Delays?</h2>
 

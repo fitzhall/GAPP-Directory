@@ -26,11 +26,13 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Family Resources',
     keywords: [
       'daycare medically fragile children',
+      'medically fragile daycare near me',
       'sick child care Georgia',
       'childcare medical needs',
       'medically fragile daycare',
       'GAPP childcare alternative',
       'PPEC Georgia',
+      'daycare for special needs children Georgia',
     ],
   },
   {
