@@ -374,6 +374,9 @@ export async function generateMetadata({
     title: `GAPP Providers in ${countyName} County, Georgia | Pediatric Home Care`,
     description,
     keywords: `${baseKeywords}${regionKeywords}${cityKeywords}`,
+    alternates: {
+      canonical: `https://www.georgiagapp.com/${countySlug}`,
+    },
     openGraph: {
       title: `GAPP Providers in ${countyName} County, Georgia`,
       description: context

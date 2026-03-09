@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   title: 'Personal Care Services (PCS) for Children in Georgia | GAPP',
   description: 'Find Personal Care Services (PCS) for children with disabilities through Georgia\'s GAPP program. Help with bathing, dressing, feeding, and daily activities. Compare providers.',
   keywords: 'personal care services Georgia, PCS GAPP, pediatric personal care, daily living assistance children, home care aide Georgia, PCS providers Atlanta',
+  alternates: {
+    canonical: 'https://www.georgiagapp.com/services/personal-care',
+  },
   openGraph: {
     title: 'Personal Care Services (PCS) for Children in Georgia | GAPP',
     description: 'Find PCS providers to help your child with daily activities through Georgia\'s GAPP program. Bathing, dressing, feeding assistance and more.',

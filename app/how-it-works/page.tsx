@@ -39,6 +39,9 @@ export const metadata: Metadata = {
   title: 'How GAPP Works | Georgia Pediatric Program Guide for Families',
   description: 'Learn how the Georgia Pediatric Program (GAPP) works. Find out who qualifies, what services are covered, and how to get started with home care for your child.',
   keywords: 'GAPP eligibility, Georgia Pediatric Program, GAPP services, pediatric home care eligibility, GAPP Medicaid waiver',
+  alternates: {
+    canonical: 'https://www.georgiagapp.com/how-it-works',
+  },
   openGraph: {
     title: 'How GAPP Works | Georgia Pediatric Program Guide',
     description: 'A simple guide for families new to the Georgia Pediatric Program. Learn about eligibility, services, and how to find providers.',

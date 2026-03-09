@@ -43,6 +43,9 @@ export const metadata: Metadata = {
   title: 'Georgia Medicaid Waivers for Children | Katie Beckett, TEFRA & GAPP',
   description: 'Compare Georgia Medicaid waivers for children with special needs. Learn about Katie Beckett (TEFRA), GAPP, and other programs. Find out which waiver is right for your child.',
   keywords: 'Katie Beckett Waiver Georgia, TEFRA Georgia, GAPP vs Katie Beckett, Georgia Medicaid waivers children, medically fragile child Georgia, pediatric Medicaid waiver',
+  alternates: {
+    canonical: 'https://www.georgiagapp.com/waivers',
+  },
   openGraph: {
     title: 'Georgia Medicaid Waivers for Children | Katie Beckett & GAPP Guide',
     description: 'Complete guide to Georgia Medicaid waivers for children with disabilities. Compare Katie Beckett, TEFRA, and GAPP programs.',

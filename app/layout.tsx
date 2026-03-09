@@ -19,6 +19,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.georgiagapp.com'),
   title: {
     default: 'Find GAPP Providers in Georgia | Verified Home Care for Medically Fragile Children',
     template: '%s | GeorgiaGAPP.com'

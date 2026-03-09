@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   title: 'Pediatric RN Nursing Services in Georgia | GAPP Home Care',
   description: 'Find skilled pediatric RN nursing services through Georgia\'s GAPP program. In-home registered nurse care for children with complex medical needs. Compare providers by county.',
   keywords: 'pediatric RN nursing Georgia, GAPP RN services, skilled nursing children Georgia, home nursing medically fragile child, registered nurse pediatric care Atlanta',
+  alternates: {
+    canonical: 'https://www.georgiagapp.com/services/rn-nursing',
+  },
   openGraph: {
     title: 'Pediatric RN Nursing Services in Georgia | GAPP',
     description: 'Find skilled pediatric registered nurse care for your child through Georgia\'s GAPP program. In-home nursing for complex medical needs.',

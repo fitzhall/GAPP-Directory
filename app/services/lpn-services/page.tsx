@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   title: 'LPN Home Nursing Services in Georgia | GAPP Pediatric Care',
   description: 'Find LPN nursing services for children through Georgia\'s GAPP program. Licensed Practical Nurse care for pediatric patients with stable medical needs. Compare providers.',
   keywords: 'LPN nursing Georgia, GAPP LPN services, pediatric LPN care, licensed practical nurse children, home nursing Georgia, LPN home health',
+  alternates: {
+    canonical: 'https://www.georgiagapp.com/services/lpn-services',
+  },
   openGraph: {
     title: 'LPN Home Nursing Services in Georgia | GAPP',
     description: 'Find licensed practical nurse care for your child through Georgia\'s GAPP program. In-home LPN nursing for stable medical needs.',
