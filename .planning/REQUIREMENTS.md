@@ -1,90 +1,84 @@
-# Requirements: GeorgiaGAPP.com SEO Expansion
+# Requirements: GeorgiaGAPP.com v1.2 — County Enrichment & Blog System
 
-**Defined:** 2026-03-07
+**Defined:** 2026-03-09
 **Core Value:** Help families quickly find verified GAPP providers by county
 
-## v1.1 Requirements
+## v1.2 Requirements
 
-### Content Pages (CONT)
+### County Enrichment (CNTY)
 
-- [ ] **CONT-01**: Visitor can read "How to become a GAPP provider" page with enrollment steps, requirements, and CTA to /providers
-- [ ] **CONT-02**: Visitor can read "GAPP paid caregiver" page explaining how family members get paid through GAPP
-- [ ] **CONT-03**: Visitor can read "GAPP vs CCSP" comparison page distinguishing the two waiver programs
-- [ ] **CONT-04**: Visitor can read "How to apply for GAPP" page with step-by-step application process
-- [ ] **CONT-05**: Visitor can read "GAPP services explained" page detailing what RN/LPN/PCS actually cover
-- [ ] **CONT-06**: Visitor can read "How to switch GAPP providers" page with process and considerations
-- [ ] **CONT-07**: Visitor can read "GAPP respite care" page explaining respite services available
+- [ ] **CNTY-01**: Each of the 159 county pages has a unique `COUNTY_CONTEXT` entry (not generic fallback)
+- [ ] **CNTY-02**: Each county description contains at least one locally-specific fact (DFCS office location, provider count, neighboring county reference, or population context)
+- [ ] **CNTY-03**: County descriptions pass ANTI-AI-STYLE-GUIDE.md checklist (max 1 AI vocab word, no three-adjective clusters, no promotional language)
+- [ ] **CNTY-04**: Metro counties (top 30 by population) have DFCS office city and phone number where verifiable
+- [ ] **CNTY-05**: Rural counties with low provider coverage honestly state the gap and suggest neighboring counties to search
 
-### SEO Infrastructure (SEO)
+### Blog Infrastructure (BLOG)
 
-- [ ] **SEO-01**: Each new page has generateMetadata with unique title (55-60 chars), description (150-160 chars), and keywords
-- [ ] **SEO-02**: Each new page has FAQPage schema (JSON-LD) with 5-7 relevant questions
-- [ ] **SEO-03**: Each new page has BreadcrumbList schema
-- [ ] **SEO-04**: Each new page appears in sitemap.ts with appropriate priority
-- [ ] **SEO-05**: Each new page has canonical URL set
+- [ ] **BLOG-01**: Blog index page exists at `/blog` with title, description, and list of posts sorted by date
+- [ ] **BLOG-02**: Blog post layout exists with Article schema (JSON-LD), author, publish date, and reading time
+- [ ] **BLOG-03**: Blog posts use markdown or MDX content with consistent styling matching site brand
+- [ ] **BLOG-04**: Blog index and posts appear in sitemap.ts with appropriate priority
+- [ ] **BLOG-05**: Blog posts have generateMetadata with unique title, description, canonical URL, and openGraph
+
+### Blog Content (POST)
+
+- [ ] **POST-01**: First blog post published — topic targeting a SERP gap identified from GSC or keyword research
+- [ ] **POST-02**: Each blog post has 5-7 FAQ items with FAQPage schema
+- [ ] **POST-03**: Each blog post links to at least 3 existing content/county pages
+- [ ] **POST-04**: Each blog post passes ANTI-AI-STYLE-GUIDE.md checklist
+- [ ] **POST-05**: Blog posts linked from relevant existing content pages (bidirectional linking)
 
 ### Internal Linking (LINK)
 
-- [ ] **LINK-01**: Each new page links to at least 3 existing pages (directory, county pages, related content)
-- [ ] **LINK-02**: Existing pages (footer, related resources sections) link back to new pages where relevant
-- [ ] **LINK-03**: Navigation or footer updated to include highest-value new pages
+- [ ] **LINK-01**: Footer updated with blog link
+- [ ] **LINK-02**: Homepage references blog section or latest post
 
 ### Content Quality (QUAL)
 
-- [ ] **QUAL-01**: All content passes ANTI-AI-STYLE-GUIDE.md checklist before commit
+- [ ] **QUAL-01**: All new content passes ANTI-AI-STYLE-GUIDE.md checklist before commit
 - [ ] **QUAL-02**: Content uses parent-advocate voice, not healthcare textbook tone
-- [ ] **QUAL-03**: Each page has actionable next steps (phone numbers, links, timelines)
-
-## v1.2 Requirements (Deferred)
-
-### County Enrichment
-
-- **CNTY-01**: Each county page has unique paragraph about local GAPP access
-- **CNTY-02**: County pages link to local Medicaid offices with phone numbers
-
-### Blog
-
-- **BLOG-01**: Blog index page at /blog
-- **BLOG-02**: Blog post template with Article schema
-- **BLOG-03**: First 5 blog posts published
+- [ ] **QUAL-03**: Each page/post has actionable next steps
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| City-level pages | County pages are primary geo unit for GAPP; cities add complexity without clear search volume |
+| City-level pages | County pages are primary geo unit for GAPP |
 | Provider reviews | Requires moderation system; separate milestone |
-| Spanish language pages | Valid need but separate i18n milestone |
-| Paid ad landing pages | Organic-first strategy; ads come after organic baseline |
+| Spanish language pages | Separate i18n milestone |
+| Multi-admin auth | Already complete — not part of v1.2 |
+| Additional content pages | Use /gapp-content-writer skill ad-hoc; v1.2 focuses on county depth + blog foundation |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CONT-01 | Phase 1 | Pending |
-| CONT-02 | Phase 1 | Pending |
-| CONT-03 | Phase 2 | Pending |
-| CONT-04 | Phase 2 | Pending |
-| CONT-05 | Phase 2 | Pending |
-| CONT-06 | Phase 3 | Pending |
-| CONT-07 | Phase 3 | Pending |
-| SEO-01 | Phase 1-3 | Pending |
-| SEO-02 | Phase 1-3 | Pending |
-| SEO-03 | Phase 1-3 | Pending |
-| SEO-04 | Phase 1-3 | Pending |
-| SEO-05 | Phase 1-3 | Pending |
-| LINK-01 | Phase 1-3 | Pending |
-| LINK-02 | Phase 4 | Pending |
-| LINK-03 | Phase 4 | Pending |
-| QUAL-01 | Phase 1-3 | Pending |
-| QUAL-02 | Phase 1-3 | Pending |
-| QUAL-03 | Phase 1-3 | Pending |
+| CNTY-01 | Phase 5 | Pending |
+| CNTY-02 | Phase 5 | Pending |
+| CNTY-03 | Phase 5 | Pending |
+| CNTY-04 | Phase 5 | Pending |
+| CNTY-05 | Phase 5 | Pending |
+| BLOG-01 | Phase 6 | Pending |
+| BLOG-02 | Phase 6 | Pending |
+| BLOG-03 | Phase 6 | Pending |
+| BLOG-04 | Phase 6 | Pending |
+| BLOG-05 | Phase 6 | Pending |
+| POST-01 | Phase 7 | Pending |
+| POST-02 | Phase 7 | Pending |
+| POST-03 | Phase 7 | Pending |
+| POST-04 | Phase 7 | Pending |
+| POST-05 | Phase 7 | Pending |
+| LINK-01 | Phase 7 | Pending |
+| LINK-02 | Phase 7 | Pending |
+| QUAL-01 | Phase 5-7 | Pending |
+| QUAL-02 | Phase 5-7 | Pending |
+| QUAL-03 | Phase 5-7 | Pending |
 
 **Coverage:**
-- v1.1 requirements: 18 total
-- Mapped to phases: 18
+- v1.2 requirements: 20 total
+- Mapped to phases: 20
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-03-07*
-*Last updated: 2026-03-07 after SERP analysis*
+*Requirements defined: 2026-03-09*

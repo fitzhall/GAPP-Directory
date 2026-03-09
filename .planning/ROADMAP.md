@@ -1,57 +1,58 @@
-# Roadmap: GeorgiaGAPP.com SEO Expansion v1.1
+# Roadmap: GeorgiaGAPP.com v1.2 — County Enrichment & Blog System
 
-## Phase 1: Revenue-Driving Content (Provider + Caregiver Pages)
+## Phase 5: County Enrichment — Metro Atlanta & Regional Centers
 
-**Goal:** Create the two highest-impact pages — one targeting provider-side searches (drives $99/mo Featured signups) and one targeting high-intent family searches (paid caregiver).
+**Goal:** Enrich the top 30-40 highest-traffic county pages with unique local content, DFCS office info, and honest provider coverage context. Uses the `/gapp-county-enricher` skill.
 
-**Requirements:** CONT-01, CONT-02, SEO-01-05, LINK-01, QUAL-01-03
-
-**Success Criteria:**
-1. `/how-to-become-a-gapp-provider` page exists with enrollment steps, DBHDD requirements, and CTA to Featured listing
-2. `/gapp-paid-caregiver` page exists explaining family caregiver payment through GAPP/Medicaid
-3. Both pages have generateMetadata, FAQPage schema, BreadcrumbList schema, canonical URLs
-4. Both pages appear in sitemap.ts
-5. Both pages link to at least 3 existing pages each
-6. Content passes ANTI-AI-STYLE-GUIDE.md checklist
-
-## Phase 2: Waiver Comparison + Application Content
-
-**Goal:** Create three pages targeting mid-funnel family searches — program comparisons and application guidance.
-
-**Requirements:** CONT-03, CONT-04, CONT-05, SEO-01-05, LINK-01, QUAL-01-03
+**Requirements:** CNTY-01 through CNTY-05, QUAL-01 through QUAL-03
 
 **Success Criteria:**
-1. `/gapp-vs-ccsp` comparison page exists with clear differentiation table
-2. `/how-to-apply-for-gapp` page exists with step-by-step process, documents needed, timelines
-3. `/gapp-services-explained` page exists detailing what RN/LPN/PCS actually cover day-to-day
-4. All three pages have full SEO infrastructure (metadata, schemas, sitemap, canonicals)
-5. All three pages link to relevant county pages and existing content
-6. Content passes ANTI-AI-STYLE-GUIDE.md checklist
+1. Top 30 metro/regional counties have enhanced `COUNTY_CONTEXT` entries with DFCS office info
+2. Each description contains at least one locally-specific fact
+3. Rural counties with low coverage honestly state the gap
+4. All descriptions pass ANTI-AI-STYLE-GUIDE.md checklist
+5. `npm run build` passes with no TypeScript errors
 
-## Phase 3: Niche Service Pages
+## Phase 6: County Enrichment — Remaining Counties
 
-**Goal:** Create two pages targeting specific service queries no competitor owns.
+**Goal:** Complete enrichment for all remaining ~120 rural and suburban counties. Batch processing via `/gapp-county-enricher all`.
 
-**Requirements:** CONT-06, CONT-07, SEO-01-05, LINK-01, QUAL-01-03
-
-**Success Criteria:**
-1. `/how-to-switch-gapp-providers` page exists with process, what to tell current provider, timeline
-2. `/gapp-respite-care` page exists explaining respite services, eligibility, how to request
-3. Both pages have full SEO infrastructure
-4. Both pages interlink with existing content
-5. Content passes ANTI-AI-STYLE-GUIDE.md checklist
-
-## Phase 4: Internal Linking Retrofit
-
-**Goal:** Update existing pages to link to all new content, strengthening the internal link graph.
-
-**Requirements:** LINK-02, LINK-03
+**Requirements:** CNTY-01 through CNTY-05, QUAL-01 through QUAL-03
 
 **Success Criteria:**
-1. Footer resources section includes links to highest-value new pages
-2. Existing content pages (approval guide, waivers, services) link to relevant new pages in their body text or "Related Resources" sections
-3. County pages' "Getting Approved" sections link to new application/services pages where relevant
-4. No orphan pages — every new page is linked from at least 2 existing pages
+1. All 159 counties have unique `COUNTY_CONTEXT` entries (no generic fallback used)
+2. Every description is distinguishable from every other county
+3. Neighboring county cross-references are accurate
+4. All descriptions pass ANTI-AI-STYLE-GUIDE.md checklist
+5. `npm run build` passes
+
+## Phase 7: Blog Infrastructure
+
+**Goal:** Build the `/blog` system — index page, post layout with Article schema, MDX/markdown support, and sitemap integration.
+
+**Requirements:** BLOG-01 through BLOG-05, LINK-01, LINK-02
+
+**Success Criteria:**
+1. `/blog` index page exists with post listing sorted by date
+2. Blog post template renders with Article schema, author, date, reading time
+3. Posts have generateMetadata, canonical URLs, openGraph
+4. Blog routes appear in sitemap.ts
+5. Footer includes blog link
+6. `npm run build` passes
+
+## Phase 8: First Blog Posts & Internal Linking
+
+**Goal:** Publish 3-5 blog posts targeting SERP gaps, wire bidirectional internal links.
+
+**Requirements:** POST-01 through POST-05, LINK-01, LINK-02, QUAL-01 through QUAL-03
+
+**Success Criteria:**
+1. At least 3 blog posts published with unique, keyword-targeted content
+2. Each post has FAQPage schema (5-7 questions)
+3. Each post links to 3+ existing content/county pages
+4. Each post is linked from 2+ existing pages (bidirectional)
+5. All content passes ANTI-AI-STYLE-GUIDE.md checklist
+6. Homepage references blog or latest post
 
 ---
 
@@ -59,12 +60,13 @@
 
 | # | Phase | Goal | Requirements | Criteria |
 |---|-------|------|--------------|----------|
-| 1 | Revenue-Driving Content | Provider + caregiver pages | CONT-01, CONT-02 + SEO/LINK/QUAL | 6 |
-| 2 | Waiver & Application | Comparison + how-to-apply + services | CONT-03, CONT-04, CONT-05 + SEO/LINK/QUAL | 6 |
-| 3 | Niche Service Pages | Switch providers + respite care | CONT-06, CONT-07 + SEO/LINK/QUAL | 5 |
-| 4 | Internal Linking | Retrofit existing pages | LINK-02, LINK-03 | 4 |
+| 5 | County Enrichment (Metro) | Top 30-40 counties with local content | CNTY-01-05, QUAL-01-03 | 5 |
+| 6 | County Enrichment (Rural) | Remaining ~120 counties | CNTY-01-05, QUAL-01-03 | 5 |
+| 7 | Blog Infrastructure | /blog index + post template + schema | BLOG-01-05, LINK-01-02 | 6 |
+| 8 | First Blog Posts | 3-5 posts + bidirectional linking | POST-01-05, LINK-01-02, QUAL-01-03 | 6 |
 
-**Total:** 4 phases | 18 requirements | All covered
+**Total:** 4 phases | 20 requirements | All covered
 
 ---
-*Roadmap created: 2026-03-07*
+*Roadmap created: 2026-03-09*
+*Continues from v1.1 phase numbering (Phases 1-4 complete)*
