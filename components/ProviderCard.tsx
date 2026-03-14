@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { ProviderCardData, ServiceType } from '@/types/provider'
 import { TrackImpression } from '@/components/TrackImpression'
+import { TrackableLink } from '@/components/TrackableLink'
 
 interface ProviderCardProps {
   provider: ProviderCardData
@@ -33,6 +34,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
   // Unclaimed providers show limited info with link to profile and claim CTA
   if (!isClaimed && !isVerified) {
     return (
+      <TrackImpression providerId={provider.id}>
       <Link
         href={`/provider/${slug}`}
         className="block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
@@ -90,12 +92,14 @@ export function ProviderCard({ provider }: ProviderCardProps) {
           </span>
         </div>
       </Link>
+      </TrackImpression>
     )
   }
 
   // Claimed but not verified - show phone number, no special badge for visitors
   if (isClaimed && !isVerified) {
     return (
+      <TrackImpression providerId={provider.id}>
       <Link
         href={`/provider/${slug}`}
         className="block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
@@ -108,8 +112,10 @@ export function ProviderCard({ provider }: ProviderCardProps) {
 
         {/* Phone - prominent for claimed providers */}
         {phone && (
-          <a
+          <TrackableLink
             href={`tel:${phone.replace(/\D/g, '')}`}
+            providerId={provider.id}
+            eventType="click_phone"
             onClick={(e) => e.stopPropagation()}
             className="flex items-center gap-2 mb-3 text-gray-900 font-medium"
           >
@@ -117,7 +123,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
             {phone}
-          </a>
+          </TrackableLink>
         )}
 
         {/* Services */}
@@ -154,11 +160,13 @@ export function ProviderCard({ provider }: ProviderCardProps) {
           </svg>
         </div>
       </Link>
+      </TrackImpression>
     )
   }
 
   // Verified providers - full card with link to profile
   return (
+    <TrackImpression providerId={provider.id}>
     <Link
       href={`/provider/${slug}`}
       className={`block bg-white rounded-xl border-2 p-5 transition-all hover:shadow-md ${
@@ -258,5 +266,6 @@ export function ProviderCard({ provider }: ProviderCardProps) {
         </svg>
       </div>
     </Link>
+    </TrackImpression>
   )
 }
