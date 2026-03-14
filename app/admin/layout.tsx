@@ -141,6 +141,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { href: '/admin', label: 'Providers' },
     { href: '/admin/leads', label: 'Leads' },
     { href: '/admin/requests', label: 'Requests' },
+    { href: '/admin/analytics', label: 'Analytics' },
     { href: '/admin/guide', label: 'Guide' },
   ]
 
