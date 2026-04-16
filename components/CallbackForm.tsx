@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { trackEvent } from '@/lib/track'
 
 interface CallbackFormProps {
@@ -23,6 +24,7 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
     urgency: '' as Urgency | '',
     preferredCallbackTime: '' as CallbackTime | '',
     specialNeeds: '',
+    smsConsent: false,
   })
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
@@ -36,6 +38,12 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
     // Basic validation
     if (!formState.parentName || !formState.phone || !formState.zipCode || !formState.serviceNeeded || !formState.urgency) {
       setErrorMessage('Please fill in all required fields.')
+      setStatus('error')
+      return
+    }
+
+    if (!formState.smsConsent) {
+      setErrorMessage('Please agree to be contacted so we can share your request with the provider.')
       setStatus('error')
       return
     }
@@ -216,6 +224,31 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
           rows={2}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary resize-none"
         />
+      </div>
+
+      {/* SMS / contact consent (A2P 10DLC required) */}
+      <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={formState.smsConsent}
+            onChange={(e) => setFormState(prev => ({ ...prev, smsConsent: e.target.checked }))}
+            className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary flex-shrink-0"
+            required
+          />
+          <span className="text-xs text-gray-600 leading-relaxed">
+            I agree to receive calls, text messages, and emails from GeorgiaGAPP.com and {providerName} at
+            the phone number and email I provided, regarding my callback request.
+            Message &amp; data rates may apply. Message frequency varies. Reply <strong>STOP</strong> to opt out, or
+            <strong> HELP</strong> for help. See our{' '}
+            <Link href="/privacy" target="_blank" className="text-primary underline">Privacy Policy</Link>{' '}
+            and{' '}
+            <Link href="/terms" target="_blank" className="text-primary underline">Terms</Link>.
+            <span className="block mt-1 text-gray-500">
+              We do not share your phone number or SMS opt-in with third parties for marketing.
+            </span>
+          </span>
+        </label>
       </div>
 
       {/* Error message */}

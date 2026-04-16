@@ -205,14 +205,29 @@ export default function RootLayout({
               <div>
                 <h4 className="text-white font-semibold mb-3 text-sm">Contact</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="mailto:help@georgiaGAPP.com" className="hover:text-warm transition-colors">help@georgiaGAPP.com</a></li>
+                  <li>
+                    <a href={`tel:${config.contact.phoneRaw}`} className="hover:text-warm transition-colors">
+                      {config.contact.phone}
+                    </a>
+                  </li>
+                  <li>
+                    <a href={`mailto:${config.contact.email}`} className="hover:text-warm transition-colors">
+                      {config.contact.email}
+                    </a>
+                  </li>
+                  <li><Link href="/contact" className="hover:text-warm transition-colors">Contact Us</Link></li>
+                  <li><Link href="/privacy" className="hover:text-warm transition-colors">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:text-warm transition-colors">Terms of Service</Link></li>
                 </ul>
               </div>
             </div>
             {/* Bottom bar */}
             <div className="pt-6 border-t border-navy-light flex flex-col sm:flex-row justify-between items-center gap-4">
               <div className="text-sm">
-                © 2025 GeorgiaGAPP.com
+                © 2026 GeorgiaGAPP.com &middot;{' '}
+                <a href={`tel:${config.contact.phoneRaw}`} className="hover:text-warm transition-colors">
+                  {config.contact.phone}
+                </a>
               </div>
               <div className="text-xs text-gray-400 text-center sm:text-right max-w-xl">
                 {config.contact.disclaimer}
