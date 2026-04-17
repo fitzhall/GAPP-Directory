@@ -10,14 +10,14 @@ export const config = {
   memberSingular: 'provider',
   memberPlural: 'providers',
 
-  // Tiers (simple: Verified Free vs Featured Paid)
+  // Tiers (0 = Claimed, 1 = Featured Paid)
   tiers: [
     {
       level: 0,
       name: 'Verified',
       price: 0,
       color: 'green',
-      description: 'Free verified listing',
+      description: 'Basic claimed listing',
       features: [
         'Listed in search results',
         'Counties served displayed',

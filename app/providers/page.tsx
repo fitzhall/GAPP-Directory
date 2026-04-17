@@ -485,7 +485,7 @@ export default function ForProvidersPage() {
             {[
               {
                 q: 'Is claiming my profile really free?',
-                a: 'Yes, 100% free. Claiming makes your contact info visible to families. Verification (also free) gets you into case manager searches.',
+                a: 'Yes, claiming is 100% free. It makes your contact info visible to families. Verification is a separate step — contact us at help@georgiagapp.com for details.',
               },
               {
                 q: 'How did you get my information?',
@@ -493,7 +493,7 @@ export default function ForProvidersPage() {
               },
               {
                 q: 'What\'s the difference between claiming and verifying?',
-                a: 'Claiming (free) = your phone number becomes visible. Verifying (free) = you get the weekly availability check and appear in case manager searches.',
+                a: 'Claiming (free) = your phone number becomes visible. Verification = you get the weekly availability check and appear in case manager searches. Contact us for verification details.',
               },
               {
                 q: 'What if I\'m not accepting patients right now?',

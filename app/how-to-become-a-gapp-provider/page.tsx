@@ -28,7 +28,7 @@ const PROVIDER_FAQS = [
   },
   {
     question: 'How do I get listed in the GAPP provider directory?',
-    answer: 'Go to georgiagapp.com/providers and claim your listing. If your agency is already in our database, you can claim it for free. If not, request a new listing. Featured listings ($99/month) get top placement in search results and callback routing from families.',
+    answer: 'Go to georgiagapp.com/providers and claim your listing. If your agency is already in our database, you can claim it for free. If not, request a new listing. Contact us at help@georgiagapp.com for verification and Featured listing options.',
   },
 ]
 
@@ -285,8 +285,8 @@ export default async function HowToBecomeGAPPProviderPage() {
                     : ' Get your agency in front of families who need your services.'}
                 </p>
                 <p className="text-gray-700 mb-4">
-                  Claiming your listing is free. You get a verified profile with your counties served, services offered, and contact information.
-                  Featured listings ($99/month) show up first in search results and get callback requests routed directly to you.
+                  Claiming your listing is free. You get a profile with your counties served, services offered, and contact information.
+                  Verification and Featured listings unlock more visibility — contact us for details.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <Link

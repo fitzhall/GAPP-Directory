@@ -34,7 +34,7 @@ export interface Provider {
   howToStart?: string;           // Step-by-step in plain English
   yearsInBusiness?: number;
 
-  // Tier System (0 = Verified Free, 1 = Featured $99/mo)
+  // Tier System (0 = Claimed, 1 = Featured $99/mo)
   tierLevel: number;
 
   // Status & Trust Signals

@@ -129,8 +129,8 @@ const sections: GuideSection[] = [
         title: 'Tier System Overview',
         content: [
           'The directory has two tiers for providers:',
-          'Verified (Tier 0, Free): A basic listing visible in the directory. The provider appears in search results sorted alphabetically after any Featured providers. Includes a standard provider card and profile page.',
-          'Featured (Tier 1, $99/mo): A premium listing with priority placement. Featured providers always appear first in search results and directory pages. Their card is visually highlighted to stand out from free listings.',
+          'Claimed (Tier 0): A basic listing visible in the directory. The provider appears in search results sorted alphabetically after any Featured providers. Includes a standard provider card and profile page. Claiming is free.',
+          'Featured (Tier 1, $99/mo): A premium listing with priority placement. Featured providers always appear first in search results and directory pages. Their card is visually highlighted to stand out from Claimed listings.',
         ],
       },
       {
@@ -139,7 +139,7 @@ const sections: GuideSection[] = [
           'Find the verified provider on the Admin > Providers page.',
           'Click the star/feature icon next to the provider\'s name. This sets their tier_level to 1, giving them Featured status and priority placement immediately.',
           'Payment is handled separately from the directory system. Coordinate with the provider to set up recurring billing through Stripe, invoice, or your preferred payment method.',
-          'It is recommended to confirm payment before enabling Featured status. If payment lapses, you can downgrade them back to the free Verified tier.',
+          'It is recommended to confirm payment before enabling Featured status. If payment lapses, you can downgrade them back to the Claimed tier.',
         ],
       },
       {
