@@ -228,6 +228,8 @@ AI uses em dashes (--) where commas, parentheses, or colons work better. One em 
 
 Use sentence case for headings unless it's a proper noun.
 
+**Exception:** `metadata.title` strings (the page's `<title>` tag, rendered as a SERP link label) may use Title Case for click-through-rate. Title Case is industry standard for SERP titles and matches the existing default in `app/layout.tsx`. This exception applies ONLY to `metadata.title` — H1s, body headings, and breadcrumb names still follow sentence case.
+
 ### 3.2 Overuse of Boldface
 
 Don't bold every **key term** in a paragraph. Bold is for headings and occasionally for one critical word. If more than 10% of a paragraph is bold, strip it back.

@@ -20,6 +20,9 @@ const EXCLUDED_DIRS = ['admin', 'dashboard', 'api', 'claim', 'availability']
 
 // Pages required to have FAQPageSchema + BreadcrumbSchema + canonical.
 // Mirrors high-priority entries in app/sitemap.ts (priority >= 0.7).
+// Source of truth: app/sitemap.ts (priority >= 0.7 entries, excluding
+// interactive routes). When adding a new SEO content page to sitemap.ts,
+// also add it here so canonical/schema rules are enforced on it.
 const SEO_CONTENT_PAGES = new Set([
   'app/georgia-pediatric-program/page.tsx',
   'app/gapp-providers-georgia/page.tsx',
@@ -64,14 +67,20 @@ function listPageFiles(dir: string): string[] {
   return out
 }
 
-function extractMetadata(content: string): {
+function extractMetadata(content: string, file: string): {
   title?: string
   description?: string
   canonical?: string
 } {
   // Capture metadata export block. Non-greedy to first balanced-looking close.
   const blockMatch = content.match(/export\s+const\s+metadata[^=]*=\s*\{([\s\S]+?)\n\}\s*\n/)
-  if (!blockMatch) return {}
+  if (!blockMatch) {
+    // Loud-skip: if the file exports `metadata` but we can't parse it, warn.
+    if (/export\s+const\s+metadata/.test(content)) {
+      console.warn(`⚠ ${file}: exports metadata but block could not be parsed (regex limitation)`)
+    }
+    return {}
+  }
   const block = blockMatch[1]
 
   const titleMatch = block.match(/^\s*title:\s*['"]([^'"]+)['"]/m)
@@ -92,7 +101,7 @@ function check(): Violation[] {
   for (const file of pages) {
     const rel = relative(process.cwd(), file).split(sep).join('/')
     const content = readFileSync(file, 'utf-8')
-    const meta = extractMetadata(content)
+    const meta = extractMetadata(content, rel)
 
     if (meta.title !== undefined && meta.title.length > TITLE_MAX) {
       violations.push({
@@ -121,6 +130,32 @@ function check(): Violation[] {
       }
     }
   }
+
+  // Defend against title.template being re-introduced — it adds chars to
+  // every rendered <title> that the per-page length check doesn't see.
+  const layoutPath = join(process.cwd(), 'app', 'layout.tsx')
+  try {
+    const layoutContent = readFileSync(layoutPath, 'utf-8')
+    if (/title\s*:\s*\{[^}]*template\s*:/m.test(layoutContent)) {
+      violations.push({
+        file: 'app/layout.tsx',
+        rule: 'title-template-present',
+        message: 'metadata.title.template adds suffix to every page <title>; either remove or tighten per-page titles to account for it',
+      })
+    }
+    // Also check the layout's default title length if string form is used
+    const defaultMatch = layoutContent.match(/title\s*:\s*['"]([^'"]+)['"]/)
+    if (defaultMatch && defaultMatch[1].length > TITLE_MAX) {
+      violations.push({
+        file: 'app/layout.tsx',
+        rule: 'title-length',
+        message: `default title is ${defaultMatch[1].length} chars (max ${TITLE_MAX}): "${defaultMatch[1].slice(0, 64)}${defaultMatch[1].length > 64 ? '…' : ''}"`,
+      })
+    }
+  } catch {
+    // layout.tsx not found — unusual but not fatal for this check
+  }
+
   return violations
 }
 

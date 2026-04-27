@@ -20,10 +20,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.georgiagapp.com'),
-  title: {
-    default: 'Find GAPP Providers in Georgia | Verified Home Care for Medically Fragile Children',
-    template: '%s | GeorgiaGAPP.com'
-  },
+  title: 'Find GAPP Providers in Georgia: Verified Home Care',
   description: 'Find GAPP providers in Georgia. Search verified home care providers for medically fragile children - RN nursing, LPN, and personal care services. Updated weekly.',
   keywords: 'find GAPP providers, GAPP providers Georgia, GAPP home care Georgia, medically fragile children care Georgia, Georgia Pediatric Program, pediatric home care',
   authors: [{ name: 'GeorgiaGAPP.com' }],
