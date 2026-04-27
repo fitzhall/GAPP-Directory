@@ -436,6 +436,34 @@ export default async function GAPPHomeCareGeorgiaPage() {
         </div>
       </section>
 
+      {/* Official resources — outbound .gov links for authority signal */}
+      <section className="bg-blue-50 border border-blue-100 rounded-lg p-6 my-8 max-w-4xl mx-auto">
+        <h2 className="text-xl font-bold text-navy mb-3">Official home care resources</h2>
+        <p className="text-gray-700 mb-4">
+          State and federal references for GAPP home care benefits and Medicaid home health services:
+        </p>
+        <ul className="space-y-3 text-gray-700">
+          <li>
+            <a href="https://medicaid.georgia.gov/programs/all-programs/georgia-pediatric-program-gapp" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Medicaid: GAPP Program Page →
+            </a>
+            <span className="text-gray-600 text-sm block">Official GAPP eligibility and services</span>
+          </li>
+          <li>
+            <a href="https://dch.georgia.gov/divisions-offices/medical-assistance-plans" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Department of Community Health →
+            </a>
+            <span className="text-gray-600 text-sm block">State agency overseeing Georgia Medicaid</span>
+          </li>
+          <li>
+            <a href="https://www.medicaid.gov/medicaid/benefits/home-health-services/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Medicaid.gov: Home Health Services →
+            </a>
+            <span className="text-gray-600 text-sm block">Federal home health benefit overview</span>
+          </li>
+        </ul>
+      </section>
+
       {/* Related Pages */}
       <section className="py-12 sm:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">

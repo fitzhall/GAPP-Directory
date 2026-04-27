@@ -537,6 +537,44 @@ export default function KatieBeckettWaiverGeorgiaPage() {
         </div>
       </section>
 
+      {/* Official resources — outbound .gov links for authority signal */}
+      <section className="bg-blue-50 border border-blue-100 rounded-lg p-6 my-8 max-w-4xl mx-auto">
+        <h2 className="text-xl font-bold text-navy mb-3">Official Katie Beckett resources</h2>
+        <p className="text-gray-700 mb-4">
+          For the most current eligibility rules and application forms, go directly to the state and federal sources:
+        </p>
+        <ul className="space-y-3 text-gray-700">
+          <li>
+            <a href="https://medicaid.georgia.gov/programs/all-programs/katie-beckett-deeming-waiver" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Medicaid: Katie Beckett Deeming Waiver →
+            </a>
+            <span className="text-gray-600 text-sm block">Official program page from Georgia DCH</span>
+          </li>
+          <li>
+            <a href="https://dch.georgia.gov/divisions-offices/medical-assistance-plans" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Department of Community Health →
+            </a>
+            <span className="text-gray-600 text-sm block">State agency that runs Georgia Medicaid</span>
+          </li>
+          <li>
+            <a href="https://www.medicaid.gov/medicaid/eligibility-policy/medicaid-children/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Medicaid.gov: Eligibility for Children →
+            </a>
+            <span className="text-gray-600 text-sm block">Federal Medicaid policy reference</span>
+          </li>
+          <li>
+            <a href="https://www.cms.gov/about-cms/where-we-are/regional-office-iv-atlanta" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              CMS: Atlanta Regional Office →
+            </a>
+            <span className="text-gray-600 text-sm block">Federal agency overseeing Medicaid in Georgia</span>
+          </li>
+        </ul>
+        <p className="text-sm text-gray-600 mt-4">
+          To start an application, call the Georgia Centralized Katie Beckett Medicaid Team at{' '}
+          <a href="tel:6782487449" className="text-primary hover:underline font-semibold">678-248-7449</a>.
+        </p>
+      </section>
+
       {/* Related Resources */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">

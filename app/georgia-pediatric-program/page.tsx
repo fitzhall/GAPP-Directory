@@ -530,6 +530,34 @@ export default async function GeorgiaPediatricProgramPage() {
         </div>
       </section>
 
+      {/* Official resources — outbound .gov links for authority signal */}
+      <section className="bg-blue-50 border border-blue-100 rounded-lg p-6 my-8 max-w-4xl mx-auto">
+        <h2 className="text-xl font-bold text-navy mb-3">Official GAPP resources</h2>
+        <p className="text-gray-700 mb-4">
+          Verify program rules and forms directly with the state and federal Medicaid agencies:
+        </p>
+        <ul className="space-y-3 text-gray-700">
+          <li>
+            <a href="https://medicaid.georgia.gov/programs/all-programs/georgia-pediatric-program-gapp" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Medicaid: Georgia Pediatric Program (GAPP) →
+            </a>
+            <span className="text-gray-600 text-sm block">Official GAPP program page</span>
+          </li>
+          <li>
+            <a href="https://dch.georgia.gov/divisions-offices/medical-assistance-plans" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Department of Community Health →
+            </a>
+            <span className="text-gray-600 text-sm block">State agency that runs Georgia Medicaid</span>
+          </li>
+          <li>
+            <a href="https://www.medicaid.gov/medicaid/home-community-based-services/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Medicaid.gov: Home &amp; Community-Based Services →
+            </a>
+            <span className="text-gray-600 text-sm block">Federal HCBS policy reference</span>
+          </li>
+        </ul>
+      </section>
+
       {/* Related Resources */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
