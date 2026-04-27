@@ -179,7 +179,12 @@ export default function RootLayout({
                   <li><Link href="/gapp-home-care" className="hover:text-warm transition-colors">GAPP Home Care</Link></li>
                   <li><Link href="/medically-fragile-children-care" className="hover:text-warm transition-colors">Medically Fragile Care</Link></li>
                   <li><Link href="/gapp-approval-guide" className="hover:text-warm transition-colors">GAPP Approval Guide</Link></li>
+                  <li><Link href="/gapp-approval-timeline" className="hover:text-warm transition-colors">GAPP Approval Timeline</Link></li>
+                  <li><Link href="/why-gapp-applications-get-denied" className="hover:text-warm transition-colors">Why Applications Get Denied</Link></li>
+                  <li><Link href="/gapp-medicaid-requirements" className="hover:text-warm transition-colors">Medicaid Requirements</Link></li>
                   <li><Link href="/how-to-apply-for-gapp" className="hover:text-warm transition-colors">How to Apply</Link></li>
+                  <li><Link href="/how-to-switch-gapp-providers" className="hover:text-warm transition-colors">How to Switch Providers</Link></li>
+                  <li><Link href="/gapp-paid-caregiver" className="hover:text-warm transition-colors">Paid Family Caregiver</Link></li>
                   <li><Link href="/gapp-services-explained" className="hover:text-warm transition-colors">Services Explained</Link></li>
                   <li><Link href="/gapp-vs-ccsp" className="hover:text-warm transition-colors">GAPP vs CCSP</Link></li>
                   <li><Link href="/gapp-respite-care" className="hover:text-warm transition-colors">Respite Care</Link></li>
