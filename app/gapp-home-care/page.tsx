@@ -444,22 +444,22 @@ export default async function GAPPHomeCareGeorgiaPage() {
         </p>
         <ul className="space-y-3 text-gray-700">
           <li>
-            <a href="https://medicaid.georgia.gov/programs/all-programs/georgia-pediatric-program-gapp" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
-              Georgia Medicaid: GAPP Program Page →
+            <a href="https://medicaid.georgia.gov/long-term-services-and-supports" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Medicaid: Long Term Services & Supports →
             </a>
-            <span className="text-gray-600 text-sm block">Official GAPP eligibility and services</span>
+            <span className="text-gray-600 text-sm block">In-home care programs including GAPP</span>
           </li>
           <li>
-            <a href="https://dch.georgia.gov/divisions-offices/medical-assistance-plans" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+            <a href="https://dch.georgia.gov/divisionsoffices" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
               Georgia Department of Community Health →
             </a>
-            <span className="text-gray-600 text-sm block">State agency overseeing Georgia Medicaid</span>
+            <span className="text-gray-600 text-sm block">State agency overseeing Georgia Medicaid (DCH divisions)</span>
           </li>
           <li>
-            <a href="https://www.medicaid.gov/medicaid/benefits/home-health-services/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
-              Medicaid.gov: Home Health Services →
+            <a href="https://www.medicaid.gov/medicaid/benefits" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Medicaid.gov: Medicaid Benefits →
             </a>
-            <span className="text-gray-600 text-sm block">Federal home health benefit overview</span>
+            <span className="text-gray-600 text-sm block">Federal Medicaid benefits overview including home health</span>
           </li>
         </ul>
       </section>

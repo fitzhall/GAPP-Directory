@@ -545,26 +545,26 @@ export default function KatieBeckettWaiverGeorgiaPage() {
         </p>
         <ul className="space-y-3 text-gray-700">
           <li>
-            <a href="https://medicaid.georgia.gov/programs/all-programs/katie-beckett-deeming-waiver" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
-              Georgia Medicaid: Katie Beckett Deeming Waiver →
+            <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Medicaid: TEFRA / Katie Beckett →
             </a>
-            <span className="text-gray-600 text-sm block">Official program page from Georgia DCH</span>
+            <span className="text-gray-600 text-sm block">Official program page from Georgia Medicaid</span>
           </li>
           <li>
-            <a href="https://dch.georgia.gov/divisions-offices/medical-assistance-plans" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+            <a href="https://dch.georgia.gov/divisionsoffices" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
               Georgia Department of Community Health →
             </a>
-            <span className="text-gray-600 text-sm block">State agency that runs Georgia Medicaid</span>
+            <span className="text-gray-600 text-sm block">State agency that runs Georgia Medicaid (DCH divisions)</span>
           </li>
           <li>
-            <a href="https://www.medicaid.gov/medicaid/eligibility-policy/medicaid-children/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
-              Medicaid.gov: Eligibility for Children →
+            <a href="https://www.medicaid.gov/medicaid/eligibility-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Medicaid.gov: Eligibility Policy →
             </a>
             <span className="text-gray-600 text-sm block">Federal Medicaid policy reference</span>
           </li>
           <li>
-            <a href="https://www.cms.gov/about-cms/where-we-are/regional-office-iv-atlanta" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
-              CMS: Atlanta Regional Office →
+            <a href="https://www.cms.gov/contacts/cms-atlanta-regional-office/general-professional-contact/1551781" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              CMS: Atlanta Regional Office (Region IV) →
             </a>
             <span className="text-gray-600 text-sm block">Federal agency overseeing Medicaid in Georgia</span>
           </li>

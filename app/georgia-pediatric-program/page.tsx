@@ -538,19 +538,19 @@ export default async function GeorgiaPediatricProgramPage() {
         </p>
         <ul className="space-y-3 text-gray-700">
           <li>
-            <a href="https://medicaid.georgia.gov/programs/all-programs/georgia-pediatric-program-gapp" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
-              Georgia Medicaid: Georgia Pediatric Program (GAPP) →
+            <a href="https://medicaid.georgia.gov/programs/all-programs/waiver-programs" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              Georgia Medicaid: Waiver Programs →
             </a>
-            <span className="text-gray-600 text-sm block">Official GAPP program page</span>
+            <span className="text-gray-600 text-sm block">Waiver programs including GAPP for medically fragile children</span>
           </li>
           <li>
-            <a href="https://dch.georgia.gov/divisions-offices/medical-assistance-plans" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+            <a href="https://dch.georgia.gov/divisionsoffices" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
               Georgia Department of Community Health →
             </a>
-            <span className="text-gray-600 text-sm block">State agency that runs Georgia Medicaid</span>
+            <span className="text-gray-600 text-sm block">State agency that runs Georgia Medicaid (DCH divisions)</span>
           </li>
           <li>
-            <a href="https://www.medicaid.gov/medicaid/home-community-based-services/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+            <a href="https://www.medicaid.gov/medicaid/home-community-based-services" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
               Medicaid.gov: Home &amp; Community-Based Services →
             </a>
             <span className="text-gray-600 text-sm block">Federal HCBS policy reference</span>
