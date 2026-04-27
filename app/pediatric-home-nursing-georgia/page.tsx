@@ -65,7 +65,7 @@ const CONDITIONS_THAT_NEED_HOME_NURSING = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Pediatric Home Nursing in Georgia: Find In-Home Nurses for Your Child (2025)',
+  title: 'Pediatric Home Nursing in Georgia: Find In-Home Nurses',
   description: 'Find pediatric home nursing services in Georgia. Learn how GAPP provides in-home RN and LPN care for medically fragile children. Search verified nursing agencies by county.',
   keywords: 'pediatric home nursing Georgia, pediatric home care Georgia, in-home nursing for children Georgia, GAPP Georgia, pediatric private duty nursing Georgia, medically fragile child care Georgia, home health nursing children Georgia',
   openGraph: {

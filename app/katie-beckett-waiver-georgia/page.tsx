@@ -68,7 +68,7 @@ const QUALIFYING_CONDITIONS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Katie Beckett waiver Georgia: eligibility, application & what it covers (2026)',
+  title: 'Katie Beckett Waiver Georgia: Eligibility & Application',
   description: 'Complete guide to the Katie Beckett waiver in Georgia. Learn eligibility requirements, what Katie Beckett covers, how to apply, and how it connects to GAPP nursing services. Updated 2026.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {

@@ -31,7 +31,7 @@ const SERVICE_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP Services Explained: What RN, LPN, and PCS Actually Cover',
+  title: 'GAPP Services Explained: RN, LPN & PCS Care in Georgia',
   description: 'What does a GAPP nurse actually do in your home? Real examples of RN, LPN, and personal care services for medically fragile children in Georgia.',
   keywords: 'GAPP services, RN home nursing Georgia, LPN services GAPP, personal care services PCS, GAPP home care, what does GAPP cover',
   openGraph: {

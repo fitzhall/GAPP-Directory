@@ -40,7 +40,7 @@ const WAIVER_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Georgia Medicaid Waivers for Children | Katie Beckett, TEFRA & GAPP',
+  title: 'Georgia Medicaid Waivers: Katie Beckett, TEFRA & GAPP',
   description: 'Compare Georgia Medicaid waivers for children with special needs. Learn about Katie Beckett (TEFRA), GAPP, and other programs. Find out which waiver is right for your child.',
   keywords: 'Katie Beckett Waiver Georgia, TEFRA Georgia, GAPP vs Katie Beckett, Georgia Medicaid waivers children, medically fragile child Georgia, pediatric Medicaid waiver',
   alternates: {

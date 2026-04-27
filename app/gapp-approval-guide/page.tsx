@@ -37,7 +37,7 @@ const APPROVAL_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'How to Get Approved for the Georgia Pediatric Program (GAPP) – Step-by-Step Guide',
+  title: 'How to Get Approved for GAPP in Georgia: Step-by-Step',
   description: 'Step-by-step guide to getting approved for GAPP in Georgia. Learn the exact approval process, avoid common delays, and find providers accepting new patients in your county.',
   keywords: 'GAPP approval Georgia, how to get GAPP, Georgia Pediatric Program application, GAPP eligibility, GAPP prior authorization, pediatric home nursing Georgia',
   openGraph: {

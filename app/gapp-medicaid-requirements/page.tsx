@@ -31,7 +31,7 @@ const MEDICAID_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP Medicaid Requirements | Georgia Pediatric Program Eligibility',
+  title: 'GAPP Medicaid Requirements: Georgia Eligibility Guide',
   description: 'Understand Medicaid requirements for GAPP in Georgia. Learn what "active Medicaid" means, how to check your status, and pathways like Katie Beckett for families with higher incomes.',
   keywords: 'GAPP Medicaid requirements, Georgia Medicaid GAPP, Katie Beckett Georgia, TEFRA Georgia, GAPP eligibility Medicaid, PeachCare vs Medicaid GAPP',
   openGraph: {

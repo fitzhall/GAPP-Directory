@@ -35,7 +35,7 @@ const FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Medically Fragile Children Care in Georgia – Home Care & Support Options',
+  title: 'Care for Medically Fragile Children in Georgia',
   description: 'Find care options for medically fragile children in Georgia. Learn about GAPP home nursing, Medicaid coverage, and how to find skilled nursing providers for your child.',
   keywords: 'medically fragile children care Georgia, pediatric home care Georgia, special needs children care, GAPP Georgia, medically complex children, skilled nursing for children Georgia',
   openGraph: {

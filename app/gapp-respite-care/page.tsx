@@ -32,7 +32,7 @@ const RESPITE_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP Respite Care in Georgia: How to Get Backup Nursing Hours',
+  title: 'GAPP Respite Care in Georgia: Backup Nursing Hours',
   description: 'GAPP respite care gives you a break while a trained nurse watches your child. How it works, who qualifies, how many hours you get, and how to request it.',
   keywords: 'GAPP respite care Georgia, respite nursing Georgia, caregiver respite GAPP, backup nursing hours, GAPP respite eligibility, respite care medically fragile child',
   openGraph: {

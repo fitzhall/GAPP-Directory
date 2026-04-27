@@ -32,7 +32,7 @@ const APPLICATION_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'How to Apply for GAPP in Georgia: Documents, Steps, and Timeline',
+  title: 'How to Apply for GAPP in Georgia: Steps & Documents',
   description: 'Apply for the Georgia Pediatric Program step by step. Required documents, where to submit, expected timeline, and what to do if denied. Updated 2026.',
   keywords: 'apply for GAPP Georgia, GAPP application, Georgia Pediatric Program application, GAPP documents needed, GAPP timeline, how to get GAPP',
   openGraph: {

@@ -36,7 +36,7 @@ const FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'How GAPP Works | Georgia Pediatric Program Guide for Families',
+  title: 'How the Georgia Pediatric Program (GAPP) Works',
   description: 'Learn how the Georgia Pediatric Program (GAPP) works. Find out who qualifies, what services are covered, and how to get started with home care for your child.',
   keywords: 'GAPP eligibility, Georgia Pediatric Program, GAPP services, pediatric home care eligibility, GAPP Medicaid waiver',
   alternates: {

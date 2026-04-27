@@ -31,7 +31,7 @@ const TIMELINE_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP approval timeline: how long does it take to get approved in Georgia?',
+  title: 'GAPP Approval Timeline: How Long Does It Take in Georgia?',
   description: 'How long does it take to get approved for Medicaid and GAPP in Georgia? Medicaid takes 30-45 days. GAPP prior authorization takes 2-6 weeks after that. Full timeline here.',
   keywords: 'GAPP approval time, how long does it take to get approved for medicaid in ga, Georgia Medicaid approval timeline, how long GAPP takes, GAPP prior authorization time, Medicaid application Georgia timeline',
   openGraph: {
