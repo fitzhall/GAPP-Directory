@@ -97,10 +97,10 @@ export default function RootLayout({
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
                   <img
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="GeorgiaGAPP.com"
-                    width={384}
-                    height={214}
+                    width={302}
+                    height={168}
                     fetchPriority="high"
                     className="h-12 sm:h-16 w-auto"
                   />
