@@ -36,7 +36,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   title: 'GAPP Home Care in Georgia: In-Home Pediatric Nursing',
-  description: 'Learn about GAPP home care services in Georgia. Find providers offering in-home skilled nursing, LPN care, and personal care for medically fragile children. Covered by Medicaid.',
+  description: 'GAPP home care in Georgia: in-home skilled nursing, LPN, and personal care for medically fragile children. 100% Medicaid covered. Find providers.',
   keywords: 'GAPP home care Georgia, pediatric home care Georgia, in-home nursing Georgia, medically fragile children home care, GAPP nursing services, pediatric home health Georgia',
   openGraph: {
     title: 'GAPP Home Care in Georgia – In-Home Nursing for Children',

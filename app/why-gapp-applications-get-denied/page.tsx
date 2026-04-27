@@ -28,7 +28,7 @@ const DENIAL_FAQS = [
 
 export const metadata: Metadata = {
   title: 'Why GAPP Applications Get Denied in Georgia',
-  description: 'Common reasons GAPP applications get denied in Georgia and how to avoid them. Learn about documentation requirements, Medicaid issues, and how to appeal a denial.',
+  description: 'Common reasons GAPP applications get denied in Georgia, and how to avoid them. Documentation, Medicaid issues, and how to appeal a denial.',
   keywords: 'GAPP denial reasons, GAPP application denied, Georgia Pediatric Program denied, GAPP appeal, GAPP rejection reasons, why GAPP denied',
   openGraph: {
     title: 'Why GAPP Applications Get Denied (And How to Avoid It)',

@@ -32,7 +32,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   title: 'Long Term Care for Children in Georgia: Your Options',
-  description: 'Long term care options for children in Georgia include GAPP home nursing, Katie Beckett Medicaid, therapy services, and medical equipment. Here is how each one works.',
+  description: 'Long term care for children in Georgia: GAPP home nursing, Katie Beckett Medicaid, therapy services, and medical equipment. How each works.',
   keywords: 'long term care for children, long term care children Georgia, pediatric long term care, GAPP long term nursing, medically fragile child long term care, chronic care children Georgia',
   openGraph: {
     title: 'Long term care for children in Georgia: your options explained',

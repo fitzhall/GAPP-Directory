@@ -33,7 +33,7 @@ const CAREGIVER_FAQS = [
 
 export const metadata: Metadata = {
   title: 'Can You Get Paid as a GAPP Caregiver? Georgia Guide',
-  description: 'Find out if family members can get paid as GAPP caregivers in Georgia. How PCS works, pay ranges, and steps to become a paid family caregiver through a GAPP agency.',
+  description: 'Can family members get paid as GAPP caregivers in Georgia? How PCS works, pay ranges, and how to become a paid family caregiver through an agency.',
   keywords: 'GAPP paid caregiver Georgia, get paid caring for child GAPP, family caregiver Medicaid Georgia, PCS caregiver pay, GAPP personal care services',
   openGraph: {
     title: 'Can You Get Paid as a GAPP Caregiver in Georgia?',

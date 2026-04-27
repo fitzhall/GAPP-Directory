@@ -40,7 +40,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   title: 'GAPP Providers in Georgia: Find Verified Home Care',
-  description: 'Search all GAPP providers in Georgia. Find verified home health agencies offering RN nursing, LPN services, and personal care for medically fragile children. Updated weekly.',
+  description: 'Search GAPP providers in Georgia. Verified home health agencies offering RN, LPN, and personal care for medically fragile children. Updated weekly.',
   keywords: 'GAPP providers Georgia, GAPP providers in Georgia, Georgia Pediatric Program providers, find GAPP provider near me, GAPP agencies Georgia, pediatric home care providers Georgia, GAPP home health agencies',
   openGraph: {
     title: 'GAPP Providers in Georgia – Complete Provider Directory',

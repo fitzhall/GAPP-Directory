@@ -36,7 +36,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   title: 'Georgia Pediatric Program (GAPP): Eligibility & Services',
-  description: 'The Georgia Pediatric Program provides in-home skilled nursing and personal care for medically fragile children. Learn about eligibility, services covered, and how to find GAPP providers.',
+  description: 'The Georgia Pediatric Program (GAPP) provides in-home nursing for medically fragile children. Eligibility, covered services, and how to find providers.',
   keywords: 'Georgia Pediatric Program, GAPP Georgia, what is GAPP, GAPP eligibility, Georgia pediatric home care program, GAPP program services, GAPP Medicaid waiver',
   openGraph: {
     title: 'Georgia Pediatric Program (GAPP) – Complete Guide',
