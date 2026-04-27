@@ -10,7 +10,7 @@ import { join, relative, sep } from 'path'
 const APP_DIR = join(process.cwd(), 'app')
 const TITLE_MAX = 60
 const DESC_MAX = 160
-const STRICT_DEFAULT = false  // Phase A: report-only. Flipped to true in Task 7.
+const STRICT_DEFAULT = true  // Phase B: strict — violations block builds. SKIP_SEO_CHECK=1 to bypass.
 const STRICT =
   process.env.SEO_CHECK_STRICT === '1' ? true :
   process.env.SEO_CHECK_STRICT === '0' ? false :
