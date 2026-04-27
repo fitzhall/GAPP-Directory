@@ -471,13 +471,18 @@ export default function WaiversPage() {
                 need assistance with daily living activities.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-5 border border-gray-200">
-              <h3 className="font-semibold text-gray-900 mb-2">CCSP</h3>
+            <Link
+              href="/gapp-vs-ccsp"
+              className="bg-white rounded-xl p-5 border border-gray-200 hover:border-primary hover:shadow-sm transition-all group"
+            >
+              <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-2">CCSP</h3>
               <p className="text-gray-600 text-sm">
                 Community Care Services Program for elderly and disabled adults who
-                need help staying in their homes.
+                need help staying in their homes. See our{' '}
+                <span className="text-primary font-semibold">GAPP vs CCSP comparison</span>{' '}
+                for a side-by-side breakdown.
               </p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

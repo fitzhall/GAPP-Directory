@@ -327,6 +327,13 @@ export default function GAPPMedicaidRequirementsPage() {
       <section className="py-12 px-4 bg-gray-50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Related Resources</h2>
+          <p className="text-gray-700 mb-4">
+            Wondering whether GAPP or CCSP fits your child better?{' '}
+            <Link href="/gapp-vs-ccsp" className="text-primary hover:underline font-semibold">
+              Compare GAPP vs CCSP
+            </Link>{' '}
+            side-by-side — eligibility, services, and how each waiver works.
+          </p>
           <div className="grid sm:grid-cols-2 gap-4">
             <Link
               href="/gapp-approval-guide"
