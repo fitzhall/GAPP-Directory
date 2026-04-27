@@ -99,6 +99,9 @@ export default function RootLayout({
                   <img
                     src="/logo.png"
                     alt="GeorgiaGAPP.com"
+                    width={384}
+                    height={214}
+                    fetchPriority="high"
                     className="h-12 sm:h-16 w-auto"
                   />
                 </Link>
