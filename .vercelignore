@@ -1,2 +1,3 @@
-scripts/
+scripts/*
+!scripts/seo-check.ts
 supabase/*.sql
