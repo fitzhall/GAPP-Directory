@@ -180,6 +180,9 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <p>
               In Georgia, the Katie Beckett program is administered by the Department of Community Health and provides a pathway for families who might not otherwise qualify for Medicaid due to income to get coverage for their child with disabilities.
             </p>
+            <p>
+              Katie Beckett is named after a child from Iowa who lived on a ventilator. Before this rule existed, Medicaid only paid for her care in a hospital, not at her parents&apos; home. In 1982, Congress passed a law called TEFRA that let kids like Katie get Medicaid at home. Georgia&apos;s version of this rule is called the <strong>TEFRA Children&apos;s Medical Assistance Program</strong>. People still call it Katie Beckett.
+            </p>
 
             <div className="bg-blue-50 border-l-4 border-primary p-4 my-6 not-prose">
               <p className="text-primary font-semibold mb-1">Key Point</p>
@@ -252,20 +255,21 @@ export default function KatieBeckettWaiverGeorgiaPage() {
 
           <div className="space-y-4 mb-8">
             {[
-              { title: 'Age Requirement', desc: 'Child must be under 18 years old' },
-              { title: 'Disability Requirement', desc: 'Child must have a disability as defined by Section 1614 of the Social Security Act' },
-              { title: 'Level of Care', desc: 'Child must require care at an institutional level (hospital, nursing facility, or ICF)' },
-              { title: 'Home Care Appropriate', desc: 'Child must be able to be safely and appropriately cared for at home' },
-              { title: 'Cost Effective', desc: 'Home care must cost less than institutional care (this is almost always the case)' },
-              { title: 'Georgia Resident', desc: 'Child must be a resident of Georgia' },
+              { title: 'Age', desc: 'Your child must be under 18.', detail: 'Katie Beckett ends on the 18th birthday. Plan for GAPP (under 21) or adult waivers before that point.' },
+              { title: 'Disability', desc: 'Your child must have a disability as defined by Section 1614 of the Social Security Act.', detail: 'This is the same definition used for SSI. The disability must be expected to last at least 12 months or result in death.' },
+              { title: 'Level of care', desc: 'Your child must need care at the level a hospital or nursing facility would give.', detail: 'DCH looks for continuous medical supervision or four or more daily hours of skilled nursing. It also covers care needs an untrained caregiver cannot meet alone.' },
+              { title: 'Safe to be home', desc: 'Your child must be able to be safely cared for at home.', detail: 'Your home does not need to be a medical setting. A bedroom, a caregiver, and the right equipment usually meet this test.' },
+              { title: 'Cost test', desc: 'Home care must cost less than facility care.', detail: 'For nearly every child, home care is cheaper than a hospital or nursing home. This test almost always passes.' },
+              { title: 'Georgia resident', desc: 'Your child must live in Georgia.', detail: 'A Georgia mailing address and parent residency normally meet this rule. Temporary out-of-state hospital stays do not break residency.' },
             ].map((req, i) => (
-              <div key={i} className="flex items-start gap-4 bg-white rounded-xl p-4 border border-gray-200">
+              <div key={i} className="flex items-start gap-4 bg-white rounded-xl p-5 border border-gray-200">
                 <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
                   {i + 1}
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">{req.title}</p>
-                  <p className="text-gray-600 text-sm">{req.desc}</p>
+                  <p className="text-gray-700 text-sm mt-1">{req.desc}</p>
+                  <p className="text-gray-500 text-sm mt-2">{req.detail}</p>
                 </div>
               </div>
             ))}
@@ -408,16 +412,33 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <div className="bg-white rounded-xl border border-gray-200 p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Contact the Katie Beckett Team</h3>
-                  <p className="text-gray-600 mb-3">
-                    Reach out to Georgia&apos;s Centralized Katie Beckett Medicaid Team:
-                  </p>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 mb-3">Pick how you want to apply</h3>
+                  <p className="text-gray-700 mb-4">You can apply three ways. Pick whichever fits your situation.</p>
+
+                  <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="font-semibold text-gray-900 mb-2">Online</p>
+                      <p className="text-gray-700 text-sm mb-2">Use the state portal at <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">medicaid.georgia.gov</a> or apply through <a href="https://gateway.ga.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">gateway.ga.gov</a>.</p>
+                      <p className="text-gray-500 text-xs">Fastest if you have the records ready to upload.</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="font-semibold text-gray-900 mb-2">By phone</p>
+                      <p className="text-gray-700 text-sm mb-2">Call the Katie Beckett team at <a href="tel:6782487449" className="text-primary hover:underline font-semibold">678-248-7449</a>.</p>
+                      <p className="text-gray-500 text-xs">They walk you through what they need.</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="font-semibold text-gray-900 mb-2">In person</p>
+                      <p className="text-gray-700 text-sm mb-2">Visit your local DFCS office. Ask for a Katie Beckett application.</p>
+                      <p className="text-gray-500 text-xs">Best if you want help filling out the forms.</p>
+                    </div>
+                  </div>
+
                   <div className="bg-gray-50 rounded-lg p-4 text-sm">
                     <p className="font-medium text-gray-900">Centralized Katie Beckett Medicaid Team</p>
-                    <p className="text-gray-600">5815 Live Oak Parkway, Suite D-2</p>
-                    <p className="text-gray-600">Norcross, GA 30093</p>
-                    <p className="text-gray-600 mt-2">
+                    <p className="text-gray-700">5815 Live Oak Parkway, Suite D-2</p>
+                    <p className="text-gray-700">Norcross, GA 30093</p>
+                    <p className="text-gray-700 mt-2">
                       <strong>Phone:</strong> 678-248-7449<br />
                       <strong>Fax:</strong> 678-248-7459
                     </p>
@@ -429,10 +450,36 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <div className="bg-white rounded-xl border border-gray-200 p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Complete the Application</h3>
-                  <p className="text-gray-600">
-                    Submit the Katie Beckett application along with your SSI denial letter and all medical documentation. The team will review your application and may request additional information.
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 mb-2">Fill out the three Katie Beckett forms</h3>
+                  <p className="text-gray-700 mb-4">Three forms from the Department of Community Health make up the Katie Beckett application. Your child&apos;s doctor fills out the medical parts.</p>
+
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold flex-shrink-0 text-xs">1</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Pediatric DMA Form</p>
+                        <p>The main application. Captures your child&apos;s diagnosis, treating doctors, and care history.</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold flex-shrink-0 text-xs">2</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Medical Necessity Level of Care Statement</p>
+                        <p>Your child&apos;s doctor signs this. It explains why your child needs hospital-level or nursing-facility-level care.</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold flex-shrink-0 text-xs">3</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Cost Effectiveness Form</p>
+                        <p>Shows that caring for your child at home costs less than caring for them in a facility. For nearly every child, this passes easily.</p>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <p className="text-gray-600 text-sm mt-4">
+                    The state has all three forms in English and Spanish. You can ask for them by phone, download them from <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">medicaid.georgia.gov</a>, or pick them up at a DFCS office.
                   </p>
                 </div>
               </div>
@@ -639,11 +686,12 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               { title: 'Hospital stays', desc: 'Inpatient and outpatient hospital care, emergency room visits, and surgeries.' },
               { title: 'Prescription medications', desc: 'Covered prescriptions including specialty medications that private insurance often limits or denies.' },
               { title: 'Durable medical equipment', desc: 'Wheelchairs, feeding pumps, oxygen equipment, suction machines, hospital beds, and other equipment your child uses daily.' },
-              { title: 'Therapy services', desc: 'Physical therapy, occupational therapy, and speech therapy. These are often capped by private insurance but covered more fully through Medicaid.' },
-              { title: 'Home nursing through GAPP', desc: 'RN, LPN, and personal care services in your home. This is the big one for most families — private insurance rarely covers the hours medically fragile children actually need.' },
-              { title: 'Mental health services', desc: 'Behavioral health support, counseling, and psychiatric care for children who need it.' },
-              { title: 'Dental care', desc: 'Pediatric dental services including sedation dentistry when needed for children who can\'t tolerate regular dental visits.' },
-              { title: 'Medical transportation', desc: 'Non-emergency medical transportation to and from appointments. One less thing to figure out on appointment days.' },
+              { title: 'Therapy services', desc: 'Physical, occupational, and speech therapy. ABA therapy for autism is also covered with a written diagnosis and a prescription from your child\'s doctor.' },
+              { title: 'Home nursing through GAPP', desc: 'RN, LPN, and personal care services in your home. Private insurance rarely covers the hours medically fragile children actually need.' },
+              { title: 'Mental health services', desc: 'Counseling, psychiatric care, and ongoing behavioral support for kids who need it.' },
+              { title: 'Behavioral health crisis services', desc: 'Mobile crisis teams and short-term stabilization for kids in a behavioral health emergency. Separate from the routine mental health benefit.' },
+              { title: 'Dental and orthodontia', desc: 'Cleanings, fillings, and sedation dentistry for kids who cannot sit still. Braces are covered when a dentist writes a medical necessity letter showing why your child needs them.' },
+              { title: 'Medical transportation', desc: 'Non-emergency rides to and from appointments. One less thing to figure out on appointment days.' },
             ].map((item, i) => (
               <div key={i} className="bg-gray-50 rounded-xl p-4 border border-gray-200">
                 <p className="font-semibold text-gray-900 mb-1">{item.title}</p>
