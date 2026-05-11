@@ -45,7 +45,7 @@ const KATIE_BECKETT_FAQS = [
   },
   {
     question: 'What does Katie Beckett Medicaid cover that regular insurance might not?',
-    answer: 'Katie Beckett Medicaid covers the full range of Medicaid services: doctor visits, hospital stays, prescriptions, durable medical equipment like wheelchairs and feeding pumps, therapy services (PT, OT, speech), home nursing through programs like GAPP, mental health services, dental care, and medical transportation. For many families, the biggest benefit is access to GAPP in-home nursing — something private insurance rarely covers at the hours medically fragile children need.',
+    answer: 'Katie Beckett Medicaid covers the full range of Georgia Medicaid services: doctor visits, hospital stays, prescriptions, durable medical equipment like wheelchairs and feeding pumps, therapy services (PT, OT, speech), home nursing through GAPP, mental health services, dental, and medical transport. Private insurance rarely covers in-home nursing at the hours medically fragile children need. Katie Beckett Medicaid does.',
   },
   {
     question: 'What are the income limits for Katie Beckett in Georgia?',
@@ -174,7 +174,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               </svg>
               <div>
                 <p className="font-semibold text-green-900">No Income Limits</p>
-                <p className="text-green-800 text-sm">Unlike regular Medicaid, Katie Beckett eligibility is based only on your child&apos;s medical needs — not your family&apos;s income.</p>
+                <p className="text-green-800 text-sm">Unlike regular Medicaid, Katie Beckett eligibility is based only on your child&apos;s medical needs, not your family&apos;s income.</p>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           </h2>
           <div className="prose prose-lg max-w-none text-gray-600">
             <p>
-              The <strong>Katie Beckett waiver</strong> (officially known as <strong>TEFRA</strong> — Tax Equity and Fiscal Responsibility Act) is a Medicaid eligibility option that allows children with significant disabilities to qualify for Medicaid based on their own medical condition, <em>regardless of their parents&apos; income</em>.
+              The <strong>Katie Beckett waiver</strong> (officially called <strong>TEFRA</strong>, or Tax Equity and Fiscal Responsibility Act) lets children with significant disabilities qualify for Medicaid based on their own medical condition, <em>regardless of their parents&apos; income</em>.
             </p>
             <p>
               Named after Katie Beckett, a child who was ventilator-dependent and could only receive Medicaid coverage while in the hospital, this program was created to allow medically fragile children to receive care at home while still qualifying for Medicaid benefits.
@@ -238,7 +238,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <div className="bg-blue-50 border-l-4 border-primary p-4 my-6 not-prose">
               <p className="text-primary font-semibold mb-1">Key Point</p>
               <p className="text-gray-700">
-                Katie Beckett is an <strong>eligibility pathway</strong> to Medicaid — it&apos;s how your child qualifies. Once on Medicaid, you can access services like <Link href="/gapp-providers-georgia" className="text-primary hover:underline">GAPP nursing care</Link>.
+                Katie Beckett is an <strong>eligibility pathway</strong> to Medicaid. It is how your child qualifies. Once on Medicaid, you can access services like <Link href="/gapp-providers-georgia" className="text-primary hover:underline">GAPP nursing care</Link>.
               </p>
             </div>
           </div>
@@ -434,7 +434,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
                     You must apply for Supplemental Security Income (SSI) and receive a denial before applying for Katie Beckett. This establishes that your child doesn&apos;t qualify for Medicaid through SSI.
                   </p>
                   <p className="text-gray-600 text-sm">
-                    Call Social Security at <strong>1-800-772-1213</strong> to apply for SSI. If approved for SSI, you don&apos;t need Katie Beckett — you&apos;ll automatically get Medicaid.
+                    Call Social Security at <strong>1-800-772-1213</strong> to apply for SSI. If approved for SSI, you don&apos;t need Katie Beckett. You will get Medicaid automatically through SSI.
                   </p>
                 </div>
               </div>
@@ -446,7 +446,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Gather Medical Documentation</h3>
                   <p className="text-gray-600 mb-3">
-                    Collect comprehensive medical records including:
+                    Collect full medical records including:
                   </p>
                   <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
                     <li>Diagnosis documentation from physicians</li>
