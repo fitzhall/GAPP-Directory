@@ -122,20 +122,35 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           </div>
 
           {/* Quick links */}
-          <div className="flex flex-wrap gap-3">
-            <a href="#eligibility" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              Eligibility Requirements
+          <div className="flex flex-wrap gap-2">
+            <a href="#online-portal" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              The new online portal
             </a>
-            <a href="#how-to-apply" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              How to Apply
+            <a href="#eligibility" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              Who qualifies
             </a>
-            <a href="#what-it-covers" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              What It Covers
+            <a href="#income-rules" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              How income works
             </a>
-            <a href="#vs-gapp" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              Katie Beckett vs GAPP
+            <a href="#how-to-apply" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              How to apply
             </a>
-            <a href="#faqs" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+            <a href="#timeline" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              How long it takes
+            </a>
+            <a href="#appeals" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              If you are denied
+            </a>
+            <a href="#renewal" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              Renewal
+            </a>
+            <a href="#what-it-covers" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              What it covers
+            </a>
+            <a href="#vs-other-programs" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              Compared to other programs
+            </a>
+            <a href="#faqs" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
               FAQs
             </a>
           </div>
@@ -166,6 +181,16 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* The new Online Portal (April 15, 2026) */}
+      <section id="online-portal" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-blue-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            The new Katie Beckett online portal
+          </h2>
+          {/* Content added in Task 2 */}
         </div>
       </section>
 
@@ -212,6 +237,16 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* How "no income limit" actually works */}
+      <section id="income-rules" className="py-12 sm:py-16 px-4 scroll-mt-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            Why your family income does not count
+          </h2>
+          {/* Content added in Task 3 */}
         </div>
       </section>
 
@@ -359,6 +394,36 @@ export default function KatieBeckettWaiverGeorgiaPage() {
         </div>
       </section>
 
+      {/* Timeline and medical evaluation */}
+      <section id="timeline" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            How long Katie Beckett takes
+          </h2>
+          {/* Content added in Task 4 */}
+        </div>
+      </section>
+
+      {/* If you are denied */}
+      <section id="appeals" className="py-12 sm:py-16 px-4 scroll-mt-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            If you are denied
+          </h2>
+          {/* Content added in Task 5 */}
+        </div>
+      </section>
+
+      {/* Renewal and recertification */}
+      <section id="renewal" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            Renewing your child&apos;s Katie Beckett
+          </h2>
+          {/* Content added in Task 6 */}
+        </div>
+      </section>
+
       {/* What Katie Beckett Covers */}
       <section id="what-it-covers" className="py-12 sm:py-16 px-4 scroll-mt-24">
         <div className="max-w-3xl mx-auto">
@@ -408,7 +473,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
       </section>
 
       {/* Katie Beckett vs GAPP */}
-      <section id="vs-gapp" className="py-12 sm:py-16 px-4 scroll-mt-24">
+      <section id="vs-other-programs" className="py-12 sm:py-16 px-4 scroll-mt-24">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             Katie Beckett vs GAPP: What&apos;s the Difference?
