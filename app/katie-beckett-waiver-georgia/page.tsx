@@ -291,7 +291,47 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             Why your family income does not count
           </h2>
-          {/* Content added in Task 3 */}
+          <p className="text-gray-700 mb-4">
+            Most Medicaid programs look at how much your family earns. Katie Beckett does not. It only looks at your child&apos;s own money. For most kids, that amount is zero.
+          </p>
+          <p className="text-gray-700 mb-6">
+            This rule is called <strong>deeming</strong>. The state deems that only your child&apos;s money counts toward the income test, not yours.
+          </p>
+
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6 my-6">
+            <p className="font-semibold text-green-900 mb-2">A real-world example</p>
+            <p className="text-green-900 mb-3">
+              Say your family earns $200,000 a year. Your child has no money of their own. Under Katie Beckett, your child passes the income test. The only test left is the medical one.
+            </p>
+            <p className="text-green-900 text-sm">
+              The same is true at $300,000 or $500,000. Family income does not block Katie Beckett.
+            </p>
+          </div>
+
+          <p className="text-gray-700 mb-4">
+            <strong>What does count as your child&apos;s money?</strong>
+          </p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>Child support paid directly to your child</li>
+            <li>SSI checks your child receives</li>
+            <li>Money in a bank account in your child&apos;s name</li>
+            <li>Assets your child inherited from a relative</li>
+          </ul>
+          <p className="text-gray-700 mb-6">
+            For most children, none of these apply. So the income limit on Katie Beckett is not the problem most families think it is.
+          </p>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-amber-900">If you were told you make too much for Medicaid</p>
+                <p className="text-amber-800 text-sm">You were told about regular Medicaid. Katie Beckett is the way around that rule for kids with serious medical needs.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
