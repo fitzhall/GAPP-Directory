@@ -716,76 +716,87 @@ export default function KatieBeckettWaiverGeorgiaPage() {
 
       {/* Katie Beckett vs GAPP */}
       <section id="vs-other-programs" className="py-12 sm:py-16 px-4 scroll-mt-24">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            Katie Beckett vs GAPP: What&apos;s the Difference?
+            Katie Beckett compared to other Georgia programs
           </h2>
 
-          <p className="text-gray-600 mb-8">
-            Many families confuse Katie Beckett and GAPP, but they serve different purposes and often work together:
+          <p className="text-gray-700 mb-8">
+            Georgia has several Medicaid programs that help children with serious needs. Each one does something different. Here is how the four that matter for kids line up.
           </p>
 
           <div className="overflow-x-auto mb-8">
-            <table className="w-full border-collapse">
+            <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="bg-gray-50">
-                  <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-900"></th>
-                  <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-primary">Katie Beckett</th>
-                  <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-accent">GAPP</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-gray-900"></th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-primary">Katie Beckett (TEFRA)</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-accent">GAPP</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-gray-700">NOW Waiver</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-gray-700">COMP Waiver</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">What it is</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Medicaid eligibility pathway</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Service delivery program</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">What it is</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">A way to get Medicaid</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">A nursing service</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Daily life supports</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Heavy daily supports</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Purpose</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Gets your child ON Medicaid</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Provides in-home nursing care</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">Who it is for</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids with serious medical needs</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids who need home nursing</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids and adults with IDD</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids and adults with severe IDD</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Income limits</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">No family income limit</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Must have Medicaid first</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">Age range</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Under 18</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Under 21</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">All ages</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">All ages</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Age limit</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Under 18</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Under 21</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">Family income test</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None (child must already have Medicaid)</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Services</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Access to all Medicaid services</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">RN, LPN, and PCS in-home care</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">How to apply</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">678-248-7449 or gateway.ga.gov</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Pick a GAPP provider; they apply for you</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Sign up on the state DD waitlist</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Sign up on the state DD waitlist</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Choose provider?</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">N/A</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Yes - you choose your provider</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">You choose the provider?</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">N/A</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Yes</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Yes</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Yes</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-            <h3 className="font-semibold text-green-900 mb-2">How They Work Together</h3>
-            <div className="flex items-center gap-2 text-green-800">
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1 bg-primary text-white rounded-full text-sm font-medium">Katie Beckett</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-                <span className="px-3 py-1 bg-green-600 text-white rounded-full text-sm font-medium">Medicaid</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-                <span className="px-3 py-1 bg-accent text-white rounded-full text-sm font-medium">GAPP Services</span>
-              </div>
+            <h3 className="font-semibold text-green-900 mb-3">How Katie Beckett and GAPP work together</h3>
+            <p className="text-green-900 mb-3">
+              Most Georgia families use Katie Beckett to get Medicaid. Then they sign up for GAPP to get home nursing care for their child.
+            </p>
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <span className="px-3 py-1 bg-primary text-white rounded-full font-medium">Katie Beckett</span>
+              <span className="text-green-800">→</span>
+              <span className="px-3 py-1 bg-green-600 text-white rounded-full font-medium">Medicaid</span>
+              <span className="text-green-800">→</span>
+              <span className="px-3 py-1 bg-accent text-white rounded-full font-medium">GAPP nursing</span>
             </div>
-            <p className="text-green-800 text-sm mt-3">
-              Many Georgia families use Katie Beckett to qualify for Medicaid, then enroll in GAPP to receive in-home nursing care for their medically fragile child.
+            <p className="text-green-900 text-sm mt-3">
+              NOW and COMP are different waivers run by the Georgia DD (Developmental Disabilities) office. They serve kids with mostly cognitive needs, not medical ones. Most families with medically fragile children use Katie Beckett plus GAPP, not the DD waivers.
             </p>
           </div>
         </div>
