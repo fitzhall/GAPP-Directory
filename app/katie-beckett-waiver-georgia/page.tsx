@@ -108,6 +108,13 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             The Katie Beckett waiver helps children with disabilities qualify for Medicaid regardless of family income. Learn if your child qualifies and how to apply.
           </p>
 
+          <div className="inline-flex items-center gap-2 mb-6 text-sm text-gray-500">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Updated May 2026 — includes the new online portal that launched April 15, 2026</span>
+          </div>
+
           {/* Key benefit callout */}
           <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8">
             <div className="flex items-start gap-3">
@@ -190,7 +197,45 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             The new Katie Beckett online portal
           </h2>
-          {/* Content added in Task 2 */}
+          <p className="text-gray-700 mb-4">
+            On April 15, 2026, Georgia launched a new online portal for Katie Beckett. You can use it to apply, send your child&apos;s medical records, and check your status. You can also message the case worker who handles your file.
+          </p>
+          <p className="text-gray-700 mb-6">
+            The portal lives on the state Medicaid website. If you do not have a computer, you can still apply by phone or at your local DFCS office. Both work the same way as before.
+          </p>
+
+          <div className="bg-white border border-blue-100 rounded-xl p-5 mb-6">
+            <p className="font-semibold text-gray-900 mb-3">What you can do in the portal</p>
+            <ul className="space-y-2 text-gray-700 text-sm">
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Start and submit your Katie Beckett application</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Upload your child&apos;s medical records</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Check your case status without calling</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Send a message to your case worker</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>See and download your approval letter when it arrives</span>
+              </li>
+            </ul>
+          </div>
+
+          <p className="text-gray-700">
+            The portal is at{' '}
+            <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">medicaid.georgia.gov</a>.
+            You can also call the Katie Beckett team at{' '}
+            <a href="tel:6782487449" className="text-primary hover:underline font-semibold">678-248-7449</a> if you need help getting started.
+          </p>
         </div>
       </section>
 
