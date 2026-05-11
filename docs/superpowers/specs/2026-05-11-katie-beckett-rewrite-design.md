@@ -223,14 +223,75 @@ Article schema `dateModified` paired with visible "Last updated: May 2026" text 
 
 ## Style & voice
 
-Per `ANTI-AI-STYLE-GUIDE.md`:
+**Hard constraint: 5th grade reading level. Plain English. Zero AI tells.**
 
-- Sentence case in H1/H2/H3 except `metadata.title` (Title Case carve-out)
-- Em dashes capped at 2 per page — current page has ~6, reduce during rewrite
-- Banned vocab: delve, leverage, robust, comprehensive, seamless, nuanced, multifaceted, foster, bolster, intricate, holistic, vibrant, pivotal, crucial, underscore
-- Worked examples use specific dollar amounts and named entities (the $200k family example, real DCH form names) — concreteness is the moat
-- No hedging — direct parent-facing voice
-- No AI tells (no "It is worth noting that…", no "It's important to remember…", no triples)
+This is the single most important constraint in the spec. A parent under stress, who may not have finished high school, must be able to read every sentence on the first try. The rewrite fails if any sentence requires a second read.
+
+### Reading level target
+
+- **Flesch-Kincaid grade level ≤ 5.0** for body prose (verify with `npx textstat` or equivalent before merging)
+- **Average sentence length ≤ 14 words** in body prose
+- **Maximum sentence length: 25 words**, used sparingly
+- Tables, headings, and form names are exempt from the grade-level check (DCH form names like "Pediatric DMA" can't be simplified)
+- Legal terms that can't be replaced (TEFRA, Medicaid, deeming, waiver) get a one-sentence plain-English gloss on first use, then the term is used freely after
+
+### Plain-English vocabulary swaps
+
+Default to the right column. Only use the left when it has legal or medical meaning the right can't carry.
+
+| Avoid | Use |
+|---|---|
+| obtain, acquire | get |
+| require, necessitate | need |
+| utilize, leverage | use |
+| demonstrate | show |
+| assist, facilitate | help |
+| reside | live |
+| commence, initiate | start |
+| purchase | buy |
+| inquire | ask |
+| consequently, therefore | so |
+| however, nevertheless | but |
+| additionally, furthermore | also |
+| pediatric | child, kid |
+| physician, practitioner | doctor |
+| eligible | qualifies |
+| sufficient | enough |
+| approximately | about |
+| numerous, various | many |
+| individuals | people, families |
+| approximately | about |
+
+### Banned AI tells (zero tolerance)
+
+The rewrite fails review if any of these appear in body prose:
+
+- **Filler openers**: "It's important to note…", "It's worth noting…", "It's worth mentioning…", "Indeed,", "Notably,", "Importantly,", "Crucially,", "Significantly,"
+- **Bureaucratic connectors**: furthermore, moreover, in essence, ultimately, subsequently, henceforth
+- **AI-style metaphors**: tapestry, landscape (abstract), realm, myriad, nestled, intricate, holistic, multifaceted, seamless
+- **Comprehensiveness-signal words**: comprehensive, robust, vibrant, pivotal, crucial, underscore, foster, bolster, delve
+- **Triples**: lists of three adjectives or three parallel clauses ("clear, concise, and complete" — pick one)
+- **Hedging stacks**: "may potentially", "could possibly", "might perhaps"
+- **Em-dash-as-connector overuse**: cap at 2 em dashes for the entire page (current page has ~6)
+- **"Quick note:" / "Pro tip:" callout language**: state the thing, don't preface it
+- **Bolded-everywhere emphasis**: bold a phrase at most once per section
+
+### Voice rules
+
+- **Address the parent directly** — "you", not "applicants" or "the family"
+- **Short sentences win** — if a sentence carries two ideas, split it
+- **Concrete over abstract** — "$200,000/year" beats "high income"; "678-248-7449" beats "the team's phone number"
+- **No hedging on rules** — if DCH says approval takes 45-90 days, write "45 to 90 days," not "can sometimes take up to 90 days"
+- **Sentence case** in H1/H2/H3 except `metadata.title` (Title Case carve-out per `ANTI-AI-STYLE-GUIDE.md`)
+- **Examples beat explanations** — when explaining deeming, show the $200k family worked example before describing the rule
+
+### Verification before merge
+
+Add a pre-merge check step in commit 9:
+
+1. Run a reading-level tool on the page body text (Hemingway Editor, `textstat` Python module, or similar). Confirm grade level ≤ 5.0 on each new content block.
+2. Grep the file for every banned word in the AI-tells list above — zero results required.
+3. Read the page aloud. If a sentence makes you stumble, rewrite it.
 
 ---
 
