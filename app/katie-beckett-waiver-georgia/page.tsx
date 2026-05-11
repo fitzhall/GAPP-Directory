@@ -485,7 +485,51 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             How long Katie Beckett takes
           </h2>
-          {/* Content added in Task 4 */}
+          <p className="text-gray-700 mb-6">
+            Most families wait 45 to 90 days from start to finish. Here is how that time breaks down.
+          </p>
+
+          <div className="space-y-4 mb-8">
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">Week 1 to 2 — Application review</p>
+              <p className="text-gray-700 text-sm">The state checks if your application is complete. If something is missing, they will ask for it. Missing forms add weeks to your wait.</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">Week 3 to 8 — Medical evaluation</p>
+              <p className="text-gray-700 text-sm">A nurse or doctor reviews your child&apos;s medical records. They want to see if your child needs the kind of care a hospital or nursing home would give.</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">Week 9 to 10 — Decision and approval letter</p>
+              <p className="text-gray-700 text-sm">The state mails you a letter with the answer. If approved, your child has Medicaid right away. The approval lasts at least two years.</p>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+              <p className="font-semibold text-green-900 mb-2">What speeds up your case</p>
+              <ul className="text-green-900 text-sm space-y-1 list-disc list-inside">
+                <li>A full medical history from your child&apos;s main doctor</li>
+                <li>Notes from any specialists who treat your child</li>
+                <li>A current treatment plan</li>
+                <li>Records of daily care your child needs</li>
+              </ul>
+            </div>
+            <div className="bg-red-50 border border-red-200 rounded-xl p-5">
+              <p className="font-semibold text-red-900 mb-2">What slows your case down</p>
+              <ul className="text-red-900 text-sm space-y-1 list-disc list-inside">
+                <li>Missing or old medical records</li>
+                <li>No proof of daily care needs</li>
+                <li>Records that do not match what the doctor wrote</li>
+                <li>No SSI denial letter on file</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700">
+            Once Katie Beckett is approved, you can start the GAPP nursing process. See our{' '}
+            <Link href="/gapp-approval-timeline" className="text-primary hover:underline">GAPP approval timeline</Link>{' '}
+            for how long GAPP takes after Medicaid is in place.
+          </p>
         </div>
       </section>
 
@@ -495,7 +539,44 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             If you are denied
           </h2>
-          {/* Content added in Task 5 */}
+          <p className="text-gray-700 mb-6">
+            A denial is not the end. You have the right to ask the state to look at your case again. This is called an appeal.
+          </p>
+
+          <p className="font-semibold text-gray-900 mb-3">Most denials come from one of three reasons</p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>The state did not see enough medical proof</li>
+            <li>Your child&apos;s care needs were not clear in the records</li>
+            <li>The SSI denial letter was missing from your file</li>
+          </ul>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-amber-900">You have 30 days to act</p>
+                <p className="text-amber-800 text-sm">From the date on your denial letter, you have 30 days to ask for a fair hearing. A fair hearing is the legal name for an appeal. You can ask by phone or in writing. The state will set a date for the hearing.</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="font-semibold text-gray-900 mb-3">What helps on appeal</p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>A letter from your child&apos;s doctor that spells out daily care needs</li>
+            <li>A log of how many hours of care your child gets each week</li>
+            <li>Records from any new doctor visits since you first applied</li>
+          </ul>
+
+          <p className="text-gray-700 mb-4">
+            If you need help, the <strong>Georgia Advocacy Office</strong> and <strong>Parent to Parent of Georgia</strong> are both free. They know how Katie Beckett works and can guide you through the appeal.
+          </p>
+
+          <p className="text-gray-700">
+            For more on common denial reasons, see our{' '}
+            <Link href="/why-gapp-applications-get-denied" className="text-primary hover:underline">guide to GAPP denials</Link>. Many of the same rules apply.
+          </p>
         </div>
       </section>
 
@@ -505,7 +586,35 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
             Renewing your child&apos;s Katie Beckett
           </h2>
-          {/* Content added in Task 6 */}
+          <p className="text-gray-700 mb-4">
+            Katie Beckett approval lasts at least two years. Some families get a longer approval based on how stable their child&apos;s needs are.
+          </p>
+          <p className="text-gray-700 mb-6">
+            About 60 to 90 days before your approval ends, the state sends a renewal notice. Open it right away. The notice tells you what to do.
+          </p>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-blue-900">Renewal is not a full new application</p>
+                <p className="text-blue-800 text-sm">The state wants updated medical records and a fresh medical evaluation. Your child&apos;s old approval stays in place while the renewal is being reviewed.</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="font-semibold text-gray-900 mb-3">What ends your child&apos;s Katie Beckett</p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>Missing the renewal window with no answer to the state</li>
+            <li>Your child going back to a hospital or nursing home for a long stay</li>
+            <li>Your child turning 18</li>
+          </ul>
+
+          <p className="text-gray-700">
+            If your child is close to 18, start planning for the next program early. GAPP nursing covers kids up to 21. Adult Medicaid waivers like ICWP or COMP may also fit your family.
+          </p>
         </div>
       </section>
 
