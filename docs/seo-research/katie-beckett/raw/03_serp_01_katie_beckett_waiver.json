@@ -1,0 +1,38 @@
+{
+    "version": "0.1.20260430",
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "time": "0 sec.",
+    "cost": 0,
+    "tasks_count": 1,
+    "tasks_error": 1,
+    "tasks": [
+        {
+            "id": "05112142-1721-0139-0000-462e8b6cc814",
+            "status_code": 40200,
+            "status_message": "Payment Required.",
+            "time": "0 sec.",
+            "cost": 0,
+            "result_count": 0,
+            "path": [
+                "v3",
+                "serp",
+                "google",
+                "organic",
+                "live",
+                "advanced"
+            ],
+            "data": {
+                "api": "serp",
+                "function": "live",
+                "se": "google",
+                "se_type": "organic",
+                "language_code": "en",
+                "location_code": 200524,
+                "keyword": "katie beckett waiver",
+                "depth": 20
+            },
+            "result": null
+        }
+    ]
+}

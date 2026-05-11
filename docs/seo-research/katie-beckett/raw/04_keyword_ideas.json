@@ -1,0 +1,42 @@
+{
+    "version": "0.1.20260430",
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "time": "0 sec.",
+    "cost": 0,
+    "tasks_count": 1,
+    "tasks_error": 1,
+    "tasks": [
+        {
+            "id": "05112143-1721-0368-0000-27a90e3a733d",
+            "status_code": 40200,
+            "status_message": "Payment Required.",
+            "time": "0 sec.",
+            "cost": 0,
+            "result_count": 0,
+            "path": [
+                "v3",
+                "keywords_data",
+                "google_ads",
+                "keywords_for_keywords",
+                "live"
+            ],
+            "data": {
+                "api": "keywords_data",
+                "function": "keywords_for_keywords",
+                "se": "google_ads",
+                "location_code": 200524,
+                "language_code": "en",
+                "keywords": [
+                    "katie beckett",
+                    "katie beckett waiver",
+                    "tefra medicaid",
+                    "katie beckett georgia"
+                ],
+                "limit": 200,
+                "include_serp_info": false
+            },
+            "result": null
+        }
+    ]
+}
