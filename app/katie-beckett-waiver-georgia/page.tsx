@@ -47,6 +47,50 @@ const KATIE_BECKETT_FAQS = [
     question: 'What does Katie Beckett Medicaid cover that regular insurance might not?',
     answer: 'Katie Beckett Medicaid covers the full range of Medicaid services: doctor visits, hospital stays, prescriptions, durable medical equipment like wheelchairs and feeding pumps, therapy services (PT, OT, speech), home nursing through programs like GAPP, mental health services, dental care, and medical transportation. For many families, the biggest benefit is access to GAPP in-home nursing — something private insurance rarely covers at the hours medically fragile children need.',
   },
+  {
+    question: 'What are the income limits for Katie Beckett in Georgia?',
+    answer: 'There are no family income limits for Katie Beckett. Only your child\'s own money is counted, and most kids have none. A family making $200,000 a year can still qualify if their child meets the medical rules.',
+  },
+  {
+    question: 'How do I apply for Katie Beckett through gateway.ga.gov?',
+    answer: 'Go to gateway.ga.gov and start a Medicaid application. When asked, mark that the application is for a child with a disability. The system will route your case to the Katie Beckett team.',
+  },
+  {
+    question: 'What is the new Katie Beckett online portal?',
+    answer: 'Georgia launched a Katie Beckett online portal on April 15, 2026. Families can apply, upload medical records, track status, and message their case worker through the portal. You can access it through medicaid.georgia.gov.',
+  },
+  {
+    question: 'What forms do I need for the Katie Beckett application?',
+    answer: 'You need three forms from the Department of Community Health. They are the Pediatric DMA form, the Medical Necessity Level of Care Statement, and the Cost Effectiveness Form. Your child\'s doctor fills out the medical parts. The state can mail you the forms or you can download them from medicaid.georgia.gov.',
+  },
+  {
+    question: 'How do I appeal a Katie Beckett denial in Georgia?',
+    answer: 'You have 30 days from the date of your denial letter to ask for a fair hearing. Call the Katie Beckett team at 678-248-7449 or send your request in writing. A doctor\'s letter spelling out your child\'s daily care needs gives the strongest appeal.',
+  },
+  {
+    question: 'How does Katie Beckett renewal work?',
+    answer: 'Most approvals last at least two years. About 60 to 90 days before your approval ends, the state sends a renewal notice. You will need updated medical records and a new evaluation, but not a full new application.',
+  },
+  {
+    question: 'What is the deeming waiver and how does it apply to Katie Beckett?',
+    answer: 'The deeming waiver is the rule that lets Katie Beckett ignore your family income. The state "deems" that only your child\'s own money counts toward the test. For most kids that is zero, so any family income level can qualify.',
+  },
+  {
+    question: 'Does Katie Beckett cover ABA therapy for autism?',
+    answer: 'Yes. Once your child has Medicaid through Katie Beckett, ABA therapy is covered. Your child needs a written autism diagnosis and a prescription for ABA from a doctor or psychologist.',
+  },
+  {
+    question: 'Does Katie Beckett cover dental work and braces?',
+    answer: 'Yes for basic dental care like cleanings, fillings, and sedation dentistry for kids who cannot sit still. Braces are covered when a dentist or orthodontist writes a medical necessity letter showing why your child needs them.',
+  },
+  {
+    question: 'What happens when my child turns 18?',
+    answer: 'Katie Beckett ends on your child\'s 18th birthday. GAPP nursing continues until age 21. Before age 18, talk to the Katie Beckett team about adult Medicaid waivers like ICWP or COMP that may fit your family.',
+  },
+  {
+    question: 'Where is the Katie Beckett office in Georgia?',
+    answer: 'The Centralized Katie Beckett Medicaid Team is at 5815 Live Oak Parkway, Suite D-2, Norcross, GA 30093. The phone number is 678-248-7449.',
+  },
 ]
 
 const QUALIFYING_CONDITIONS = [
