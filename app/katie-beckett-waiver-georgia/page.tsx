@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
-import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import { FAQPageSchema, BreadcrumbSchema, ArticleSchema } from '@/components/JsonLd'
 
 const KATIE_BECKETT_FAQS = [
   {
@@ -113,7 +113,7 @@ const QUALIFYING_CONDITIONS = [
 
 export const metadata: Metadata = {
   title: 'Katie Beckett Waiver Georgia: Eligibility & Application',
-  description: 'Complete guide to the Katie Beckett waiver in Georgia. Eligibility, what it covers, how to apply, and how it connects to GAPP nursing.',
+  description: 'Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {
     title: 'Katie Beckett Waiver Georgia: Complete Eligibility & Application Guide',
@@ -134,6 +134,13 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           { name: 'Home', url: 'https://www.georgiagapp.com' },
           { name: 'Katie Beckett Waiver Georgia', url: 'https://www.georgiagapp.com/katie-beckett-waiver-georgia' },
         ]}
+      />
+      <ArticleSchema
+        headline="Katie Beckett Waiver in Georgia"
+        datePublished="2026-01-19"
+        dateModified="2026-05-11"
+        description="Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP."
+        url="https://www.georgiagapp.com/katie-beckett-waiver-georgia"
       />
 
       {/* Hero */}
@@ -985,8 +992,11 @@ export default function KatieBeckettWaiverGeorgiaPage() {
       {/* Disclaimer */}
       <section className="py-8 bg-gray-100 border-t border-gray-200">
         <div className="max-w-3xl mx-auto px-4 text-center">
+          <p className="text-sm text-gray-500 mb-2">
+            <strong>Last updated:</strong> May 2026 (includes the April 15, 2026 online portal launch)
+          </p>
           <p className="text-sm text-gray-500">
-            This information is provided for educational purposes only and is not legal or medical advice. For official Katie Beckett eligibility information, contact Georgia&apos;s Centralized Katie Beckett Medicaid Team at 678-248-7449.
+            This information is for education only. It is not legal or medical advice. For official Katie Beckett eligibility information, contact the Centralized Katie Beckett Medicaid Team at <a href="tel:6782487449" className="underline hover:text-gray-700">678-248-7449</a>.
           </p>
         </div>
       </section>
