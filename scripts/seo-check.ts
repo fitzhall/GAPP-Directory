@@ -36,6 +36,8 @@ const SEO_CONTENT_PAGES = new Set([
   'app/pediatric-home-nursing-georgia/page.tsx',
   'app/how-to-become-a-gapp-provider/page.tsx',
   'app/gapp-paid-caregiver/page.tsx',
+  'app/get-paid-family-caregiver-georgia/page.tsx',
+  'app/gapp-nursing-services/page.tsx',
   'app/gapp-vs-ccsp/page.tsx',
   'app/how-to-apply-for-gapp/page.tsx',
   'app/gapp-services-explained/page.tsx',
