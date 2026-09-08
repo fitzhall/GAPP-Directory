@@ -56,6 +56,23 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Dedup: if this phone already requested a callback from this provider in
+    // the last 30 minutes, treat it as the same request (double-submit / retry)
+    // and return success without inserting a duplicate or re-notifying.
+    const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString()
+    const { data: existing } = await supabase
+      .from('callback_requests')
+      .select('id')
+      .eq('provider_id', body.providerId)
+      .eq('phone', body.phone)
+      .gte('created_at', thirtyMinutesAgo)
+      .limit(1)
+      .maybeSingle()
+
+    if (existing) {
+      return NextResponse.json({ success: true, id: existing.id, deduped: true })
+    }
+
     // Insert callback request
     const { data: callback, error: insertError } = await supabase
       .from('callback_requests')

@@ -1,0 +1,4218 @@
+{
+    "version": "0.1.20260430",
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "time": "1.9233 sec.",
+    "cost": 0.075,
+    "tasks_count": 1,
+    "tasks_error": 0,
+    "tasks": [
+        {
+            "id": "05112139-1721-0367-0000-34c7897d275f",
+            "status_code": 20000,
+            "status_message": "Ok.",
+            "time": "1.8364 sec.",
+            "cost": 0.075,
+            "result_count": 116,
+            "path": [
+                "v3",
+                "keywords_data",
+                "google_ads",
+                "search_volume",
+                "live"
+            ],
+            "data": {
+                "api": "keywords_data",
+                "function": "search_volume",
+                "se": "google_ads",
+                "location_code": 200524,
+                "language_code": "en",
+                "keywords": [
+                    "katie beckett",
+                    "katie beckett waiver",
+                    "katie beckett program",
+                    "katie beckett medicaid",
+                    "katie beckett waiver program",
+                    "what is katie beckett",
+                    "what is katie beckett medicaid",
+                    "what is the katie beckett waiver",
+                    "tefra",
+                    "tefra medicaid",
+                    "tefra waiver",
+                    "katie beckett georgia",
+                    "katie beckett ga",
+                    "katie beckett waiver georgia",
+                    "katie beckett waiver ga",
+                    "katie beckett medicaid ga",
+                    "katie beckett medicaid georgia",
+                    "katie beckett program georgia",
+                    "katie beckett atlanta",
+                    "georgia katie beckett",
+                    "georgia katie beckett waiver",
+                    "katie beckett ga application",
+                    "tefra georgia",
+                    "tefra ga",
+                    "katie beckett eligibility",
+                    "katie beckett income limits",
+                    "katie beckett requirements",
+                    "katie beckett age limit",
+                    "who qualifies for katie beckett",
+                    "does my child qualify for katie beckett",
+                    "katie beckett disability requirements",
+                    "katie beckett qualifying conditions",
+                    "katie beckett income georgia",
+                    "katie beckett income chart",
+                    "katie beckett waiver requirements",
+                    "katie beckett asset limits",
+                    "what does katie beckett cover",
+                    "what does katie beckett cover in georgia",
+                    "does katie beckett cover dental",
+                    "does katie beckett cover braces",
+                    "does katie beckett cover therapy",
+                    "does katie beckett cover diapers",
+                    "does katie beckett cover formula",
+                    "does katie beckett cover vision",
+                    "does katie beckett cover dental insurance",
+                    "katie beckett dental",
+                    "katie beckett benefits",
+                    "katie beckett medicaid benefits",
+                    "katie beckett services",
+                    "katie beckett insurance",
+                    "how to apply for katie beckett",
+                    "how to apply for katie beckett in georgia",
+                    "katie beckett application",
+                    "katie beckett application georgia",
+                    "katie beckett application form",
+                    "katie beckett tefra application",
+                    "where to apply for katie beckett",
+                    "apply for katie beckett",
+                    "apply for katie beckett georgia",
+                    "katie beckett form",
+                    "katie beckett tefra form georgia",
+                    "katie beckett autism",
+                    "katie beckett autism georgia",
+                    "katie beckett adhd",
+                    "katie beckett cerebral palsy",
+                    "katie beckett down syndrome",
+                    "katie beckett type 1 diabetes",
+                    "katie beckett diabetes",
+                    "katie beckett seizure disorder",
+                    "katie beckett feeding tube",
+                    "katie beckett tracheostomy",
+                    "katie beckett ventilator",
+                    "katie beckett spina bifida",
+                    "katie beckett special needs",
+                    "katie beckett denial",
+                    "katie beckett denied",
+                    "katie beckett appeal",
+                    "katie beckett renewal",
+                    "katie beckett wait time",
+                    "katie beckett approval time",
+                    "how long does katie beckett take",
+                    "katie beckett process",
+                    "katie beckett medical evaluation",
+                    "katie beckett denial reasons",
+                    "katie beckett recertification",
+                    "katie beckett status",
+                    "katie beckett vs ssi",
+                    "katie beckett vs medicaid",
+                    "katie beckett vs gapp",
+                    "katie beckett vs ccsp",
+                    "katie beckett vs source",
+                    "difference between katie beckett and medicaid",
+                    "difference between katie beckett and ssi",
+                    "ssi vs katie beckett",
+                    "medicaid waiver vs katie beckett",
+                    "katie beckett 18",
+                    "katie beckett age out",
+                    "after katie beckett",
+                    "katie beckett transition",
+                    "what happens after katie beckett",
+                    "katie beckett to medicaid waiver",
+                    "deeming waiver",
+                    "deeming waiver georgia",
+                    "katie beckett deeming",
+                    "katie beckett deeming waiver",
+                    "medicaid waiver children georgia",
+                    "medicaid waiver for disabled child georgia",
+                    "medically fragile child medicaid",
+                    "medically fragile child medicaid georgia",
+                    "georgia medicaid disabled child",
+                    "georgia medicaid waiver child",
+                    "georgia tefra application",
+                    "katie beckett phone number georgia",
+                    "katie beckett office georgia",
+                    "katie beckett medicaid team georgia",
+                    "katie beckett norcross"
+                ],
+                "search_partners": false
+            },
+            "result": [
+                {
+                    "keyword": "katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 7,
+                    "search_volume": 1300,
+                    "low_top_of_page_bid": 0.86,
+                    "high_top_of_page_bid": 9.16,
+                    "cpc": 6.95,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 1900
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 1000
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 1300
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 7,
+                    "search_volume": 1300,
+                    "low_top_of_page_bid": 0.86,
+                    "high_top_of_page_bid": 9.16,
+                    "cpc": 6.95,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 1900
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 1000
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 1300
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett program",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 9,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.01,
+                    "high_top_of_page_bid": 13.3,
+                    "cpc": 17.56,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 320
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett medicaid",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 7,
+                    "search_volume": 1300,
+                    "low_top_of_page_bid": 0.86,
+                    "high_top_of_page_bid": 9.16,
+                    "cpc": 6.95,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 1900
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 1000
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 1300
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 1600
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 1300
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett waiver program",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 9,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.01,
+                    "high_top_of_page_bid": 13.3,
+                    "cpc": 17.56,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 320
+                        }
+                    ]
+                },
+                {
+                    "keyword": "what is katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 3,
+                    "search_volume": 20,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "what is katie beckett medicaid",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 4,
+                    "search_volume": 40,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 2.72,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 70
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "what is the katie beckett waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 2,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "tefra",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 0,
+                    "search_volume": 50,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 70
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 70
+                        }
+                    ]
+                },
+                {
+                    "keyword": "tefra medicaid",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 9,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "tefra waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 0,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett ga",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett waiver georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett waiver ga",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett medicaid ga",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett medicaid georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett program georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 30,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 9.47,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett atlanta",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "georgia katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.48,
+                    "high_top_of_page_bid": 14.11,
+                    "cpc": 9.09,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 590
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 170
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 210
+                        }
+                    ]
+                },
+                {
+                    "keyword": "georgia katie beckett waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett ga application",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "tefra georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "tefra ga",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett eligibility",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 0,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett income limits",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 4,
+                    "search_volume": 30,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 50
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett requirements",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett age limit",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "who qualifies for katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 3,
+                    "search_volume": 20,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 5.74,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "does my child qualify for katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett disability requirements",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett qualifying conditions",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett income georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett income chart",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett waiver requirements",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 0,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett asset limits",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "what does katie beckett cover",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 0,
+                    "search_volume": 20,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 20
+                        }
+                    ]
+                },
+                {
+                    "keyword": "what does katie beckett cover in georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 6,
+                    "search_volume": 20,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 13.69,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 20
+                        }
+                    ]
+                },
+                {
+                    "keyword": "does katie beckett cover dental",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 3,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "does katie beckett cover braces",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "does katie beckett cover therapy",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "does katie beckett cover diapers",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "does katie beckett cover formula",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "does katie beckett cover vision",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "does katie beckett cover dental insurance",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett dental",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett benefits",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 0,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett medicaid benefits",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett services",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett insurance",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 20,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "how to apply for katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 24,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 0.1,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "how to apply for katie beckett in georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 11,
+                    "search_volume": 30,
+                    "low_top_of_page_bid": 0.58,
+                    "high_top_of_page_bid": 8.4,
+                    "cpc": 11.83,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 50
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett application",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 9,
+                    "search_volume": 260,
+                    "low_top_of_page_bid": 1.01,
+                    "high_top_of_page_bid": 13.3,
+                    "cpc": 17.56,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 210
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 390
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 260
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 320
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 320
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett application georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 30,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 9.47,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 40
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett application form",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 14,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett tefra application",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "where to apply for katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "apply for katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 25,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "apply for katie beckett georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 27,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": 2.88,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett form",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett tefra form georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett autism",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 5,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 0
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett autism georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett adhd",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett cerebral palsy",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett down syndrome",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett type 1 diabetes",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett diabetes",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett seizure disorder",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett feeding tube",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett tracheostomy",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett ventilator",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett spina bifida",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett special needs",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett denial",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett denied",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett appeal",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett renewal",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 5,
+                    "search_volume": 20,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett wait time",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett approval time",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "how long does katie beckett take",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett process",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett medical evaluation",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett denial reasons",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett recertification",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett status",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett vs ssi",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett vs medicaid",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett vs gapp",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett vs ccsp",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett vs source",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "difference between katie beckett and medicaid",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "difference between katie beckett and ssi",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "ssi vs katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "medicaid waiver vs katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett 18",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett age out",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "after katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett transition",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "what happens after katie beckett",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett to medicaid waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "deeming waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 1,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "deeming waiver georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": 10,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 0
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 10
+                        }
+                    ]
+                },
+                {
+                    "keyword": "katie beckett deeming",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett deeming waiver",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": "LOW",
+                    "competition_index": 11,
+                    "search_volume": 20,
+                    "low_top_of_page_bid": 0.42,
+                    "high_top_of_page_bid": 6.69,
+                    "cpc": null,
+                    "monthly_searches": [
+                        {
+                            "year": 2026,
+                            "month": 3,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2026,
+                            "month": 2,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2026,
+                            "month": 1,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 12,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 11,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 10,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 9,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 8,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 7,
+                            "search_volume": 20
+                        },
+                        {
+                            "year": 2025,
+                            "month": 6,
+                            "search_volume": 10
+                        },
+                        {
+                            "year": 2025,
+                            "month": 5,
+                            "search_volume": 30
+                        },
+                        {
+                            "year": 2025,
+                            "month": 4,
+                            "search_volume": 30
+                        }
+                    ]
+                },
+                {
+                    "keyword": "medicaid waiver children georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "medicaid waiver for disabled child georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "medically fragile child medicaid",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "medically fragile child medicaid georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "georgia medicaid disabled child",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "georgia medicaid waiver child",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "georgia tefra application",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett phone number georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett office georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett medicaid team georgia",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                },
+                {
+                    "keyword": "katie beckett norcross",
+                    "spell": null,
+                    "location_code": 200524,
+                    "language_code": "en",
+                    "search_partners": false,
+                    "competition": null,
+                    "competition_index": null,
+                    "search_volume": null,
+                    "low_top_of_page_bid": null,
+                    "high_top_of_page_bid": null,
+                    "cpc": null,
+                    "monthly_searches": null
+                }
+            ]
+        }
+    ]
+}

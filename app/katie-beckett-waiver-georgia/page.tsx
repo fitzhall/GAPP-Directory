@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
-import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import { FAQPageSchema, BreadcrumbSchema, ArticleSchema } from '@/components/JsonLd'
 
 const KATIE_BECKETT_FAQS = [
   {
@@ -45,7 +45,51 @@ const KATIE_BECKETT_FAQS = [
   },
   {
     question: 'What does Katie Beckett Medicaid cover that regular insurance might not?',
-    answer: 'Katie Beckett Medicaid covers the full range of Medicaid services: doctor visits, hospital stays, prescriptions, durable medical equipment like wheelchairs and feeding pumps, therapy services (PT, OT, speech), home nursing through programs like GAPP, mental health services, dental care, and medical transportation. For many families, the biggest benefit is access to GAPP in-home nursing — something private insurance rarely covers at the hours medically fragile children need.',
+    answer: 'Katie Beckett Medicaid covers the full range of Georgia Medicaid services: doctor visits, hospital stays, prescriptions, durable medical equipment like wheelchairs and feeding pumps, therapy services (PT, OT, speech), home nursing through GAPP, mental health services, dental, and medical transport. Private insurance rarely covers in-home nursing at the hours medically fragile children need. Katie Beckett Medicaid does.',
+  },
+  {
+    question: 'What are the income limits for Katie Beckett in Georgia?',
+    answer: 'There are no family income limits for Katie Beckett. Only your child\'s own money is counted, and most kids have none. A family making $200,000 a year can still qualify if their child meets the medical rules.',
+  },
+  {
+    question: 'How do I apply for Katie Beckett through gateway.ga.gov?',
+    answer: 'Go to gateway.ga.gov and start a Medicaid application. When asked, mark that the application is for a child with a disability. The system will route your case to the Katie Beckett team.',
+  },
+  {
+    question: 'What is the new Katie Beckett online portal?',
+    answer: 'Georgia launched a Katie Beckett online portal on April 15, 2026. Families can apply, upload medical records, track status, and message their case worker through the portal. You can access it through medicaid.georgia.gov.',
+  },
+  {
+    question: 'What forms do I need for the Katie Beckett application?',
+    answer: 'You need three forms from the Department of Community Health. They are the Pediatric DMA form, the Medical Necessity Level of Care Statement, and the Cost Effectiveness Form. Your child\'s doctor fills out the medical parts. The state can mail you the forms or you can download them from medicaid.georgia.gov.',
+  },
+  {
+    question: 'How do I appeal a Katie Beckett denial in Georgia?',
+    answer: 'You have 30 days from the date of your denial letter to ask for a fair hearing. Call the Katie Beckett team at 678-248-7449 or send your request in writing. A doctor\'s letter spelling out your child\'s daily care needs gives the strongest appeal.',
+  },
+  {
+    question: 'How does Katie Beckett renewal work?',
+    answer: 'Most approvals last at least two years. About 60 to 90 days before your approval ends, the state sends a renewal notice. You will need updated medical records and a new evaluation, but not a full new application.',
+  },
+  {
+    question: 'What is the deeming waiver and how does it apply to Katie Beckett?',
+    answer: 'The deeming waiver is the rule that lets Katie Beckett ignore your family income. The state "deems" that only your child\'s own money counts toward the test. For most kids that is zero, so any family income level can qualify.',
+  },
+  {
+    question: 'Does Katie Beckett cover ABA therapy for autism?',
+    answer: 'Yes. Once your child has Medicaid through Katie Beckett, ABA therapy is covered. Your child needs a written autism diagnosis and a prescription for ABA from a doctor or psychologist.',
+  },
+  {
+    question: 'Does Katie Beckett cover dental work and braces?',
+    answer: 'Yes for basic dental care like cleanings, fillings, and sedation dentistry for kids who cannot sit still. Braces are covered when a dentist or orthodontist writes a medical necessity letter showing why your child needs them.',
+  },
+  {
+    question: 'What happens when my child turns 18?',
+    answer: 'Katie Beckett ends on your child\'s 18th birthday. GAPP nursing continues until age 21. Before age 18, talk to the Katie Beckett team about adult Medicaid waivers like ICWP or COMP that may fit your family.',
+  },
+  {
+    question: 'Where is the Katie Beckett office in Georgia?',
+    answer: 'The Centralized Katie Beckett Medicaid Team is at 5815 Live Oak Parkway, Suite D-2, Norcross, GA 30093. The phone number is 678-248-7449.',
   },
 ]
 
@@ -69,7 +113,7 @@ const QUALIFYING_CONDITIONS = [
 
 export const metadata: Metadata = {
   title: 'Katie Beckett Waiver Georgia: Eligibility & Application',
-  description: 'Complete guide to the Katie Beckett waiver in Georgia. Eligibility, what it covers, how to apply, and how it connects to GAPP nursing.',
+  description: 'Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {
     title: 'Katie Beckett Waiver Georgia: Complete Eligibility & Application Guide',
@@ -91,6 +135,13 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           { name: 'Katie Beckett Waiver Georgia', url: 'https://www.georgiagapp.com/katie-beckett-waiver-georgia' },
         ]}
       />
+      <ArticleSchema
+        headline="Katie Beckett Waiver in Georgia"
+        datePublished="2026-01-19"
+        dateModified="2026-05-11"
+        description="Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP."
+        url="https://www.georgiagapp.com/katie-beckett-waiver-georgia"
+      />
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-12 sm:py-16 px-4">
@@ -108,6 +159,13 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             The Katie Beckett waiver helps children with disabilities qualify for Medicaid regardless of family income. Learn if your child qualifies and how to apply.
           </p>
 
+          <div className="inline-flex items-center gap-2 mb-6 text-sm text-gray-500">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Updated May 2026 — includes the new online portal that launched April 15, 2026</span>
+          </div>
+
           {/* Key benefit callout */}
           <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-8">
             <div className="flex items-start gap-3">
@@ -116,26 +174,41 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               </svg>
               <div>
                 <p className="font-semibold text-green-900">No Income Limits</p>
-                <p className="text-green-800 text-sm">Unlike regular Medicaid, Katie Beckett eligibility is based only on your child&apos;s medical needs — not your family&apos;s income.</p>
+                <p className="text-green-800 text-sm">Unlike regular Medicaid, Katie Beckett eligibility is based only on your child&apos;s medical needs, not your family&apos;s income.</p>
               </div>
             </div>
           </div>
 
           {/* Quick links */}
-          <div className="flex flex-wrap gap-3">
-            <a href="#eligibility" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              Eligibility Requirements
+          <div className="flex flex-wrap gap-2">
+            <a href="#online-portal" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              The new online portal
             </a>
-            <a href="#how-to-apply" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              How to Apply
+            <a href="#eligibility" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              Who qualifies
             </a>
-            <a href="#what-it-covers" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              What It Covers
+            <a href="#income-rules" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              How income works
             </a>
-            <a href="#vs-gapp" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
-              Katie Beckett vs GAPP
+            <a href="#how-to-apply" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              How to apply
             </a>
-            <a href="#faqs" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+            <a href="#timeline" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              How long it takes
+            </a>
+            <a href="#appeals" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              If you are denied
+            </a>
+            <a href="#renewal" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              Renewal
+            </a>
+            <a href="#what-it-covers" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              What it covers
+            </a>
+            <a href="#vs-other-programs" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
+              Compared to other programs
+            </a>
+            <a href="#faqs" className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors">
               FAQs
             </a>
           </div>
@@ -150,7 +223,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           </h2>
           <div className="prose prose-lg max-w-none text-gray-600">
             <p>
-              The <strong>Katie Beckett waiver</strong> (officially known as <strong>TEFRA</strong> — Tax Equity and Fiscal Responsibility Act) is a Medicaid eligibility option that allows children with significant disabilities to qualify for Medicaid based on their own medical condition, <em>regardless of their parents&apos; income</em>.
+              The <strong>Katie Beckett waiver</strong> (officially called <strong>TEFRA</strong>, or Tax Equity and Fiscal Responsibility Act) lets children with significant disabilities qualify for Medicaid based on their own medical condition, <em>regardless of their parents&apos; income</em>.
             </p>
             <p>
               Named after Katie Beckett, a child who was ventilator-dependent and could only receive Medicaid coverage while in the hospital, this program was created to allow medically fragile children to receive care at home while still qualifying for Medicaid benefits.
@@ -158,14 +231,65 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <p>
               In Georgia, the Katie Beckett program is administered by the Department of Community Health and provides a pathway for families who might not otherwise qualify for Medicaid due to income to get coverage for their child with disabilities.
             </p>
+            <p>
+              Katie Beckett is named after a child from Iowa who lived on a ventilator. Before this rule existed, Medicaid only paid for her care in a hospital, not at her parents&apos; home. In 1982, Congress passed a law called TEFRA that let kids like Katie get Medicaid at home. Georgia&apos;s version of this rule is called the <strong>TEFRA Children&apos;s Medical Assistance Program</strong>. People still call it Katie Beckett.
+            </p>
 
             <div className="bg-blue-50 border-l-4 border-primary p-4 my-6 not-prose">
               <p className="text-primary font-semibold mb-1">Key Point</p>
               <p className="text-gray-700">
-                Katie Beckett is an <strong>eligibility pathway</strong> to Medicaid — it&apos;s how your child qualifies. Once on Medicaid, you can access services like <Link href="/gapp-providers-georgia" className="text-primary hover:underline">GAPP nursing care</Link>.
+                Katie Beckett is an <strong>eligibility pathway</strong> to Medicaid. It is how your child qualifies. Once on Medicaid, you can access services like <Link href="/gapp-providers-georgia" className="text-primary hover:underline">GAPP nursing care</Link>.
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* The new Online Portal (April 15, 2026) */}
+      <section id="online-portal" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-blue-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            The new Katie Beckett online portal
+          </h2>
+          <p className="text-gray-700 mb-4">
+            On April 15, 2026, Georgia launched a new online portal for Katie Beckett. You can use it to apply, send your child&apos;s medical records, and check your status. You can also message the case worker who handles your file.
+          </p>
+          <p className="text-gray-700 mb-6">
+            The portal lives on the state Medicaid website. If you do not have a computer, you can still apply by phone or at your local DFCS office. Both work the same way as before.
+          </p>
+
+          <div className="bg-white border border-blue-100 rounded-xl p-5 mb-6">
+            <p className="font-semibold text-gray-900 mb-3">What you can do in the portal</p>
+            <ul className="space-y-2 text-gray-700 text-sm">
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Start and submit your Katie Beckett application</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Upload your child&apos;s medical records</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Check your case status without calling</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Send a message to your case worker</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>See and download your approval letter when it arrives</span>
+              </li>
+            </ul>
+          </div>
+
+          <p className="text-gray-700">
+            The portal is at{' '}
+            <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">medicaid.georgia.gov</a>.
+            You can also call the Katie Beckett team at{' '}
+            <a href="tel:6782487449" className="text-primary hover:underline font-semibold">678-248-7449</a> if you need help getting started.
+          </p>
         </div>
       </section>
 
@@ -182,20 +306,21 @@ export default function KatieBeckettWaiverGeorgiaPage() {
 
           <div className="space-y-4 mb-8">
             {[
-              { title: 'Age Requirement', desc: 'Child must be under 18 years old' },
-              { title: 'Disability Requirement', desc: 'Child must have a disability as defined by Section 1614 of the Social Security Act' },
-              { title: 'Level of Care', desc: 'Child must require care at an institutional level (hospital, nursing facility, or ICF)' },
-              { title: 'Home Care Appropriate', desc: 'Child must be able to be safely and appropriately cared for at home' },
-              { title: 'Cost Effective', desc: 'Home care must cost less than institutional care (this is almost always the case)' },
-              { title: 'Georgia Resident', desc: 'Child must be a resident of Georgia' },
+              { title: 'Age', desc: 'Your child must be under 18.', detail: 'Katie Beckett ends on the 18th birthday. Plan for GAPP (under 21) or adult waivers before that point.' },
+              { title: 'Disability', desc: 'Your child must have a disability as defined by Section 1614 of the Social Security Act.', detail: 'This is the same definition used for SSI. The disability must be expected to last at least 12 months or result in death.' },
+              { title: 'Level of care', desc: 'Your child must need care at the level a hospital or nursing facility would give.', detail: 'DCH looks for continuous medical supervision or four or more daily hours of skilled nursing. It also covers care needs an untrained caregiver cannot meet alone.' },
+              { title: 'Safe to be home', desc: 'Your child must be able to be safely cared for at home.', detail: 'Your home does not need to be a medical setting. A bedroom, a caregiver, and the right equipment usually meet this test.' },
+              { title: 'Cost test', desc: 'Home care must cost less than facility care.', detail: 'For nearly every child, home care is cheaper than a hospital or nursing home. This test almost always passes.' },
+              { title: 'Georgia resident', desc: 'Your child must live in Georgia.', detail: 'A Georgia mailing address and parent residency normally meet this rule. Temporary out-of-state hospital stays do not break residency.' },
             ].map((req, i) => (
-              <div key={i} className="flex items-start gap-4 bg-white rounded-xl p-4 border border-gray-200">
+              <div key={i} className="flex items-start gap-4 bg-white rounded-xl p-5 border border-gray-200">
                 <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
                   {i + 1}
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">{req.title}</p>
-                  <p className="text-gray-600 text-sm">{req.desc}</p>
+                  <p className="text-gray-700 text-sm mt-1">{req.desc}</p>
+                  <p className="text-gray-500 text-sm mt-2">{req.detail}</p>
                 </div>
               </div>
             ))}
@@ -209,6 +334,56 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               <div>
                 <p className="font-semibold text-amber-900">Important Note</p>
                 <p className="text-amber-800 text-sm">Family income and assets are NOT considered for Katie Beckett eligibility. Your income does not disqualify your child if they meet the medical criteria.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How "no income limit" actually works */}
+      <section id="income-rules" className="py-12 sm:py-16 px-4 scroll-mt-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            Why your family income does not count
+          </h2>
+          <p className="text-gray-700 mb-4">
+            Most Medicaid programs look at how much your family earns. Katie Beckett does not. It only looks at your child&apos;s own money. For most kids, that amount is zero.
+          </p>
+          <p className="text-gray-700 mb-6">
+            This rule is called <strong>deeming</strong>. The state deems that only your child&apos;s money counts toward the income test, not yours.
+          </p>
+
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6 my-6">
+            <p className="font-semibold text-green-900 mb-2">A real-world example</p>
+            <p className="text-green-900 mb-3">
+              Say your family earns $200,000 a year. Your child has no money of their own. Under Katie Beckett, your child passes the income test. The only test left is the medical one.
+            </p>
+            <p className="text-green-900 text-sm">
+              The same is true at $300,000 or $500,000. Family income does not block Katie Beckett.
+            </p>
+          </div>
+
+          <p className="text-gray-700 mb-4">
+            <strong>What does count as your child&apos;s money?</strong>
+          </p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>Child support paid directly to your child</li>
+            <li>SSI checks your child receives</li>
+            <li>Money in a bank account in your child&apos;s name</li>
+            <li>Assets your child inherited from a relative</li>
+          </ul>
+          <p className="text-gray-700 mb-6">
+            For most children, none of these apply. So the income limit on Katie Beckett is not the problem most families think it is.
+          </p>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-amber-900">If you were told you make too much for Medicaid</p>
+                <p className="text-amber-800 text-sm">You were told about regular Medicaid. Katie Beckett is the way around that rule for kids with serious medical needs.</p>
               </div>
             </div>
           </div>
@@ -259,7 +434,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
                     You must apply for Supplemental Security Income (SSI) and receive a denial before applying for Katie Beckett. This establishes that your child doesn&apos;t qualify for Medicaid through SSI.
                   </p>
                   <p className="text-gray-600 text-sm">
-                    Call Social Security at <strong>1-800-772-1213</strong> to apply for SSI. If approved for SSI, you don&apos;t need Katie Beckett — you&apos;ll automatically get Medicaid.
+                    Call Social Security at <strong>1-800-772-1213</strong> to apply for SSI. If approved for SSI, you don&apos;t need Katie Beckett. You will get Medicaid automatically through SSI.
                   </p>
                 </div>
               </div>
@@ -271,7 +446,7 @@ export default function KatieBeckettWaiverGeorgiaPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Gather Medical Documentation</h3>
                   <p className="text-gray-600 mb-3">
-                    Collect comprehensive medical records including:
+                    Collect full medical records including:
                   </p>
                   <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
                     <li>Diagnosis documentation from physicians</li>
@@ -288,16 +463,33 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <div className="bg-white rounded-xl border border-gray-200 p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Contact the Katie Beckett Team</h3>
-                  <p className="text-gray-600 mb-3">
-                    Reach out to Georgia&apos;s Centralized Katie Beckett Medicaid Team:
-                  </p>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 mb-3">Pick how you want to apply</h3>
+                  <p className="text-gray-700 mb-4">You can apply three ways. Pick whichever fits your situation.</p>
+
+                  <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="font-semibold text-gray-900 mb-2">Online</p>
+                      <p className="text-gray-700 text-sm mb-2">Use the state portal at <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">medicaid.georgia.gov</a> or apply through <a href="https://gateway.ga.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">gateway.ga.gov</a>.</p>
+                      <p className="text-gray-500 text-xs">Fastest if you have the records ready to upload.</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="font-semibold text-gray-900 mb-2">By phone</p>
+                      <p className="text-gray-700 text-sm mb-2">Call the Katie Beckett team at <a href="tel:6782487449" className="text-primary hover:underline font-semibold">678-248-7449</a>.</p>
+                      <p className="text-gray-500 text-xs">They walk you through what they need.</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="font-semibold text-gray-900 mb-2">In person</p>
+                      <p className="text-gray-700 text-sm mb-2">Visit your local DFCS office. Ask for a Katie Beckett application.</p>
+                      <p className="text-gray-500 text-xs">Best if you want help filling out the forms.</p>
+                    </div>
+                  </div>
+
                   <div className="bg-gray-50 rounded-lg p-4 text-sm">
                     <p className="font-medium text-gray-900">Centralized Katie Beckett Medicaid Team</p>
-                    <p className="text-gray-600">5815 Live Oak Parkway, Suite D-2</p>
-                    <p className="text-gray-600">Norcross, GA 30093</p>
-                    <p className="text-gray-600 mt-2">
+                    <p className="text-gray-700">5815 Live Oak Parkway, Suite D-2</p>
+                    <p className="text-gray-700">Norcross, GA 30093</p>
+                    <p className="text-gray-700 mt-2">
                       <strong>Phone:</strong> 678-248-7449<br />
                       <strong>Fax:</strong> 678-248-7459
                     </p>
@@ -309,10 +501,36 @@ export default function KatieBeckettWaiverGeorgiaPage() {
             <div className="bg-white rounded-xl border border-gray-200 p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Complete the Application</h3>
-                  <p className="text-gray-600">
-                    Submit the Katie Beckett application along with your SSI denial letter and all medical documentation. The team will review your application and may request additional information.
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 mb-2">Fill out the three Katie Beckett forms</h3>
+                  <p className="text-gray-700 mb-4">Three forms from the Department of Community Health make up the Katie Beckett application. Your child&apos;s doctor fills out the medical parts.</p>
+
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold flex-shrink-0 text-xs">1</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Pediatric DMA Form</p>
+                        <p>The main application. Captures your child&apos;s diagnosis, treating doctors, and care history.</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold flex-shrink-0 text-xs">2</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Medical Necessity Level of Care Statement</p>
+                        <p>Your child&apos;s doctor signs this. It explains why your child needs hospital-level or nursing-facility-level care.</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold flex-shrink-0 text-xs">3</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Cost Effectiveness Form</p>
+                        <p>Shows that caring for your child at home costs less than caring for them in a facility. For nearly every child, this passes easily.</p>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <p className="text-gray-600 text-sm mt-4">
+                    The state has all three forms in English and Spanish. You can ask for them by phone, download them from <a href="https://medicaid.georgia.gov/programs/all-programs/tefrakatie-beckett" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">medicaid.georgia.gov</a>, or pick them up at a DFCS office.
                   </p>
                 </div>
               </div>
@@ -359,6 +577,145 @@ export default function KatieBeckettWaiverGeorgiaPage() {
         </div>
       </section>
 
+      {/* Timeline and medical evaluation */}
+      <section id="timeline" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            How long Katie Beckett takes
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Most families wait 45 to 90 days from start to finish. Here is how that time breaks down.
+          </p>
+
+          <div className="space-y-4 mb-8">
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">Week 1 to 2 — Application review</p>
+              <p className="text-gray-700 text-sm">The state checks if your application is complete. If something is missing, they will ask for it. Missing forms add weeks to your wait.</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">Week 3 to 8 — Medical evaluation</p>
+              <p className="text-gray-700 text-sm">A nurse or doctor reviews your child&apos;s medical records. They want to see if your child needs the kind of care a hospital or nursing home would give.</p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+              <p className="font-semibold text-gray-900 mb-1">Week 9 to 10 — Decision and approval letter</p>
+              <p className="text-gray-700 text-sm">The state mails you a letter with the answer. If approved, your child has Medicaid right away. The approval lasts at least two years.</p>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+              <p className="font-semibold text-green-900 mb-2">What speeds up your case</p>
+              <ul className="text-green-900 text-sm space-y-1 list-disc list-inside">
+                <li>A full medical history from your child&apos;s main doctor</li>
+                <li>Notes from any specialists who treat your child</li>
+                <li>A current treatment plan</li>
+                <li>Records of daily care your child needs</li>
+              </ul>
+            </div>
+            <div className="bg-red-50 border border-red-200 rounded-xl p-5">
+              <p className="font-semibold text-red-900 mb-2">What slows your case down</p>
+              <ul className="text-red-900 text-sm space-y-1 list-disc list-inside">
+                <li>Missing or old medical records</li>
+                <li>No proof of daily care needs</li>
+                <li>Records that do not match what the doctor wrote</li>
+                <li>No SSI denial letter on file</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700">
+            Once Katie Beckett is approved, you can start the GAPP nursing process. See our{' '}
+            <Link href="/gapp-approval-timeline" className="text-primary hover:underline">GAPP approval timeline</Link>{' '}
+            for how long GAPP takes after Medicaid is in place.
+          </p>
+        </div>
+      </section>
+
+      {/* If you are denied */}
+      <section id="appeals" className="py-12 sm:py-16 px-4 scroll-mt-24">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            If you are denied
+          </h2>
+          <p className="text-gray-700 mb-6">
+            A denial is not the end. You have the right to ask the state to look at your case again. This is called an appeal.
+          </p>
+
+          <p className="font-semibold text-gray-900 mb-3">Most denials come from one of three reasons</p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>The state did not see enough medical proof</li>
+            <li>Your child&apos;s care needs were not clear in the records</li>
+            <li>The SSI denial letter was missing from your file</li>
+          </ul>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-amber-900">You have 30 days to act</p>
+                <p className="text-amber-800 text-sm">From the date on your denial letter, you have 30 days to ask for a fair hearing. A fair hearing is the legal name for an appeal. You can ask by phone or in writing. The state will set a date for the hearing.</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="font-semibold text-gray-900 mb-3">What helps on appeal</p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>A letter from your child&apos;s doctor that spells out daily care needs</li>
+            <li>A log of how many hours of care your child gets each week</li>
+            <li>Records from any new doctor visits since you first applied</li>
+          </ul>
+
+          <p className="text-gray-700 mb-4">
+            If you need help, the <strong>Georgia Advocacy Office</strong> and <strong>Parent to Parent of Georgia</strong> are both free. They know how Katie Beckett works and can guide you through the appeal.
+          </p>
+
+          <p className="text-gray-700">
+            For more on common denial reasons, see our{' '}
+            <Link href="/why-gapp-applications-get-denied" className="text-primary hover:underline">guide to GAPP denials</Link>. Many of the same rules apply.
+          </p>
+        </div>
+      </section>
+
+      {/* Renewal and recertification */}
+      <section id="renewal" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+            Renewing your child&apos;s Katie Beckett
+          </h2>
+          <p className="text-gray-700 mb-4">
+            Katie Beckett approval lasts at least two years. Some families get a longer approval based on how stable their child&apos;s needs are.
+          </p>
+          <p className="text-gray-700 mb-6">
+            About 60 to 90 days before your approval ends, the state sends a renewal notice. Open it right away. The notice tells you what to do.
+          </p>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <svg className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-blue-900">Renewal is not a full new application</p>
+                <p className="text-blue-800 text-sm">The state wants updated medical records and a fresh medical evaluation. Your child&apos;s old approval stays in place while the renewal is being reviewed.</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="font-semibold text-gray-900 mb-3">What ends your child&apos;s Katie Beckett</p>
+          <ul className="space-y-2 text-gray-700 mb-6 list-disc list-inside ml-2">
+            <li>Missing the renewal window with no answer to the state</li>
+            <li>Your child going back to a hospital or nursing home for a long stay</li>
+            <li>Your child turning 18</li>
+          </ul>
+
+          <p className="text-gray-700">
+            If your child is close to 18, start planning for the next program early. GAPP nursing covers kids up to 21. Adult Medicaid waivers like ICWP or COMP may also fit your family.
+          </p>
+        </div>
+      </section>
+
       {/* What Katie Beckett Covers */}
       <section id="what-it-covers" className="py-12 sm:py-16 px-4 scroll-mt-24">
         <div className="max-w-3xl mx-auto">
@@ -380,11 +737,12 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               { title: 'Hospital stays', desc: 'Inpatient and outpatient hospital care, emergency room visits, and surgeries.' },
               { title: 'Prescription medications', desc: 'Covered prescriptions including specialty medications that private insurance often limits or denies.' },
               { title: 'Durable medical equipment', desc: 'Wheelchairs, feeding pumps, oxygen equipment, suction machines, hospital beds, and other equipment your child uses daily.' },
-              { title: 'Therapy services', desc: 'Physical therapy, occupational therapy, and speech therapy. These are often capped by private insurance but covered more fully through Medicaid.' },
-              { title: 'Home nursing through GAPP', desc: 'RN, LPN, and personal care services in your home. This is the big one for most families — private insurance rarely covers the hours medically fragile children actually need.' },
-              { title: 'Mental health services', desc: 'Behavioral health support, counseling, and psychiatric care for children who need it.' },
-              { title: 'Dental care', desc: 'Pediatric dental services including sedation dentistry when needed for children who can\'t tolerate regular dental visits.' },
-              { title: 'Medical transportation', desc: 'Non-emergency medical transportation to and from appointments. One less thing to figure out on appointment days.' },
+              { title: 'Therapy services', desc: 'Physical, occupational, and speech therapy. ABA therapy for autism is also covered with a written diagnosis and a prescription from your child\'s doctor.' },
+              { title: 'Home nursing through GAPP', desc: 'RN, LPN, and personal care services in your home. Private insurance rarely covers the hours medically fragile children actually need.' },
+              { title: 'Mental health services', desc: 'Counseling, psychiatric care, and ongoing behavioral support for kids who need it.' },
+              { title: 'Behavioral health crisis services', desc: 'Mobile crisis teams and short-term stabilization for kids in a behavioral health emergency. Separate from the routine mental health benefit.' },
+              { title: 'Dental and orthodontia', desc: 'Cleanings, fillings, and sedation dentistry for kids who cannot sit still. Braces are covered when a dentist writes a medical necessity letter showing why your child needs them.' },
+              { title: 'Medical transportation', desc: 'Non-emergency rides to and from appointments. One less thing to figure out on appointment days.' },
             ].map((item, i) => (
               <div key={i} className="bg-gray-50 rounded-xl p-4 border border-gray-200">
                 <p className="font-semibold text-gray-900 mb-1">{item.title}</p>
@@ -408,77 +766,88 @@ export default function KatieBeckettWaiverGeorgiaPage() {
       </section>
 
       {/* Katie Beckett vs GAPP */}
-      <section id="vs-gapp" className="py-12 sm:py-16 px-4 scroll-mt-24">
-        <div className="max-w-3xl mx-auto">
+      <section id="vs-other-programs" className="py-12 sm:py-16 px-4 scroll-mt-24">
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            Katie Beckett vs GAPP: What&apos;s the Difference?
+            Katie Beckett compared to other Georgia programs
           </h2>
 
-          <p className="text-gray-600 mb-8">
-            Many families confuse Katie Beckett and GAPP, but they serve different purposes and often work together:
+          <p className="text-gray-700 mb-8">
+            Georgia has several Medicaid programs that help children with serious needs. Each one does something different. Here is how the four that matter for kids line up.
           </p>
 
           <div className="overflow-x-auto mb-8">
-            <table className="w-full border-collapse">
+            <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="bg-gray-50">
-                  <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-900"></th>
-                  <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-primary">Katie Beckett</th>
-                  <th className="border border-gray-200 px-4 py-3 text-left font-semibold text-accent">GAPP</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-gray-900"></th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-primary">Katie Beckett (TEFRA)</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-accent">GAPP</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-gray-700">NOW Waiver</th>
+                  <th className="border border-gray-200 px-3 py-3 text-left font-semibold text-gray-700">COMP Waiver</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">What it is</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Medicaid eligibility pathway</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Service delivery program</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">What it is</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">A way to get Medicaid</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">A nursing service</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Daily life supports</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Heavy daily supports</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Purpose</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Gets your child ON Medicaid</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Provides in-home nursing care</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">Who it is for</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids with serious medical needs</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids who need home nursing</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids and adults with IDD</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Kids and adults with severe IDD</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Income limits</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">No family income limit</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Must have Medicaid first</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">Age range</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Under 18</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Under 21</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">All ages</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">All ages</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Age limit</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Under 18</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Under 21</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">Family income test</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None (child must already have Medicaid)</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">None</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Services</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Access to all Medicaid services</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">RN, LPN, and PCS in-home care</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">How to apply</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">678-248-7449 or gateway.ga.gov</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Pick a GAPP provider; they apply for you</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Sign up on the state DD waitlist</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Sign up on the state DD waitlist</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-200 px-4 py-3 font-medium text-gray-900 bg-gray-50">Choose provider?</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">N/A</td>
-                  <td className="border border-gray-200 px-4 py-3 text-gray-700">Yes - you choose your provider</td>
+                  <td className="border border-gray-200 px-3 py-3 font-medium text-gray-900 bg-gray-50">You choose the provider?</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">N/A</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Yes</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Yes</td>
+                  <td className="border border-gray-200 px-3 py-3 text-gray-700">Yes</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-            <h3 className="font-semibold text-green-900 mb-2">How They Work Together</h3>
-            <div className="flex items-center gap-2 text-green-800">
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1 bg-primary text-white rounded-full text-sm font-medium">Katie Beckett</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-                <span className="px-3 py-1 bg-green-600 text-white rounded-full text-sm font-medium">Medicaid</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-                <span className="px-3 py-1 bg-accent text-white rounded-full text-sm font-medium">GAPP Services</span>
-              </div>
+            <h3 className="font-semibold text-green-900 mb-3">How Katie Beckett and GAPP work together</h3>
+            <p className="text-green-900 mb-3">
+              Most Georgia families use Katie Beckett to get Medicaid. Then they sign up for GAPP to get home nursing care for their child.
+            </p>
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <span className="px-3 py-1 bg-primary text-white rounded-full font-medium">Katie Beckett</span>
+              <span className="text-green-800">→</span>
+              <span className="px-3 py-1 bg-green-600 text-white rounded-full font-medium">Medicaid</span>
+              <span className="text-green-800">→</span>
+              <span className="px-3 py-1 bg-accent text-white rounded-full font-medium">GAPP nursing</span>
             </div>
-            <p className="text-green-800 text-sm mt-3">
-              Many Georgia families use Katie Beckett to qualify for Medicaid, then enroll in GAPP to receive in-home nursing care for their medically fragile child.
+            <p className="text-green-900 text-sm mt-3">
+              NOW and COMP are different waivers run by the Georgia DD (Developmental Disabilities) office. They serve kids with mostly cognitive needs, not medical ones. Most families with medically fragile children use Katie Beckett plus GAPP, not the DD waivers.
             </p>
           </div>
         </div>
@@ -623,8 +992,11 @@ export default function KatieBeckettWaiverGeorgiaPage() {
       {/* Disclaimer */}
       <section className="py-8 bg-gray-100 border-t border-gray-200">
         <div className="max-w-3xl mx-auto px-4 text-center">
+          <p className="text-sm text-gray-500 mb-2">
+            <strong>Last updated:</strong> May 2026 (includes the April 15, 2026 online portal launch)
+          </p>
           <p className="text-sm text-gray-500">
-            This information is provided for educational purposes only and is not legal or medical advice. For official Katie Beckett eligibility information, contact Georgia&apos;s Centralized Katie Beckett Medicaid Team at 678-248-7449.
+            This information is for education only. It is not legal or medical advice. For official Katie Beckett eligibility information, contact the Centralized Katie Beckett Medicaid Team at <a href="tel:6782487449" className="underline hover:text-gray-700">678-248-7449</a>.
           </p>
         </div>
       </section>

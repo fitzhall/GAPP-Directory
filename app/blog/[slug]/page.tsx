@@ -57,8 +57,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         description={post.description}
         url={`https://www.georgiagapp.com/blog/${post.slug}`}
         datePublished={post.publishedAt}
-        dateModified={post.updatedAt}
-        author={post.author}
+        dateModified={post.updatedAt ?? post.publishedAt}
       />
       <BreadcrumbSchema
         items={[

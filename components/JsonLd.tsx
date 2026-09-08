@@ -236,50 +236,44 @@ export function WebPageSchema({
   return <JsonLd data={data} />
 }
 
-// Article Schema - for blog/editorial content
+// Article Schema - for long-form content pages with freshness signal
 interface ArticleSchemaProps {
   headline: string
-  description: string
-  url: string
-  datePublished: string
-  dateModified?: string
-  author?: string
-  image?: string
+  datePublished: string  // ISO 8601 (YYYY-MM-DD)
+  dateModified: string   // ISO 8601 (YYYY-MM-DD)
+  description?: string
+  url?: string
 }
 
 export function ArticleSchema({
   headline,
-  description,
-  url,
   datePublished,
   dateModified,
-  author = 'GeorgiaGAPP.com',
-  image,
+  description,
+  url,
 }: ArticleSchemaProps) {
-  const data: Record<string, unknown> = {
+  const data = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline,
-    description,
-    url,
     datePublished,
+    dateModified,
+    ...(description && { description }),
+    ...(url && { mainEntityOfPage: { '@type': 'WebPage', '@id': url } }),
     author: {
       '@type': 'Organization',
-      name: author,
+      name: 'GeorgiaGAPP',
+      url: 'https://www.georgiagapp.com',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'GeorgiaGAPP.com',
+      name: 'GeorgiaGAPP',
       url: 'https://www.georgiagapp.com',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.georgiagapp.com/logo.png',
+        url: 'https://www.georgiagapp.com/logo.webp',
       },
     },
   }
-
-  if (dateModified) data.dateModified = dateModified
-  if (image) data.image = image
-
   return <JsonLd data={data} />
 }

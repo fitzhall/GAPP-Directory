@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/track'
+import { GEORGIA_COUNTIES, formatCountyName } from '@/lib/county-data'
+import { countyFromZip } from '@/lib/zip-county'
 
 interface CallbackFormProps {
   providerId: string
@@ -57,7 +59,7 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
           phone: formState.phone,
           email: formState.email || undefined,
           zipCode: formState.zipCode,
-          county: formState.county || 'Unknown',
+          county: formState.county || countyFromZip(formState.zipCode) || 'Unknown',
           serviceNeeded: formState.serviceNeeded,
           urgency: formState.urgency,
           preferredCallbackTime: formState.preferredCallbackTime || undefined,
@@ -156,6 +158,26 @@ export function CallbackForm({ providerId, providerName }: CallbackFormProps) {
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
           required
         />
+      </div>
+
+      {/* County (optional) — helps match you to providers in your area */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          County <span className="text-gray-400">(optional)</span>
+        </label>
+        <select
+          value={formState.county}
+          onChange={(e) => setFormState(prev => ({ ...prev, county: e.target.value }))}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+        >
+          <option value="">Select your county...</option>
+          {GEORGIA_COUNTIES.map((slug) => {
+            const name = formatCountyName(slug)
+            return (
+              <option key={slug} value={name}>{name}</option>
+            )
+          })}
+        </select>
       </div>
 
       {/* Service Needed */}
