@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto'
+import { revalidatePath } from 'next/cache'
 
 function getSupabase() {
   return createClient(
@@ -72,7 +73,7 @@ export async function POST(request: NextRequest) {
       // Find provider by email
       const { data: provider, error: findError } = await supabase
         .from('providers')
-        .select('id, name, email, is_verified, tier_level')
+        .select('id, name, slug, email, is_verified, tier_level')
         .eq('email', customerEmail)
         .single()
 
@@ -147,6 +148,8 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to update provider' }, { status: 500 })
       }
 
+      revalidatePath(`/provider/${provider.slug}`)
+
       console.log(`Successfully upgraded provider: ${provider.name} (${customerEmail})`)
 
       return NextResponse.json({
@@ -169,7 +172,7 @@ export async function POST(request: NextRequest) {
       // Find and downgrade provider
       const { data: provider } = await supabase
         .from('providers')
-        .select('id, name')
+        .select('id, name, slug')
         .eq('email', customerEmail)
         .single()
 
@@ -182,6 +185,8 @@ export async function POST(request: NextRequest) {
             is_featured: false,
           })
           .eq('id', provider.id)
+
+        revalidatePath(`/provider/${provider.slug}`)
 
         console.log(`Downgraded provider: ${provider.name} (membership cancelled)`)
       }

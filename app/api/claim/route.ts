@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
+import { revalidatePath } from 'next/cache'
 
 function getSupabase() {
   return createClient(
@@ -120,6 +121,14 @@ export async function POST(request: NextRequest) {
         { error: 'Failed to claim profile: ' + updateError.message },
         { status: 500 }
       )
+    }
+
+    // Provider pages are ISR-cached; push this claim live now rather than
+    // waiting for the next rebuild.
+    const revalidatedSlug = (updatePayload.slug as string) || provider.slug
+    revalidatePath(`/provider/${revalidatedSlug}`)
+    if (revalidatedSlug !== provider.slug) {
+      revalidatePath(`/provider/${provider.slug}`)
     }
 
     // Verify the update worked
