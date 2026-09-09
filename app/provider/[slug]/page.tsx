@@ -10,6 +10,10 @@ import { CountiesSection } from '@/components/CountiesSection'
 import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { VerifiedProviderProfile } from '@/components/provider/VerifiedProviderProfile'
 
+// Rebuild at most hourly so provider changes (claims, verification, Whop
+// upgrades) reach visitors without waiting for a redeploy.
+export const revalidate = 3600
+
 // Service type labels
 const serviceLabels: Record<ServiceType, string> = {
   RN: 'Registered Nursing (RN)',

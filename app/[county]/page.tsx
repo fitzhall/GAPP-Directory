@@ -9,6 +9,10 @@ import { BreadcrumbSchema } from '@/components/JsonLd'
 import { MiniScreener } from '@/components/MiniScreener'
 import type { Provider, ProviderCardData } from '@/types/provider'
 
+// Rebuild at most hourly so provider changes (claims, verification, Whop
+// upgrades) reach visitors without waiting for a redeploy.
+export const revalidate = 3600
+
 // County data imported from lib/county-data.ts (single source of truth)
 
 function toProviderCard(provider: Provider): ProviderCardData {

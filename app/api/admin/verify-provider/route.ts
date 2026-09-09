@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
+import { revalidatePath } from 'next/cache'
 
 function getSupabase() {
   return createClient(
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
     // Get the provider
     const { data: provider, error: fetchError } = await supabase
       .from('providers')
-      .select('id, name, email, claimed_by_email, is_verified')
+      .select('id, name, slug, email, claimed_by_email, is_verified')
       .eq('id', providerId)
       .single()
 
@@ -57,6 +58,8 @@ export async function POST(request: NextRequest) {
       console.error('Error verifying provider:', updateError)
       return NextResponse.json({ error: 'Failed to verify provider' }, { status: 500 })
     }
+
+    revalidatePath(`/provider/${provider.slug}`)
 
     // Send verification confirmation email
     const recipientEmail = provider.claimed_by_email || provider.email
