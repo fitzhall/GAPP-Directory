@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     description: 'Find GAPP providers in Georgia. Search verified home care providers for medically fragile children - RN nursing, LPN, and personal care services.',
     images: [
       {
-        url: 'https://www.georgiagapp.com/og-image.png',
-        width: 1640,
-        height: 624,
+        url: 'https://www.georgiagapp.com/og-image.jpg',
+        width: 1200,
+        height: 630,
         alt: 'GeorgiaGAPP.com - Connecting Families with Quality GAPP Providers',
       },
     ],
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'GeorgiaGAPP.com | Find GAPP Providers',
     description: 'Connecting families with quality GAPP providers for special needs children in Georgia.',
-    images: ['https://www.georgiagapp.com/og-image.png'],
+    images: ['https://www.georgiagapp.com/og-image.jpg'],
   },
   robots: {
     index: true,

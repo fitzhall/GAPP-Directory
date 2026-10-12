@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     siteName: 'GeorgiaGAPP.com',
     images: [
       {
-        url: 'https://www.georgiagapp.com/og-image.png',
-        width: 1640,
-        height: 624,
+        url: 'https://www.georgiagapp.com/og-image.jpg',
+        width: 1200,
+        height: 630,
         alt: 'Georgia Pediatric Program (GAPP) - Complete Guide',
       },
     ],
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Georgia Pediatric Program (GAPP) – Complete Guide',
     description: 'Everything you need to know about the Georgia Pediatric Program: eligibility, services covered, and how to get started.',
-    images: ['https://www.georgiagapp.com/og-image.png'],
+    images: ['https://www.georgiagapp.com/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.georgiagapp.com/georgia-pediatric-program',
