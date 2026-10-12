@@ -23,7 +23,17 @@ export const GEORGIA_COUNTIES = [
   'wilkinson', 'worth'
 ]
 
+// Georgia county names that are not plain title case. The database stores
+// these spellings, so formatting the slug naively ("Dekalb") matched almost
+// none of the providers that serve DeKalb, McDuffie or McIntosh.
+const COUNTY_NAME_EXCEPTIONS: Record<string, string> = {
+  dekalb: 'DeKalb',
+  mcduffie: 'McDuffie',
+  mcintosh: 'McIntosh',
+}
+
 export function formatCountyName(slug: string): string {
+  if (COUNTY_NAME_EXCEPTIONS[slug]) return COUNTY_NAME_EXCEPTIONS[slug]
   return slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
