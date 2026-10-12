@@ -9,6 +9,7 @@ import { PaginatedProviderList } from '@/components/PaginatedProviderList'
 import { BreadcrumbSchema } from '@/components/JsonLd'
 import { MiniScreener } from '@/components/MiniScreener'
 import type { Provider, ProviderCardData } from '@/types/provider'
+import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 // Rebuild at most hourly so provider changes (claims, verification, Whop
 // upgrades) reach visitors without waiting for a redeploy.
@@ -70,7 +71,7 @@ const getProvidersByCounty = cache(async (countyName: string): Promise<Provider[
 
   const { data, error } = await supabase
     .from('providers')
-    .select('*')
+    .select(PUBLIC_PROVIDER_COLUMNS)
     .eq('is_active', true)
     .overlaps('counties_served', spellings)
     .order('is_featured', { ascending: false })

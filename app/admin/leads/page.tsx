@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
+import { adminData } from '@/lib/admin-data'
 
 interface Lead {
   id: string
@@ -40,13 +40,7 @@ export default function LeadsPage() {
 
   async function fetchLeads() {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('callback_requests')
-      .select(`
-        *,
-        provider:providers(id, name, slug)
-      `)
-      .order('created_at', { ascending: false })
+    const { data, error } = await adminData<Lead[]>('leads.list')
 
     if (error) {
       console.error('Error fetching leads:', error)
@@ -72,10 +66,7 @@ export default function LeadsPage() {
       updates.contacted_at = new Date().toISOString()
     }
 
-    const { error } = await supabase
-      .from('callback_requests')
-      .update(updates)
-      .eq('id', id)
+    const { error } = await adminData('leads.update', { id, updates })
 
     if (error) {
       console.error('Error updating lead:', error)

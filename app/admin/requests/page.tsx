@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
+import { adminData } from '@/lib/admin-data'
 
 interface ListingRequest {
   id: string
@@ -37,10 +37,7 @@ export default function AdminRequestsPage() {
 
   async function fetchRequests() {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('listing_requests')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const { data, error } = await adminData<ListingRequest[]>('requests.list')
 
     if (error) {
       console.error('Error fetching listing requests:', error)
@@ -77,9 +74,8 @@ export default function AdminRequestsPage() {
         .replace(/^-|-$/g, '')
 
       // Create the provider
-      const { data: newProvider, error: providerError } = await supabase
-        .from('providers')
-        .insert({
+      const { data: newProvider, error: providerError } = await adminData<{ id: string }>('providers.insert', {
+        values: {
           name: request.business_name,
           slug: slug,
           city: request.city,
@@ -96,9 +92,8 @@ export default function AdminRequestsPage() {
           is_featured: false,
           accepting_new_patients: false,
           tier_level: 1, // Claimed tier
-        })
-        .select()
-        .single()
+        },
+      })
 
       if (providerError) {
         console.error('Error creating provider:', providerError)
@@ -108,15 +103,21 @@ export default function AdminRequestsPage() {
       }
 
       // Update the listing request
-      const { error: updateError } = await supabase
-        .from('listing_requests')
-        .update({
+      if (!newProvider) {
+        alert('Failed to create provider')
+        setProcessing(null)
+        return
+      }
+
+      const { error: updateError } = await adminData('requests.update', {
+        id: request.id,
+        updates: {
           status: 'approved',
           reviewed_at: new Date().toISOString(),
           reviewed_by: 'admin',
           provider_id: newProvider.id,
-        })
-        .eq('id', request.id)
+        },
+      })
 
       if (updateError) {
         console.error('Error updating request:', updateError)
@@ -147,15 +148,15 @@ export default function AdminRequestsPage() {
 
     setProcessing(request.id)
 
-    const { error } = await supabase
-      .from('listing_requests')
-      .update({
+    const { error } = await adminData('requests.update', {
+      id: request.id,
+      updates: {
         status: 'rejected',
         reviewed_at: new Date().toISOString(),
         reviewed_by: 'admin',
         review_notes: reason || null,
-      })
-      .eq('id', request.id)
+      },
+    })
 
     if (error) {
       console.error('Error rejecting request:', error)

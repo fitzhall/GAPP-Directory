@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
   try {
     let query = supabase
       .from('providers')
-      .select('*', { count: 'exact' })
+      .select(PUBLIC_PROVIDER_COLUMNS, { count: 'exact' })
       .eq('is_active', true)
 
     // Filters would be applied here if using server-side filtering

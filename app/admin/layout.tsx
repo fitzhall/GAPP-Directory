@@ -18,14 +18,19 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [adminUser, setAdminUser] = useState('')
   const pathname = usePathname()
 
+  // The session lives in an httpOnly cookie the server checks on every admin
+  // API call; ask the server whether this browser is signed in.
   useEffect(() => {
-    const auth = sessionStorage.getItem('admin_auth')
-    const user = sessionStorage.getItem('admin_user')
-    if (auth === 'true') {
-      setIsAuthenticated(true)
-      setAdminUser(user || 'admin')
-    }
-    setIsLoading(false)
+    fetch('/api/admin/auth')
+      .then(res => (res.ok ? res.json() : null))
+      .then(data => {
+        if (data?.authenticated) {
+          setIsAuthenticated(true)
+          setAdminUser(data.username || 'admin')
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsLoading(false))
   }, [])
 
   async function handleLogin(e: React.FormEvent) {
@@ -43,8 +48,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       const data = await res.json()
 
       if (res.ok && data.success) {
-        sessionStorage.setItem('admin_auth', 'true')
-        sessionStorage.setItem('admin_user', data.username || 'admin')
         setIsAuthenticated(true)
         setAdminUser(data.username || 'admin')
       } else {
@@ -58,8 +61,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   function handleLogout() {
-    sessionStorage.removeItem('admin_auth')
-    sessionStorage.removeItem('admin_user')
+    fetch('/api/admin/auth', { method: 'DELETE' }).catch(() => {})
     setIsAuthenticated(false)
     setAdminUser('')
     setUsername('')

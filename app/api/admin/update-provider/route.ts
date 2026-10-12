@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { requireAdmin } from '@/lib/admin-session'
+import { createServiceClient } from '@/lib/supabase-service'
 
-// Use service role for admin operations
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! // Using anon key since service role has issues
-)
 
 function slugify(text: string): string {
   return text
@@ -17,6 +13,11 @@ function slugify(text: string): string {
 }
 
 export async function POST(request: NextRequest) {
+  const denied = requireAdmin(request)
+  if (denied) return denied
+
+  const supabase = createServiceClient()
+
   try {
     const body = await request.json()
     const {

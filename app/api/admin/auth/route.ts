@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { adminFromRequest, setAdminCookie, clearAdminCookie } from '@/lib/admin-session'
 
 interface AdminUser {
   username: string
@@ -34,7 +35,9 @@ export async function POST(request: NextRequest) {
       )
 
       if (user) {
-        return NextResponse.json({ success: true, username: user.username, role: user.role })
+        const response = NextResponse.json({ success: true, username: user.username, role: user.role })
+        setAdminCookie(response, user.username)
+        return response
       }
 
       return NextResponse.json({ error: 'Invalid username or password' }, { status: 401 })
@@ -48,7 +51,9 @@ export async function POST(request: NextRequest) {
     }
 
     if (password === adminPassword) {
-      return NextResponse.json({ success: true, username: 'admin' })
+      const response = NextResponse.json({ success: true, username: 'admin' })
+      setAdminCookie(response, 'admin')
+      return response
     }
 
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
@@ -56,4 +61,18 @@ export async function POST(request: NextRequest) {
     console.error('Admin auth error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
+}
+
+// Is this browser signed in? The admin layout asks on load.
+export async function GET(request: NextRequest) {
+  const username = adminFromRequest(request)
+  if (!username) return NextResponse.json({ authenticated: false }, { status: 401 })
+  return NextResponse.json({ authenticated: true, username })
+}
+
+// Sign out.
+export async function DELETE() {
+  const response = NextResponse.json({ success: true })
+  clearAdminCookie(response)
+  return response
 }

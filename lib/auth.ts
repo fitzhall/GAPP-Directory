@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { createServiceClient } from '@/lib/supabase-service'
 
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies()
@@ -28,7 +29,10 @@ export async function getProviderSession() {
 
   if (!user) return null
 
-  const { data: provider } = await supabase
+  // The signed-in user is verified above; their own row (including the
+  // claimer email, which the public roles cannot read) is fetched on the
+  // server with the service role.
+  const { data: provider } = await createServiceClient()
     .from('providers')
     .select('id, name, slug, tier_level, is_verified, is_featured, claimed_by_email')
     .eq('auth_user_id', user.id)

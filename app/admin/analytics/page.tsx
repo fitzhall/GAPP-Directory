@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { supabase } from '@/lib/supabase'
+import { adminData } from '@/lib/admin-data'
 import { DashboardCharts } from '@/components/DashboardCharts'
 
 interface ProviderEvent {
@@ -61,26 +61,16 @@ export default function AdminAnalyticsPage() {
   async function fetchData() {
     setLoading(true)
 
-    const [eventsRes, providersRes, callbacksRes] = await Promise.all([
-      supabase
-        .from('provider_events')
-        .select('provider_id, event_type, created_at')
-        .gte('created_at', thirtyDaysAgo),
-      supabase
-        .from('providers')
-        .select('id, name, slug, city, is_claimed, is_verified, is_featured, tier_level')
-        .eq('is_active', true)
-        .order('name'),
-      supabase
-        .from('callback_requests')
-        .select('id, parent_name, county, urgency, service_needed, created_at, provider_id')
-        .gte('created_at', thirtyDaysAgo)
-        .order('created_at', { ascending: false }),
-    ])
+    const { data, error } = await adminData<{
+      events: typeof events
+      providers: typeof providers
+      callbacks: typeof callbacks
+    }>('analytics.load', { since: thirtyDaysAgo })
 
-    if (eventsRes.data) setEvents(eventsRes.data)
-    if (providersRes.data) setProviders(providersRes.data)
-    if (callbacksRes.data) setCallbacks(callbacksRes.data)
+    if (error) console.error('Error loading analytics:', error)
+    if (data?.events) setEvents(data.events)
+    if (data?.providers) setProviders(data.providers)
+    if (data?.callbacks) setCallbacks(data.callbacks)
 
     setLoading(false)
   }

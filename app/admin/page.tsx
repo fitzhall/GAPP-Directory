@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
+import { adminData } from '@/lib/admin-data'
 
 interface ProviderAdmin {
   id: string
@@ -104,29 +104,10 @@ export default function AdminPage() {
 
   async function fetchProviders() {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('providers')
-      .select('id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claimer_name, claimer_phone, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason, missed_checkin_at')
-      .order('name')
+    const { data, error } = await adminData<any[]>('providers.list')
 
     if (error) {
       console.error('Error fetching providers:', error)
-      // If columns don't exist yet, try without them
-      if (error.message?.includes('is_claimed') || error.message?.includes('claim_token')) {
-        const { data: fallbackData } = await supabase
-          .from('providers')
-          .select('id, name, slug, city, email, phone, website, services_offered, languages, is_verified, is_featured, accepting_new_patients, tier_level, created_at, counties_served')
-          .order('name')
-        const transformed = (fallbackData || []).map(p => ({
-          ...p,
-          county: p.counties_served?.[0] || 'Unknown',
-          languages: p.languages || ['English'],
-          is_claimed: false,
-          claimed_by_email: null,
-          claim_token: null
-        }))
-        setProviders(transformed)
-      }
     } else {
       const transformed = (data || []).map(p => ({
         ...p,
@@ -219,10 +200,7 @@ export default function AdminPage() {
   // Update provider field
   async function updateProvider(id: string, updates: Partial<ProviderAdmin>) {
     setUpdating(id)
-    const { error } = await supabase
-      .from('providers')
-      .update(updates)
-      .eq('id', id)
+    const { error } = await adminData('providers.update', { id, updates })
 
     if (error) {
       console.error('Error updating provider:', error)
@@ -366,11 +344,10 @@ export default function AdminPage() {
 
   // Fetch provider's full details (counties, languages)
   async function fetchProviderDetails(providerId: string) {
-    const { data } = await supabase
-      .from('providers')
-      .select('counties_served, languages')
-      .eq('id', providerId)
-      .single()
+    const { data } = await adminData<{ counties_served: string[]; languages: string[] }>(
+      'providers.details',
+      { id: providerId }
+    )
 
     if (data) {
       setEditForm(prev => ({
