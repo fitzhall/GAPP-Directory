@@ -1,5 +1,7 @@
 -- 009: lock the public key out of everything it should not read or change.
 --
+-- Applied 2026-10-12 with `supabase db query --linked -f` (CLI 2.120).
+--
 -- Before (found 2026-10-12): providers and callback_requests had "allow all"
 -- policies with no role attached, so anyone holding the public (anon) key,
 -- which ships in every visitor's browser, could read the family callback
@@ -64,6 +66,17 @@ CREATE POLICY "Anyone can create callback requests" ON public.callback_requests
   WITH CHECK (true);
 
 GRANT INSERT ON public.callback_requests TO anon, authenticated;
+
+-- provider_cards: a view over the public provider columns. Reading it is
+-- harmless, but a write through it reaches the providers table as the view's
+-- owner, around the rules above. listing_requests and provider_issues had row
+-- security switched off entirely; the loop above switched it on.
+DO $$
+BEGIN
+  IF to_regclass('public.provider_cards') IS NOT NULL THEN
+    REVOKE INSERT, UPDATE, DELETE, TRUNCATE ON public.provider_cards FROM anon, authenticated;
+  END IF;
+END $$;
 
 COMMIT;
 
