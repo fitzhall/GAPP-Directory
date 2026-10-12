@@ -9,6 +9,7 @@ import { TrackableLink } from '@/components/TrackableLink'
 import { CountiesSection } from '@/components/CountiesSection'
 import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { VerifiedProviderProfile } from '@/components/provider/VerifiedProviderProfile'
+import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 // Rebuild at most hourly so provider changes (claims, verification, Whop
 // upgrades) reach visitors without waiting for a redeploy.
@@ -28,7 +29,7 @@ interface ProviderData extends Provider {
 async function getProvider(slug: string): Promise<ProviderData | null> {
   const { data, error } = await supabase
     .from('providers')
-    .select('*')
+    .select(PUBLIC_PROVIDER_COLUMNS)
     .eq('slug', slug)
     .eq('is_active', true)
     .single()

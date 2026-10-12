@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ProviderCard } from '@/components/ProviderCard'
 import { supabase, toProviderCard } from '@/lib/supabase'
 import type { Provider, ServiceType, ProviderCardData } from '@/types/provider'
+import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 // Georgia counties - dynamically populated from data
 const GEORGIA_COUNTIES = [
@@ -58,7 +59,7 @@ function DirectoryContent() {
       try {
         const query = supabase
           .from('providers')
-          .select('*')
+          .select(PUBLIC_PROVIDER_COLUMNS)
           .eq('is_active', true)
           .order('is_featured', { ascending: false })
           .order('tier_level', { ascending: false })

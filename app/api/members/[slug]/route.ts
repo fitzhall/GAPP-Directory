@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 export async function GET(
   request: NextRequest,
@@ -10,7 +11,7 @@ export async function GET(
 
     const { data: provider, error } = await supabase
       .from('providers')
-      .select('*')
+      .select(PUBLIC_PROVIDER_COLUMNS)
       .eq('slug', slug)
       .eq('is_active', true)
       .single()

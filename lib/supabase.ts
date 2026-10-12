@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Provider, ProviderCardData, CallbackRequest, ProviderFilters } from '@/types/provider';
+import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns';
 
 // Environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -18,7 +19,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export async function getProviders(filters?: ProviderFilters): Promise<Provider[]> {
   let query = supabase
     .from('providers')
-    .select('*')
+    .select(PUBLIC_PROVIDER_COLUMNS)
     .eq('is_active', true);
 
   // Apply filters
@@ -72,7 +73,7 @@ export async function getProviders(filters?: ProviderFilters): Promise<Provider[
 export async function getProviderBySlug(slug: string): Promise<Provider | null> {
   const { data, error } = await supabase
     .from('providers')
-    .select('*')
+    .select(PUBLIC_PROVIDER_COLUMNS)
     .eq('slug', slug)
     .eq('is_active', true)
     .single();
@@ -99,7 +100,7 @@ export async function getProvidersByCounty(county: string): Promise<Provider[]> 
 export async function getFeaturedProviders(limit = 6): Promise<Provider[]> {
   const { data, error } = await supabase
     .from('providers')
-    .select('*')
+    .select(PUBLIC_PROVIDER_COLUMNS)
     .eq('is_active', true)
     .eq('is_featured', true)
     .order('name')

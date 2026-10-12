@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireAdmin } from '@/lib/admin-session'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -8,6 +9,9 @@ const WHOP_VERIFIED_URL = 'https://whop.com/bitcoin-estate-commission-inc/verfie
 const WHOP_PREMIUM_URL = 'https://whop.com/bitcoin-estate-commission-inc/premium-listing/'
 
 export async function POST(request: NextRequest) {
+  const denied = requireAdmin(request)
+  if (denied) return denied
+
   try {
     const { providerName, providerEmail } = await request.json()
 

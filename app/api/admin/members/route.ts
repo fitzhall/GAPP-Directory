@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
-
-// Note: In production, add authentication/authorization here
+import { requireAdmin } from '@/lib/admin-session'
+import { createServiceClient } from '@/lib/supabase-service'
 
 export async function GET(request: NextRequest) {
-  const authHeader = request.headers.get('authorization')
+  const denied = requireAdmin(request)
+  if (denied) return denied
 
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    )
-  }
+  const supabase = createServiceClient()
 
   try {
     const { data: providers, error } = await supabase
