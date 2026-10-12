@@ -1,4 +1,4 @@
--- 012 (NOT YET APPLIED): strip glued counties from names and cities the
+-- 012: strip glued counties from names and cities the
 -- state list can't vouch for. After 010/011 the rows left garbled are ones the
 -- Aug 2026 state list does not cover; the damage is the same import glue: a
 -- county stuck onto the end (sometimes start) of the name ("Agape Family

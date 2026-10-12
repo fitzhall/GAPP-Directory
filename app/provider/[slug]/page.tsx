@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
@@ -14,6 +14,17 @@ import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 // Rebuild at most hourly so provider changes (claims, verification, Whop
 // upgrades) reach visitors without waiting for a redeploy.
 export const revalidate = 3600
+
+// A retired duplicate listing forwards to the listing that was kept
+// (provider_slug_redirects, supabase/migrations/013). Returns the kept slug.
+async function getRedirectSlug(slug: string): Promise<string | null> {
+  const { data } = await supabase
+    .from('provider_slug_redirects')
+    .select('new_slug')
+    .eq('old_slug', slug)
+    .maybeSingle()
+  return data?.new_slug ?? null
+}
 
 // Service type labels
 const serviceLabels: Record<ServiceType, string> = {
@@ -132,6 +143,8 @@ export default async function ProviderPage({
   const provider = await getProvider(slug)
 
   if (!provider) {
+    const keptSlug = await getRedirectSlug(slug)
+    if (keptSlug) permanentRedirect(`/provider/${keptSlug}`)
     notFound()
   }
 
