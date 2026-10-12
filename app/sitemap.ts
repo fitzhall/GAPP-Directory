@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
-import { GEORGIA_COUNTIES } from '@/lib/county-data'
+import { GEORGIA_COUNTIES, formatCountyName } from '@/lib/county-data'
 import { getAllBlogPosts } from '@/lib/blog-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -224,23 +224,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // County pages
-  const countyPages: MetadataRoute.Sitemap = GEORGIA_COUNTIES.map(county => ({
-    url: `${baseUrl}/${county}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }))
+  // One query for every active provider; it feeds both the county pages and
+  // the provider pages below.
+  let providers: {
+    slug: string
+    updated_at: string
+    is_featured: boolean
+    is_verified: boolean
+    is_claimed: boolean | null
+    counties_served: string[] | null
+  }[] | null = null
+  try {
+    const { data } = await supabase
+      .from('providers')
+      .select('slug, updated_at, is_featured, is_verified, is_claimed, counties_served')
+      .eq('is_active', true)
+    providers = data
+  } catch (error) {
+    console.error('Error fetching providers for sitemap:', error)
+  }
+
+  // County pages - leave out counties no active provider serves. Those pages
+  // are noindexed (app/[county]/page.tsx), so listing them here would send
+  // Google mixed signals. Lowercase match covers spellings like "Dekalb".
+  // If the query failed, list every county as before.
+  const servedCounties = providers
+    ? new Set(providers.flatMap(p => (p.counties_served || []).map(c => c.toLowerCase())))
+    : null
+  const countyPages: MetadataRoute.Sitemap = GEORGIA_COUNTIES
+    .filter(county => !servedCounties || servedCounties.has(formatCountyName(county).toLowerCase()))
+    .map(county => ({
+      url: `${baseUrl}/${county}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }))
 
   // Provider pages - ALL active providers (so agencies can find themselves on Google)
   // Priority: Premium > Verified > Claimed > Unclaimed
   let providerPages: MetadataRoute.Sitemap = []
   try {
-    const { data: providers } = await supabase
-      .from('providers')
-      .select('slug, updated_at, is_featured, is_verified, is_claimed')
-      .eq('is_active', true)
-
     if (providers) {
       providerPages = providers.map(provider => {
         // Higher priority for higher tiers - incentivizes claiming/upgrading

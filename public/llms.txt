@@ -25,14 +25,33 @@ The Georgia Pediatric Program (GAPP) is a Medicaid waiver program that provides 
 
 ## Key Pages
 
-- /georgia-pediatric-program - Complete guide to understanding GAPP
-- /gapp-providers-georgia - Search all GAPP providers by county
-- /directory - Main provider search with filters
-- /gapp-approval-guide - Step-by-step application process
-- /gapp-approval-timeline - Expected approval timeframes
-- /katie-beckett-waiver-georgia - Alternative Medicaid eligibility pathway
-- /screener - Check if your child qualifies for GAPP
-- /quiz - Get matched with providers based on your needs
+- [Find GAPP Providers | Georgia Home Care Provider Directory](https://www.georgiagapp.com/directory): Providers by county. Filter by any Georgia county, service type (RN, LPN, PCS), name, or city; each county also has its own page, such as https://www.georgiagapp.com/fulton.
+- [GAPP Eligibility Screener | Check If Your Child Qualifies](https://www.georgiagapp.com/screener): A short questionnaire on whether a child may qualify for GAPP.
+- [Find the Right Provider | GAPP Provider Matching Quiz](https://www.georgiagapp.com/quiz): Matches a family with providers based on county and care needs.
+
+## Guides
+
+- [Georgia Pediatric Program (GAPP): Eligibility & Services](https://www.georgiagapp.com/georgia-pediatric-program): What GAPP is, who qualifies, and which services it covers.
+- [GAPP Providers in Georgia: Find Verified Home Care](https://www.georgiagapp.com/gapp-providers-georgia): How GAPP home health agencies in Georgia are listed and how to search them.
+- [GAPP Home Care in Georgia: In-Home Pediatric Nursing](https://www.georgiagapp.com/gapp-home-care): What in-home GAPP care includes and how Medicaid pays for it.
+- [Care for Medically Fragile Children in Georgia](https://www.georgiagapp.com/medically-fragile-children-care): Care options in Georgia for children with complex medical needs.
+- [How to Get Approved for GAPP in Georgia: Step-by-Step](https://www.georgiagapp.com/gapp-approval-guide): The GAPP approval process step by step, and the common delays to avoid.
+- [GAPP Approval Timeline 2026: How Long It Really Takes](https://www.georgiagapp.com/gapp-approval-timeline): How long each approval stage usually takes before care starts.
+- [GAPP Medicaid Requirements: Georgia Eligibility Guide](https://www.georgiagapp.com/gapp-medicaid-requirements): What active Medicaid means for GAPP and how to check a child's status.
+- [Why GAPP Applications Get Denied in Georgia](https://www.georgiagapp.com/why-gapp-applications-get-denied): Common denial reasons and how to appeal a denial.
+- [Katie Beckett Waiver Georgia: Eligibility & Application](https://www.georgiagapp.com/katie-beckett-waiver-georgia): Katie Beckett (TEFRA) eligibility, income rules, and how to apply in Georgia.
+- [Pediatric Home Nursing in Georgia: Find In-Home Nurses](https://www.georgiagapp.com/pediatric-home-nursing-georgia): How GAPP-funded RN and LPN home nursing works for children.
+- [How to Become a GAPP Provider in Georgia (2026 Guide)](https://www.georgiagapp.com/how-to-become-a-gapp-provider): Licensing and Medicaid enrollment steps for agencies that want to offer GAPP care.
+- [Can You Get Paid as a GAPP Caregiver? Georgia Guide](https://www.georgiagapp.com/gapp-paid-caregiver): Whether and how family members get paid for GAPP personal care.
+- [Get Paid to Be a Family Caregiver in Georgia (2026)](https://www.georgiagapp.com/get-paid-family-caregiver-georgia): How parents and relatives get paid through GAPP and Medicaid PCS.
+- [GAPP Pediatric Nursing Services in Georgia (RN & LPN)](https://www.georgiagapp.com/gapp-nursing-services): What RN and LPN nursing under GAPP covers and how hours are approved.
+- [GAPP vs CCSP: Which Georgia Waiver Program Fits Your Child?](https://www.georgiagapp.com/gapp-vs-ccsp): How GAPP and CCSP differ in eligibility, services, and wait times.
+- [How to Apply for GAPP in Georgia: Steps & Documents](https://www.georgiagapp.com/how-to-apply-for-gapp): The documents needed to apply and where to submit them.
+- [GAPP Services Explained: RN, LPN & PCS Care in Georgia](https://www.georgiagapp.com/gapp-services-explained): What a GAPP nurse or aide does in the home, with examples.
+- [How to Switch GAPP Providers in Georgia: Steps and Timeline](https://www.georgiagapp.com/how-to-switch-gapp-providers): How to change agencies without a gap in services.
+- [GAPP Respite Care in Georgia: Backup Nursing Hours](https://www.georgiagapp.com/gapp-respite-care): Who qualifies for respite hours and how to request them.
+- [Long Term Care for Children in Georgia: Your Options](https://www.georgiagapp.com/long-term-care-children-georgia): Long-term care options for children, including GAPP, Katie Beckett, therapy, and equipment.
+- [Sick child care in Georgia: options when daycare isn't enough](https://www.georgiagapp.com/sick-child-care-georgia): Care options when a child is too medically complex for regular daycare.
 
 ## Provider Information
 
