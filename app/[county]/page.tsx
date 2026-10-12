@@ -38,11 +38,18 @@ function toProviderCard(provider: Provider): ProviderCardData {
 const FREE_TIER_COUNTY_LIMIT = 5
 
 async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
+  // A few rows still carry the plain title-case spelling ("Dekalb" for
+  // DeKalb); match either so those providers are not dropped.
+  const spellings = Array.from(new Set([
+    countyName,
+    countyName.replace(/\B[A-Z]/g, c => c.toLowerCase()),
+  ]))
+
   const { data, error } = await supabase
     .from('providers')
     .select('*')
     .eq('is_active', true)
-    .contains('counties_served', [countyName])
+    .overlaps('counties_served', spellings)
     .order('is_featured', { ascending: false })
     .order('is_verified', { ascending: false })
     .order('is_claimed', { ascending: false })
@@ -60,7 +67,7 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
     // For non-verified, check if this county is in their first 5 visible counties
     const sortedCounties = [...(row.counties_served || [])].sort()
     const visibleCounties = sortedCounties.slice(0, FREE_TIER_COUNTY_LIMIT)
-    return visibleCounties.includes(countyName)
+    return visibleCounties.some(c => spellings.includes(c))
   })
 
   return filteredData.map(row => ({
