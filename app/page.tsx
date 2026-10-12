@@ -1,5 +1,14 @@
 import Link from 'next/link'
 import { config } from '@/lib/config'
+import type { Metadata } from 'next'
+
+// Title and description come from app/layout.tsx; the home page only
+// needs its own canonical so www.georgiagapp.com/ is the one indexed URL.
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://www.georgiagapp.com',
+  },
+}
 
 export default function HomePage() {
   return (
