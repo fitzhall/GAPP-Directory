@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
@@ -37,7 +38,29 @@ function toProviderCard(provider: Provider): ProviderCardData {
 
 const FREE_TIER_COUNTY_LIMIT = 5
 
-async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
+// How many provider cards the first page of PaginatedProviderList puts in the
+// server-rendered HTML. Anything past this sits behind client-side buttons.
+const CARDS_PER_PAGE = 9
+
+// Cleans up the city column for the plain link list. Some rows hold the state
+// ("Georgia") or a street/county glued to the city ("CobbPowder Springs",
+// "th FloorEllenwood"); those get no city at all. A lowercase letter followed
+// by a capital marks the glue, except name prefixes like McDonough, LaGrange.
+// ALL-CAPS cities are title-cased.
+function displayCity(city: string | null | undefined): string | null {
+  const c = (city || '').trim()
+  if (!/^[A-Z][A-Za-z .'-]*$/.test(c)) return null
+  if (/^(georgia|ga|unknown|n\/a|none)$/i.test(c)) return null
+  if (/[a-z][A-Z]/.test(c.replace(/\b(Mc|Mac|La|De)(?=[A-Z])/g, ''))) return null
+  if (c !== c.toUpperCase()) return c
+  return c
+    .toLowerCase()
+    .replace(/(^|[\s-])([a-z])/g, (_, sep, ch) => sep + ch.toUpperCase())
+    .replace(/\bMc([a-z])/g, (_, ch) => 'Mc' + ch.toUpperCase())
+}
+
+// cache() so generateMetadata and the page share one query per render.
+const getProvidersByCounty = cache(async (countyName: string): Promise<Provider[]> => {
   // A few rows still carry the plain title-case spelling ("Dekalb" for
   // DeKalb); match either so those providers are not dropped.
   const spellings = Array.from(new Set([
@@ -61,7 +84,7 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
   }
 
   // Filter: non-verified providers only appear for their first 5 counties (alphabetically)
-  const filteredData = (data || []).filter(row => {
+  const freeTierData = (data || []).filter(row => {
     if (row.is_verified) return true // Verified providers appear for all counties
 
     // For non-verified, check if this county is in their first 5 visible counties
@@ -69,6 +92,13 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
     const visibleCounties = sortedCounties.slice(0, FREE_TIER_COUNTY_LIMIT)
     return visibleCounties.some(c => spellings.includes(c))
   })
+
+  // Empty-county fallback. The 5-county limit is an upsell lever where
+  // providers compete for a county. Where it would leave the page with nobody
+  // at all, it helps no family, and an empty county page reads as a doorway
+  // page to Google. So if the free-tier rule empties the county, show every
+  // active provider that serves it (same sort order as above).
+  const filteredData = freeTierData.length > 0 ? freeTierData : (data || [])
 
   return filteredData.map(row => ({
     id: row.id,
@@ -102,7 +132,7 @@ async function getProvidersByCounty(countyName: string): Promise<Provider[]> {
     verifiedAt: row.verified_at,
     featuredAt: row.featured_at,
   }))
-}
+})
 
 // Generate metadata for SEO - dynamic and unique per county
 export async function generateMetadata({
@@ -119,6 +149,12 @@ export async function generateMetadata({
 
   const countyName = formatCountyName(countySlug)
   const context = COUNTY_CONTEXT[countySlug]
+
+  // A county with no provider at all (even after the empty-county fallback)
+  // stays reachable for visitors but out of the index. app/sitemap.ts leaves
+  // the same counties out.
+  const providers = await getProvidersByCounty(countyName)
+  const robots = providers.length === 0 ? { index: false, follow: true } : undefined
 
   // Dynamic description based on county context
   let description: string
@@ -138,6 +174,7 @@ export async function generateMetadata({
     title: `GAPP Providers in ${countyName} County, Georgia | Pediatric Home Care`,
     description,
     keywords: `${baseKeywords}${regionKeywords}${cityKeywords}`,
+    ...(robots && { robots }),
     alternates: {
       canonical: `https://www.georgiagapp.com/${countySlug}`,
     },
@@ -341,8 +378,36 @@ export default async function CountyPage({
         ) : (
           <PaginatedProviderList
             providers={providers.map(toProviderCard)}
-            pageSize={9}
+            pageSize={CARDS_PER_PAGE}
           />
+        )}
+
+        {/* Full provider list - plain links in the server HTML so crawlers and
+            families can reach every provider, not just the first page of cards */}
+        {providers.length > CARDS_PER_PAGE && (
+          <section className="mt-8 bg-white rounded-xl border border-gray-200 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              All {providers.length} GAPP providers serving {countyName} County
+            </h2>
+            <ul className="text-sm text-gray-600 sm:columns-2 lg:columns-3 gap-x-8">
+              {[...providers]
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(provider => {
+                  const city = displayCity(provider.city)
+                  return (
+                    <li key={provider.id} className="py-1 break-inside-avoid">
+                      <Link
+                        href={`/provider/${provider.slug}`}
+                        className="text-gray-700 hover:text-primary hover:underline"
+                      >
+                        {provider.name}
+                      </Link>
+                      {city && <span className="text-gray-400"> · {city}</span>}
+                    </li>
+                  )
+                })}
+            </ul>
+          </section>
         )}
 
         {/* SEO content - Unique regional context for Google (not redundant with stats above) */}

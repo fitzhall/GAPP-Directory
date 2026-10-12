@@ -118,18 +118,25 @@ function DirectoryContent() {
   const FREE_TIER_COUNTY_LIMIT = 5
 
   const filteredProviders = useMemo(() => {
-    return providers.filter(provider => {
-      // County filter - non-verified only appear for their first 5 counties
-      if (county) {
+    // County filter - non-verified only appear for their first 5 counties
+    let pool = providers
+    if (county) {
+      const countyVisible = providers.filter(provider => {
         const visibleCounties = provider.isVerified
           ? provider.countiesServed
           : [...provider.countiesServed].sort().slice(0, FREE_TIER_COUNTY_LIMIT)
+        return visibleCounties.includes(county)
+      })
 
-        if (!visibleCounties.includes(county)) {
-          return false
-        }
-      }
+      // Empty-county fallback, same as app/[county]/page.tsx: the 5-county
+      // limit is an upsell lever where providers compete, but an empty county
+      // helps no family. If it empties the county, use every provider serving it.
+      pool = countyVisible.length > 0
+        ? countyVisible
+        : providers.filter(provider => (provider.countiesServed || []).includes(county))
+    }
 
+    return pool.filter(provider => {
       // Service filter
       if (service !== 'all' && !provider.servicesOffered.includes(service)) {
         return false
