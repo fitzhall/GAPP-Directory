@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/admin-session'
 import { createServiceClient } from '@/lib/supabase-service'
+import { sendLeadEmail, type LeadForEmail } from '@/lib/lead-email'
+import { validateMatchLead } from '@/lib/match-lead'
 
 // Every database read and write the admin pages make, run on the server with
 // the service role after the admin session is checked. The admin pages used
@@ -77,6 +79,78 @@ async function run(op: string, args: Args): Promise<Result> {
       return wrap(
         await db.from('callback_requests').update(asObject(args.updates, 'updates')).eq('id', asId(args.id))
       )
+
+    // Route a site-owned lead to a verified provider and email them.
+    case 'leads.assign': {
+      const id = asId(args.id)
+      const providerId = asId(args.providerId)
+      const { data: provider, error: pErr } = await db
+        .from('providers')
+        .select('id, name, email')
+        .eq('id', providerId)
+        .single()
+      if (pErr || !provider) return { data: null, error: 'Provider not found' }
+
+      const { data: lead, error: uErr } = await db
+        .from('callback_requests')
+        .update({ provider_id: providerId })
+        .eq('id', id)
+        .select('*, provider:providers(id, name, slug)')
+        .single()
+      if (uErr || !lead) return { data: null, error: uErr?.message || 'Lead not found' }
+
+      const emailed = provider.email
+        ? await sendLeadEmail(provider.email, provider.name, lead as LeadForEmail)
+        : false
+      return { data: { lead, emailed }, error: null }
+    }
+
+    // The operator took a call and logs it so every lead is in one list.
+    case 'leads.insertPhone': {
+      const v = validateMatchLead({ ...args, smsConsent: true, sourcePage: '/admin/leads' })
+      if (!v.ok) return { data: null, error: v.error }
+      const l = v.lead
+      const { data, error } = await db
+        .from('callback_requests')
+        .insert({
+          parent_name: l.parentName,
+          phone: l.phone,
+          email: null,
+          zip_code: '',
+          county: l.county,
+          service_needed: l.serviceNeeded,
+          urgency: 'asap',
+          special_needs: l.notes,
+          provider_id: null,
+          source: 'phone',
+          source_page: null,
+          status: 'contacted',
+          contacted_at: new Date().toISOString(),
+        })
+        .select('*, provider:providers(id, name, slug)')
+        .single()
+      if (error) return { data: null, error: error.message }
+      return { data, error: null }
+    }
+
+    // Verified providers who serve a county, Featured first.
+    case 'providers.forCounty': {
+      const county = typeof args.county === 'string' ? args.county : ''
+      if (!county) return { data: [], error: null }
+      return wrap(
+        await db
+          .from('providers')
+          .select('id, name, slug, is_featured')
+          .eq('is_active', true)
+          .eq('is_verified', true)
+          .contains('counties_served', [county])
+          .order('is_featured', { ascending: false })
+          .order('name')
+      )
+    }
+
+    case 'providers.reportLink':
+      throw new Error('not yet') // replaced in the report task
 
     // app/admin/requests/page.tsx
     case 'requests.list':
