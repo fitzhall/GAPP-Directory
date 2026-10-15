@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 import { config } from '@/lib/config'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
 
@@ -45,7 +47,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function GAPPPaidCaregiverPage() {
+export default async function GAPPPaidCaregiverPage() {
+  const callable = await getCallableProviders()
   return (
     <div className="min-h-screen bg-white">
       <FAQPageSchema faqs={CAREGIVER_FAQS} />
@@ -92,6 +95,13 @@ export default function GAPPPaidCaregiverPage() {
           </div>
         </div>
       </section>
+
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/gapp-paid-caregiver"
+        heading="Agencies taking GAPP patients now"
+        intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
+      />
 
       {/* How it works - Step cards */}
       <section className="py-12 px-4 bg-gray-50">

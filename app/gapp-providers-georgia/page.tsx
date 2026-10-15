@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
-import { FeaturedProvidersStrip, type StripProvider } from '@/components/FeaturedProvidersStrip'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 
 const FAQS = [
   {
@@ -73,45 +74,6 @@ async function getProviderStats() {
   }
 }
 
-// Featured agencies first, then verified ones, all with a phone number so a
-// family can call straight from this page instead of walking the 500-agency
-// directory. Capped so the section stays above the fold on a phone.
-function formatPhone(raw: string): string {
-  const digits = raw.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '')
-  if (digits.length !== 10) return ''
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
-}
-
-async function getCallableProviders(): Promise<StripProvider[]> {
-  const { data, error } = await supabase
-    .from('providers')
-    .select('id, name, slug, city, phone, intake_phone, counties_served, accepting_new_patients, is_featured, is_verified, tier_level')
-    .eq('is_active', true)
-    .or('is_featured.eq.true,is_verified.eq.true')
-    .order('is_featured', { ascending: false })
-    .order('tier_level', { ascending: false })
-    .order('accepting_new_patients', { ascending: false })
-    .order('name')
-    .limit(12)
-
-  if (error || !data) return []
-
-  return data
-    .map(row => ({
-      id: row.id,
-      name: row.name,
-      slug: row.slug,
-      city: (row.city || '').trim(),
-      phone: formatPhone((row.intake_phone || row.phone || '') as string),
-      countiesServed: row.counties_served || [],
-      acceptingNewPatients: row.accepting_new_patients ?? false,
-      isFeatured: row.is_featured ?? false,
-      isVerified: row.is_verified ?? false,
-    }))
-    .filter(p => p.phone !== '')
-    .slice(0, 6)
-}
-
 const TOP_COUNTIES = [
   { slug: 'fulton', name: 'Fulton' },
   { slug: 'gwinnett', name: 'Gwinnett' },
@@ -140,8 +102,10 @@ export default async function GAPPProvidersGeorgiaPage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-12 sm:py-16 px-4">
+      {/* Hero: title, one line, then the agencies. Families on a phone see a
+          number to call on the first screen instead of four stat boxes and
+          two buttons into the 531-agency directory. */}
+      <section className="bg-gradient-to-b from-blue-50 to-white pt-10 sm:pt-14 pb-6 px-4">
         <div className="max-w-3xl mx-auto">
           <nav className="text-sm text-gray-500 mb-4">
             <Link href="/" className="hover:text-primary">Home</Link>
@@ -149,55 +113,42 @@ export default async function GAPPProvidersGeorgiaPage() {
             <span className="text-gray-900">GAPP Providers Georgia</span>
           </nav>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
             GAPP Providers in Georgia
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Find verified home health agencies offering skilled nursing and personal care for medically fragile children through Georgia&apos;s Pediatric Program.
+          <p className="text-xl text-gray-600">
+            Home nursing and personal care agencies for medically fragile children, paid by Medicaid. Call one that is taking patients today.
           </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">{stats.total}</div>
-              <div className="text-sm text-gray-600">Total Providers</div>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-green-600">{stats.accepting}</div>
-              <div className="text-sm text-gray-600">Accepting Patients</div>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-accent">{stats.verified}</div>
-              <div className="text-sm text-gray-600">Verified</div>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-gray-700">{stats.counties}</div>
-              <div className="text-sm text-gray-600">Counties Served</div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/directory"
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
-            >
-              Search All Providers
-              <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </Link>
-            <Link
-              href="/quiz"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary/5 transition-colors"
-            >
-              Help Me Choose
-            </Link>
-          </div>
         </div>
       </section>
 
-      <FeaturedProvidersStrip providers={callable} sourcePage="/gapp-providers-georgia" />
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/gapp-providers-georgia"
+        heading="Agencies taking patients now"
+        intro="Featured and verified agencies that have confirmed their details. Tap the number to call."
+        tone="hero"
+      />
+
+      {/* Everything else: full search, the quiz, and the numbers */}
+      <section className="pb-10 px-4 bg-white border-b border-gray-100">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 text-base">
+            <Link href="/directory" className="inline-flex items-center font-semibold text-primary hover:underline">
+              Don&apos;t see your county? Search all {stats.total} providers
+              <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <Link href="/quiz" className="inline-flex items-center font-medium text-gray-700 hover:text-primary hover:underline">
+              Not sure what you need? Take the 2-minute quiz
+            </Link>
+          </div>
+          <p className="mt-4 text-sm text-gray-500">
+            {stats.total} agencies · {stats.accepting} accepting patients · {stats.verified} verified · {stats.counties} counties served
+          </p>
+        </div>
+      </section>
 
       {/* What is a GAPP Provider */}
       <section className="py-12 sm:py-16 px-4 bg-white">

@@ -18,6 +18,10 @@ interface FeaturedProvidersStripProps {
   providers: StripProvider[]
   /** Recorded on each phone tap so the admin scorecard can tell which page produced it. */
   sourcePage: string
+  heading?: string
+  intro?: string
+  /** 'hero' drops the top padding so the strip sits directly under a page title. */
+  tone?: 'default' | 'hero'
 }
 
 function countyLine(counties: string[]) {
@@ -26,18 +30,20 @@ function countyLine(counties: string[]) {
   return `${counties.slice(0, 3).join(', ')} +${counties.length - 3} more`
 }
 
-export function FeaturedProvidersStrip({ providers, sourcePage }: FeaturedProvidersStripProps) {
+export function FeaturedProvidersStrip({
+  providers,
+  sourcePage,
+  heading = 'Agencies ready to take your call',
+  intro = 'Featured and verified GAPP providers who have confirmed their details. Tap the number to call.',
+  tone = 'default',
+}: FeaturedProvidersStripProps) {
   if (providers.length === 0) return null
 
   return (
-    <section className="py-10 sm:py-12 px-4 bg-white border-b border-gray-100">
+    <section className={`${tone === 'hero' ? 'pt-2 pb-8 sm:pb-10' : 'py-10 sm:py-12 border-b border-gray-100'} px-4 bg-white`}>
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-          Agencies ready to take your call
-        </h2>
-        <p className="text-gray-600 mb-6">
-          Featured and verified GAPP providers who have confirmed their details. Tap the number to call.
-        </p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{heading}</h2>
+        <p className="text-gray-600 mb-6">{intro}</p>
 
         <div className="grid gap-3 sm:grid-cols-2">
           {providers.map(provider => {

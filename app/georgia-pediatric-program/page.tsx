@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema, WebPageSchema } from '@/components/JsonLd'
 
@@ -94,7 +96,7 @@ const TOP_COUNTIES = [
 ]
 
 export default async function GeorgiaPediatricProgramPage() {
-  const stats = await getProviderStats()
+  const [stats, callable] = await Promise.all([getProviderStats(), getCallableProviders()])
 
   return (
     <div className="min-h-screen bg-white">
@@ -175,6 +177,13 @@ export default async function GeorgiaPediatricProgramPage() {
           </div>
         </div>
       </section>
+
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/georgia-pediatric-program"
+        heading="Agencies taking GAPP patients now"
+        intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
+      />
 
       {/* Who Qualifies */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
