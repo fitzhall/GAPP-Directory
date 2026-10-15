@@ -116,8 +116,8 @@ export const config = {
   // Contact
   contact: {
     email: 'help@georgiaGAPP.com',
-    phone: '(770) 746-3176',
-    phoneRaw: '+17707463176',
+    phone: '(678) 263-8540',
+    phoneRaw: '+16782638540',
     businessName: 'GeorgiaGAPP.com',
     disclaimer: 'This directory is not affiliated with the State of Georgia or the official GAPP program. We help families find providers but are not a state agency.',
   },
