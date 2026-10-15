@@ -127,10 +127,20 @@ export default async function ReportPage({ params, searchParams }: Props) {
                 Claim this listing
               </Link>
             </>
+          ) : d.provider.isVerified && d.provider.isFeatured ? (
+            <>
+              <h2 className="text-xl font-bold mb-2">You have everything turned on.</h2>
+              <p className="text-white/80 mb-4">Questions about your numbers? Call or text us.</p>
+              <a href={`tel:${config.contact.phoneRaw}`} className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-lg">
+                {config.contact.phone}
+              </a>
+            </>
           ) : (
             <>
-              <h2 className="text-xl font-bold mb-2">Want the callback form and the top spot?</h2>
-              <p className="text-white/80 mb-4">Call or text us and we will turn them on today.</p>
+              <h2 className="text-xl font-bold mb-2">
+                {d.provider.isVerified ? 'Want the top spot in your counties?' : 'Want the callback form and the top spot?'}
+              </h2>
+              <p className="text-white/80 mb-4">Call or text us and we will turn it on today.</p>
               <a href={`tel:${config.contact.phoneRaw}`} className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-lg">
                 {config.contact.phone}
               </a>
