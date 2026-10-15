@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import { HelplineCta } from '@/components/HelplineCta'
 
 const FAQS = [
   {
@@ -361,6 +362,13 @@ export default async function GAPPProvidersGeorgiaPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Talk to a human */}
+      <section className="py-10 px-4">
+        <div className="max-w-3xl mx-auto">
+          <HelplineCta variant="banner" sourcePage="/gapp-providers-georgia" />
         </div>
       </section>
 

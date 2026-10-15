@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { FAQPageSchema, BreadcrumbSchema, ArticleSchema } from '@/components/JsonLd'
+import { HelplineCta } from '@/components/HelplineCta'
 
 const KATIE_BECKETT_FAQS = [
   {
@@ -879,6 +880,13 @@ export default function KatieBeckettWaiverGeorgiaPage() {
               GAPP Approval Guide
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Talk to a human */}
+      <section className="py-10 px-4">
+        <div className="max-w-3xl mx-auto">
+          <HelplineCta variant="banner" sourcePage="/katie-beckett-waiver-georgia" />
         </div>
       </section>
 

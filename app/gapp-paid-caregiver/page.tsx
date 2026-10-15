@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { config } from '@/lib/config'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import { HelplineCta } from '@/components/HelplineCta'
 
 // FAQ data for schema markup and display
 const CAREGIVER_FAQS = [
@@ -336,6 +337,13 @@ export default function GAPPPaidCaregiverPage() {
               <p className="text-sm text-gray-600">Overview of GAPP for families who are just getting started.</p>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Talk to a human */}
+      <section className="py-10 px-4">
+        <div className="max-w-3xl mx-auto">
+          <HelplineCta variant="banner" sourcePage="/gapp-paid-caregiver" />
         </div>
       </section>
 
