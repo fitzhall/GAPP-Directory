@@ -115,7 +115,7 @@ const QUALIFYING_CONDITIONS = [
 
 export const metadata: Metadata = {
   title: 'Katie Beckett Waiver Georgia: Eligibility & Application',
-  description: 'Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP.',
+  description: 'Georgia\'s Katie Beckett (TEFRA) waiver has no parent income limit. Who qualifies, the 2026 online portal, forms, timelines, and how it pairs with GAPP nursing.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {
     title: 'Katie Beckett Waiver Georgia: Complete Eligibility & Application Guide',
