@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/admin-session'
 import { createServiceClient } from '@/lib/supabase-service'
 import { sendLeadEmail, type LeadForEmail } from '@/lib/lead-email'
 import { validateMatchLead } from '@/lib/match-lead'
+import { reportUrl } from '@/lib/report-token'
 
 // Every database read and write the admin pages make, run on the server with
 // the service role after the admin session is checked. The admin pages used
@@ -149,8 +150,11 @@ async function run(op: string, args: Args): Promise<Result> {
       )
     }
 
-    case 'providers.reportLink':
-      throw new Error('not yet') // replaced in the report task
+    case 'providers.reportLink': {
+      const slug = typeof args.slug === 'string' ? args.slug : ''
+      if (!slug) return { data: null, error: 'slug is required' }
+      return { data: { url: reportUrl(slug) }, error: null }
+    }
 
     // app/admin/requests/page.tsx
     case 'requests.list':

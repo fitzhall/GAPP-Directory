@@ -1,5 +1,6 @@
 import { createHmac, timingSafeEqual } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
+import { signingKey } from '@/lib/signing-key'
 
 // Server-checked admin session. The admin login used to live only in the
 // browser's sessionStorage, while the admin pages wrote to the database with
@@ -8,15 +9,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export const ADMIN_COOKIE = 'gapp_admin'
 const MAX_AGE_SECONDS = 60 * 60 * 12
-
-// The signing key is derived from a server-only secret plus the admin
-// credentials, so changing the admin password ends every open session.
-function signingKey(): string {
-  const base = process.env.ADMIN_SESSION_SECRET || process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!base) throw new Error('No server secret available to sign admin sessions')
-  const credentials = process.env.ADMIN_USERS || process.env.ADMIN_PASSWORD || ''
-  return createHmac('sha256', base).update(`gapp-admin-session-v1:${credentials}`).digest('hex')
-}
 
 function sign(payload: string): string {
   return createHmac('sha256', signingKey()).update(payload).digest('base64url')
