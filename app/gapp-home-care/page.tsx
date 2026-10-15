@@ -37,8 +37,8 @@ const FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP Home Care Georgia: Free In-Home Nursing for Kids',
-  description: 'GAPP home care gives medically fragile children in Georgia in-home RN, LPN, and personal care at no cost through Medicaid. Who qualifies and how to start.',
+  title: 'GAPP Home Care in Georgia: In-Home Pediatric Nursing',
+  description: 'GAPP home care in Georgia: in-home skilled nursing, LPN, and personal care for medically fragile children. 100% Medicaid covered. Find providers.',
   keywords: 'GAPP home care Georgia, pediatric home care Georgia, in-home nursing Georgia, medically fragile children home care, GAPP nursing services, pediatric home health Georgia',
   openGraph: {
     title: 'GAPP Home Care in Georgia – In-Home Nursing for Children',
@@ -103,7 +103,7 @@ export default async function GAPPHomeCareGeorgiaPage() {
             GAPP Home Care in Georgia
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            In-home nurses and personal care aides for medically fragile children, paid in full by Georgia Medicaid. Keep your child at home with the medical support they need.
+            In-home skilled nursing and personal care for medically fragile children. Keep your child at home with the professional medical support they need.
           </p>
 
           {/* Key Benefits */}

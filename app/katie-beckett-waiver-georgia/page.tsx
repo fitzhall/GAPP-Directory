@@ -114,8 +114,8 @@ const QUALIFYING_CONDITIONS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Katie Beckett Waiver Georgia: Income Rules & How to Apply',
-  description: 'Georgia\'s Katie Beckett (TEFRA) waiver has no parent income limit. Who qualifies, the 2026 online portal, forms, timelines, and how it pairs with GAPP home nursing.',
+  title: 'Katie Beckett Waiver Georgia: Eligibility & Application',
+  description: 'Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {
     title: 'Katie Beckett Waiver Georgia: Complete Eligibility & Application Guide',
@@ -159,7 +159,7 @@ export default async function KatieBeckettWaiverGeorgiaPage() {
             Katie Beckett Waiver in Georgia
           </h1>
           <p className="text-xl text-gray-600 mb-6">
-            Katie Beckett gets a child with a disability onto Georgia Medicaid with no parent income limit. Only the child&apos;s income and medical need count. Here is who qualifies and how to apply.
+            The Katie Beckett waiver helps children with disabilities qualify for Medicaid regardless of family income. Learn if your child qualifies and how to apply.
           </p>
 
           <div className="inline-flex items-center gap-2 mb-6 text-sm text-gray-500">
