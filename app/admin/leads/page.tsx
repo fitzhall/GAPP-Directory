@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { adminData } from '@/lib/admin-data'
-import { GEORGIA_COUNTY_NAMES, SERVICE_OPTIONS } from '@/lib/match-lead'
+import { GEORGIA_COUNTY_NAMES, SERVICE_OPTIONS, needsMatch } from '@/lib/match-lead'
 
 interface Lead {
   id: string
@@ -46,6 +46,14 @@ export default function LeadsPage() {
     fetchLeads()
   }, [])
 
+  // Load the verified providers for each county that has an unassigned lead,
+  // so the assign dropdown is populated the first time it is opened.
+  useEffect(() => {
+    const counties = Array.from(new Set(leads.filter(needsMatch).map(l => l.county)))
+    counties.forEach(c => { if (!countyProviders[c]) loadCountyProviders(c) })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leads])
+
   async function fetchLeads() {
     setLoading(true)
     const { data, error } = await adminData<Lead[]>('leads.list')
@@ -54,17 +62,17 @@ export default function LeadsPage() {
       console.error('Error fetching leads:', error)
     } else {
       setLeads(data || [])
-      if ((data || []).some(l => l.provider === null)) setStatusFilter('needs_match')
+      if ((data || []).some(needsMatch)) setStatusFilter('needs_match')
     }
     setLoading(false)
   }
 
   const filteredLeads = leads.filter(lead => {
-    if (statusFilter === 'needs_match') return lead.provider === null
+    if (statusFilter === 'needs_match') return needsMatch(lead)
     if (statusFilter === 'all') return true
     return lead.status === statusFilter
   })
-  const needsMatchCount = leads.filter(l => l.provider === null).length
+  const needsMatchCount = leads.filter(needsMatch).length
 
   const newCount = leads.filter(l => l.status === 'new').length
   const contactedCount = leads.filter(l => l.status === 'contacted').length
@@ -100,14 +108,16 @@ export default function LeadsPage() {
     const providerId = assignChoice[id]
     if (!providerId) return
     setUpdating(id)
-    const { data, error } = await adminData<{ lead: Lead; emailed: boolean }>('leads.assign', { id, providerId })
+    const { data, error } = await adminData<{ lead: Lead; email: 'sent' | 'no_email' | 'send_failed' }>('leads.assign', { id, providerId })
     if (error || !data) {
       alert(`Could not assign: ${error?.message || 'unknown error'}`)
     } else {
       setLeads(prev => prev.map(l => (l.id === id ? data.lead : l)))
-      setNotice(data.emailed
-        ? `Assigned to ${data.lead.provider?.name} and emailed them.`
-        : `Assigned to ${data.lead.provider?.name}. They have no email on file, so nothing was sent. Call them.`)
+      const name = data.lead.provider?.name
+      setNotice(
+        data.email === 'sent' ? `Assigned to ${name} and emailed them.`
+        : data.email === 'no_email' ? `Assigned to ${name}. They have no email on file, so nothing was sent. Call them.`
+        : `Assigned to ${name}, but the email did not send. Call them or try again from Resend.`)
     }
     setUpdating(null)
   }
@@ -362,7 +372,6 @@ export default function LeadsPage() {
                           <select
                             className="px-2 py-1.5 border border-gray-300 rounded text-xs"
                             value={assignChoice[lead.id] || ''}
-                            onFocus={() => loadCountyProviders(lead.county)}
                             onChange={e => setAssignChoice(prev => ({ ...prev, [lead.id]: e.target.value }))}
                           >
                             <option value="">Assign to a verified provider in {lead.county}…</option>

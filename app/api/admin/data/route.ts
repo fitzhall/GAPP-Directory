@@ -85,25 +85,31 @@ async function run(op: string, args: Args): Promise<Result> {
     case 'leads.assign': {
       const id = asId(args.id)
       const providerId = asId(args.providerId)
+      // Only active, verified providers may receive a family's details, and
+      // only a lead nobody has yet; the UI enforces both, the op is the boundary.
       const { data: provider, error: pErr } = await db
         .from('providers')
         .select('id, name, email')
         .eq('id', providerId)
-        .single()
-      if (pErr || !provider) return { data: null, error: 'Provider not found' }
+        .eq('is_active', true)
+        .eq('is_verified', true)
+        .maybeSingle()
+      if (pErr || !provider) return { data: null, error: 'Provider not found or not verified' }
 
       const { data: lead, error: uErr } = await db
         .from('callback_requests')
         .update({ provider_id: providerId })
         .eq('id', id)
+        .is('provider_id', null)
         .select('*, provider:providers(id, name, slug)')
-        .single()
-      if (uErr || !lead) return { data: null, error: uErr?.message || 'Lead not found' }
+        .maybeSingle()
+      if (uErr) return { data: null, error: uErr.message }
+      if (!lead) return { data: null, error: 'Lead not found or already assigned' }
 
-      const emailed = provider.email
-        ? await sendLeadEmail(provider.email, provider.name, lead as LeadForEmail)
-        : false
-      return { data: { lead, emailed }, error: null }
+      const email: 'sent' | 'no_email' | 'send_failed' = !provider.email
+        ? 'no_email'
+        : (await sendLeadEmail(provider.email, provider.name, lead as LeadForEmail)) ? 'sent' : 'send_failed'
+      return { data: { lead, email }, error: null }
     }
 
     // The operator took a call and logs it so every lead is in one list.

@@ -85,3 +85,8 @@ export function validateMatchLead(body: unknown): MatchLeadValidation {
 export function dedupWindowStart(now: Date, minutes = 30): string {
   return new Date(now.getTime() - minutes * 60 * 1000).toISOString()
 }
+
+/** A lead the operator still has to route: no provider yet, and not closed or converted. */
+export function needsMatch(lead: { provider: unknown | null; status: string }): boolean {
+  return lead.provider === null && lead.status !== 'closed' && lead.status !== 'converted'
+}

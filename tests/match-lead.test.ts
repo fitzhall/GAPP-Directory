@@ -98,3 +98,14 @@ describe('dedupWindowStart', () => {
     expect(dedupWindowStart(now, 5)).toBe('2026-10-15T11:55:00.000Z')
   })
 })
+
+describe('needsMatch', () => {
+  it('is true only for unassigned leads that are still open', async () => {
+    const { needsMatch } = await import('@/lib/match-lead')
+    expect(needsMatch({ provider: null, status: 'new' })).toBe(true)
+    expect(needsMatch({ provider: null, status: 'contacted' })).toBe(true)
+    expect(needsMatch({ provider: null, status: 'closed' })).toBe(false)
+    expect(needsMatch({ provider: null, status: 'converted' })).toBe(false)
+    expect(needsMatch({ provider: { id: 'p' }, status: 'new' })).toBe(false)
+  })
+})

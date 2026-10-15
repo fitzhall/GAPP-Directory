@@ -324,13 +324,31 @@ export default function AdminPage() {
   }
 
   // Copy a signed report link for a provider (the sales tool)
-  async function copyReportLink(slug: string) {
-    const { data, error } = await adminData<{ url: string }>('providers.reportLink', { slug })
-    if (error || !data) {
-      alert(error?.message || 'Could not make link')
-      return
+  // Safari and Firefox only allow a clipboard write inside the click's user
+  // gesture, which an awaited fetch leaves; ClipboardItem with a promise keeps
+  // the gesture. Fall back to a prompt the admin can copy from.
+  async function copyReportLink(slug: string): Promise<boolean> {
+    const fetchUrl = async () => {
+      const { data, error } = await adminData<{ url: string }>('providers.reportLink', { slug })
+      if (error || !data) throw new Error(error?.message || 'Could not make link')
+      return data.url
     }
-    await navigator.clipboard.writeText(data.url)
+    try {
+      if (typeof ClipboardItem !== 'undefined' && navigator.clipboard?.write) {
+        const blob = fetchUrl().then(url => new Blob([url], { type: 'text/plain' }))
+        await navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })])
+        return true
+      }
+      await navigator.clipboard.writeText(await fetchUrl())
+      return true
+    } catch {
+      try {
+        window.prompt('Copy this report link:', await fetchUrl())
+      } catch (err) {
+        alert(err instanceof Error ? err.message : 'Could not make link')
+      }
+      return false
+    }
   }
 
   // Export every listing's signed report link as CSV (join into call lists
@@ -757,10 +775,11 @@ export default function AdminPage() {
                           <button
                             onClick={async (e) => {
                               const btn = e.currentTarget
-                              await copyReportLink(provider.slug)
                               const originalText = btn.innerText
-                              btn.innerText = 'Copied!'
-                              setTimeout(() => (btn.innerText = originalText), 1000)
+                              if (await copyReportLink(provider.slug)) {
+                                btn.innerText = 'Copied!'
+                                setTimeout(() => (btn.innerText = originalText), 1000)
+                              }
                             }}
                             className="px-3 py-1.5 text-xs rounded border border-navy text-navy hover:bg-navy/10"
                           >
