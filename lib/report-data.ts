@@ -86,9 +86,9 @@ export async function getReportData(slug: string): Promise<ReportData | null> {
 
   // Verified, active peers sharing a county; fall back to all verified.
   const verified = () => db.from('providers').select('id').eq('is_active', true).eq('is_verified', true).neq('id', p.id)
-  let scope: 'counties' | 'sitewide' = 'counties'
+  let scope: 'counties' | 'sitewide' = counties.length ? 'counties' : 'sitewide'
   let peers = (counties.length ? await verified().overlaps('counties_served', counties) : await verified()).data || []
-  if (peers.length < MIN_PEERS) {
+  if (scope === 'counties' && peers.length < MIN_PEERS) {
     scope = 'sitewide'
     peers = (await verified()).data || []
   }

@@ -34,6 +34,13 @@ const CALLBACK_TIME_TEXT: Record<string, string> = {
   evening: 'Evening (5pm - 8pm)',
 }
 
+/** tel: href for a US number typed any way; falls back to the raw text. */
+export function telHref(phone: string): string {
+  let d = (phone || '').replace(/\D/g, '')
+  if (d.length === 11 && d.startsWith('1')) d = d.slice(1)
+  return d.length === 10 ? `tel:+1${d}` : `tel:${phone}`
+}
+
 export function escapeHtml(s: string): string {
   return s
     .replace(/&/g, '&amp;')
@@ -76,7 +83,7 @@ export function leadEmailHtml(providerName: string, lead: LeadForEmail): string 
                   </h2>
                   <table style="width: 100%; border-collapse: collapse;">
                     ${row('Name:', e(lead.parent_name), true)}
-                    ${row('Phone:', `<a href="tel:${e(lead.phone)}" style="color: #FF8A80;">${e(lead.phone)}</a>`, true)}
+                    ${row('Phone:', `<a href="${e(telHref(lead.phone))}" style="color: #FF8A80;">${e(lead.phone)}</a>`, true)}
                     ${lead.email ? row('Email:', `<a href="mailto:${e(lead.email)}" style="color: #FF8A80;">${e(lead.email)}</a>`) : ''}
                     ${lead.zip_code ? row('ZIP Code:', e(lead.zip_code)) : ''}
                     ${row('County:', e(lead.county))}
@@ -96,7 +103,7 @@ export function leadEmailHtml(providerName: string, lead: LeadForEmail): string 
                 </div>
 
                 <div style="text-align: center; margin-top: 30px;">
-                  <a href="tel:${e(lead.phone)}"
+                  <a href="${e(telHref(lead.phone))}"
                      style="display: inline-block; background: #FF8A80; color: white; padding: 15px 40px;
                             text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px;">
                     Call ${e(lead.parent_name)} Now

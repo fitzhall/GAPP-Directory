@@ -22,7 +22,7 @@ describe('operatorLeadEmailHtml', () => {
     const html = operatorLeadEmailHtml(lead, 'match_form', 'https://www.georgiagapp.com/admin/leads')
     expect(html).toContain('https://www.georgiagapp.com/provider/triumph-private-home-care-llc-decatur-8440')
     expect(html).toContain('https://www.georgiagapp.com/admin/leads')
-    expect(html).toContain('tel:(404) 555-1212')
+    expect(html).toContain('href="tel:+14045551212"')
     expect(html).toContain('Nights only')
   })
   it('escapes family input', () => {

@@ -1,7 +1,7 @@
 // The email the operator (LEAD_NOTIFY_EMAIL) gets when a family asks the
 // site to match them, with no provider attached yet.
 import { Resend } from 'resend'
-import { escapeHtml } from '@/lib/lead-email'
+import { escapeHtml, telHref } from '@/lib/lead-email'
 import type { MatchLead } from '@/lib/match-lead'
 
 const SERVICE_TEXT: Record<string, string> = {
@@ -35,14 +35,14 @@ export function operatorLeadEmailHtml(lead: MatchLead, source: 'match_form' | 'p
       <div style="padding: 24px; background: #f9f9f9;">
         <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; padding: 12px;">
           ${row('Name', `<strong>${e(lead.parentName)}</strong>`)}
-          ${row('Phone', `<a href="tel:${e(lead.phone)}" style="color: #FF8A80; font-weight: bold;">${e(lead.phone)}</a>`)}
+          ${row('Phone', `<a href="${e(telHref(lead.phone))}" style="color: #FF8A80; font-weight: bold;">${e(lead.phone)}</a>`)}
           ${row('County', e(lead.county))}
           ${row('Needs', e(SERVICE_TEXT[lead.serviceNeeded] || lead.serviceNeeded))}
           ${lead.notes ? row('Notes', e(lead.notes)) : ''}
           ${row('Came from', source === 'phone' ? 'Phone call (logged by admin)' : `<a href="${e(sourceUrl)}" style="color: #2C3E50;">${e(lead.sourcePage)}</a>`)}
         </table>
         <div style="text-align: center; margin-top: 24px;">
-          <a href="tel:${e(lead.phone)}" style="display: inline-block; background: #FF8A80; color: white; padding: 12px 32px; text-decoration: none; border-radius: 8px; font-weight: bold;">Call ${e(lead.parentName)}</a>
+          <a href="${e(telHref(lead.phone))}" style="display: inline-block; background: #FF8A80; color: white; padding: 12px 32px; text-decoration: none; border-radius: 8px; font-weight: bold;">Call ${e(lead.parentName)}</a>
           <br><br>
           <a href="${e(adminUrl)}" style="color: #2C3E50;">Open in admin to assign a provider</a>
         </div>

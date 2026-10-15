@@ -359,7 +359,8 @@ export default function AdminPage() {
       alert(error?.message || 'Could not make links')
       return
     }
-    const q = (v: string) => `"${v.replace(/"/g, '""')}"`
+    // Quote every cell; prefix formula-leading cells so Excel treats them as text.
+    const q = (v: string) => `"${(/^[=+\-@]/.test(v) ? `'${v}` : v).replace(/"/g, '""')}"`
     const csv = [['name', 'slug', 'report_url'].join(','), ...data.map(r => [q(r.name), q(r.slug), q(r.url)].join(','))].join('\n')
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)

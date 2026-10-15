@@ -23,7 +23,7 @@ describe('leadEmailHtml', () => {
   it('includes the provider name, phone link and notes', () => {
     const html = leadEmailHtml('Opulent Private Care', lead)
     expect(html).toContain('Opulent Private Care')
-    expect(html).toContain('tel:(404) 555-1212')
+    expect(html).toContain('href="tel:+14045551212"')
     expect(html).toContain('Nights only')
     expect(html).toContain('AS SOON AS POSSIBLE')
   })

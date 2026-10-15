@@ -40,6 +40,7 @@ export default function LeadsPage() {
   const [assignChoice, setAssignChoice] = useState<Record<string, string>>({})
   const [notice, setNotice] = useState<string | null>(null)
   const [showPhoneForm, setShowPhoneForm] = useState(false)
+  const [savingPhone, setSavingPhone] = useState(false)
   const [phoneForm, setPhoneForm] = useState({ parentName: '', phone: '', county: '', serviceNeeded: 'not_sure', notes: '' })
 
   useEffect(() => {
@@ -124,7 +125,10 @@ export default function LeadsPage() {
 
   async function addPhoneLead(e: React.FormEvent) {
     e.preventDefault()
+    if (savingPhone) return
+    setSavingPhone(true)
     const { data, error } = await adminData<Lead>('leads.insertPhone', phoneForm)
+    setSavingPhone(false)
     if (error || !data) {
       alert(error?.message || 'Could not save')
       return
@@ -263,8 +267,8 @@ export default function LeadsPage() {
             </select>
             <textarea placeholder="Notes from the call" className="px-3 py-2 border rounded sm:col-span-2" rows={2}
               value={phoneForm.notes} onChange={e => setPhoneForm(f => ({ ...f, notes: e.target.value }))} />
-            <button type="submit" className="sm:col-span-2 px-4 py-2 bg-primary text-white font-medium rounded hover:bg-primary-dark">
-              Save phone lead
+            <button type="submit" disabled={savingPhone} className="sm:col-span-2 px-4 py-2 bg-primary text-white font-medium rounded hover:bg-primary-dark disabled:opacity-60">
+              {savingPhone ? 'Saving...' : 'Save phone lead'}
             </button>
           </form>
         )}
