@@ -288,7 +288,7 @@ export default function ClaimProfilePage() {
             <div className="space-y-3">
               {/* Verified Tier */}
               <a
-                href="https://whop.com/bitcoin-estate-commission-inc/verfied-tier/"
+                href="https://whop.com/checkout/plan_4j17R6ZugaIIw"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
@@ -298,7 +298,7 @@ export default function ClaimProfilePage() {
 
               {/* Premium Tier */}
               <a
-                href="https://whop.com/bitcoin-estate-commission-inc/premium-listing/"
+                href="https://whop.com/checkout/plan_G4k1CThUXfFdD"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-lg text-center hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
