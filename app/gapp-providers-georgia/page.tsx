@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import { FeaturedProvidersStrip, type StripProvider } from '@/components/FeaturedProvidersStrip'
 
 const FAQS = [
   {
@@ -72,6 +73,45 @@ async function getProviderStats() {
   }
 }
 
+// Featured agencies first, then verified ones, all with a phone number so a
+// family can call straight from this page instead of walking the 500-agency
+// directory. Capped so the section stays above the fold on a phone.
+function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '')
+  if (digits.length !== 10) return ''
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+}
+
+async function getCallableProviders(): Promise<StripProvider[]> {
+  const { data, error } = await supabase
+    .from('providers')
+    .select('id, name, slug, city, phone, intake_phone, counties_served, accepting_new_patients, is_featured, is_verified, tier_level')
+    .eq('is_active', true)
+    .or('is_featured.eq.true,is_verified.eq.true')
+    .order('is_featured', { ascending: false })
+    .order('tier_level', { ascending: false })
+    .order('accepting_new_patients', { ascending: false })
+    .order('name')
+    .limit(12)
+
+  if (error || !data) return []
+
+  return data
+    .map(row => ({
+      id: row.id,
+      name: row.name,
+      slug: row.slug,
+      city: (row.city || '').trim(),
+      phone: formatPhone((row.intake_phone || row.phone || '') as string),
+      countiesServed: row.counties_served || [],
+      acceptingNewPatients: row.accepting_new_patients ?? false,
+      isFeatured: row.is_featured ?? false,
+      isVerified: row.is_verified ?? false,
+    }))
+    .filter(p => p.phone !== '')
+    .slice(0, 6)
+}
+
 const TOP_COUNTIES = [
   { slug: 'fulton', name: 'Fulton' },
   { slug: 'gwinnett', name: 'Gwinnett' },
@@ -88,7 +128,7 @@ const TOP_COUNTIES = [
 ]
 
 export default async function GAPPProvidersGeorgiaPage() {
-  const stats = await getProviderStats()
+  const [stats, callable] = await Promise.all([getProviderStats(), getCallableProviders()])
 
   return (
     <div className="min-h-screen bg-white">
@@ -156,6 +196,8 @@ export default async function GAPPProvidersGeorgiaPage() {
           </div>
         </div>
       </section>
+
+      <FeaturedProvidersStrip providers={callable} sourcePage="/gapp-providers-georgia" />
 
       {/* What is a GAPP Provider */}
       <section className="py-12 sm:py-16 px-4 bg-white">
