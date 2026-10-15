@@ -11,7 +11,9 @@ const SERVICE_TEXT: Record<string, string> = {
   not_sure: 'Not sure yet',
 }
 
-export const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.georgiagapp.com'
+// Canonical host for links in the email; never the environment's base URL,
+// which differs between local, preview and production.
+export const SITE_URL = 'https://www.georgiagapp.com'
 
 export function operatorLeadEmailSubject(lead: MatchLead): string {
   return `Match lead: ${lead.parentName}, ${lead.county}, ${SERVICE_TEXT[lead.serviceNeeded] || lead.serviceNeeded}`
