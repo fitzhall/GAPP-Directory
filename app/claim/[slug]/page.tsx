@@ -288,7 +288,7 @@ export default function ClaimProfilePage() {
             <div className="space-y-3">
               {/* Verified Tier */}
               <a
-                href="https://whop.com/checkout/plan_4j17R6ZugaIIw"
+                href="https://whop.com/checkout/plan_ONEJn5I9ehbJp"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
