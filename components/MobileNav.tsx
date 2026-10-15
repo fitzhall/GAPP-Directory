@@ -12,7 +12,7 @@ export function MobileNav() {
     { href: '/directory', label: 'Find Provider' },
     { href: '/screener', label: 'Check Eligibility' },
     { href: '/quiz', label: 'Help Me Choose' },
-    { href: '/georgia-pediatric-program', label: 'What is GAPP?' },
+    { href: '/georgia-pediatric-program', label: 'Georgia Pediatric Program' },
     { href: '/waivers', label: 'Medicaid Waivers' },
     { href: '/providers', label: 'For Providers' },
   ]

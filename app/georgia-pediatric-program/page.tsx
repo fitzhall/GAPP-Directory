@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { supabase } from '@/lib/supabase'
-import { FAQPageSchema, BreadcrumbSchema, WebPageSchema } from '@/components/JsonLd'
+import { FAQPageSchema, BreadcrumbSchema, WebPageSchema, GovernmentServiceSchema } from '@/components/JsonLd'
 
 const FAQS = [
   {
@@ -107,6 +107,17 @@ export default async function GeorgiaPediatricProgramPage() {
           { name: 'Georgia Pediatric Program', url: 'https://www.georgiagapp.com/georgia-pediatric-program' },
         ]}
       />
+      <GovernmentServiceSchema
+        name="Georgia Pediatric Program (GAPP)"
+        description="Georgia Medicaid program, run by the Georgia Department of Community Health, that pays for in-home skilled nursing and personal care for medically fragile children under 21. Services are delivered through Medicaid-enrolled GAPP nursing agencies and require prior authorization."
+        url="https://www.georgiagapp.com/georgia-pediatric-program"
+        officialUrls={[
+          'https://dch.georgia.gov/document/publication/georgia-pediatric-program-gapp-fact-sheet/download',
+          'https://dch.georgia.gov/programs/hcbs/community-based-services',
+          'https://medicaid.georgia.gov/programs/all-programs/waiver-programs',
+        ]}
+        phone="+1-404-657-7882"
+      />
       <WebPageSchema
         name="Georgia Pediatric Program (GAPP) – Complete Guide"
         description="The Georgia Pediatric Program provides in-home skilled nursing and personal care for medically fragile children under 21. Learn about eligibility, services covered, and how to find GAPP providers."
@@ -129,10 +140,13 @@ export default async function GeorgiaPediatricProgramPage() {
           </nav>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Understanding the Georgia Pediatric Program (GAPP)
+            Georgia Pediatric Program (GAPP)
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            GAPP provides in-home skilled nursing and personal care services for medically fragile children under 21 in Georgia. Learn what the program covers, who qualifies, and how to get started.
+          <p className="text-xl text-gray-600 mb-3">
+            The Georgia Pediatric Program is Georgia Medicaid&apos;s in-home nursing and personal care program for medically fragile children under 21, run by the Georgia Department of Community Health. This page explains what it covers, who qualifies, how to apply, and how to reach the state program office.
+          </p>
+          <p className="text-sm text-gray-500 mb-8">
+            Independent guide. GeorgiaGAPP.com is not a state agency. <a href="#official-contacts" className="text-primary hover:underline">Official state contacts are below.</a>
           </p>
 
           {/* CTA */}
@@ -174,6 +188,43 @@ export default async function GeorgiaPediatricProgramPage() {
                 <strong>Key Point:</strong> GAPP is not insurance — it&apos;s a Medicaid service program. You must have Georgia Medicaid coverage to access GAPP services.
               </p>
             </div>
+          </div>
+
+          {/* Official contacts: the state's own numbers, from DCH's published
+              GAPP fact sheet. Families search "GAPP phone number" and land on
+              pages that pass themselves off as the state; give them the real
+              thing and say plainly who we are. */}
+          <div id="official-contacts" className="mt-8 bg-white rounded-xl border-2 border-gray-200 p-6 scroll-mt-24">
+            <h3 className="text-xl font-bold text-gray-900 mb-1">Official GAPP phone numbers and contacts</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              These belong to the State of Georgia, not to this website. GeorgiaGAPP.com is an independent directory and does not take applications.
+            </p>
+            <dl className="grid sm:grid-cols-2 gap-4 text-gray-700">
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-gray-500">GAPP Program Specialist (DCH)</dt>
+                <dd className="text-lg font-semibold text-gray-900"><a href="tel:4046577882" className="hover:text-primary">404-657-7882</a></dd>
+                <dd className="text-sm text-gray-600">Program questions. Listed on DCH&apos;s GAPP fact sheet.</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-gray-500">Georgia Department of Community Health</dt>
+                <dd className="text-lg font-semibold text-gray-900"><a href="tel:4046564507" className="hover:text-primary">404-656-4507</a></dd>
+                <dd className="text-sm text-gray-600">Main line for the agency that runs GAPP.</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-gray-500">Georgia Medicaid member services</dt>
+                <dd className="text-lg font-semibold text-gray-900"><a href="tel:18662110950" className="hover:text-primary">1-866-211-0950</a></dd>
+                <dd className="text-sm text-gray-600">Check whether your child&apos;s Medicaid is active.</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wide text-gray-500">Katie Beckett / TEFRA team</dt>
+                <dd className="text-lg font-semibold text-gray-900"><a href="tel:6782487449" className="hover:text-primary">678-248-7449</a></dd>
+                <dd className="text-sm text-gray-600">If family income is too high for regular Medicaid.</dd>
+              </div>
+            </dl>
+            <p className="mt-4 text-sm text-gray-600">
+              You cannot apply for GAPP by calling the state. Applications go through a Medicaid-enrolled GAPP nursing agency, which submits the prior authorization.{' '}
+              <Link href="/gapp-providers-georgia" className="text-primary hover:underline font-medium">See agencies taking patients</Link>.
+            </p>
           </div>
         </div>
       </section>
@@ -546,6 +597,18 @@ export default async function GeorgiaPediatricProgramPage() {
           Verify program rules and forms directly with the state and federal Medicaid agencies:
         </p>
         <ul className="space-y-3 text-gray-700">
+          <li>
+            <a href="https://dch.georgia.gov/document/publication/georgia-pediatric-program-gapp-fact-sheet/download" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              DCH: Georgia Pediatric Program (GAPP) fact sheet (PDF) →
+            </a>
+            <span className="text-gray-600 text-sm block">The state&apos;s own overview of the program and its contact number</span>
+          </li>
+          <li>
+            <a href="https://dch.georgia.gov/programs/hcbs/community-based-services" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+              DCH: Community-Based Services →
+            </a>
+            <span className="text-gray-600 text-sm block">Where GAPP sits among Georgia&apos;s home and community-based programs</span>
+          </li>
           <li>
             <a href="https://medicaid.georgia.gov/programs/all-programs/waiver-programs" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
               Georgia Medicaid: Waiver Programs →

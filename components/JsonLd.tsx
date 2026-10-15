@@ -277,3 +277,36 @@ export function ArticleSchema({
   }
   return <JsonLd data={data} />
 }
+
+// GovernmentService Schema - describes a state program a page is ABOUT.
+// The provider is the state agency, never this site: GeorgiaGAPP.com is an
+// independent directory, and the schema says so through the WebPage publisher.
+interface GovernmentServiceSchemaProps {
+  name: string
+  description: string
+  url: string           // the page on this site that describes the program
+  officialUrls: string[] // .gov pages and documents about the program
+  phone?: string        // the agency's published number for the program
+}
+
+export function GovernmentServiceSchema({ name, description, url, officialUrls, phone }: GovernmentServiceSchemaProps) {
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'GovernmentService',
+    name,
+    alternateName: 'GAPP',
+    description,
+    serviceType: 'In-home skilled nursing and personal care for medically fragile children under 21',
+    provider: {
+      '@type': 'GovernmentOrganization',
+      name: 'Georgia Department of Community Health',
+      url: 'https://dch.georgia.gov',
+      ...(phone && { telephone: phone }),
+    },
+    areaServed: { '@type': 'State', name: 'Georgia' },
+    audience: { '@type': 'Audience', audienceType: 'Medicaid-enrolled children under 21 who are medically fragile' },
+    sameAs: officialUrls,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  }
+  return <JsonLd data={data} />
+}
