@@ -150,6 +150,16 @@ async function run(op: string, args: Args): Promise<Result> {
       )
     }
 
+    // Every active listing's signed report link, for the sales call lists.
+    case 'providers.reportLinks': {
+      const r = await selectAll((from, to) =>
+        db.from('providers').select('name, slug').eq('is_active', true).order('name').range(from, to)
+      )
+      if (r.error) return r
+      const rows = (r.data as { name: string; slug: string }[]).map(p => ({ ...p, url: reportUrl(p.slug) }))
+      return { data: rows, error: null }
+    }
+
     case 'providers.reportLink': {
       const slug = typeof args.slug === 'string' ? args.slug : ''
       if (!slug) return { data: null, error: 'slug is required' }
