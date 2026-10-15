@@ -5,8 +5,8 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Whop checkout URLs
-const WHOP_VERIFIED_URL = 'https://whop.com/bitcoin-estate-commission-inc/verfied-tier/'
-const WHOP_PREMIUM_URL = 'https://whop.com/bitcoin-estate-commission-inc/premium-listing/'
+const WHOP_VERIFIED_URL = 'https://whop.com/checkout/plan_4j17R6ZugaIIw'
+const WHOP_PREMIUM_URL = 'https://whop.com/checkout/plan_G4k1CThUXfFdD'
 
 export async function POST(request: NextRequest) {
   const denied = requireAdmin(request)
