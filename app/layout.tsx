@@ -131,7 +131,7 @@ export default function RootLayout({
                   href="/georgia-pediatric-program"
                   className="px-3 py-2 text-sm font-semibold text-navy hover:text-primary hover:bg-warm/20 rounded-lg transition-colors"
                 >
-                  What is GAPP?
+                  GAPP Program
                 </Link>
                 <Link
                   href="/waivers"
@@ -175,7 +175,7 @@ export default function RootLayout({
                 <h4 className="text-white font-semibold mb-3 text-sm">Resources</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/blog" className="hover:text-warm transition-colors">Blog</Link></li>
-                  <li><Link href="/georgia-pediatric-program" className="hover:text-warm transition-colors">What is GAPP?</Link></li>
+                  <li><Link href="/georgia-pediatric-program" className="hover:text-warm transition-colors">Georgia Pediatric Program (GAPP)</Link></li>
                   <li><Link href="/gapp-providers-georgia" className="hover:text-warm transition-colors">GAPP Providers Georgia</Link></li>
                   <li><Link href="/pediatric-home-nursing-georgia" className="hover:text-warm transition-colors">Pediatric Home Nursing</Link></li>
                   <li><Link href="/katie-beckett-waiver-georgia" className="hover:text-warm transition-colors">Katie Beckett Waiver</Link></li>

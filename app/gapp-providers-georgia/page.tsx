@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 import { HelplineCta } from '@/components/HelplineCta'
 
 const FAQS = [
@@ -89,7 +91,7 @@ const TOP_COUNTIES = [
 ]
 
 export default async function GAPPProvidersGeorgiaPage() {
-  const stats = await getProviderStats()
+  const [stats, callable] = await Promise.all([getProviderStats(), getCallableProviders()])
 
   return (
     <div className="min-h-screen bg-white">
@@ -101,8 +103,10 @@ export default async function GAPPProvidersGeorgiaPage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-12 sm:py-16 px-4">
+      {/* Hero: title, one line, then the agencies. Families on a phone see a
+          number to call on the first screen instead of four stat boxes and
+          two buttons into the 531-agency directory. */}
+      <section className="bg-gradient-to-b from-blue-50 to-white pt-10 sm:pt-14 pb-6 px-4">
         <div className="max-w-3xl mx-auto">
           <nav className="text-sm text-gray-500 mb-4">
             <Link href="/" className="hover:text-primary">Home</Link>
@@ -110,51 +114,40 @@ export default async function GAPPProvidersGeorgiaPage() {
             <span className="text-gray-900">GAPP Providers Georgia</span>
           </nav>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
             GAPP Providers in Georgia
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Find verified home health agencies offering skilled nursing and personal care for medically fragile children through Georgia&apos;s Pediatric Program.
+          <p className="text-xl text-gray-600">
+            Home nursing and personal care agencies for medically fragile children, paid by Medicaid. Call one that is taking patients today.
           </p>
+        </div>
+      </section>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">{stats.total}</div>
-              <div className="text-sm text-gray-600">Total Providers</div>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-green-600">{stats.accepting}</div>
-              <div className="text-sm text-gray-600">Accepting Patients</div>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-accent">{stats.verified}</div>
-              <div className="text-sm text-gray-600">Verified</div>
-            </div>
-            <div className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-gray-700">{stats.counties}</div>
-              <div className="text-sm text-gray-600">Counties Served</div>
-            </div>
-          </div>
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/gapp-providers-georgia"
+        heading="Agencies taking patients now"
+        intro="Featured and verified agencies that have confirmed their details. Tap the number to call."
+        tone="hero"
+      />
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/directory"
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
-            >
-              Search All Providers
-              <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      {/* Everything else: full search, the quiz, and the numbers */}
+      <section className="pb-10 px-4 bg-white border-b border-gray-100">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 text-base">
+            <Link href="/directory" className="inline-flex items-center font-semibold text-primary hover:underline">
+              Don&apos;t see your county? Search all {stats.total} providers
+              <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </Link>
-            <Link
-              href="/quiz"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary/5 transition-colors"
-            >
-              Help Me Choose
+            <Link href="/quiz" className="inline-flex items-center font-medium text-gray-700 hover:text-primary hover:underline">
+              Not sure what you need? Take the 2-minute quiz
             </Link>
           </div>
+          <p className="mt-4 text-sm text-gray-500">
+            {stats.total} agencies · {stats.accepting} accepting patients · {stats.verified} verified · {stats.counties} counties served
+          </p>
         </div>
       </section>
 

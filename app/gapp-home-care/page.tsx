@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
 
@@ -36,7 +38,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   title: 'GAPP Home Care in Georgia: In-Home Pediatric Nursing',
-  description: 'GAPP home care in Georgia: in-home skilled nursing, LPN, and personal care for medically fragile children. 100% Medicaid covered. Find providers.',
+  description: 'GAPP home care gives medically fragile children in Georgia in-home RN, LPN, and personal care at no cost through Medicaid. Who qualifies and how to start.',
   keywords: 'GAPP home care Georgia, pediatric home care Georgia, in-home nursing Georgia, medically fragile children home care, GAPP nursing services, pediatric home health Georgia',
   openGraph: {
     title: 'GAPP Home Care in Georgia – In-Home Nursing for Children',
@@ -76,7 +78,7 @@ const TOP_COUNTIES = [
 ]
 
 export default async function GAPPHomeCareGeorgiaPage() {
-  const stats = await getProviderStats()
+  const [stats, callable] = await Promise.all([getProviderStats(), getCallableProviders()])
 
   return (
     <div className="min-h-screen bg-white">
@@ -163,6 +165,13 @@ export default async function GAPPHomeCareGeorgiaPage() {
           </div>
         </div>
       </section>
+
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/gapp-home-care"
+        heading="Agencies taking GAPP patients now"
+        intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
+      />
 
       {/* Types of Home Care */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">

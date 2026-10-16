@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 import { config } from '@/lib/config'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { HelplineCta } from '@/components/HelplineCta'
@@ -33,7 +35,7 @@ const TIMELINE_FAQS = [
 
 export const metadata: Metadata = {
   title: 'GAPP Approval Timeline 2026: How Long It Really Takes',
-  description: 'How long does GAPP approval really take in Georgia? A realistic 6-12 week timeline — Medicaid eligibility, prior authorization, and when care actually starts.',
+  description: 'GAPP approval takes 2 to 6 weeks once your child has Medicaid. Georgia Medicaid itself takes 30 to 45 days. Step-by-step timeline and what causes delays.',
   keywords: 'GAPP approval time, how long does it take to get approved for medicaid in ga, Georgia Medicaid approval timeline, how long GAPP takes, GAPP prior authorization time, Medicaid application Georgia timeline',
   openGraph: {
     title: 'GAPP Approval Timeline: How Long Does It Take?',
@@ -45,7 +47,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function GAPPApprovalTimelinePage() {
+export default async function GAPPApprovalTimelinePage() {
+  const callable = await getCallableProviders()
   return (
     <div className="min-h-screen bg-white">
       <FAQPageSchema faqs={TIMELINE_FAQS} />
@@ -99,6 +102,13 @@ export default function GAPPApprovalTimelinePage() {
           </div>
         </div>
       </section>
+
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/gapp-approval-timeline"
+        heading="Agencies taking GAPP patients now"
+        intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
+      />
 
       {/* Medicaid Approval Timeline */}
       <section className="py-12 px-4">

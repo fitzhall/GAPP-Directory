@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { getCallableProviders } from '@/lib/callable-providers'
 import { FAQPageSchema, BreadcrumbSchema, ArticleSchema } from '@/components/JsonLd'
 import { HelplineCta } from '@/components/HelplineCta'
 
@@ -114,7 +116,7 @@ const QUALIFYING_CONDITIONS = [
 
 export const metadata: Metadata = {
   title: 'Katie Beckett Waiver Georgia: Eligibility & Application',
-  description: 'Katie Beckett (TEFRA) in Georgia — eligibility, the 2026 Online Portal, income rules, application forms, and how it works with GAPP.',
+  description: 'Georgia\'s Katie Beckett (TEFRA) waiver has no parent income limit. Who qualifies, the 2026 online portal, forms, timelines, and how it pairs with GAPP nursing.',
   keywords: 'Katie Beckett waiver Georgia, Katie Beckett eligibility Georgia, TEFRA Georgia, Katie Beckett application Georgia, Katie Beckett requirements, Georgia Medicaid disabled child, Katie Beckett vs GAPP',
   openGraph: {
     title: 'Katie Beckett Waiver Georgia: Complete Eligibility & Application Guide',
@@ -126,7 +128,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function KatieBeckettWaiverGeorgiaPage() {
+export default async function KatieBeckettWaiverGeorgiaPage() {
+  const callable = await getCallableProviders()
   return (
     <div className="min-h-screen bg-white">
       <FAQPageSchema faqs={KATIE_BECKETT_FAQS} />
@@ -245,6 +248,13 @@ export default function KatieBeckettWaiverGeorgiaPage() {
           </div>
         </div>
       </section>
+
+      <FeaturedProvidersStrip
+        providers={callable}
+        sourcePage="/katie-beckett-waiver-georgia"
+        heading="Agencies taking GAPP patients now"
+        intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
+      />
 
       {/* The new Online Portal (April 15, 2026) */}
       <section id="online-portal" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-blue-50">
