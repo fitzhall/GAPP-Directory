@@ -2,11 +2,14 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { verifyReportToken } from '@/lib/report-token'
-import { getReportData, type ReportData } from '@/lib/report-data'
+import { getReportData } from '@/lib/report-data'
+import { reportStory, compareSentence, missingAndGains } from '@/lib/report-copy'
 import { config } from '@/lib/config'
 
 // A private, signed page the operator texts to a provider during a sales
 // call. Not linked from anywhere, not indexed, rendered fresh on every hit.
+// Written for a home care owner on a phone: one story, plain words, no
+// marketing vocabulary.
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
@@ -16,23 +19,40 @@ export const metadata: Metadata = {
 
 type Props = { params: { slug: string }; searchParams: { t?: string } }
 
-function Stat({ label, value, note }: { label: string; value: number; note?: string }) {
+function Dot({ tone }: { tone: 'good' | 'bad' | 'neutral' }) {
+  const color = tone === 'good' ? 'bg-green-500' : tone === 'bad' ? 'bg-primary-dark' : 'bg-accent-dark'
+  return <span className={`inline-block w-3 h-3 rounded-full ${color} shrink-0`} aria-hidden />
+}
+
+function Step({ n, tone, value, label, meaning }: { n: number; tone: 'good' | 'bad' | 'neutral'; value: number; label: string; meaning: string }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5">
-      <p className="text-sm text-gray-500">{label}</p>
-      <p className="text-3xl font-bold text-gray-900 mt-1">{value.toLocaleString()}</p>
-      {note && <p className="text-xs text-gray-500 mt-2">{note}</p>}
-    </div>
+    <li className="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4 items-start">
+      <div className="w-9 h-9 rounded-full bg-navy text-white font-bold flex items-center justify-center shrink-0 text-base">{n}</div>
+      <div className="min-w-0">
+        <div className="flex items-center gap-2">
+          <Dot tone={tone} />
+          <p className="text-3xl font-extrabold text-navy leading-none">{value.toLocaleString()}</p>
+        </div>
+        <p className="text-lg font-bold text-navy mt-1">{label}</p>
+        <p className="text-base text-gray-600 mt-1">{meaning}</p>
+      </div>
+    </li>
   )
 }
 
-function missingList(d: ReportData): string[] {
-  const items: string[] = []
-  if (!d.provider.isClaimed) items.push('Your phone number is not shown. Families who find you cannot call you.')
-  if (!d.provider.isVerified) items.push('No callback form. Families who do not call leave without a trace.')
-  if (!d.provider.isVerified || !d.provider.hasWebsite) items.push('No link to your website.')
-  if (!d.provider.isFeatured) items.push('Not first in your county results. Featured listings are.')
-  return items
+function Bar({ label, value, max, color }: { label: string; value: number; max: number; color: string }) {
+  const pct = max > 0 ? Math.max(4, Math.round((value / max) * 100)) : 4
+  return (
+    <div>
+      <div className="flex justify-between text-base mb-1">
+        <span className="font-bold text-navy">{label}</span>
+        <span className="font-extrabold text-navy">{Math.round(value).toLocaleString()} views</span>
+      </div>
+      <div className="h-6 rounded-full bg-gray-100 overflow-hidden">
+        <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
+      </div>
+    </div>
+  )
 }
 
 export default async function ReportPage({ params, searchParams }: Props) {
@@ -40,116 +60,133 @@ export default async function ReportPage({ params, searchParams }: Props) {
   const d = await getReportData(params.slug)
   if (!d) notFound()
 
-  const reached = d.you.helplineClicks + d.you.leads
-  const sinceText = new Date(d.since).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-  const missing = missingList(d)
-  const peerScope = d.peers.scope === 'counties'
-    ? `${d.peers.count} verified listings that serve your counties`
-    : `${d.peers.count} verified listings across Georgia (too few in your counties to compare)`
+  const story = reportStory(d)
+  const reached = d.you.phoneClicks + d.you.helplineClicks + d.you.leads
+  const { missing, gains } = missingAndGains(d.provider)
+  const sinceText = new Date(d.since).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  const peerLabel = d.peers.scope === 'counties' ? 'Verified agency near you' : 'Verified agency in Georgia'
+  const barMax = Math.max(d.you.views, d.peers.views, 1)
 
   return (
-    <main className="min-h-screen bg-gray-50 py-8 px-4 print:bg-white">
-      <div className="max-w-2xl mx-auto space-y-8">
-        <header>
-          <p className="text-sm text-gray-500">GeorgiaGAPP.com listing report</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">{d.provider.name}</h1>
-          <p className="text-gray-600 mt-1">
-            {d.provider.city && `${d.provider.city} · `}Last {d.days} days, since {sinceText}
+    <main className="min-h-screen bg-gray-50 py-6 px-4 print:bg-white font-sans">
+      <div className="max-w-xl mx-auto space-y-10">
+        <header className="text-center">
+          <p className="text-sm font-bold tracking-wide text-accent-dark uppercase">GeorgiaGAPP.com</p>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-navy mt-1">{d.provider.name}</h1>
+          <p className="text-base text-gray-600 mt-1">
+            {d.provider.city && `${d.provider.city} · `}{sinceText} to today
           </p>
         </header>
 
-        <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">What families did on your listing</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <Stat label="Profile views" value={d.you.views} />
-            <Stat label="Times shown in search results" value={d.you.impressions} />
-            <Stat
-              label="Phone taps"
-              value={d.you.phoneClicks}
-              note={!d.provider.isClaimed ? 'Zero, because your number is not shown.' : undefined}
-            />
-            <Stat
-              label="Families who tried to reach you through us"
-              value={reached}
-              note={reached > 0 ? 'They tapped our helpline from your page or asked us for a match.' : undefined}
-            />
-          </div>
+        {/* The one thing to take away */}
+        <section className="bg-warm-light border-2 border-warm rounded-3xl p-6 sm:p-8 text-center">
+          <p className="text-7xl font-extrabold text-navy leading-none">{story.bigNumber.toLocaleString()}</p>
+          <p className="text-xl font-bold text-navy mt-3">{story.headline}</p>
+          <p className={`text-lg font-extrabold mt-4 rounded-xl px-4 py-3 ${story.tone === 'bad' ? 'bg-primary/15 text-primary-dark' : 'bg-green-100 text-green-800'}`}>
+            {story.problem}
+          </p>
         </section>
 
+        {/* How a family finds you, in three steps */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-1">Verified listings near you</h2>
-          <p className="text-sm text-gray-500 mb-3">Typical numbers for {peerScope}, same {d.days} days.</p>
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-gray-50 text-gray-500">
-                <tr>
-                  <th className="text-left px-4 py-2 font-medium"> </th>
-                  <th className="text-right px-4 py-2 font-medium">You</th>
-                  <th className="text-right px-4 py-2 font-medium">Verified listing</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-t border-gray-100">
-                  <td className="px-4 py-3">Profile views</td>
-                  <td className="px-4 py-3 text-right font-semibold">{d.you.views}</td>
-                  <td className="px-4 py-3 text-right">{d.peers.views}</td>
-                </tr>
-                <tr className="border-t border-gray-100">
-                  <td className="px-4 py-3">Phone taps</td>
-                  <td className="px-4 py-3 text-right font-semibold">{d.you.phoneClicks}</td>
-                  <td className="px-4 py-3 text-right">{d.peers.phoneClicks}</td>
-                </tr>
-              </tbody>
-            </table>
+          <h2 className="text-xl font-extrabold text-navy mb-1">What those families did</h2>
+          <p className="text-base text-gray-600 mb-4">Two steps. The second one is the one that pays.</p>
+          <ol className="space-y-3">
+            <Step
+              n={1}
+              tone="neutral"
+              value={d.you.views}
+              label="Found and opened your listing"
+              meaning="A family searching for GAPP care clicked your name to read about you. This is a family who is choosing."
+            />
+            <Step
+              n={2}
+              tone={reached > 0 ? 'good' : 'bad'}
+              value={reached}
+              label="Tried to reach you"
+              meaning={
+                d.provider.isClaimed
+                  ? 'They tapped your number, texted our helpline from your page, or asked us for a match.'
+                  : 'Your number is hidden, so the only way was to text our helpline or ask us for a match.'
+              }
+            />
+          </ol>
+        </section>
+
+        {/* You vs. verified */}
+        <section className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+          <h2 className="text-xl font-extrabold text-navy mb-4">You next to a verified agency</h2>
+          <div className="space-y-4">
+            <Bar label="You" value={d.you.views} max={barMax} color="bg-gray-400" />
+            <Bar label={peerLabel} value={d.peers.views} max={barMax} color="bg-accent-dark" />
           </div>
+          <p className="text-lg font-bold text-navy mt-5">{compareSentence(d.you.views, d.peers.views, d.peers.scope)}</p>
+          <p className="text-sm text-gray-500 mt-2">
+            Typical numbers for {d.peers.count} verified {d.peers.count === 1 ? 'agency' : 'agencies'}
+            {d.peers.scope === 'counties' ? ' that serve your counties' : ' across Georgia'}, same 90 days.
+          </p>
         </section>
 
         {missing.length > 0 && (
-          <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">What your listing is missing</h2>
-            <ul className="space-y-2">
-              {missing.map(m => (
-                <li key={m} className="flex gap-3 bg-white rounded-lg border border-gray-200 px-4 py-3 text-gray-800">
-                  <span className="text-primary font-bold">•</span>
-                  <span>{m}</span>
-                </li>
-              ))}
-            </ul>
+          <section className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-white rounded-2xl border-2 border-primary/40 p-5">
+              <h2 className="text-lg font-extrabold text-primary-dark mb-3">What turns families away</h2>
+              <ul className="space-y-3">
+                {missing.map(m => (
+                  <li key={m} className="flex gap-3 text-base text-navy">
+                    <span className="text-primary-dark font-extrabold text-xl leading-none" aria-hidden>✕</span>
+                    <span>{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-white rounded-2xl border-2 border-green-300 p-5">
+              <h2 className="text-lg font-extrabold text-green-700 mb-3">What verified agencies have</h2>
+              <ul className="space-y-3">
+                {gains.map(g => (
+                  <li key={g} className="flex gap-3 text-base text-navy">
+                    <span className="text-green-600 font-extrabold text-xl leading-none" aria-hidden>✓</span>
+                    <span>{g}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
         )}
 
-        <section className="bg-navy text-white rounded-2xl p-6 text-center print:hidden">
+        <section className="bg-navy text-white rounded-3xl p-6 sm:p-8 text-center print:hidden">
           {!d.provider.isClaimed ? (
             <>
-              <h2 className="text-xl font-bold mb-2">Claim your listing. It is free.</h2>
-              <p className="text-white/80 mb-4">Claiming turns your phone number on the same day.</p>
-              <Link href={`/claim/${d.provider.slug}`} className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-lg">
+              <h2 className="text-2xl font-extrabold mb-2">Claim your listing. It is free.</h2>
+              <p className="text-lg text-white/85 mb-5">Your phone number turns on the same day.</p>
+              <Link href={`/claim/${d.provider.slug}`} className="inline-block w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white text-xl font-extrabold rounded-2xl">
                 Claim this listing
               </Link>
+              <p className="text-base text-white/70 mt-5">Questions? Call or text {config.contact.phone}</p>
             </>
           ) : d.provider.isVerified && d.provider.isFeatured ? (
             <>
-              <h2 className="text-xl font-bold mb-2">You have everything turned on.</h2>
-              <p className="text-white/80 mb-4">Questions about your numbers? Call or text us.</p>
-              <a href={`tel:${config.contact.phoneRaw}`} className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-lg">
+              <h2 className="text-2xl font-extrabold mb-2">You have everything turned on.</h2>
+              <p className="text-lg text-white/85 mb-5">Questions about your numbers? Call or text us.</p>
+              <a href={`tel:${config.contact.phoneRaw}`} className="inline-block w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white text-xl font-extrabold rounded-2xl">
                 {config.contact.phone}
               </a>
             </>
           ) : (
             <>
-              <h2 className="text-xl font-bold mb-2">
-                {d.provider.isVerified ? 'Want the top spot in your counties?' : 'Want the callback form and the top spot?'}
+              <h2 className="text-2xl font-extrabold mb-2">
+                {d.provider.isVerified ? 'Want the top spot in your counties?' : 'Want families to reach you?'}
               </h2>
-              <p className="text-white/80 mb-4">Call or text us and we will turn it on today.</p>
-              <a href={`tel:${config.contact.phoneRaw}`} className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-lg">
+              <p className="text-lg text-white/85 mb-5">Call or text us. We turn it on today.</p>
+              <a href={`tel:${config.contact.phoneRaw}`} className="inline-block w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white text-xl font-extrabold rounded-2xl">
                 {config.contact.phone}
               </a>
             </>
           )}
         </section>
 
-        <p className="text-xs text-gray-400 text-center">
-          Counts come from GeorgiaGAPP.com visitor activity. Search impressions are directory listings shown, not Google.
+        <p className="text-sm text-gray-500 text-center leading-relaxed">
+          These counts come from visits to GeorgiaGAPP.com over the last {d.days} days. They are not Google numbers.
         </p>
       </div>
     </main>
