@@ -9,6 +9,7 @@ import { TrackableLink } from '@/components/TrackableLink'
 import { CountiesSection } from '@/components/CountiesSection'
 import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { VerifiedProviderProfile } from '@/components/provider/VerifiedProviderProfile'
+import { HelplineCta } from '@/components/HelplineCta'
 import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 // Rebuild at most hourly so provider changes (claims, verification, Whop
@@ -379,31 +380,22 @@ export default async function ProviderPage({
                     )}
                   </div>
                 ) : (
-                  /* Unclaimed profile - show claim CTA */
-                  <div className="text-center py-4">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-medium mb-4">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                      Unclaimed Profile
-                    </div>
+                  /* Unclaimed profile: our helpline first, then the claim link */
+                  <div className="py-2">
+                    <HelplineCta
+                      variant="provider"
+                      county={provider.countiesServed[0]}
+                      providerId={provider.id}
+                      sourcePage={`/provider/${provider.slug}`}
+                    />
 
-                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact Information Unavailable</h2>
-                    <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                      This provider hasn&apos;t claimed their profile yet. Once claimed,
-                      you&apos;ll be able to request callbacks and see full contact details.
-                    </p>
-
-                    <div className="pt-6 border-t border-gray-200">
-                      <p className="text-sm text-gray-500 mb-3">Are you the owner of this business?</p>
+                    <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+                      <p className="text-sm text-gray-500 mb-2">Do you run this agency?</p>
                       <Link
                         href={`/claim/${provider.slug}`}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
                       >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                        Claim This Profile
+                        Claim this listing for free
                       </Link>
                     </div>
                   </div>

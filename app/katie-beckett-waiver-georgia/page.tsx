@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { FAQPageSchema, BreadcrumbSchema, ArticleSchema } from '@/components/JsonLd'
+import { HelplineCta } from '@/components/HelplineCta'
 
 const KATIE_BECKETT_FAQS = [
   {
@@ -889,6 +890,13 @@ export default async function KatieBeckettWaiverGeorgiaPage() {
               GAPP Approval Guide
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Talk to a human */}
+      <section className="py-10 px-4">
+        <div className="max-w-3xl mx-auto">
+          <HelplineCta variant="banner" sourcePage="/katie-beckett-waiver-georgia" />
         </div>
       </section>
 

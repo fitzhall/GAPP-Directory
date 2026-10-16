@@ -323,6 +323,54 @@ export default function AdminPage() {
     navigator.clipboard.writeText(link)
   }
 
+  // Copy a signed report link for a provider (the sales tool)
+  // Safari and Firefox only allow a clipboard write inside the click's user
+  // gesture, which an awaited fetch leaves; ClipboardItem with a promise keeps
+  // the gesture. Fall back to a prompt the admin can copy from.
+  async function copyReportLink(slug: string): Promise<boolean> {
+    const fetchUrl = async () => {
+      const { data, error } = await adminData<{ url: string }>('providers.reportLink', { slug })
+      if (error || !data) throw new Error(error?.message || 'Could not make link')
+      return data.url
+    }
+    try {
+      if (typeof ClipboardItem !== 'undefined' && navigator.clipboard?.write) {
+        const blob = fetchUrl().then(url => new Blob([url], { type: 'text/plain' }))
+        await navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })])
+        return true
+      }
+      await navigator.clipboard.writeText(await fetchUrl())
+      return true
+    } catch {
+      try {
+        window.prompt('Copy this report link:', await fetchUrl())
+      } catch (err) {
+        alert(err instanceof Error ? err.message : 'Could not make link')
+      }
+      return false
+    }
+  }
+
+  // Export every listing's signed report link as CSV (join into call lists
+  // with scripts/report-links.ts)
+  async function exportReportLinks() {
+    const { data, error } = await adminData<{ name: string; slug: string; url: string }[]>('providers.reportLinks')
+    if (error || !data) {
+      alert(error?.message || 'Could not make links')
+      return
+    }
+    // Quote every cell; prefix formula-leading cells so Excel treats them as text.
+    const q = (v: string) => `"${(/^[=+\-@]/.test(v) ? `'${v}` : v).replace(/"/g, '""')}"`
+    const csv = [['name', 'slug', 'report_url'].join(','), ...data.map(r => [q(r.name), q(r.slug), q(r.url)].join(','))].join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `gapp-report-links-${new Date().toISOString().split('T')[0]}.csv`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
   // Open edit modal
   function openEditModal(provider: ProviderAdmin) {
     setEditingProvider(provider)
@@ -461,6 +509,13 @@ export default function AdminPage() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+              <button
+                onClick={exportReportLinks}
+                className="px-3 py-1.5 bg-navy text-white text-xs sm:text-sm font-medium rounded hover:bg-navy/90"
+              >
+                <span className="hidden sm:inline">Export Report Links</span>
+                <span className="sm:hidden">Reports</span>
+              </button>
               <button
                 onClick={exportClaimLinks}
                 className="px-3 py-1.5 bg-accent text-white text-xs sm:text-sm font-medium rounded hover:bg-accent/90 flex items-center gap-1.5"
@@ -718,6 +773,19 @@ export default function AdminPage() {
                               Copy Link
                             </button>
                           )}
+                          <button
+                            onClick={async (e) => {
+                              const btn = e.currentTarget
+                              const originalText = btn.innerText
+                              if (await copyReportLink(provider.slug)) {
+                                btn.innerText = 'Copied!'
+                                setTimeout(() => (btn.innerText = originalText), 1000)
+                              }
+                            }}
+                            className="px-3 py-1.5 text-xs rounded border border-navy text-navy hover:bg-navy/10"
+                          >
+                            Copy report
+                          </button>
                           {!provider.is_verified ? (
                             provider.is_featured ? (
                               <>
@@ -1028,7 +1096,7 @@ export default function AdminPage() {
                                       </button>
                                       <button
                                         onClick={() => {
-                                          navigator.clipboard.writeText('https://whop.com/bitcoin-estate-commission-inc/verfied-tier/')
+                                          navigator.clipboard.writeText('https://whop.com/checkout/plan_4j17R6ZugaIIw')
                                           const btn = document.activeElement as HTMLButtonElement
                                           const original = btn.innerText
                                           btn.innerText = 'Copied!'

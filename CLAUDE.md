@@ -129,7 +129,7 @@ Family lead capture (callback form submissions).
 
 ### Row Level Security (RLS)
 - **Providers:** Public read access for active providers
-- **Callback Requests:** Anyone can INSERT, service role can manage
+- **Callback Requests:** Anyone can INSERT, service role can manage. Since migration 014, `provider_id` is nullable and rows carry `source` ('provider_form' | 'match_form' | 'phone') and `source_page`.
 
 ---
 
@@ -267,6 +267,16 @@ Save callback request + send email to provider.
 1. Insert into `callback_requests` table
 2. Send HTML email via Resend to provider
 
+### `POST /api/match`
+Site-owned "match me" lead from an unclaimed provider page or a content page (no provider attached).
+
+**Request Body:** `{ parentName, phone, county, serviceNeeded: 'RN'|'LPN'|'PCS'|'not_sure', notes?, sourcePage, smsConsent: true }`
+
+**Side Effects:** inserts into `callback_requests` with `provider_id = NULL`, `source = 'match_form'`, `source_page`; dedupes on phone for 30 minutes; emails `LEAD_NOTIFY_EMAIL`. The admin assigns the lead to a verified provider from `/admin/leads` ("Needs match" tab), which emails that provider.
+
+### `GET /report/[slug]?t=<token>`
+Public, signed, noindex per-provider 90-day listing report (views, impressions, phone taps, helpline taps, leads, county peer medians). The token is an HMAC of the slug (`lib/report-token.ts`); make links with "Copy report" / "Export Report Links" in `/admin`. Rotating the admin password or `ADMIN_USERS` invalidates every link.
+
 ---
 
 ## Environment Variables
@@ -277,6 +287,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://mjuuqjrxzhkvsbrgqfot.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
 SUPABASE_SERVICE_ROLE_KEY=<service-role-key>  # For admin operations
 RESEND_API_KEY=re_xxxxx                        # For email notifications
+LEAD_NOTIFY_EMAIL=you@example.com              # Inbox for site-owned match leads (/api/match)
 ```
 
 ### Local Development
@@ -505,4 +516,4 @@ If queries fail with "permission denied":
 
 ---
 
-**Last Updated:** 2026-01-19
+**Last Updated:** 2026-10-15

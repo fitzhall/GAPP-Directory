@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/admin-session'
 import { createServiceClient } from '@/lib/supabase-service'
+import { sendLeadEmail, type LeadForEmail } from '@/lib/lead-email'
+import { validateMatchLead } from '@/lib/match-lead'
+import { reportUrl } from '@/lib/report-token'
 
 // Every database read and write the admin pages make, run on the server with
 // the service role after the admin session is checked. The admin pages used
@@ -77,6 +80,97 @@ async function run(op: string, args: Args): Promise<Result> {
       return wrap(
         await db.from('callback_requests').update(asObject(args.updates, 'updates')).eq('id', asId(args.id))
       )
+
+    // Route a site-owned lead to a verified provider and email them.
+    case 'leads.assign': {
+      const id = asId(args.id)
+      const providerId = asId(args.providerId)
+      // Only active, verified providers may receive a family's details, and
+      // only a lead nobody has yet; the UI enforces both, the op is the boundary.
+      const { data: provider, error: pErr } = await db
+        .from('providers')
+        .select('id, name, email')
+        .eq('id', providerId)
+        .eq('is_active', true)
+        .eq('is_verified', true)
+        .maybeSingle()
+      if (pErr || !provider) return { data: null, error: 'Provider not found or not verified' }
+
+      const { data: lead, error: uErr } = await db
+        .from('callback_requests')
+        .update({ provider_id: providerId })
+        .eq('id', id)
+        .is('provider_id', null)
+        .select('*, provider:providers(id, name, slug)')
+        .maybeSingle()
+      if (uErr) return { data: null, error: uErr.message }
+      if (!lead) return { data: null, error: 'Lead not found or already assigned' }
+
+      const email: 'sent' | 'no_email' | 'send_failed' = !provider.email
+        ? 'no_email'
+        : (await sendLeadEmail(provider.email, provider.name, lead as LeadForEmail)) ? 'sent' : 'send_failed'
+      return { data: { lead, email }, error: null }
+    }
+
+    // The operator took a call and logs it so every lead is in one list.
+    case 'leads.insertPhone': {
+      const v = validateMatchLead({ ...args, smsConsent: true, sourcePage: '/admin/leads' })
+      if (!v.ok) return { data: null, error: v.error }
+      const l = v.lead
+      const { data, error } = await db
+        .from('callback_requests')
+        .insert({
+          parent_name: l.parentName,
+          phone: l.phone,
+          email: null,
+          zip_code: '',
+          county: l.county,
+          service_needed: l.serviceNeeded,
+          urgency: 'asap',
+          special_needs: l.notes,
+          provider_id: null,
+          source: 'phone',
+          source_page: null,
+          status: 'contacted',
+          contacted_at: new Date().toISOString(),
+        })
+        .select('*, provider:providers(id, name, slug)')
+        .single()
+      if (error) return { data: null, error: error.message }
+      return { data, error: null }
+    }
+
+    // Verified providers who serve a county, Featured first.
+    case 'providers.forCounty': {
+      const county = typeof args.county === 'string' ? args.county : ''
+      if (!county) return { data: [], error: null }
+      return wrap(
+        await db
+          .from('providers')
+          .select('id, name, slug, is_featured')
+          .eq('is_active', true)
+          .eq('is_verified', true)
+          .contains('counties_served', [county])
+          .order('is_featured', { ascending: false })
+          .order('name')
+      )
+    }
+
+    // Every active listing's signed report link, for the sales call lists.
+    case 'providers.reportLinks': {
+      const r = await selectAll((from, to) =>
+        db.from('providers').select('name, slug').eq('is_active', true).order('name').range(from, to)
+      )
+      if (r.error) return r
+      const rows = (r.data as { name: string; slug: string }[]).map(p => ({ ...p, url: reportUrl(p.slug) }))
+      return { data: rows, error: null }
+    }
+
+    case 'providers.reportLink': {
+      const slug = typeof args.slug === 'string' ? args.slug : ''
+      if (!slug) return { data: null, error: 'slug is required' }
+      return { data: { url: reportUrl(slug) }, error: null }
+    }
 
     // app/admin/requests/page.tsx
     case 'requests.list':

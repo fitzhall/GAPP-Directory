@@ -6,7 +6,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-const VALID_EVENTS = ['view', 'click_phone', 'click_website', 'click_callback', 'impression'] as const
+const VALID_EVENTS = ['view', 'click_phone', 'click_website', 'click_callback', 'impression', 'click_helpline'] as const
 
 export async function POST(request: NextRequest) {
   try {

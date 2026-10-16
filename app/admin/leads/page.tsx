@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { adminData } from '@/lib/admin-data'
+import { GEORGIA_COUNTY_NAMES, SERVICE_OPTIONS, needsMatch } from '@/lib/match-lead'
 
 interface Lead {
   id: string
@@ -19,24 +20,40 @@ interface Lead {
   created_at: string
   contacted_at: string | null
   notes: string | null
+  source: 'provider_form' | 'match_form' | 'phone'
+  source_page: string | null
   provider: {
     id: string
     name: string
     slug: string
-  }
+  } | null
 }
 
-type StatusFilter = 'all' | 'new' | 'contacted' | 'converted' | 'closed'
+type StatusFilter = 'needs_match' | 'all' | 'new' | 'contacted' | 'converted' | 'closed'
 
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(true)
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [updating, setUpdating] = useState<string | null>(null)
+  const [countyProviders, setCountyProviders] = useState<Record<string, { id: string; name: string; slug: string; is_featured: boolean }[]>>({})
+  const [assignChoice, setAssignChoice] = useState<Record<string, string>>({})
+  const [notice, setNotice] = useState<string | null>(null)
+  const [showPhoneForm, setShowPhoneForm] = useState(false)
+  const [savingPhone, setSavingPhone] = useState(false)
+  const [phoneForm, setPhoneForm] = useState({ parentName: '', phone: '', county: '', serviceNeeded: 'not_sure', notes: '' })
 
   useEffect(() => {
     fetchLeads()
   }, [])
+
+  // Load the verified providers for each county that has an unassigned lead,
+  // so the assign dropdown is populated the first time it is opened.
+  useEffect(() => {
+    const counties = Array.from(new Set(leads.filter(needsMatch).map(l => l.county)))
+    counties.forEach(c => { if (!countyProviders[c]) loadCountyProviders(c) })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leads])
 
   async function fetchLeads() {
     setLoading(true)
@@ -46,14 +63,17 @@ export default function LeadsPage() {
       console.error('Error fetching leads:', error)
     } else {
       setLeads(data || [])
+      if ((data || []).some(needsMatch)) setStatusFilter('needs_match')
     }
     setLoading(false)
   }
 
   const filteredLeads = leads.filter(lead => {
+    if (statusFilter === 'needs_match') return needsMatch(lead)
     if (statusFilter === 'all') return true
     return lead.status === statusFilter
   })
+  const needsMatchCount = leads.filter(needsMatch).length
 
   const newCount = leads.filter(l => l.status === 'new').length
   const contactedCount = leads.filter(l => l.status === 'contacted').length
@@ -77,6 +97,52 @@ export default function LeadsPage() {
       )
     }
     setUpdating(null)
+  }
+
+  async function loadCountyProviders(county: string) {
+    if (countyProviders[county]) return
+    const { data } = await adminData<{ id: string; name: string; slug: string; is_featured: boolean }[]>('providers.forCounty', { county })
+    setCountyProviders(prev => ({ ...prev, [county]: data || [] }))
+  }
+
+  async function assignLead(id: string) {
+    const providerId = assignChoice[id]
+    if (!providerId) return
+    setUpdating(id)
+    const { data, error } = await adminData<{ lead: Lead; email: 'sent' | 'no_email' | 'send_failed' }>('leads.assign', { id, providerId })
+    if (error || !data) {
+      alert(`Could not assign: ${error?.message || 'unknown error'}`)
+    } else {
+      setLeads(prev => prev.map(l => (l.id === id ? data.lead : l)))
+      const name = data.lead.provider?.name
+      setNotice(
+        data.email === 'sent' ? `Assigned to ${name} and emailed them.`
+        : data.email === 'no_email' ? `Assigned to ${name}. They have no email on file, so nothing was sent. Call them.`
+        : `Assigned to ${name}, but the email did not send. Call them or try again from Resend.`)
+    }
+    setUpdating(null)
+  }
+
+  async function addPhoneLead(e: React.FormEvent) {
+    e.preventDefault()
+    if (savingPhone) return
+    setSavingPhone(true)
+    const { data, error } = await adminData<Lead>('leads.insertPhone', phoneForm)
+    setSavingPhone(false)
+    if (error || !data) {
+      alert(error?.message || 'Could not save')
+      return
+    }
+    setLeads(prev => [data, ...prev])
+    setPhoneForm({ parentName: '', phone: '', county: '', serviceNeeded: 'not_sure', notes: '' })
+    setShowPhoneForm(false)
+    setStatusFilter('needs_match')
+  }
+
+  function sourceBadge(lead: Lead) {
+    if (lead.source === 'match_form') return <span className="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Match form</span>
+    if (lead.source === 'phone') return <span className="px-2 py-0.5 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Phone</span>
+    return null
   }
 
   function formatDate(dateStr: string) {
@@ -133,6 +199,12 @@ export default function LeadsPage() {
               </p>
             </div>
             <div className="flex gap-3">
+              <button
+                onClick={() => setShowPhoneForm(v => !v)}
+                className="px-3 py-1.5 bg-primary text-white text-xs sm:text-sm font-medium rounded hover:bg-primary-dark"
+              >
+                {showPhoneForm ? 'Cancel' : 'Add phone lead'}
+              </button>
               <Link
                 href="/admin"
                 className="text-xs sm:text-sm text-gray-600 hover:text-gray-900"
@@ -171,11 +243,41 @@ export default function LeadsPage() {
           </div>
         </div>
 
+        {notice && (
+          <div className="mb-4 bg-blue-50 border border-blue-200 text-blue-800 text-sm rounded-lg px-4 py-3 flex justify-between">
+            <span>{notice}</span>
+            <button onClick={() => setNotice(null)} className="text-blue-600">Dismiss</button>
+          </div>
+        )}
+
+        {showPhoneForm && (
+          <form onSubmit={addPhoneLead} className="mb-6 bg-white rounded-lg border border-gray-200 p-4 grid sm:grid-cols-2 gap-3">
+            <input required placeholder="Parent name" className="px-3 py-2 border rounded"
+              value={phoneForm.parentName} onChange={e => setPhoneForm(f => ({ ...f, parentName: e.target.value }))} />
+            <input required placeholder="Phone" className="px-3 py-2 border rounded"
+              value={phoneForm.phone} onChange={e => setPhoneForm(f => ({ ...f, phone: e.target.value }))} />
+            <select required className="px-3 py-2 border rounded"
+              value={phoneForm.county} onChange={e => setPhoneForm(f => ({ ...f, county: e.target.value }))}>
+              <option value="">County</option>
+              {GEORGIA_COUNTY_NAMES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <select className="px-3 py-2 border rounded"
+              value={phoneForm.serviceNeeded} onChange={e => setPhoneForm(f => ({ ...f, serviceNeeded: e.target.value }))}>
+              {SERVICE_OPTIONS.map(s => <option key={s} value={s}>{s === 'not_sure' ? 'Not sure' : s}</option>)}
+            </select>
+            <textarea placeholder="Notes from the call" className="px-3 py-2 border rounded sm:col-span-2" rows={2}
+              value={phoneForm.notes} onChange={e => setPhoneForm(f => ({ ...f, notes: e.target.value }))} />
+            <button type="submit" disabled={savingPhone} className="sm:col-span-2 px-4 py-2 bg-primary text-white font-medium rounded hover:bg-primary-dark disabled:opacity-60">
+              {savingPhone ? 'Saving...' : 'Save phone lead'}
+            </button>
+          </form>
+        )}
+
         {/* Filter Tabs */}
         <div className="bg-white rounded-lg border border-gray-200 mb-6">
           <div className="border-b border-gray-200 overflow-x-auto">
             <div className="flex gap-1 sm:gap-4 px-2 sm:px-4 min-w-max">
-              {(['all', 'new', 'contacted', 'converted', 'closed'] as StatusFilter[]).map(status => (
+              {(['needs_match', 'all', 'new', 'contacted', 'converted', 'closed'] as StatusFilter[]).map(status => (
                 <button
                   key={status}
                   onClick={() => setStatusFilter(status)}
@@ -185,7 +287,8 @@ export default function LeadsPage() {
                       : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  {status} ({status === 'all' ? leads.length : leads.filter(l => l.status === status).length})
+                  {status === 'needs_match' ? 'Needs match' : status} (
+                  {status === 'needs_match' ? needsMatchCount : status === 'all' ? leads.length : leads.filter(l => l.status === status).length})
                 </button>
               ))}
             </div>
@@ -210,6 +313,7 @@ export default function LeadsPage() {
                   <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{lead.parent_name}</h3>
                   {getStatusBadge(lead.status)}
                   {getUrgencyBadge(lead.urgency)}
+                  {sourceBadge(lead)}
                   <span className="text-xs text-gray-500">{formatDate(lead.created_at)}</span>
                 </div>
 
@@ -223,7 +327,7 @@ export default function LeadsPage() {
                       {lead.email}
                     </a>
                   )}
-                  <span className="text-gray-500 text-xs sm:text-sm">{lead.zip_code}, {lead.county}</span>
+                  <span className="text-gray-500 text-xs sm:text-sm">{[lead.zip_code, lead.county].filter(Boolean).join(', ')}</span>
                 </div>
 
                 {/* Details Row - wraps on mobile */}
@@ -236,12 +340,22 @@ export default function LeadsPage() {
                       <strong>Best time:</strong> {lead.preferred_callback_time}
                     </span>
                   )}
-                  <span>
-                    <strong>For:</strong>{' '}
-                    <Link href={`/provider/${lead.provider?.slug}`} className="text-primary hover:underline">
-                      {lead.provider?.name}
-                    </Link>
-                  </span>
+                  {lead.provider ? (
+                    <span>
+                      <strong>For:</strong>{' '}
+                      <Link href={`/provider/${lead.provider.slug}`} className="text-primary hover:underline">
+                        {lead.provider.name}
+                      </Link>
+                    </span>
+                  ) : (
+                    <span className="text-amber-700"><strong>Needs a provider</strong></span>
+                  )}
+                  {lead.source_page && (
+                    <span>
+                      <strong>From:</strong>{' '}
+                      <Link href={lead.source_page} className="text-gray-700 hover:underline" target="_blank">{lead.source_page}</Link>
+                    </span>
+                  )}
                 </div>
 
                 {/* Special Needs */}
@@ -257,6 +371,30 @@ export default function LeadsPage() {
                     <span className="text-xs text-gray-500">Saving...</span>
                   ) : (
                     <>
+                      {!lead.provider && (
+                        <div className="flex flex-wrap items-center gap-2 w-full mb-1">
+                          <select
+                            className="px-2 py-1.5 border border-gray-300 rounded text-xs"
+                            value={assignChoice[lead.id] || ''}
+                            onChange={e => setAssignChoice(prev => ({ ...prev, [lead.id]: e.target.value }))}
+                          >
+                            <option value="">Assign to a verified provider in {lead.county}…</option>
+                            {(countyProviders[lead.county] || []).map(p => (
+                              <option key={p.id} value={p.id}>{p.is_featured ? '★ ' : ''}{p.name}</option>
+                            ))}
+                          </select>
+                          <button
+                            onClick={() => assignLead(lead.id)}
+                            disabled={!assignChoice[lead.id]}
+                            className="px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-dark disabled:opacity-50"
+                          >
+                            Assign and email
+                          </button>
+                          {countyProviders[lead.county] && countyProviders[lead.county].length === 0 && (
+                            <span className="text-xs text-gray-500">No verified providers serve {lead.county} yet.</span>
+                          )}
+                        </div>
+                      )}
                       {lead.status === 'new' && (
                         <button
                           onClick={() => updateStatus(lead.id, 'contacted')}

@@ -4,6 +4,7 @@ import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema, WebPageSchema, GovernmentServiceSchema } from '@/components/JsonLd'
+import { HelplineCta } from '@/components/HelplineCta'
 
 const FAQS = [
   {
@@ -511,6 +512,13 @@ export default async function GeorgiaPediatricProgramPage() {
               <span className="text-gray-600"><strong className="text-gray-900">You can switch providers any time.</strong> If you&apos;re not happy with your agency, you have every right to move to a different one. Learn how in our <Link href="/how-to-switch-gapp-providers" className="text-primary hover:text-primary-dark">guide to switching GAPP providers</Link>.</span>
             </li>
           </ul>
+        </div>
+      </section>
+
+      {/* Talk to a human */}
+      <section className="py-10 px-4">
+        <div className="max-w-3xl mx-auto">
+          <HelplineCta variant="banner" sourcePage="/georgia-pediatric-program" />
         </div>
       </section>
 
