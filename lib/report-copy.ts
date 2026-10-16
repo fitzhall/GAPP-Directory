@@ -67,3 +67,25 @@ export function missingAndGains(p: StoryProvider): { missing: string[]; gains: s
   }
   return { missing, gains }
 }
+
+export type ReachStep = { value: number; tone: 'good' | 'bad'; label: string; meaning: string }
+
+// Step 2 of the story. An unclaimed listing has no number on the page, so
+// "tried to reach you" would make no sense; say plainly that nobody could.
+export function reachStep(d: StoryInput): ReachStep {
+  const viaUs = d.you.helplineClicks + d.you.leads
+  if (!d.provider.isClaimed) {
+    const tail =
+      viaUs > 0
+        ? `${viaUs.toLocaleString()} of these families texted our helpline or asked us for a match instead.`
+        : 'Every one of these families had to go find another agency.'
+    return { value: 0, tone: 'bad', label: 'Could call you', meaning: `There was no phone number on your page. ${tail}` }
+  }
+  const value = d.you.phoneClicks + viaUs
+  return {
+    value,
+    tone: value > 0 ? 'good' : 'bad',
+    label: 'Tried to reach you',
+    meaning: 'They tapped your number, texted our helpline from your page, or asked us for a match.',
+  }
+}

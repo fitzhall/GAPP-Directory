@@ -3,7 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { verifyReportToken } from '@/lib/report-token'
 import { getReportData } from '@/lib/report-data'
-import { reportStory, compareSentence, missingAndGains } from '@/lib/report-copy'
+import { reportStory, compareSentence, missingAndGains, reachStep } from '@/lib/report-copy'
 import { config } from '@/lib/config'
 
 // A private, signed page the operator texts to a provider during a sales
@@ -61,7 +61,7 @@ export default async function ReportPage({ params, searchParams }: Props) {
   if (!d) notFound()
 
   const story = reportStory(d)
-  const reached = d.you.phoneClicks + d.you.helplineClicks + d.you.leads
+  const reach = reachStep(d)
   const { missing, gains } = missingAndGains(d.provider)
   const sinceText = new Date(d.since).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   const peerLabel = d.peers.scope === 'counties' ? 'Verified agency near you' : 'Verified agency in Georgia'
@@ -80,7 +80,7 @@ export default async function ReportPage({ params, searchParams }: Props) {
 
         {/* The one thing to take away */}
         <section className="bg-warm-light border-2 border-warm rounded-3xl p-6 sm:p-8 text-center">
-          <p className="text-7xl font-extrabold text-navy leading-none">{story.bigNumber.toLocaleString()}</p>
+          <p className="text-7xl font-extrabold text-primary-dark leading-none">{story.bigNumber.toLocaleString()}</p>
           <p className="text-xl font-bold text-navy mt-3">{story.headline}</p>
           <p className={`text-lg font-extrabold mt-4 rounded-xl px-4 py-3 ${story.tone === 'bad' ? 'bg-primary/15 text-primary-dark' : 'bg-green-100 text-green-800'}`}>
             {story.problem}
@@ -99,17 +99,7 @@ export default async function ReportPage({ params, searchParams }: Props) {
               label="Found and opened your listing"
               meaning="A family searching for GAPP care clicked your name to read about you. This is a family who is choosing."
             />
-            <Step
-              n={2}
-              tone={reached > 0 ? 'good' : 'bad'}
-              value={reached}
-              label="Tried to reach you"
-              meaning={
-                d.provider.isClaimed
-                  ? 'They tapped your number, texted our helpline from your page, or asked us for a match.'
-                  : 'Your number is hidden, so the only way was to text our helpline or ask us for a match.'
-              }
-            />
+            <Step n={2} tone={reach.tone} value={reach.value} label={reach.label} meaning={reach.meaning} />
           </ol>
         </section>
 

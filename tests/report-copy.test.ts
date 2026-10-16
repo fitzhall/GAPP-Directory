@@ -87,3 +87,38 @@ describe('missingAndGains', () => {
     expect(r.gains).toEqual([])
   })
 })
+
+import { reachStep } from '@/lib/report-copy'
+
+describe('reachStep', () => {
+  it('unclaimed: no number on the page, so nobody could call', () => {
+    const s = reachStep({ ...base, you: { ...base.you, helplineClicks: 0, leads: 0 } })
+    expect(s).toEqual({
+      value: 0,
+      tone: 'bad',
+      label: 'Could call you',
+      meaning: 'There was no phone number on your page. Every one of these families had to go find another agency.',
+    })
+  })
+  it('unclaimed with helpline texts: says those families came to us instead', () => {
+    const s = reachStep(base) // helplineClicks 2, leads 1
+    expect(s.value).toBe(0)
+    expect(s.meaning).toBe(
+      'There was no phone number on your page. 3 of these families texted our helpline or asked us for a match instead.'
+    )
+  })
+  it('claimed: counts taps, helpline texts and match requests', () => {
+    const s = reachStep({ ...base, provider: { ...base.provider, isClaimed: true }, you: { ...base.you, phoneClicks: 4 } })
+    expect(s).toEqual({
+      value: 7,
+      tone: 'good',
+      label: 'Tried to reach you',
+      meaning: 'They tapped your number, texted our helpline from your page, or asked us for a match.',
+    })
+  })
+  it('claimed with nothing: bad tone', () => {
+    const s = reachStep({ ...base, provider: { ...base.provider, isClaimed: true }, you: { ...base.you, helplineClicks: 0, leads: 0 } })
+    expect(s.value).toBe(0)
+    expect(s.tone).toBe('bad')
+  })
+})
