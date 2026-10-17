@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { CountyFinder } from '@/components/CountyFinder'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { HelplineCta } from '@/components/HelplineCta'
 
@@ -130,6 +131,10 @@ export default async function GAPPProvidersGeorgiaPage() {
         intro="Featured and verified agencies that have confirmed their details. Tap the number to call."
         tone="hero"
       />
+
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-8">
+        <CountyFinder />
+      </section>
 
       {/* Everything else: full search, the quiz, and the numbers */}
       <section className="pb-10 px-4 bg-white border-b border-gray-100">

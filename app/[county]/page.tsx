@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { GEORGIA_COUNTIES, COUNTY_CONTEXT, formatCountyName, getNearbyCounties } from '@/lib/county-data'
+import { CountyOffer } from '@/components/CountyOffer'
+import { StickyCallBar } from '@/components/StickyCallBar'
 import { ProviderCard } from '@/components/ProviderCard'
 import { PaginatedProviderList } from '@/components/PaginatedProviderList'
 import { BreadcrumbSchema } from '@/components/JsonLd'
@@ -245,7 +247,7 @@ export default async function CountyPage({
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <div className={`max-w-6xl mx-auto px-4 sm:px-6 py-8 ${verifiedProviders.length === 0 ? 'pb-24 sm:pb-8' : ''}`}>
         {/* Dynamic Stats - unique per county */}
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6">
           <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">
@@ -307,6 +309,14 @@ export default async function CountyPage({
             </div>
           )}
         </div>
+
+        {/* No verified agency here: our offer goes above listings that have no phone number */}
+        {verifiedProviders.length === 0 && (
+          <div className="mb-6">
+            <CountyOffer county={countyName} unclaimedCount={providers.length} />
+            <StickyCallBar />
+          </div>
+        )}
 
         {/* Mini Screener Widget - Interactive utility for engagement */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">

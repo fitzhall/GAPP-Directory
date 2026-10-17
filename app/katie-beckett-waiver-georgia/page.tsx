@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { CountyFinder } from '@/components/CountyFinder'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { FAQPageSchema, BreadcrumbSchema, ArticleSchema } from '@/components/JsonLd'
 import { HelplineCta } from '@/components/HelplineCta'
@@ -255,6 +256,10 @@ export default async function KatieBeckettWaiverGeorgiaPage() {
         heading="Agencies taking GAPP patients now"
         intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
       />
+
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-8">
+        <CountyFinder />
+      </section>
 
       {/* The new Online Portal (April 15, 2026) */}
       <section id="online-portal" className="py-12 sm:py-16 px-4 scroll-mt-24 bg-blue-50">

@@ -13,3 +13,22 @@ export function unclaimedOfferCopy(agencyName: string, county: string | undefine
     ownerLine: `Do you run ${agencyName}? Claim this listing free and your phone number shows here instead.`,
   }
 }
+
+// Copy for the offer card on a county page where no verified agency is listed.
+export function countyOfferCopy(county: string, unclaimedCount: number): UnclaimedOfferCopy {
+  const where = `${county} County`
+  let body: string
+  if (unclaimedCount === 0) {
+    body = `No agency has listed ${where} yet. Call or text us and a real person will find you a GAPP agency that will serve ${where}. Free for families.`
+  } else if (unclaimedCount === 1) {
+    body = `The 1 agency listed here has not claimed its listing yet, so it shows no phone number. Call or text us and a real person will match you with a GAPP agency that serves ${where} and has nurses available. Free for families.`
+  } else {
+    body = `The ${unclaimedCount} agencies listed here have not claimed their listings yet, so none shows a phone number. Call or text us and a real person will match you with a GAPP agency that serves ${where} and has nurses available. Free for families.`
+  }
+  return {
+    headline: `Looking for GAPP care in ${where}?`,
+    body,
+    trust: ['Free for families', 'We know which agencies have openings', 'Usually the same day'],
+    ownerLine: '',
+  }
+}

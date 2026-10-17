@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { CountyFinder } from '@/components/CountyFinder'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { config } from '@/lib/config'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
@@ -103,6 +104,10 @@ export default async function GAPPPaidCaregiverPage() {
         heading="Agencies taking GAPP patients now"
         intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
       />
+
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-8">
+        <CountyFinder />
+      </section>
 
       {/* How it works - Step cards */}
       <section className="py-12 px-4 bg-gray-50">

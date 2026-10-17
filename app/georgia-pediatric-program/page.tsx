@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { FeaturedProvidersStrip } from '@/components/FeaturedProvidersStrip'
+import { CountyFinder } from '@/components/CountyFinder'
 import { getCallableProviders } from '@/lib/callable-providers'
 import { supabase } from '@/lib/supabase'
 import { FAQPageSchema, BreadcrumbSchema, WebPageSchema, GovernmentServiceSchema } from '@/components/JsonLd'
@@ -236,6 +237,10 @@ export default async function GeorgiaPediatricProgramPage() {
         heading="Agencies taking GAPP patients now"
         intro="Verified agencies that have confirmed their details. Tap the number to call, or compare every provider in the directory."
       />
+
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-8">
+        <CountyFinder />
+      </section>
 
       {/* Who Qualifies */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
