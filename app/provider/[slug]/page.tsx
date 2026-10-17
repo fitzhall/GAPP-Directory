@@ -10,6 +10,8 @@ import { CountiesSection } from '@/components/CountiesSection'
 import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { VerifiedProviderProfile } from '@/components/provider/VerifiedProviderProfile'
 import { HelplineCta } from '@/components/HelplineCta'
+import { UnclaimedOffer } from '@/components/UnclaimedOffer'
+import { StickyCallBar } from '@/components/StickyCallBar'
 import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
 
 // Rebuild at most hourly so provider changes (claims, verification, Whop
@@ -177,7 +179,7 @@ export default async function ProviderPage({
         }}
         areaServed={provider.countiesServed}
         medicalSpecialty={medicalSpecialties}
-        isAcceptingNewPatients={provider.acceptingNewPatients}
+        isAcceptingNewPatients={provider.isClaimed ? provider.acceptingNewPatients : undefined}
       />
 
       {/* Schema.org Breadcrumb */}
@@ -194,7 +196,8 @@ export default async function ProviderPage({
         <VerifiedProviderProfile provider={provider} />
       ) : (
         /* Unclaimed and claimed-but-unverified get the original layout */
-        <div className="min-h-screen bg-gray-50">
+        <div className={`min-h-screen bg-gray-50 ${provider.isClaimed ? '' : 'pb-24 sm:pb-0'}`}>
+          {!provider.isClaimed && <StickyCallBar providerId={provider.id} />}
           {/* Breadcrumb */}
           <div className="bg-white border-b border-gray-200">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3">
@@ -232,8 +235,8 @@ export default async function ProviderPage({
                 </h1>
                 <p className="text-gray-600">{provider.city}, Georgia</p>
 
-                {/* Trust badges */}
-                <div className="flex flex-wrap gap-2 mt-4">
+                {/* Trust badges: claimed listings set these; unclaimed ones are database defaults */}
+                {provider.isClaimed && <div className="flex flex-wrap gap-2 mt-4">
                   {provider.acceptingNewPatients ? (
                     <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-50 text-green-700 text-sm font-medium rounded-full">
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
@@ -261,7 +264,19 @@ export default async function ProviderPage({
                       Background-Checked Staff
                     </span>
                   )}
-                </div>
+                </div>}
+
+                {/* Unclaimed: the offer is the first screen */}
+                {!provider.isClaimed && (
+                  <div className="mt-5">
+                    <UnclaimedOffer
+                      agencyName={provider.name}
+                      county={provider.countiesServed[0]}
+                      providerId={provider.id}
+                      slug={provider.slug}
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Content */}
