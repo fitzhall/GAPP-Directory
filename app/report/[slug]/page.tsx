@@ -61,6 +61,8 @@ export default async function ReportPage({ params, searchParams }: Props) {
   if (!d) notFound()
 
   const story = reportStory(d)
+  const [problemNumber, ...problemWords] = story.problem.split(' ')
+  const problemRest = problemWords.join(' ')
   const reach = reachStep(d)
   const { missing, gains } = missingAndGains(d.provider)
   const sinceText = new Date(d.since).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -82,9 +84,10 @@ export default async function ReportPage({ params, searchParams }: Props) {
         <section className="bg-warm-light border-2 border-warm rounded-3xl p-6 sm:p-8 text-center">
           <p className="text-7xl font-extrabold text-primary-dark leading-none">{story.bigNumber.toLocaleString()}</p>
           <p className="text-xl font-bold text-navy mt-3">{story.headline}</p>
-          <p className={`text-lg font-extrabold mt-4 rounded-xl px-4 py-3 ${story.tone === 'bad' ? 'bg-primary/15 text-primary-dark' : 'bg-green-100 text-green-800'}`}>
-            {story.problem}
-          </p>
+          <div className={`mt-5 rounded-2xl px-5 py-4 text-white shadow-md ${story.tone === 'bad' ? 'bg-primary-dark' : 'bg-green-600'}`}>
+            <p className="text-5xl font-extrabold leading-none">{problemNumber}</p>
+            <p className="text-lg font-bold mt-2 leading-snug">{problemRest}</p>
+          </div>
         </section>
 
         {/* How a family finds you, in three steps */}
