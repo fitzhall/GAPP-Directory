@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { isCrawlerUserAgent, eventClientMeta } from '@/lib/crawler'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -20,12 +21,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid eventType' }, { status: 400 })
     }
 
+    // Crawlers run the page code too. Count only people, and keep the
+    // browser and referrer so a report can filter anything we missed.
+    const ua = request.headers.get('user-agent')
+    if (isCrawlerUserAgent(ua)) {
+      return NextResponse.json({ success: true, skipped: 'crawler' })
+    }
+
     const { error } = await supabase
       .from('provider_events')
       .insert({
         provider_id: providerId,
         event_type: eventType,
-        metadata: metadata || {},
+        metadata: { ...(metadata || {}), ...eventClientMeta(ua, request.headers.get('referer')) },
       })
 
     if (error) {
