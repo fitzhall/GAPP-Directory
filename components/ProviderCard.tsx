@@ -100,13 +100,15 @@ export function ProviderCard({ provider }: ProviderCardProps) {
   if (isClaimed && !isVerified) {
     return (
       <TrackImpression providerId={provider.id}>
-      <Link
-        href={`/provider/${slug}`}
-        className="block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
-      >
+      {/* A tel link cannot sit inside the card link (nested <a> breaks hydration),
+          so the card is a div; the name link stretches over it and the phone
+          link sits above that overlay. */}
+      <div className="relative block bg-white rounded-xl border-2 border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all">
         {/* Provider name and city */}
         <div className="mb-3">
-          <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
+          <h3 className="text-lg font-semibold text-gray-900">
+            <Link href={`/provider/${slug}`} className="after:absolute after:inset-0 after:content-['']">{name}</Link>
+          </h3>
           <p className="text-sm text-gray-500">{city}, Georgia</p>
         </div>
 
@@ -117,7 +119,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
             providerId={provider.id}
             eventType="click_phone"
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-2 mb-3 text-gray-900 font-medium"
+            className="relative z-10 flex items-center gap-2 mb-3 text-gray-900 font-medium"
           >
             <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -159,7 +161,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </div>
-      </Link>
+      </div>
       </TrackImpression>
     )
   }
