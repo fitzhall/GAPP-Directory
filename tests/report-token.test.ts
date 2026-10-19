@@ -29,3 +29,17 @@ describe('report token', () => {
     )
   })
 })
+
+import { reportToken } from '@/lib/report-token'
+
+describe('REPORT_SIGNING_SECRET', () => {
+  it('signs report links with its own secret when set, independent of the admin password', async () => {
+    const before = reportToken('some-agency')
+    process.env.REPORT_SIGNING_SECRET = 'report-only-secret'
+    const after = reportToken('some-agency')
+    delete process.env.REPORT_SIGNING_SECRET
+    expect(after).not.toBe(before)
+    expect(after).toHaveLength(24)
+    expect(reportToken('some-agency')).toBe(before)
+  })
+})

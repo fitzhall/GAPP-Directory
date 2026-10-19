@@ -3,11 +3,17 @@ import { signingKey } from '@/lib/signing-key'
 
 // A provider's report link is /report/<slug>?t=<token>. The token is an HMAC
 // of the slug, so a link proves the operator made it for that one slug and
-// nothing else. No database row, no expiry; rotating ADMIN_SESSION_SECRET
-// (or the admin password) invalidates every link at once.
+// nothing else. No database row, no expiry. Signed with REPORT_SIGNING_SECRET
+// when set (links then survive an admin password change and can be made off
+// the server), otherwise with the admin signing key; rotating whichever is in
+// use invalidates every link at once.
+
+function reportKey(): string | Buffer {
+  return process.env.REPORT_SIGNING_SECRET || signingKey()
+}
 
 export function reportToken(slug: string): string {
-  return createHmac('sha256', signingKey()).update(`report-v1:${slug}`).digest('base64url').slice(0, 24)
+  return createHmac('sha256', reportKey()).update(`report-v1:${slug}`).digest('base64url').slice(0, 24)
 }
 
 export function verifyReportToken(slug: string, token: string | undefined): boolean {
