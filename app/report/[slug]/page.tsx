@@ -26,8 +26,8 @@ function Dot({ tone }: { tone: 'good' | 'bad' | 'neutral' }) {
 
 function Step({ n, tone, value, label, meaning }: { n: number; tone: 'good' | 'bad' | 'neutral'; value: number; label: string; meaning: string }) {
   return (
-    <li className="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4 items-start">
-      <div className="w-9 h-9 rounded-full bg-navy text-white font-bold flex items-center justify-center shrink-0 text-base">{n}</div>
+    <li className="bg-white rounded-2xl border border-gray-200 p-5">
+      <p className="text-xs font-bold tracking-wide uppercase text-gray-400 mb-2">Step {n}</p>
       <div className="min-w-0">
         <div className="flex items-center gap-2">
           <Dot tone={tone} />
