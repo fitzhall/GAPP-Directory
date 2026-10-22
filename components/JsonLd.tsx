@@ -109,6 +109,8 @@ interface MedicalBusinessSchemaProps {
   areaServed?: string[] // counties
   medicalSpecialty?: string[]
   isAcceptingNewPatients?: boolean
+  npi?: string // national provider identifier, from the public registry
+  foundingDate?: string // NPI enumeration date, YYYY-MM-DD
 }
 
 export function MedicalBusinessSchema({
@@ -120,6 +122,8 @@ export function MedicalBusinessSchema({
   areaServed,
   medicalSpecialty,
   isAcceptingNewPatients,
+  npi,
+  foundingDate,
 }: MedicalBusinessSchemaProps) {
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -130,6 +134,8 @@ export function MedicalBusinessSchema({
 
   if (description) data.description = description
   if (telephone) data.telephone = telephone
+  if (npi) data.identifier = { '@type': 'PropertyValue', propertyID: 'NPI', value: npi }
+  if (foundingDate) data.foundingDate = foundingDate
   if (isAcceptingNewPatients !== undefined) data.isAcceptingNewPatients = isAcceptingNewPatients
 
   if (address) {
