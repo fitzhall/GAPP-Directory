@@ -282,6 +282,9 @@ On listings that are **not verified and not featured**, the Call button rings a 
 - Env: `TWILIO_AUTH_TOKEN`, `TWILIO_CONNECT_NUMBERS` (comma-separated E.164), optional `CONNECT_FALLBACK_PHONE`. Each number's Voice webhook must POST to `https://www.georgiagapp.com/api/connect/voice`.
 - Pure logic and TwiML in `lib/connect.ts`; signature check in `lib/twilio-signature.ts`. Spec: `docs/superpowers/specs/2026-10-22-connect-line-and-public-facts-design.md`.
 
+### Premium seats (one featured agency per county)
+`providers.premium_county` names the ONE county where a featured agency ranks first (migration 016; a unique index allows one active agency per county). Rules live in `lib/premium.ts`: a seat needs `is_featured` + `is_verified` + `premium_county`. On that county's page and in the county-filtered directory the holder is first and wears "Featured in X County"; in every other county it ranks as verified. Statewide lists (unfiltered directory, guide-page strip from `lib/callable-providers.ts`) show every seat holder first, order rotating daily, capped at six. The admin "Feature" button prompts for the county. A featured agency with no `premium_county` is legacy and ranks as verified everywhere.
+
 ### Public facts
 `scripts/enrich-public-facts.ts` fills `npi*`, `state_list_date`, `state_list_coverage`, `facts_checked_at` on providers from the NPI registry and Appendix P (2026-08-15). Matching rules in `lib/public-facts.ts` are strict (name + city/phone/street, and a seeded slug's four-digit suffix must equal the NPI's last four). Rendered as "Public record" by `components/PublicFacts.tsx`; review CSV in `outreach/2026-10-22-public-facts/`. Re-run with `--all` after a data cleanup.
 

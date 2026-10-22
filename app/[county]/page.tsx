@@ -7,6 +7,7 @@ import { GEORGIA_COUNTIES, COUNTY_CONTEXT, formatCountyName, getNearbyCounties }
 import { CountyOffer } from '@/components/CountyOffer'
 import { StickyCallBar } from '@/components/StickyCallBar'
 import { ProviderCard } from '@/components/ProviderCard'
+import { isPremiumIn, premiumLabel, rankForCounty } from '@/lib/premium'
 import { PaginatedProviderList } from '@/components/PaginatedProviderList'
 import { BreadcrumbSchema } from '@/components/JsonLd'
 import { MiniScreener } from '@/components/MiniScreener'
@@ -19,7 +20,8 @@ export const revalidate = 3600
 
 // County data imported from lib/county-data.ts (single source of truth)
 
-function toProviderCard(provider: Provider): ProviderCardData {
+function toProviderCard(provider: Provider, countyName: string): ProviderCardData {
+  const featuredHere = isPremiumIn(provider, countyName)
   return {
     id: provider.id,
     name: provider.name,
@@ -31,7 +33,8 @@ function toProviderCard(provider: Provider): ProviderCardData {
     tierLevel: provider.tierLevel,
     isClaimed: provider.isClaimed,
     isVerified: provider.isVerified,
-    isFeatured: provider.isFeatured,
+    isFeatured: featuredHere,
+    featuredLabel: featuredHere && provider.premiumCounty ? premiumLabel(provider.premiumCounty) : undefined,
     phone: provider.phone,
     fastResponse: provider.fastResponse,
     backgroundCheckedStaff: provider.backgroundCheckedStaff,
@@ -103,7 +106,7 @@ const getProvidersByCounty = cache(async (countyName: string): Promise<Provider[
   // active provider that serves it (same sort order as above).
   const filteredData = freeTierData.length > 0 ? freeTierData : (data || [])
 
-  return filteredData.map(row => ({
+  const mapped: Provider[] = filteredData.map(row => ({
     id: row.id,
     name: row.name,
     slug: row.slug,
@@ -134,7 +137,11 @@ const getProvidersByCounty = cache(async (countyName: string): Promise<Provider[
     updatedAt: row.updated_at,
     verifiedAt: row.verified_at,
     featuredAt: row.featured_at,
+    premiumCounty: row.premium_county ?? null,
   }))
+  // The county's premium seat holder first; a premium agency from another
+  // county ranks as verified here.
+  return rankForCounty(mapped, countyName)
 })
 
 // Generate metadata for SEO - dynamic and unique per county
@@ -388,7 +395,7 @@ export default async function CountyPage({
           </div>
         ) : (
           <PaginatedProviderList
-            providers={providers.map(toProviderCard)}
+            providers={providers.map(p => toProviderCard(p, countyName))}
             pageSize={CARDS_PER_PAGE}
           />
         )}

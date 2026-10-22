@@ -19,6 +19,7 @@ interface ProviderAdmin {
   is_claimed: boolean
   is_verified: boolean
   is_featured: boolean
+  premium_county?: string | null
   accepting_new_patients: boolean
   tier_level: number
   created_at: string
@@ -204,7 +205,10 @@ export default function AdminPage() {
 
     if (error) {
       console.error('Error updating provider:', error)
-      alert('Failed to update provider')
+      const message = typeof error === 'string' ? error : error.message
+      alert(/premium_county_unique/.test(message)
+        ? 'That county already has a premium agency. Only one agency can hold a county.'
+        : `Failed to update provider: ${message}`)
     } else {
       setProviders(prev =>
         prev.map(p => p.id === id ? { ...p, ...updates } : p)
@@ -264,12 +268,18 @@ export default function AdminPage() {
     await updateProvider(id, { accepting_new_patients: !currentValue })
   }
 
-  // Toggle featured
+  // Toggle featured. Turning it on asks for the ONE county where this agency
+  // ranks first (its premium seat); the database allows one agency per county.
   async function toggleFeatured(id: string, currentValue: boolean) {
-    await updateProvider(id, {
-      is_featured: !currentValue,
-      tier_level: !currentValue ? 1 : 0
-    })
+    if (currentValue) {
+      await updateProvider(id, { is_featured: false, premium_county: null, tier_level: 0 })
+      return
+    }
+    const answer = prompt('Premium seat: which ONE county does this agency rank first in? (example: Gwinnett)')
+    if (answer === null) return
+    const county = answer.trim().replace(/\s+county$/i, '')
+    if (!county) { alert('A premium seat needs a county.'); return }
+    await updateProvider(id, { is_featured: true, premium_county: county, tier_level: 3 })
   }
 
   // Mark provider as claimed (manual fix)
@@ -707,7 +717,7 @@ export default function AdminPage() {
                           <span className={`px-2 py-0.5 text-xs rounded-full ${
                             provider.is_verified ? 'bg-purple-100 text-purple-700' : 'bg-red-100 text-red-700'
                           }`}>
-                            Featured {!provider.is_verified && '⚠️'}
+                            Featured{provider.premium_county ? ` · ${provider.premium_county}` : ' · no county'} {!provider.is_verified && '⚠️'}
                           </span>
                         )}
                       </div>
@@ -982,7 +992,7 @@ export default function AdminPage() {
                                   ? 'bg-purple-100 text-purple-700'
                                   : 'bg-red-100 text-red-700'
                               }`}>
-                                Featured {!provider.is_verified && '⚠️'}
+                                Featured{provider.premium_county ? ` · ${provider.premium_county}` : ' · no county'} {!provider.is_verified && '⚠️'}
                               </span>
                             )}
                             {provider.missed_checkin_at && (

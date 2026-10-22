@@ -11,7 +11,7 @@ import { reportUrl } from '@/lib/report-token'
 // because the database let the public key read and write everything.
 
 const ADMIN_PROVIDER_COLUMNS =
-  'id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claimer_name, claimer_phone, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason, missed_checkin_at'
+  'id, name, slug, city, email, phone, website, services_offered, languages, is_claimed, is_verified, is_featured, accepting_new_patients, tier_level, created_at, claimed_at, counties_served, claimed_by_email, claimer_name, claimer_phone, claim_token, unverified_at, unverified_reason, downgraded_at, downgraded_reason, missed_checkin_at, premium_county'
 
 type Args = Record<string, unknown>
 type Result = { data: unknown; error: string | null }

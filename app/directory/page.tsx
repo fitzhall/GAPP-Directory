@@ -7,6 +7,7 @@ import { ProviderCard } from '@/components/ProviderCard'
 import { supabase, toProviderCard } from '@/lib/supabase'
 import type { Provider, ServiceType, ProviderCardData } from '@/types/provider'
 import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
+import { rankForCounty, rankStatewide } from '@/lib/premium'
 
 // Georgia counties - dynamically populated from data
 const GEORGIA_COUNTIES = [
@@ -101,6 +102,7 @@ function DirectoryContent() {
           updatedAt: row.updated_at,
           verifiedAt: row.verified_at,
           featuredAt: row.featured_at,
+          premiumCounty: row.premium_county ?? null,
         }))
 
         setProviders(transformed)
@@ -157,28 +159,15 @@ function DirectoryContent() {
     })
   }, [providers, county, service, searchQuery])
 
-  // Sort: Premium+Verified > Verified > Claimed > Featured-but-not-verified > Unclaimed
-  // NOTE: Featured providers who lost verification should NOT rank above verified providers
+  // Sort. With a county picked: that county's premium seat holder, then
+  // verified, claimed, unclaimed. Without one: every premium seat holder
+  // first (order rotates daily), then verified, claimed, unclaimed. A
+  // featured agency that is not verified, or holds no seat, ranks as verified.
   const sortedProviders = useMemo(() => {
-    return [...filteredProviders].sort((a, b) => {
-      // Calculate tier score - verification is required to benefit from featured status
-      const getTierScore = (p: typeof a) => {
-        if (p.isFeatured && p.isVerified) return 5  // Premium AND verified - top ranking
-        if (p.isVerified) return 4                   // Verified (with or without featured)
-        if (p.isFeatured) return 2                   // Featured but NOT verified - demoted below verified
-        if (p.isClaimed) return 1                    // Claimed only
-        return 0                                      // Unclaimed
-      }
-      const scoreA = getTierScore(a)
-      const scoreB = getTierScore(b)
-
-      // Higher tier first
-      if (scoreA !== scoreB) return scoreB - scoreA
-
-      // Then alphabetically
-      return a.name.localeCompare(b.name)
-    })
-  }, [filteredProviders])
+    if (county) return rankForCounty(filteredProviders, county)
+    const { premium, rest } = rankStatewide(filteredProviders)
+    return [...premium, ...rest]
+  }, [filteredProviders, county])
 
   // Pagination
   const totalPages = Math.ceil(sortedProviders.length / ITEMS_PER_PAGE)
@@ -188,7 +177,7 @@ function DirectoryContent() {
   }, [sortedProviders, currentPage])
 
   // Convert to card data
-  const providerCards: ProviderCardData[] = paginatedProviders.map(toProviderCard)
+  const providerCards: ProviderCardData[] = paginatedProviders.map(p => toProviderCard(p, county))
 
   // Count of active filters
   const activeFilterCount = [

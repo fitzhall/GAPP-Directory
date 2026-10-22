@@ -42,6 +42,7 @@ export interface Provider {
   isClaimed: boolean;            // Provider claimed their profile (phone visible)
   isVerified: boolean;           // Paid verified tier
   isFeatured: boolean;           // Paid featured listing
+  premiumCounty?: string | null; // The one county where a featured agency ranks first
   backgroundCheckedStaff?: boolean;
   fastResponse?: boolean;        // Measured/verified fast response
 
@@ -85,6 +86,8 @@ export interface ProviderCardData {
   isClaimed: boolean;
   isVerified: boolean;
   isFeatured: boolean;
+  /** Set when this card should wear the Featured badge; the text names the county. */
+  featuredLabel?: string;
   phone?: string;
   fastResponse?: boolean;
   backgroundCheckedStaff?: boolean;

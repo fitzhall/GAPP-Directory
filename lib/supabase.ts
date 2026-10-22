@@ -1,3 +1,4 @@
+import { holdsPremiumSeat, isPremiumIn, premiumLabel } from '@/lib/premium'
 import { createClient } from '@supabase/supabase-js';
 import type { Provider, ProviderCardData, CallbackRequest, ProviderFilters } from '@/types/provider';
 import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns';
@@ -237,7 +238,13 @@ function transformCallbackRequest(data: Record<string, unknown>): CallbackReques
 // PROVIDER CARD DATA (lighter weight)
 // ============================================
 
-export function toProviderCard(provider: Provider): ProviderCardData {
+/**
+ * `county` is the county the visitor is looking at. With one, only that
+ * county's premium seat holder wears the Featured badge. Without one (a
+ * statewide list) every seat holder does.
+ */
+export function toProviderCard(provider: Provider, county?: string | null): ProviderCardData {
+  const featuredHere = county && county.trim() ? isPremiumIn(provider, county) : holdsPremiumSeat(provider)
   return {
     id: provider.id,
     name: provider.name,
@@ -249,7 +256,8 @@ export function toProviderCard(provider: Provider): ProviderCardData {
     tierLevel: provider.tierLevel,
     isClaimed: provider.isClaimed,
     isVerified: provider.isVerified,
-    isFeatured: provider.isFeatured,
+    isFeatured: featuredHere,
+    featuredLabel: featuredHere && provider.premiumCounty ? premiumLabel(provider.premiumCounty) : undefined,
     phone: provider.phone,
     fastResponse: provider.fastResponse,
     backgroundCheckedStaff: provider.backgroundCheckedStaff,
