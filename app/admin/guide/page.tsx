@@ -63,7 +63,7 @@ const sections: GuideSection[] = [
         content: [
           'On the Providers page, verified providers have a star icon next to their name.',
           'Click the star to toggle Featured status on or off. Featured providers (Tier 1) appear first in all search results and directory listings, and their cards are visually highlighted.',
-          'Featuring a provider sets their tier_level to 1. Coordinate payment ($99/mo) separately. See the Revenue section below for details on the tier system.',
+          'Featuring a provider asks for its one premium county and sets tier_level to 3. Coordinate payment ($897/quarter) separately. See the Revenue section below for details on the tier system.',
         ],
       },
     ],
@@ -105,7 +105,7 @@ const sections: GuideSection[] = [
           'Unclaimed: The provider exists in the database but hasn\'t claimed their listing yet. They are not visible on the public site.',
           'Claimed: The provider filled out the claim form with their contact info. They appear in the "Claimed" tab but are still not visible to the public.',
           'Verified: An admin has confirmed the provider. Their listing is live on the site and visible to families in search results.',
-          'Featured: A verified provider with a paid premium listing ($99/mo). They appear first in search results with a highlighted card.',
+          'Featured: A verified provider with a paid premium listing ($897/quarter). It appears first in its one premium county and at the top of the guide pages.',
         ],
       },
       {
@@ -130,7 +130,7 @@ const sections: GuideSection[] = [
         content: [
           'The directory has two tiers for providers:',
           'Claimed (Tier 0): A basic listing visible in the directory. The provider appears in search results sorted alphabetically after any Featured providers. Includes a standard provider card and profile page. Claiming is free.',
-          'Featured (Tier 1, $99/mo): A premium listing with priority placement. Featured providers always appear first in search results and directory pages. Their card is visually highlighted to stand out from Claimed listings.',
+          'Featured (Tier 3, $897/quarter): A premium listing with first place in one county. Featured providers appear first in that county and on the guide pages pages. Their card is visually highlighted to stand out from Claimed listings.',
         ],
       },
       {
@@ -422,7 +422,7 @@ export default function AdminGuidePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
               <span className="px-3 py-1.5 bg-primary/10 text-primary-dark font-medium rounded-full">
-                Featured ($99/mo)
+                Featured ($897/quarter)
               </span>
             </div>
             <p className="text-xs text-gray-500 mt-4">

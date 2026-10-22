@@ -1,3 +1,4 @@
+import { config } from '@/lib/config'
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/admin-session'
 import { Resend } from 'resend'
@@ -5,8 +6,8 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Whop checkout URLs
-const WHOP_VERIFIED_URL = 'https://whop.com/checkout/plan_ONEJn5I9ehbJp'
-const WHOP_PREMIUM_URL = 'https://whop.com/checkout/plan_G4k1CThUXfFdD'
+const WHOP_VERIFIED_URL = config.pricing.verified.checkoutUrl
+const WHOP_PREMIUM_URL = config.pricing.premium.checkoutUrl
 
 export async function POST(request: NextRequest) {
   const denied = requireAdmin(request)
@@ -44,7 +45,7 @@ export async function POST(request: NextRequest) {
           <p>To get the most out of your listing, consider upgrading to one of our verified tiers:</p>
 
           <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin: 25px 0;">
-            <h3 style="margin: 0 0 15px 0; color: #333;">Verified Provider - $127/quarter</h3>
+            <h3 style="margin: 0 0 15px 0; color: #333;">Verified Provider - ${config.pricing.verified.label}</h3>
             <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #555;">
               <li>Appear in case manager searches</li>
               <li>Show "Verified" badge on your listing</li>
@@ -57,10 +58,11 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="background: linear-gradient(135deg, #f5f3ff 0%, #fdf4ff 100%); border-radius: 12px; padding: 20px; margin: 25px 0; border: 1px solid #e9d5ff;">
-            <h3 style="margin: 0 0 15px 0; color: #7c3aed;">Premium Provider - $387/quarter</h3>
+            <h3 style="margin: 0 0 15px 0; color: #7c3aed;">Premium Provider - ${config.pricing.premium.label}</h3>
             <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #555;">
               <li>Everything in Verified, plus:</li>
-              <li>Featured placement at top of search results</li>
+              <li>First place in one county of your choice (one agency per county)</li>
+              <li>Top of our guide pages statewide</li>
               <li>Priority in case manager recommendations</li>
               <li>"Featured Provider" badge</li>
             </ul>

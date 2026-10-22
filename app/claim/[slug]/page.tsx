@@ -1,5 +1,6 @@
 'use client'
 
+import { config } from '@/lib/config'
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
@@ -288,25 +289,25 @@ export default function ClaimProfilePage() {
             <div className="space-y-3">
               {/* Verified Tier */}
               <a
-                href="https://whop.com/checkout/plan_ONEJn5I9ehbJp"
+                href={config.pricing.verified.checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-accent text-white font-semibold rounded-lg text-center hover:bg-accent/90 transition-colors"
               >
-                Get Verified — $127/quarter
+                Get Verified — {config.pricing.verified.label}
               </a>
 
               {/* Premium Tier */}
               <a
-                href="https://whop.com/checkout/plan_G4k1CThUXfFdD"
+                href={config.pricing.premium.checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-lg text-center hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
               >
-                ⭐ Go Premium — $387/quarter
+                ⭐ Go Premium — {config.pricing.premium.label}
               </a>
               <p className="text-xs text-gray-600 text-center">
-                Premium includes: Featured placement, priority in search results, and highlighted profile badge
+                Premium: first place in one county of your choice, top of our guide pages statewide, and the Featured badge. One agency per county.
               </p>
             </div>
 

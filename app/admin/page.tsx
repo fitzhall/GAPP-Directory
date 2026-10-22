@@ -1,5 +1,6 @@
 'use client'
 
+import { config } from '@/lib/config'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { adminData } from '@/lib/admin-data'
@@ -1106,7 +1107,7 @@ export default function AdminPage() {
                                       </button>
                                       <button
                                         onClick={() => {
-                                          navigator.clipboard.writeText('https://whop.com/checkout/plan_4j17R6ZugaIIw')
+                                          navigator.clipboard.writeText(config.pricing.verified.checkoutUrl)
                                           const btn = document.activeElement as HTMLButtonElement
                                           const original = btn.innerText
                                           btn.innerText = 'Copied!'
@@ -1327,7 +1328,7 @@ export default function AdminPage() {
               <li>Confirm they are a GAPP provider</li>
               <li>Ask for their email to send them access to claim their profile</li>
               <li>Once they claim, verify their listing</li>
-              <li>Upsell Featured placement for $99/mo</li>
+              <li>Upsell Premium (first place in one county) for $897/quarter</li>
             </ol>
           </div>
         </div>

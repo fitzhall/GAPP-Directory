@@ -15,9 +15,9 @@ export const config = {
     {
       level: 0,
       name: 'Verified',
-      price: 0,
+      price: 147,
       color: 'green',
-      description: 'Basic claimed listing',
+      description: 'Verified listing, billed quarterly',
       features: [
         'Listed in search results',
         'Counties served displayed',
@@ -28,9 +28,9 @@ export const config = {
     {
       level: 1,
       name: 'Featured',
-      price: 99,
+      price: 897,
       color: 'purple',
-      description: 'Premium placement + lead routing',
+      description: 'Premium: first place in one county, billed quarterly',
       features: [
         'Top placement in your counties',
         'Featured badge on profile',
@@ -41,6 +41,23 @@ export const config = {
       ]
     },
   ],
+
+  // Plans and the Whop checkout links that charge them. Prices here must match
+  // what the Whop plan actually charges (checked 2026-10-22).
+  pricing: {
+    verified: {
+      price: 147,
+      period: 'quarter',
+      label: '$147/quarter',
+      checkoutUrl: 'https://whop.com/checkout/plan_ONEJn5I9ehbJp',
+    },
+    premium: {
+      price: 897,
+      period: 'quarter',
+      label: '$897/quarter',
+      checkoutUrl: 'https://whop.com/checkout/plan_G4k1CThUXfFdD',
+    },
+  },
 
   // Trust Badges
   badges: [
