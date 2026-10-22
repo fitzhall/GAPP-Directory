@@ -35,12 +35,12 @@ const TIMELINE_FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'GAPP Approval Timeline 2026: How Long It Really Takes',
-  description: 'GAPP approval takes 2 to 6 weeks once your child has Medicaid. Georgia Medicaid itself takes 30 to 45 days. Step-by-step timeline and what causes delays.',
+  title: 'Georgia Medicaid Approval: 30 to 45 Days. GAPP: 2 to 6 Weeks',
+  description: 'Georgia Medicaid takes 30 to 45 days. GAPP nursing approval takes 2 to 6 weeks more. Step by step, what slows it down, and what to do while you wait.',
   keywords: 'GAPP approval time, how long does it take to get approved for medicaid in ga, Georgia Medicaid approval timeline, how long GAPP takes, GAPP prior authorization time, Medicaid application Georgia timeline',
   openGraph: {
-    title: 'GAPP Approval Timeline: How Long Does It Take?',
-    description: 'Complete breakdown of the GAPP approval timeline in Georgia. Know what to expect at each step.',
+    title: 'Georgia Medicaid Approval: 30 to 45 Days. GAPP: 2 to 6 Weeks',
+    description: 'Georgia Medicaid takes 30 to 45 days. GAPP nursing approval takes 2 to 6 weeks more. Step by step, what slows it down, and what to do while you wait.',
     type: 'article',
   },
   alternates: {

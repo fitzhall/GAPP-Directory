@@ -39,12 +39,12 @@ const FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Georgia Pediatric Program (GAPP): Eligibility & Services',
-  description: 'The Georgia Pediatric Program (GAPP) provides in-home nursing for medically fragile children. Eligibility, covered services, and how to find providers.',
+  title: 'GAPP: Free In-Home Nursing for Georgia Kids on Medicaid',
+  description: 'GAPP sends a nurse or caregiver to your home for a child with serious medical needs. No cost with Georgia Medicaid. See who qualifies and how to start.',
   keywords: 'Georgia Pediatric Program, GAPP Georgia, what is GAPP, GAPP eligibility, Georgia pediatric home care program, GAPP program services, GAPP Medicaid waiver',
   openGraph: {
-    title: 'Georgia Pediatric Program (GAPP) – Complete Guide',
-    description: 'Everything you need to know about the Georgia Pediatric Program: eligibility, services covered, and how to get started with GAPP.',
+    title: 'GAPP: Free In-Home Nursing for Georgia Kids on Medicaid',
+    description: 'GAPP sends a nurse or caregiver to your home for a child with serious medical needs. No cost with Georgia Medicaid. See who qualifies and how to start.',
     type: 'article',
     url: 'https://www.georgiagapp.com/georgia-pediatric-program',
     siteName: 'GeorgiaGAPP.com',
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Georgia Pediatric Program (GAPP) – Complete Guide',
-    description: 'Everything you need to know about the Georgia Pediatric Program: eligibility, services covered, and how to get started.',
+    title: 'GAPP: Free In-Home Nursing for Georgia Kids on Medicaid',
+    description: 'GAPP sends a nurse or caregiver to your home for a child with serious medical needs. No cost with Georgia Medicaid.',
     images: ['https://www.georgiagapp.com/og-image.jpg'],
   },
   alternates: {
