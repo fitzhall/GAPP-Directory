@@ -172,12 +172,20 @@ export default function ClaimProfilePage() {
               help@georgiaGAPP.com
             </a>
           </p>
-          <Link
-            href={`/provider/${provider.slug}`}
-            className="inline-block px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"
-          >
-            View Profile
-          </Link>
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/premium"
+              className="inline-block px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all"
+            >
+              Upgrade to Verified or Premium
+            </Link>
+            <Link
+              href={`/provider/${provider.slug}`}
+              className="inline-block px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"
+            >
+              View Profile
+            </Link>
+          </div>
         </div>
       </div>
     )
