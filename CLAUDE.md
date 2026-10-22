@@ -274,6 +274,17 @@ Site-owned "match me" lead from an unclaimed provider page or a content page (no
 
 **Side Effects:** inserts into `callback_requests` with `provider_id = NULL`, `source = 'match_form'`, `source_page`; dedupes on phone for 30 minutes; emails `LEAD_NOTIFY_EMAIL`. The admin assigns the lead to a verified provider from `/admin/leads` ("Needs match" tab), which emails that provider.
 
+### Connect line (`/api/connect/*`)
+On listings that are **not verified and not featured**, the Call button rings a GeorgiaGAPP-owned Twilio pool number that forwards to the agency, so every call is logged (`connect_calls`, `provider_events.connect_call`) and emailed to `LEAD_NOTIFY_EMAIL`. Off until `TWILIO_CONNECT_NUMBERS` is set.
+
+- `POST /api/connect/number` `{providerId}` → ties a pool number to that listing for 15 minutes (`connect_assignments`) and returns it; the browser dials it (`components/ConnectCallButton.tsx`).
+- `POST /api/connect/voice` → Twilio Voice webhook for every pool number; forwards to the live listing, else the helpline. `whisper` tells the agency the call is from the site; `status` records the outcome and sends the caller to the helpline when the agency does not pick up.
+- Env: `TWILIO_AUTH_TOKEN`, `TWILIO_CONNECT_NUMBERS` (comma-separated E.164), optional `CONNECT_FALLBACK_PHONE`. Each number's Voice webhook must POST to `https://www.georgiagapp.com/api/connect/voice`.
+- Pure logic and TwiML in `lib/connect.ts`; signature check in `lib/twilio-signature.ts`. Spec: `docs/superpowers/specs/2026-10-22-connect-line-and-public-facts-design.md`.
+
+### Public facts
+`scripts/enrich-public-facts.ts` fills `npi*`, `state_list_date`, `state_list_coverage`, `facts_checked_at` on providers from the NPI registry and Appendix P (2026-08-15). Matching rules in `lib/public-facts.ts` are strict (name + city/phone/street, and a seeded slug's four-digit suffix must equal the NPI's last four). Rendered as "Public record" by `components/PublicFacts.tsx`; review CSV in `outreach/2026-10-22-public-facts/`. Re-run with `--all` after a data cleanup.
+
 ### `GET /report/[slug]?t=<token>`
 Public, signed, noindex per-provider 90-day listing report (views, impressions, phone taps, helpline taps, leads, county peer medians). The token is an HMAC of the slug (`lib/report-token.ts`); make links with "Copy report" / "Export Report Links" in `/admin`. Rotating the admin password or `ADMIN_USERS` invalidates every link.
 

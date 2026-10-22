@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { config } from '@/lib/config'
 import { TrackableLink } from '@/components/TrackableLink'
+import { ConnectCallButton } from '@/components/ConnectCallButton'
 
 interface Props {
   headline: string
@@ -8,11 +9,13 @@ interface Props {
   trust: string[]
   providerId?: string
   footer?: ReactNode
+  /** When set, the big button calls this agency through the connect line and our helpline becomes the second button. */
+  agencyCall?: { agencyName: string }
 }
 
 // The site's own offer: big call and text buttons, three trust lines. With a
 // providerId the taps are logged against that listing as click_helpline.
-export function OfferCard({ headline, body, trust, providerId, footer }: Props) {
+export function OfferCard({ headline, body, trust, providerId, footer, agencyCall }: Props) {
   const btn = 'flex items-center justify-center gap-2 px-6 py-4 text-lg font-extrabold rounded-xl transition-colors'
   const callClass = `${btn} bg-primary text-white hover:bg-primary-dark shadow-md flex-1`
   const textClass = `${btn} bg-white border-2 border-primary text-primary-dark hover:bg-primary/10`
@@ -28,7 +31,16 @@ export function OfferCard({ headline, body, trust, providerId, footer }: Props) 
       <p className="text-2xl sm:text-3xl font-extrabold text-navy leading-tight">{headline}</p>
       <p className="text-lg text-navy mt-3 leading-relaxed">{body}</p>
       <div className="flex flex-col sm:flex-row gap-3 mt-5">
-        {providerId ? (
+        {agencyCall && providerId ? (
+          <>
+            <ConnectCallButton providerId={providerId} fallbackTel={null} className={callClass}>
+              {phoneIcon}Call {agencyCall.agencyName}
+            </ConnectCallButton>
+            <TrackableLink href={tel} providerId={providerId} eventType="click_helpline" className={textClass}>
+              Call us instead
+            </TrackableLink>
+          </>
+        ) : providerId ? (
           <>
             <TrackableLink href={tel} providerId={providerId} eventType="click_helpline" className={callClass}>
               {phoneIcon}Call {config.contact.phone}

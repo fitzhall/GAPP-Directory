@@ -10,6 +10,10 @@ import { CountiesSection } from '@/components/CountiesSection'
 import { MedicalBusinessSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { VerifiedProviderProfile } from '@/components/provider/VerifiedProviderProfile'
 import { HelplineCta } from '@/components/HelplineCta'
+import { ConnectCallButton } from '@/components/ConnectCallButton'
+import { PublicFacts } from '@/components/PublicFacts'
+import { connectPool, isConnectEligible, toE164 } from '@/lib/connect'
+import type { PublicFacts as PublicFactsData } from '@/lib/public-facts'
 import { UnclaimedOffer } from '@/components/UnclaimedOffer'
 import { StickyCallBar } from '@/components/StickyCallBar'
 import { PUBLIC_PROVIDER_COLUMNS } from '@/lib/provider-columns'
@@ -38,6 +42,7 @@ const serviceLabels: Record<ServiceType, string> = {
 
 interface ProviderData extends Provider {
   isClaimed: boolean
+  facts: PublicFactsData
 }
 
 async function getProvider(slug: string): Promise<ProviderData | null> {
@@ -82,6 +87,15 @@ async function getProvider(slug: string): Promise<ProviderData | null> {
     updatedAt: data.updated_at,
     verifiedAt: data.verified_at,
     featuredAt: data.featured_at,
+    facts: {
+      npi: data.npi ?? null,
+      npiEnumerationDate: data.npi_enumeration_date ?? null,
+      npiTaxonomy: data.npi_taxonomy ?? null,
+      npiOfficialName: data.npi_official_name ?? null,
+      npiOfficialTitle: data.npi_official_title ?? null,
+      stateListDate: data.state_list_date ?? null,
+      stateListCoverage: data.state_list_coverage ?? null,
+    },
   }
 }
 
@@ -153,6 +167,12 @@ export default async function ProviderPage({
 
   const contactPhone = provider.intakePhone || provider.phone
 
+  // Connect line: only non-verified, non-featured listings, and only once the
+  // pool numbers exist. Off, the page behaves exactly as before.
+  const connectOn =
+    connectPool().length > 0 &&
+    isConnectEligible({ isActive: provider.isActive, isVerified: provider.isVerified, isFeatured: !!provider.isFeatured, phone: contactPhone ?? null })
+
   // Map service codes to medical specialty names for schema
   const medicalSpecialties = provider.servicesOffered.map(service => {
     switch (service) {
@@ -180,6 +200,8 @@ export default async function ProviderPage({
         areaServed={provider.countiesServed}
         medicalSpecialty={medicalSpecialties}
         isAcceptingNewPatients={provider.isClaimed ? provider.acceptingNewPatients : undefined}
+        npi={provider.facts.npi || undefined}
+        foundingDate={provider.facts.npiEnumerationDate || undefined}
       />
 
       {/* Schema.org Breadcrumb */}
@@ -274,6 +296,7 @@ export default async function ProviderPage({
                       county={provider.countiesServed[0]}
                       providerId={provider.id}
                       slug={provider.slug}
+                      connect={connectOn}
                     />
                   </div>
                 )}
@@ -288,6 +311,9 @@ export default async function ProviderPage({
                     <p className="text-gray-700 leading-relaxed">{provider.bio}</p>
                   </section>
                 )}
+
+                {/* Public record: facts from the NPI registry and the state GAPP list */}
+                <PublicFacts facts={provider.facts} />
 
                 {/* Services */}
                 <section>
@@ -372,7 +398,19 @@ export default async function ProviderPage({
 
                     {/* Show phone for claimed profiles - website only for verified */}
                     <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-                      {contactPhone && (
+                      {contactPhone && connectOn && (
+                        <ConnectCallButton
+                          providerId={provider.id}
+                          fallbackTel={toE164(contactPhone) || contactPhone.replace(/\D/g, '')}
+                          className="flex items-center justify-center gap-3 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"
+                        >
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                          Call {provider.name}
+                        </ConnectCallButton>
+                      )}
+                      {contactPhone && !connectOn && (
                         <TrackableLink
                           href={`tel:${contactPhone.replace(/\D/g, '')}`}
                           providerId={provider.id}
@@ -386,6 +424,11 @@ export default async function ProviderPage({
                         </TrackableLink>
                       )}
                     </div>
+                    {contactPhone && connectOn && (
+                      <p className="text-xs text-gray-500 mt-3 text-center">
+                        Calls go through the GeorgiaGAPP referral line. If no one picks up, you reach us.
+                      </p>
+                    )}
 
                     {/* Website only shown for verified providers */}
                     {provider.website && (
