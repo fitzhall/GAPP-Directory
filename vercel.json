@@ -1,13 +1,4 @@
 {
   "framework": "nextjs",
-  "crons": [
-    {
-      "path": "/api/cron/availability-ping",
-      "schedule": "0 14 * * 1"
-    },
-    {
-      "path": "/api/cron/availability-followup",
-      "schedule": "0 14 * * *"
-    }
-  ]
+  "crons": []
 }

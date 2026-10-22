@@ -282,6 +282,9 @@ On listings that are **not verified and not featured**, the Call button rings a 
 - Env: `TWILIO_AUTH_TOKEN`, `TWILIO_CONNECT_NUMBERS` (comma-separated E.164), optional `CONNECT_FALLBACK_PHONE`. Each number's Voice webhook must POST to `https://www.georgiagapp.com/api/connect/voice`.
 - Pure logic and TwiML in `lib/connect.ts`; signature check in `lib/twilio-signature.ts`. Spec: `docs/superpowers/specs/2026-10-22-connect-line-and-public-facts-design.md`.
 
+### Weekly availability check-in (PAUSED 2026-10-22)
+The Monday "are you accepting new cases?" email (`/api/cron/availability-ping`) and the daily follow-up that hides non-responders (`/api/cron/availability-followup`) are paused until the operator says otherwise: `vercel.json` has an empty `crons` list. To resume, restore `{ "path": "/api/cron/availability-ping", "schedule": "0 14 * * 1" }` and `{ "path": "/api/cron/availability-followup", "schedule": "0 14 * * *" }`. The welcome emails still describe the check-in; update them if the pause becomes permanent.
+
 ### Premium seats (one featured agency per county)
 `providers.premium_county` names the ONE county where a featured agency ranks first (migration 016; a unique index allows one active agency per county). Rules live in `lib/premium.ts`: a seat needs `is_featured` + `is_verified` + `premium_county`. On that county's page and in the county-filtered directory the holder is first and wears "Featured in X County"; in every other county it ranks as verified. Statewide lists (unfiltered directory, guide-page strip from `lib/callable-providers.ts`) show every seat holder first, order rotating daily, capped at six. The admin "Feature" button prompts for the county. A featured agency with no `premium_county` is legacy and ranks as verified everywhere.
 
