@@ -46,13 +46,19 @@ export async function GET(request: NextRequest) {
     .from('providers')
     .select('id')
     .eq('auth_user_id', user.id)
+    .eq('is_active', true)
     .single()
 
-  if (!existing) {
+  if (!existing && user.email) {
+    // Auth stores emails lowercased; claim forms kept whatever the agency
+    // typed. Escape LIKE wildcards so ilike is a case-insensitive equals.
+    // Retired duplicate listings can share the email, so link live ones only.
+    const email = user.email.replace(/[\\%_]/g, (c) => `\\${c}`)
     const { error: linkError } = await serviceClient
       .from('providers')
       .update({ auth_user_id: user.id })
-      .eq('claimed_by_email', user.email)
+      .ilike('claimed_by_email', email)
+      .eq('is_active', true)
       .is('auth_user_id', null)
 
     if (linkError) {

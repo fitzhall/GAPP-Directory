@@ -36,6 +36,7 @@ export async function getProviderSession() {
     .from('providers')
     .select('id, name, slug, tier_level, is_verified, is_featured, claimed_by_email')
     .eq('auth_user_id', user.id)
+    .eq('is_active', true)
     .single()
 
   if (!provider) return null
