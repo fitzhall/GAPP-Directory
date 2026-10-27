@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { config } from '@/lib/config'
+import { PremiumVideo } from '@/components/PremiumVideo'
 
 export const metadata: Metadata = {
   title: 'Premium Listing for GAPP Agencies | GeorgiaGAPP.com',
@@ -26,6 +27,10 @@ export default function PremiumPage() {
             agency first in one county of your choice. One agency per county. No one else gets that spot.
           </p>
         </div>
+      </section>
+
+      <section className="px-4 pt-12">
+        <PremiumVideo />
       </section>
 
       <section className="px-4 py-12">

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { config } from '@/lib/config'
+import { PremiumVideo } from '@/components/PremiumVideo'
 
 interface SearchResult {
   id: string
@@ -144,6 +145,11 @@ export default function ForProvidersPage() {
             Find & Claim Your Profile — Free
           </a>
         </div>
+      </section>
+
+      {/* The Premium explainer video */}
+      <section className="pt-12 sm:pt-16 px-4">
+        <PremiumVideo />
       </section>
 
       {/* Why Claim Section */}
