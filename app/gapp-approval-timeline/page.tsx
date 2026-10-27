@@ -6,6 +6,7 @@ import { getCallableProviders } from '@/lib/callable-providers'
 import { config } from '@/lib/config'
 import { FAQPageSchema, BreadcrumbSchema } from '@/components/JsonLd'
 import { HelplineCta } from '@/components/HelplineCta'
+import { YouTubeVideo } from '@/components/YouTubeVideo'
 
 const TIMELINE_FAQS = [
   {
@@ -102,6 +103,16 @@ export default async function GAPPApprovalTimelinePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* The 90-second walkthrough of these steps (YouTube, loads on tap) */}
+      <section className="py-10 px-4">
+        <YouTubeVideo
+          id="1wO5nJM2GNo"
+          title="How GAPP approval works in Georgia: step by step"
+          poster="/videos/gapp-approval-poster.jpg"
+          caption="90 seconds: every step below, and how long each one usually takes."
+        />
       </section>
 
       <FeaturedProvidersStrip
