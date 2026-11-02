@@ -9,6 +9,7 @@ export function MobileNav() {
   const pathname = usePathname()
 
   const links = [
+    { href: '/match', label: 'Get Matched (free)' },
     { href: '/directory', label: 'Find Provider' },
     { href: '/screener', label: 'Check Eligibility' },
     { href: '/quiz', label: 'Help Me Choose' },

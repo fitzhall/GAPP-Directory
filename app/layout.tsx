@@ -145,6 +145,12 @@ export default function RootLayout({
                 >
                   For Providers
                 </Link>
+                <Link
+                  href="/match"
+                  className="ml-2 px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-primary-dark rounded-lg transition-colors"
+                >
+                  Get Matched
+                </Link>
               </div>
 
               {/* Mobile Navigation */}
