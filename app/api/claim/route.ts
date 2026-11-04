@@ -11,6 +11,12 @@ function getSupabase() {
   )
 }
 
+// help@georgiagapp.com is on Resend's suppression list (it bounced), so claim
+// alerts and agency replies go to the operator inbox that gets match leads.
+function operatorInbox(): string {
+  return process.env.LEAD_NOTIFY_EMAIL || 'help@georgiagapp.com'
+}
+
 function getResend() {
   if (!process.env.RESEND_API_KEY) return null
   return new Resend(process.env.RESEND_API_KEY)
@@ -100,7 +106,9 @@ export async function POST(request: NextRequest) {
       if (body.profileUpdates.servicesOffered) {
         updatePayload.services_offered = body.profileUpdates.servicesOffered
       }
-      if (body.profileUpdates.countiesServed) {
+      // Never save an empty county list: a listing with no counties shows on
+      // no county page. The form once sent [] by mistake and wiped listings.
+      if (body.profileUpdates.countiesServed?.length) {
         updatePayload.counties_served = body.profileUpdates.countiesServed
       }
       if (body.profileUpdates.languages) {
@@ -148,7 +156,7 @@ export async function POST(request: NextRequest) {
         const agencyName = (verifyData?.name as string) || provider.name
         await resend.emails.send({
           from: 'GeorgiaGAPP.com <noreply@georgiagapp.com>',
-          replyTo: 'help@georgiagapp.com',
+          replyTo: operatorInbox(),
           to: body.email,
           subject: claimEmailSubject(agencyName),
           html: claimEmailHtml({
@@ -187,7 +195,7 @@ export async function POST(request: NextRequest) {
 
         await resend.emails.send({
           from: 'GeorgiaGAPP.com <noreply@georgiagapp.com>',
-          to: 'help@georgiaGAPP.com',
+          to: operatorInbox(),
           subject: `New Claim: ${provider.name}${body.profileUpdates ? ' (with updates)' : ''}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

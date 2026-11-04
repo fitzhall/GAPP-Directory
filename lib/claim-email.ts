@@ -32,6 +32,14 @@ function joinWords(items: string[]): string {
   return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`
 }
 
+// Name up to 8 hidden counties; past that, name 3 and count the rest, so an
+// agency that picked all 159 doesn't get a wall of county names.
+const HIDDEN_NAMED_MAX = 8
+function hiddenWords(hidden: string[]): string {
+  if (hidden.length <= HIDDEN_NAMED_MAX) return joinWords(hidden)
+  return `${hidden.slice(0, 3).join(', ')} and ${hidden.length - 3} other counties`
+}
+
 function every3Months(price: number): string {
   return `$${price} every 3 months`
 }
@@ -60,7 +68,7 @@ export function claimEmailHtml(input: ClaimEmailInput): string {
   } else {
     countyText =
       p(`You serve ${total} counties. A free page only shows in its first ${FREE_COUNTY_LIMIT}, A to Z. Right now parents in ${e(joinWords(shown))} can find you.`) +
-      p(`Parents in ${e(joinWords(hidden))} don't see you yet.`)
+      p(`Parents in ${e(hiddenWords(hidden))} don't see you yet.`)
   }
 
   const { verified, premium } = config.pricing

@@ -91,7 +91,7 @@ export default function ClaimProfilePage() {
             businessName: businessName !== provider?.name ? businessName : undefined,
             city: city !== provider?.city ? city : undefined,
             servicesOffered: JSON.stringify(servicesOffered) !== JSON.stringify(provider?.services_offered) ? servicesOffered : undefined,
-            countiesServed: JSON.stringify(countiesServed) !== JSON.stringify(provider?.counties_served) ? countiesServed : undefined,
+            countiesServed: countiesServed.length > 0 && JSON.stringify(countiesServed) !== JSON.stringify(provider?.counties_served) ? countiesServed : undefined,
             languages: JSON.stringify(languages) !== JSON.stringify(provider?.languages || ['English']) ? languages : undefined,
           },
         }),

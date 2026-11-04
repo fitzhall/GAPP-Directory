@@ -42,6 +42,13 @@ describe('claimEmailHtml', () => {
     expect(html).toContain('Fulton and Gwinnett')
   })
 
+  it('counts the hidden counties instead of listing them all', () => {
+    const all = Array.from({ length: 159 }, (_, i) => `County${String(i).padStart(3, '0')}`)
+    const big = claimEmailHtml({ ...base, countiesServed: all })
+    expect(big).toContain('County005, County006, County007 and 151 other counties')
+    expect(big).not.toContain('County158')
+  })
+
   it('tells an agency with 5 counties or fewer it shows everywhere', () => {
     const small = claimEmailHtml({ ...base, countiesServed: ['Cobb', 'Fulton'] })
     expect(small).toContain('all 2 of your counties')

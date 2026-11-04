@@ -19,7 +19,9 @@ export async function GET(
     // Try to get with is_claimed column
     let query = supabase
       .from('providers')
-      .select('id, name, slug, city, phone, services_offered, is_claimed, is_verified')
+      // The claim form edits counties and languages starting from these; leaving
+      // them out made it submit an empty county list and wipe the listing's.
+      .select('id, name, slug, city, phone, services_offered, counties_served, languages, is_claimed, is_verified')
       .eq('slug', slug)
       .eq('is_active', true)
       .single()
@@ -30,7 +32,7 @@ export async function GET(
     if (error?.message?.includes('is_claimed')) {
       const { data: fallbackData, error: fallbackError } = await supabase
         .from('providers')
-        .select('id, name, slug, city, phone, services_offered, is_verified')
+        .select('id, name, slug, city, phone, services_offered, counties_served, languages, is_verified')
         .eq('slug', slug)
         .eq('is_active', true)
         .single()
