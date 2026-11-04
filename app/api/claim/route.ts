@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 import { revalidatePath } from 'next/cache'
+import { claimEmailHtml, claimEmailSubject } from '@/lib/claim-email'
 
 function getSupabase() {
   return createClient(
@@ -131,10 +132,10 @@ export async function POST(request: NextRequest) {
       revalidatePath(`/provider/${provider.slug}`)
     }
 
-    // Verify the update worked
+    // Verify the update worked, and read back the saved listing for the email
     const { data: verifyData } = await supabase
       .from('providers')
-      .select('is_claimed, claimed_by_email')
+      .select('is_claimed, claimed_by_email, name, slug, counties_served')
       .eq('id', body.providerId)
       .single()
 
@@ -144,44 +145,19 @@ export async function POST(request: NextRequest) {
     const resend = getResend()
     if (resend) {
       try {
+        const agencyName = (verifyData?.name as string) || provider.name
         await resend.emails.send({
           from: 'GeorgiaGAPP.com <noreply@georgiagapp.com>',
+          replyTo: 'help@georgiagapp.com',
           to: body.email,
-          subject: `Claim Received: ${provider.name}`,
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <div style="background: #FF8A80; padding: 20px; text-align: center;">
-                <h1 style="color: white; margin: 0;">Claim Received!</h1>
-              </div>
-
-              <div style="padding: 30px; background: #f9f9f9;">
-                <p style="font-size: 16px; color: #333;">
-                  Hi ${body.name},
-                </p>
-                <p style="font-size: 16px; color: #333;">
-                  We've received your request to claim the profile for <strong>${provider.name}</strong> on GeorgiaGAPP.com.
-                </p>
-
-                <div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0;">
-                  <h2 style="color: #2C3E50; margin-top: 0;">What happens next?</h2>
-                  <ol style="color: #555; line-height: 1.8;">
-                    <li>Our team will review your claim within 24-48 hours</li>
-                    <li>We may call to verify your association with ${provider.name}</li>
-                    <li>Once verified, your profile will be fully visible</li>
-                    <li>You'll start receiving callback requests from families</li>
-                  </ol>
-                </div>
-
-                <p style="color: #666; font-size: 14px;">
-                  If you have any questions, reply to this email or contact us at help@georgiaGAPP.com
-                </p>
-
-                <p style="color: #999; font-size: 12px; margin-top: 30px;">
-                  GeorgiaGAPP.com - Connecting families with GAPP providers
-                </p>
-              </div>
-            </div>
-          `,
+          subject: claimEmailSubject(agencyName),
+          html: claimEmailHtml({
+            claimerName: body.name,
+            agencyName,
+            slug: (verifyData?.slug as string) || revalidatedSlug,
+            email: body.email,
+            countiesServed: (verifyData?.counties_served as string[]) || [],
+          }),
         })
       } catch (emailError) {
         console.error('Error sending email:', emailError)
